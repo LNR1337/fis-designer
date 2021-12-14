@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Load images into the project</h2>
+<mat-dialog-content>
+
+  <!-- Background -->
+  <button mat-raised-button (click)="backgroundInput.click()">Gauges background</button>
+  <input hidden (change)="onImageSelected($event, 'backgroundImage')" #backgroundInput type="file" accept="image/png">
+
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button mat-dialog-close color="primary">Done</button>
+</mat-dialog-actions>
