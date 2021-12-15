@@ -58,7 +58,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   }
 
   openFileSelectorDialog() {
-    const dialogRef = this.dialog.open(ImageSelectorComponent, {
+    this.dialog.open(ImageSelectorComponent, {
       width: '400px',
       disableClose: true,
     });
