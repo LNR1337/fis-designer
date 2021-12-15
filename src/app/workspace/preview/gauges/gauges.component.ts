@@ -1,30 +1,35 @@
-import { Component, ElementRef, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {ImageSelectorDialog} from "../image-selector-dialog/image-selector.component";
-import {Store} from "@ngrx/store";
-import {Subscription, Observable, tap} from "rxjs";
-import {selectImages} from "../state/preview.selectors";
-import {StateImageFields, StateImageFieldsType} from "../state/preview.state";
+import {
+  Component,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageSelectorComponent } from '../image-selector/image-selector.component';
+import { Store } from '@ngrx/store';
+import { Subscription, Observable, tap } from 'rxjs';
+import { selectImages } from '../state/preview.selectors';
+import { PartialStateImages } from '../state/preview.state';
 
 @Component({
-  selector: 'gauges',
+  selector: 'app-gauges',
   templateUrl: './gauges.component.html',
-  styleUrls: ['./gauges.component.scss']
+  styleUrls: ['./gauges.component.scss'],
 })
 export class GaugesComponent implements AfterViewInit, OnDestroy {
-
   // The main canvas to draw on.
-  @ViewChild('displayCanvas', {static: false}) displayCanvas?: ElementRef<HTMLCanvasElement>;
+  @ViewChild('displayCanvas', { static: false })
+  displayCanvas?: ElementRef<HTMLCanvasElement>;
   // Context for the main canvas.
   private displayContext?: CanvasRenderingContext2D;
 
   subscription = new Subscription();
-  images?: Partial<Record<StateImageFieldsType, HTMLImageElement|undefined>>;
-
+  images?: PartialStateImages<HTMLImageElement>;
 
   constructor(public dialog: MatDialog, private readonly store: Store) {
     this.subscription.add(
-      this.store.select(selectImages).subscribe(images => {
+      this.store.select(selectImages).subscribe((images) => {
         this.images = images;
         this.redrawGauges();
       })
@@ -36,7 +41,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
     this.displayContext = this.displayCanvas!.nativeElement.getContext('2d')!;
   }
 
-  drawImage(image: HTMLImageElement, x: number, y:number) {
+  drawImage(image: HTMLImageElement, x: number, y: number) {
     this.displayContext!.drawImage(image, x, y);
   }
 
@@ -53,13 +58,13 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   }
 
   openFileSelectorDialog() {
-    const dialogRef = this.dialog.open(ImageSelectorDialog, {
+    const dialogRef = this.dialog.open(ImageSelectorComponent, {
       width: '400px',
+      disableClose: true,
     });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
-
 }

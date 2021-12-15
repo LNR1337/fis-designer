@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Load images into the project</h2>
+<mat-dialog-content *ngIf="currentImages | async as images">
+  <!-- Background -->
+  <app-file-button
+    imageName="backgroundImage"
+    [currentImageUrl]="images.backgroundImage?.src"
+  ></app-file-button>
+  <app-file-button imageName="tableBackgroundImage"></app-file-button>
+  <app-file-button imageName="needleImage1"></app-file-button>
+  <app-file-button imageName="needleImage2"></app-file-button>
+  <app-file-button imageName="needleImage3"></app-file-button>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button mat-dialog-close color="primary">Done</button>
+</mat-dialog-actions>

@@ -13,4 +13,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 4px;
+
+  .save-buttons button {
+    margin-left: 4px;
+  }
 }

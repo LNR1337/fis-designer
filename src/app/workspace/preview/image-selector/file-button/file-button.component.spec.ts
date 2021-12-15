@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GaugesComponent } from './gauges.component';
+import { FileButtonComponent } from './file-button.component';
 
-describe('DisplayComponent', () => {
-  let component: GaugesComponent;
-  let fixture: ComponentFixture<GaugesComponent>;
+describe('FileButtonComponent', () => {
+  let component: FileButtonComponent;
+  let fixture: ComponentFixture<FileButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GaugesComponent],
+      declarations: [FileButtonComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GaugesComponent);
+    fixture = TestBed.createComponent(FileButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

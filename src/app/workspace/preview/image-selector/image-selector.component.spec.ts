@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageSelectorDialog } from './image-selector.component';
+import { ImageSelectorComponent } from './image-selector.component';
 
 describe('ImageSelectorDialog', () => {
-  let component: ImageSelectorDialog;
-  let fixture: ComponentFixture<ImageSelectorDialog>;
+  let component: ImageSelectorComponent;
+  let fixture: ComponentFixture<ImageSelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageSelectorDialog ]
-    })
-    .compileComponents();
+      declarations: [ImageSelectorComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageSelectorDialog);
+    fixture = TestBed.createComponent(ImageSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

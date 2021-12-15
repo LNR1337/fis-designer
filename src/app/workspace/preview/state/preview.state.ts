@@ -1,19 +1,35 @@
-/**
- * Names of state fields holding images.
- * Those are needed to validate dynamically passed field names for images.
- * */
+/** Names of state fields holding images. */
 export const StateImageFields = [
-  'backgroundImage', 'tableBackgroundImage', 'needleImage1', 'needleImage2', 'needleImage3',
-  'digit0', 'digit1', 'digit2', 'digit3', 'digit4', 'digit5', 'digit6', 'digit7', 'digit8',
-  'digit9', 'digitMinus', 'digitDot'
-];
+  'backgroundImage',
+  'tableBackgroundImage',
+  'needleImage1',
+  'needleImage2',
+  'needleImage3',
+  'digit0',
+  'digit1',
+  'digit2',
+  'digit3',
+  'digit4',
+  'digit5',
+  'digit6',
+  'digit7',
+  'digit8',
+  'digit9',
+  'digitMinus',
+  'digitDot',
+] as const;
 
 /** Type for all valid state fields holding images. */
-export type StateImageFieldsType = Extract<keyof PreviewState, typeof StateImageFields[number]>;
+export type StateImageFieldsType = typeof StateImageFields[number];
 
+/** Type for an object holding data for all the images. */
+export type CompleteStateImages<T> = { [property in StateImageFieldsType]: T };
+
+/** Type for an object holding data for some of the images. */
+export type PartialStateImages<T> = Partial<CompleteStateImages<T>>;
 
 /** State for the preview module. */
-export interface PreviewState {
+export interface PreviewState extends PartialStateImages<HTMLImageElement> {
   readonly backgroundImage?: HTMLImageElement;
   readonly tableBackgroundImage?: HTMLImageElement;
   readonly needleImage1?: HTMLImageElement;
