@@ -1,0 +1,59 @@
+<div class="header">
+  <h4 class="label">{{ label }}</h4>
+  <button mat-icon-button color="primary" [disabled]="!resizeEnabled" (click)="recalculateSize()">
+    <mat-icon
+      [matTooltip]="
+        resizeEnabled
+          ? 'Set needle dimensions to match the needle image.'
+          : 'No needle image loaded yet.'
+      "
+    >
+      photo_size_select_large
+    </mat-icon>
+  </button>
+</div>
+
+<app-sliding-input label="Width" [value]="needleConfig?.width"></app-sliding-input>
+<app-sliding-input label="Height" [value]="needleConfig?.height"></app-sliding-input>
+<app-sliding-input
+  label="{{ NEEDLE_FIELD_LABELS['centerX'] }}"
+  [min]="0"
+  [max]="800"
+  [value]="needleConfig?.centerX"
+  (valueChanged)="valueChanged($event, 'centerX')"
+></app-sliding-input>
+<app-sliding-input
+  label="{{ NEEDLE_FIELD_LABELS['centerY'] }}"
+  [min]="0"
+  [max]="480"
+  [value]="needleConfig?.centerY"
+  (valueChanged)="valueChanged($event, 'centerY')"
+></app-sliding-input>
+<app-sliding-input
+  label="{{ NEEDLE_FIELD_LABELS['positionX'] }}"
+  [min]="0"
+  [max]="800"
+  [value]="needleConfig?.positionX"
+  (valueChanged)="valueChanged($event, 'positionX')"
+></app-sliding-input>
+<app-sliding-input
+  label="{{ NEEDLE_FIELD_LABELS['positionY'] }}"
+  [min]="0"
+  [max]="480"
+  [value]="needleConfig?.positionY"
+  (valueChanged)="valueChanged($event, 'positionY')"
+></app-sliding-input>
+<app-sliding-input
+  label="{{ NEEDLE_FIELD_LABELS['indicatorPositionX'] }}"
+  [min]="0"
+  [max]="800"
+  [value]="needleConfig?.indicatorPositionX"
+  (valueChanged)="valueChanged($event, 'indicatorPositionX')"
+></app-sliding-input>
+<app-sliding-input
+  label="{{ NEEDLE_FIELD_LABELS['indicatorPositionY'] }}"
+  [min]="0"
+  [max]="480"
+  [value]="needleConfig?.indicatorPositionY"
+  (valueChanged)="valueChanged($event, 'indicatorPositionY')"
+></app-sliding-input>

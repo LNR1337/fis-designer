@@ -1,0 +1,21 @@
+@import 'src/variables';
+
+:host {
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .label {
+    color: map-get($primary, default);
+  }
+
+  button {
+    position: relative;
+    top: -10px;
+  }
+}

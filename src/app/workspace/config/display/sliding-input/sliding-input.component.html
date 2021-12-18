@@ -1,0 +1,21 @@
+<span class="label">{{ label }}:</span>
+<mat-slider
+  *ngIf="showSlider"
+  [min]="min"
+  [max]="max"
+  step="1"
+  [value]="value"
+  (input)="onChangeSlider($event)"
+  (change)="onChangeSlider($event)"
+></mat-slider>
+<input
+  mat-input
+  class="number-input"
+  [class.wide]="!showSlider"
+  maxlength="3"
+  type="number"
+  [value]="value"
+  (change)="onChangeField($event)"
+  [max]="max"
+  [min]="min"
+/>

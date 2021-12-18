@@ -1,0 +1,9 @@
+<div class="preview" [ngStyle]="{'background-image': 'url(' + currentImageUrl + ')'}"></div>
+<div class="label">
+  <div>{{ label }}</div>
+  <div class="restriction">{{ restriction }}</div>
+</div>
+<button mat-icon-button (click)="imageInput.click()" [disabled]="disabled" color="primary">
+  <mat-icon>{{ state }}</mat-icon>
+</button>
+<input hidden (change)="onImageSelected($event)" #imageInput type="file" accept="{{ MIME_TYPE }}" />

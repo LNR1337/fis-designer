@@ -1,15 +1,17 @@
 import {
+  ElementRef,
+  OnChanges,
+  SimpleChanges} from '@angular/core';
+import {
   Component,
   Input,
-  OnChanges,
-  SimpleChanges,
-  ElementRef,
   ViewChild,
 } from '@angular/core';
-import { IMAGE_MAX_SIZE, IMAGE_LABEL, MIME_TYPE } from '../images_config';
+import { IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE } from '../../models/images_metadata';
 import { StateImageFieldsType } from '../../state/preview.state';
 import {
-  SnackBarService,
+  SnackBarService} from '../../../services/snack-bar.service';
+import {
   SnackType,
 } from '../../../services/snack-bar.service';
 import { loadedImage } from '../../state/preview.actions';
@@ -22,10 +24,10 @@ enum ButtonState {
 
 @Component({
   selector: 'app-file-button[imageName]',
-  templateUrl: './file-button.component.html',
-  styleUrls: ['./file-button.component.scss'],
+  templateUrl: './image-selector.component.html',
+  styleUrls: ['./image-selector.component.scss'],
 })
-export class FileButtonComponent implements OnChanges {
+export class ImageSelectorComponent implements OnChanges {
   @ViewChild('preview') previewContainer?: ElementRef;
 
   MIME_TYPE = MIME_TYPE;
@@ -76,38 +78,42 @@ export class FileButtonComponent implements OnChanges {
     this.disabled = true;
     const input = event.currentTarget as HTMLInputElement;
     if (input.files && input.files.length) {
-      // Reader for loading data into a blob and assigning it as image src.
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (!reader.result) return;
-        // New image element.
-        const image = new Image();
-        image.src = URL.createObjectURL(
-          new Blob([reader.result], { type: MIME_TYPE })
-        );
-        image
-          .decode()
-          .then(() => {
-            if (this.validateImage(image)) {
-              this.store.dispatch(
-                loadedImage({ image: image, imageField: this.imageName })
-              );
-            }
-            this.disabled = false;
-          })
-          .catch((encodingError) => {
-            this.snackBar.open(
-              `Error loading image: ${encodingError}`,
-              SnackType.ERROR
-            );
-            this.disabled = false;
-          });
-      };
-      reader.onerror = () => {
-        this.snackBar.open('Failed to read image file.', SnackType.ERROR);
-      };
-      reader.readAsArrayBuffer(input.files[0]);
+      this.ingestFile(input.files[0]);
     }
+  }
+
+  ingestFile(file: File) {
+    // Reader for loading data into a blob and assigning it as image src.
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (!reader.result) return;
+      // New image element.
+      const image = new Image();
+      image.src = URL.createObjectURL(
+        new Blob([reader.result], { type: MIME_TYPE })
+      );
+      image
+        .decode()
+        .then(() => {
+          if (this.validateImage(image)) {
+            this.store.dispatch(
+              loadedImage({ image: image, imageField: this.imageName })
+            );
+          }
+          this.disabled = false;
+        })
+        .catch((encodingError) => {
+          this.snackBar.open(
+            `Error loading image: ${encodingError}`,
+            SnackType.ERROR
+          );
+          this.disabled = false;
+        });
+    };
+    reader.onerror = () => {
+      this.snackBar.open('Failed to read image file.', SnackType.ERROR);
+    };
+    reader.readAsArrayBuffer(file);
   }
 
   ngOnChanges(changes: SimpleChanges) {

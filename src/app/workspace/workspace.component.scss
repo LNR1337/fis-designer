@@ -1,0 +1,8 @@
+@import 'src/variables';
+
+:host {
+  height: calc(100% - $top-bar-height);
+  margin-top: $top-bar-height;
+  display: flex;
+  flex-wrap: nowrap;
+}

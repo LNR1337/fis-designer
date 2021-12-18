@@ -1,16 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+@import 'src/variables';
 
-
-.title {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 32px;
+.top-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 0;
 }
 
-.version {
-  font-weight: normal;
-  font-size: 65%;
-  align-self: flex-end;
-  margin-bottom: 11px;
-  opacity: .6;
-  margin-left: 8px;
+.top-bar {
+  height: $top-bar-height;
+
+  .title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px;
+    line-height: $top-bar-height;
+  }
+
+  .version {
+    font-weight: normal;
+    font-size: 65%;
+    align-self: flex-end;
+    margin-bottom: 11px;
+    opacity: 0.6;
+    margin-left: 8px;
+  }
 }

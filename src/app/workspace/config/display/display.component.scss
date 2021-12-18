@@ -1,0 +1,13 @@
+.button-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 8px;
+
+  button:not(:last-child) {
+    margin-right: 8px;
+  }
+}
+
+.settings-form {
+  padding: 0 0px 32px 0px;
+}

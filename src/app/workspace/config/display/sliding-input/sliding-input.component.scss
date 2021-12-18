@@ -1,0 +1,30 @@
+@import 'src/variables';
+
+:host {
+  display: flex;
+  align-content: center;
+  margin-bottom: 4px;
+}
+
+mat-slider {
+  flex-grow: 4;
+  padding: 0;
+  height: 32px;
+  margin-right: 16px;
+
+  ::ng-deep .mat-slider-wrapper {
+    top: 17px;
+  }
+}
+
+.wide {
+  width: 70px;
+}
+
+.label {
+  color: $light-grey-item;
+  line-height: 36px;
+  width: 120px;
+  text-align: right;
+  margin-right: 16px;
+}

@@ -1,0 +1,57 @@
+@import 'src/variables';
+
+mwlResizable {
+  box-sizing: border-box; // required for the enableGhostResize option to work
+}
+
+.resizable-wrapper {
+  background-color: $background-dialog;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100%;
+  position: relative;
+  min-width: 480px;
+  max-width: calc(100% - 8px);
+
+  .resize-handle {
+    width: 7px;
+    height: 100%;
+    background: transparent;
+    cursor: col-resize;
+    position: absolute;
+    right: -8px;
+    border-left: solid 1px $grey-border;
+
+    &:hover {
+      background: $grey-border;
+    }
+  }
+}
+
+mat-tab-group {
+  width: 100%;
+  min-height: 100px;
+}
+
+::ng-deep .mat-tab-label-content {
+  color: map-get($primary, default);
+}
+
+::ng-deep .mat-tab-body-content {
+  &::-webkit-scrollbar {
+    width: 8px;
+    overflow-y: scroll;
+    background: $background-dialog;
+    border-left: solid 1px $grey-border;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $grey-border;
+    border-radius: 4px;
+
+    &:hover {
+      background: $grey-item;
+    }
+  }
+}

@@ -19,7 +19,7 @@ export const StateImageFields = [
   'digitDot',
 ] as const;
 
-/** Type for all valid state fields holding images. */
+/** Type for all valid state field names holding images. */
 export type StateImageFieldsType = typeof StateImageFields[number];
 
 /** Type for an object holding data for all the images. */
@@ -29,22 +29,4 @@ export type CompleteStateImages<T> = { [property in StateImageFieldsType]: T };
 export type PartialStateImages<T> = Partial<CompleteStateImages<T>>;
 
 /** State for the preview module. */
-export interface PreviewState extends PartialStateImages<HTMLImageElement> {
-  readonly backgroundImage?: HTMLImageElement;
-  readonly tableBackgroundImage?: HTMLImageElement;
-  readonly needleImage1?: HTMLImageElement;
-  readonly needleImage2?: HTMLImageElement;
-  readonly needleImage3?: HTMLImageElement;
-  readonly digit0?: HTMLImageElement;
-  readonly digit1?: HTMLImageElement;
-  readonly digit2?: HTMLImageElement;
-  readonly digit3?: HTMLImageElement;
-  readonly digit4?: HTMLImageElement;
-  readonly digit5?: HTMLImageElement;
-  readonly digit6?: HTMLImageElement;
-  readonly digit7?: HTMLImageElement;
-  readonly digit8?: HTMLImageElement;
-  readonly digit9?: HTMLImageElement;
-  readonly digitMinus?: HTMLImageElement;
-  readonly digitDot?: HTMLImageElement;
-}
+export type PreviewState = PartialStateImages<HTMLImageElement>;

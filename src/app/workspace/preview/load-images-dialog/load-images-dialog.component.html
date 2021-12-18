@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Load images for the project</h2>
+<mat-dialog-content *ngIf="currentImages | async as images">
+  <div>
+    <app-file-button
+      *ngFor="let imageName of stateImageFields | slice: 0:5"
+      [imageName]="imageName"
+      [currentImageUrl]="images[imageName]?.src"
+      #imageInput
+    ></app-file-button>
+  </div>
+  <div>
+    <app-file-button
+      *ngFor="let imageName of stateImageFields | slice: 5:11"
+      [imageName]="imageName"
+      [currentImageUrl]="images[imageName]?.src"
+      #imageInput
+    ></app-file-button>
+  </div>
+  <div>
+    <app-file-button
+      *ngFor="let imageName of stateImageFields | slice: 11"
+      [imageName]="imageName"
+      [currentImageUrl]="images[imageName]?.src"
+      #imageInput
+    ></app-file-button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <input
+    hidden
+    (change)="onMultiImageSelected($event)"
+    #multiImageInput
+    type="file"
+    accept="{{ MIME_TYPE }}"
+    multiple="multiple"
+  />
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="multiImageInput.click()"
+    matTooltip="Upload multiple images and try to guess their intended role based on their file names."
+  >
+    <mat-icon>collections</mat-icon>
+    Bulk load images
+  </button>
+  <button mat-raised-button mat-dialog-close color="primary">
+    <mat-icon>close</mat-icon>
+    Close
+  </button>
+</mat-dialog-actions>

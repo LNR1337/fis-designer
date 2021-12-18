@@ -1,8 +1,9 @@
-import { Component, Injectable, Inject } from '@angular/core';
+import { Component, Inject, Injectable } from '@angular/core';
 import {
   MatSnackBar,
-  MatSnackBarRef,
-  MAT_SNACK_BAR_DATA,
+  MatSnackBarRef} from '@angular/material/snack-bar';
+import {
+  MAT_SNACK_BAR_DATA
 } from '@angular/material/snack-bar';
 
 /** Available snack bar types. */
@@ -37,8 +38,8 @@ export class SnackBarService {
   open(
     message: string,
     type: SnackType = SnackType.INFO,
-    action: string = 'Dismiss',
-    duration: number = 5000
+    action = 'OK',
+    duration = 5000
   ) {
     this.snackBar.openFromComponent(SnackBarComponent, {
       duration,

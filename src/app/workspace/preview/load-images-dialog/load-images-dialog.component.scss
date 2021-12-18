@@ -1,0 +1,19 @@
+@import 'src/variables';
+
+mat-dialog-content {
+  padding: 16px 24px;
+  display: flex;
+  flex-flow: row wrap;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    overflow-y: scroll;
+    background: transparent;
+    border: solid 1px $grey-border;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $grey-border;
+    border-radius: 10px;
+  }
+}

@@ -4,8 +4,10 @@
 }
 
 .display {
-  width: 800px;
-  height: 480px;
+  width: 100%;
+  min-width: 450px;
+  max-width: 800px;
+  max-height: 480px;
   background-color: #000;
 }
 

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { GaugesComponent } from './gauges.component';
+import {GaugesComponent} from './gauges.component';
+import {ComponentFixture} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
 describe('DisplayComponent', () => {
   let component: GaugesComponent;

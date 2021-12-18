@@ -1,15 +1,16 @@
 import {
-  Component,
-  ElementRef,
   AfterViewInit,
-  OnDestroy,
+  ElementRef,
+  OnDestroy} from '@angular/core';
+import {
+  Component,
   ViewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ImageSelectorComponent } from '../image-selector/image-selector.component';
+import { LoadImagesDialogComponent } from '../load-images-dialog/load-images-dialog.component';
 import { Store } from '@ngrx/store';
-import { Subscription, Observable, tap } from 'rxjs';
-import { selectImages } from '../state/preview.selectors';
+import { Observable, Subscription, tap } from 'rxjs';
+import { selectAllImages } from '../state/preview.selectors';
 import { PartialStateImages } from '../state/preview.state';
 
 @Component({
@@ -27,9 +28,9 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   subscription = new Subscription();
   images?: PartialStateImages<HTMLImageElement>;
 
-  constructor(public dialog: MatDialog, private readonly store: Store) {
+  constructor(private readonly store: Store) {
     this.subscription.add(
-      this.store.select(selectImages).subscribe((images) => {
+      this.store.select(selectAllImages).subscribe((images) => {
         this.images = images;
         this.redrawGauges();
       })
@@ -55,13 +56,6 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
     if (this.images.backgroundImage) {
       this.drawImage(this.images.backgroundImage, 0, 0);
     }
-  }
-
-  openFileSelectorDialog() {
-    this.dialog.open(ImageSelectorComponent, {
-      width: '400px',
-      disableClose: true,
-    });
   }
 
   ngOnDestroy() {

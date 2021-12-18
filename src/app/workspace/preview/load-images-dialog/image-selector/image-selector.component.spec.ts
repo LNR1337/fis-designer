@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ImageSelectorComponent} from './image-selector.component';
+import {ComponentFixture} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ImageSelectorComponent } from './image-selector.component';
-
-describe('ImageSelectorDialog', () => {
+describe('ImageSelectorComponent', () => {
   let component: ImageSelectorComponent;
   let fixture: ComponentFixture<ImageSelectorComponent>;
 
