@@ -9,13 +9,13 @@ export const GaugeConfigFields = [
 export type GaugeConfigFieldsType = typeof GaugeConfigFields[number];
 
 /** Interface type for an object holding data for every field in gauge config. */
-export type CompleteGaugeConfigFields<T> = { [property in GaugeConfigFieldsType]: T };
+export type GaugeConfigFieldsInterface<T> = { [property in GaugeConfigFieldsType]: T };
 
 /** Interface type for an object holding data for some fields in gauge config. */
-export type PartialGaugeConfigFields<T> = Partial<CompleteGaugeConfigFields<T>>;
+export type PartialGaugeConfigFieldsInterface<T> = Partial<GaugeConfigFieldsInterface<T>>;
 
 /** Configuration of gauge display. */
-export type GaugeConfig = PartialGaugeConfigFields<number>;
+export type GaugeConfig = PartialGaugeConfigFieldsInterface<number>;
 
 // Needles.
 
@@ -28,13 +28,13 @@ export const NeedleConfigFields = [
 export type NeedleConfigFieldsType = typeof NeedleConfigFields[number];
 
 /** Interface type for an object holding data for every field in needle config. */
-export type CompleteNeedleConfigFields<T> = { [property in NeedleConfigFieldsType]: T };
+export type NeedleConfigFieldsInterface<T> = { [property in NeedleConfigFieldsType]: T };
 
 /** Interface type for an object holding data for some fields in needle config. */
-export type PartialNeedleConfigFields<T> = Partial<CompleteNeedleConfigFields<T>>;
+export type PartialNeedleConfigFieldsInterface<T> = Partial<NeedleConfigFieldsInterface<T>>;
 
 /** Configuration of needle display. */
-export type NeedleConfig = PartialNeedleConfigFields<number>;
+export type NeedleConfig = PartialNeedleConfigFieldsInterface<number>;
 
 // Numerical.
 
@@ -47,13 +47,13 @@ export const NumericalConfigFields = [
 export type NumericalConfigFieldsType = typeof NumericalConfigFields[number];
 
 /** Interface type for an object holding data for every field in numerical config. */
-export type CompleteNumericalConfigFields<T> = { [property in NumericalConfigFieldsType]: T };
+export type NumericalConfigFieldsInterface<T> = { [property in NumericalConfigFieldsType]: T };
 
 /** Interface type for an object holding data for some fields in numerical config. */
-export type PartialNumericalConfigFields<T> = Partial<CompleteNumericalConfigFields<T>>;
+export type PartialNumericalConfigFieldsInterface<T> = Partial<NumericalConfigFieldsInterface<T>>;
 
 /** Configuration of numerical gauge display. */
-export interface NumericalConfig extends PartialNumericalConfigFields<number|boolean>{
+export interface NumericalConfig extends PartialNumericalConfigFieldsInterface<number|boolean>{
   positionX?: number;
   positionY?: number;
   centered?: boolean;
