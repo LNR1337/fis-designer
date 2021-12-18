@@ -6,14 +6,14 @@ import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state"
 import {Store} from "@ngrx/store";
 import {changedNeedleConfig, recalculateNeedleSize} from "../state/display.actions";
 import {NeedleConfig} from "../models/configs";
-import {NEEDLE_FIELD_LABELS} from '../models/configs_metadata';
+import {NEEDLE_DISPLAY_TO_PREVIEW_FIELD, NEEDLE_FIELD_LABELS} from '../models/configs_metadata';
 
 @Component({
   selector: 'app-needle',
   templateUrl: './needle.component.html',
   styleUrls: ['./needle.component.scss']
 })
-export class NeedleComponent implements OnChanges{
+export class NeedleComponent implements OnChanges {
   @Input() needleConfig?: NeedleConfig;
   // Name of the state field this config corresponds to.
   @Input() fieldName?: DisplayStateNeedleFieldsType;
@@ -37,29 +37,20 @@ export class NeedleComponent implements OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['loadedImages']) {
-      // TODO(pawelszydlo): clean up this ugle translation.
-      let imageFieldName: PreviewStateImageFieldsType = 'needleImage1';
-      switch (this.fieldName) {
-        case 'needle1':
-          imageFieldName = 'needleImage1';
-          break;
-        case 'needle2':
-          imageFieldName = 'needleImage2';
-          break;
-        case 'needle3':
-          imageFieldName = 'needleImage3';
-          break;
-        default:
-          console.error(`No image name found for config field ${this.fieldName}`);
-      }
-      this.resizeEnabled = !!this.loadedImages && this.loadedImages.has(imageFieldName);
+    if (changes['loadedImages'] && this.fieldName) {
+      const previewImageField = NEEDLE_DISPLAY_TO_PREVIEW_FIELD[this.fieldName];
+      this.resizeEnabled = !!this.loadedImages && this.loadedImages.has(previewImageField);
     }
   }
 
   recalculateSize() {
     if (this.fieldName) {
-      this.store.dispatch(recalculateNeedleSize({needleField: this.fieldName}))
+      this.store.dispatch(
+        recalculateNeedleSize({
+          displayStateNeedleField: this.fieldName,
+          previewStateImageField: NEEDLE_DISPLAY_TO_PREVIEW_FIELD[this.fieldName]
+        })
+      )
     }
   }
 

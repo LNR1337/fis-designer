@@ -1,7 +1,18 @@
+@import 'src/variables';
+
 :host {
   width: 100%;
   height: 100%;
   display: flex;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  color: $grey-border;
+  user-select: none;
+  z-index: 0;
 }
 
 .preview {

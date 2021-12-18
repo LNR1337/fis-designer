@@ -12,22 +12,24 @@ import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state"
 @Injectable()
 export class DisplayEffects {
 
+  debug = createEffect(() => this.actions$.pipe(
+    tap(action => console.log(`ACTION: ${action.type}`, action))
+  ), {dispatch: false});
+
   recalculateNeedle = createEffect(() => this.actions$.pipe(
     ofType(recalculateNeedleSize),
     withLatestFrom(this.store.select(selectNeedleConfigs)),
     withLatestFrom(this.store.select(selectAllImages)),
     concatMap(([[action, needleConfigs], allImages]) => {
-      console.log(allImages);
-      const image = allImages[action.needleField as PreviewStateImageFieldsType];
-      const config = needleConfigs[action.needleField];
-      console.log(image, config);
+      const image = allImages[action.previewStateImageField];
+      const config = needleConfigs[action.displayStateNeedleField];
       if (!image || !config) return [];
       return [changedNeedleConfig({
         config: {
           ...config,
           width: image.naturalWidth,
           height: image.naturalHeight
-        }, displayConfigField: action.needleField
+        }, displayConfigField: action.displayStateNeedleField
       })];
     })
   ));

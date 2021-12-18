@@ -3,10 +3,11 @@ import {
   DisplayStateGaugeFieldsType, DisplayStateNeedleFieldsType
 } from "./display.state";
 import {GaugeConfig, NeedleConfig} from "../models/configs";
+import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
 
 export const recalculateNeedleSize = createAction(
   '[Config] Recalculate needle size',
-  props<{needleField: DisplayStateNeedleFieldsType}>(),
+  props<{displayStateNeedleField: DisplayStateNeedleFieldsType, previewStateImageField: PreviewStateImageFieldsType}>(),
 );
 
 export const changedGaugeConfig = createAction(

@@ -13,8 +13,16 @@
   </button>
 </div>
 
-<app-sliding-input label="Width" [value]="needleConfig?.width"></app-sliding-input>
-<app-sliding-input label="Height" [value]="needleConfig?.height"></app-sliding-input>
+<app-sliding-input
+  label="{{ NEEDLE_FIELD_LABELS['width'] }}"
+  [value]="needleConfig?.width"
+  (valueChanged)="valueChanged($event, 'width')"
+></app-sliding-input
+><app-sliding-input
+  label="{{ NEEDLE_FIELD_LABELS['height'] }}"
+  [value]="needleConfig?.height"
+  (valueChanged)="valueChanged($event, 'height')"
+></app-sliding-input>
 <app-sliding-input
   label="{{ NEEDLE_FIELD_LABELS['centerX'] }}"
   [min]="0"

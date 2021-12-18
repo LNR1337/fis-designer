@@ -1,5 +1,6 @@
 import {DisplayStateGaugeFieldsInterface, DisplayStateNeedleFieldsInterface} from "../state/display.state";
 import {GaugeConfigFieldsInterface, NeedleConfigFieldsInterface} from "./configs";
+import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
 
 export const GAUGE_LABELS: DisplayStateGaugeFieldsInterface<string> = {
   gauge1: 'Left gauge',
@@ -18,6 +19,12 @@ export const NEEDLE_LABELS: DisplayStateNeedleFieldsInterface<string> = {
   needle1: 'Left needle',
   needle2: 'Center needle',
   needle3: 'Right needle',
+}
+
+export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsInterface<PreviewStateImageFieldsType> = {
+  needle1: 'needleImage1',
+  needle2: 'needleImage2',
+  needle3: 'needleImage3',
 }
 
 export const NEEDLE_FIELD_LABELS: NeedleConfigFieldsInterface<string> = {
