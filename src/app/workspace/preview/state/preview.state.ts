@@ -1,5 +1,5 @@
 /** Names of state fields holding images. */
-export const StateImageFields = [
+export const PreviewStateImageFields = [
   'backgroundImage',
   'tableBackgroundImage',
   'needleImage1',
@@ -20,13 +20,13 @@ export const StateImageFields = [
 ] as const;
 
 /** Type for all valid state field names holding images. */
-export type StateImageFieldsType = typeof StateImageFields[number];
+export type PreviewStateImageFieldsType = typeof PreviewStateImageFields[number];
 
 /** Type for an object holding data for all the images. */
-export type CompleteStateImages<T> = { [property in StateImageFieldsType]: T };
+export type PreviewStateImageFieldsInterface<T> = { [property in PreviewStateImageFieldsType]: T };
 
 /** Type for an object holding data for some of the images. */
-export type PartialStateImages<T> = Partial<CompleteStateImages<T>>;
+export type PartialPreviewStateImageFieldsInterface<T> = Partial<PreviewStateImageFieldsInterface<T>>;
 
 /** State for the preview module. */
-export type PreviewState = PartialStateImages<HTMLImageElement>;
+export type PreviewState = PartialPreviewStateImageFieldsInterface<HTMLImageElement>;

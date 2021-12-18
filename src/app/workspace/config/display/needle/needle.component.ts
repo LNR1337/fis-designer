@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {
-  StateDisplayNeedleFieldsType
+  DisplayStateNeedleFieldsType
 } from "../state/display.state";
-import {StateImageFieldsType} from "../../../preview/state/preview.state";
+import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
 import {Store} from "@ngrx/store";
 import {changedNeedleConfig, recalculateNeedleSize} from "../state/display.actions";
 import {NeedleConfig} from "../models/configs";
@@ -16,9 +16,9 @@ import {NEEDLE_FIELD_LABELS} from '../models/configs_metadata';
 export class NeedleComponent implements OnChanges{
   @Input() needleConfig?: NeedleConfig;
   // Name of the state field this config corresponds to.
-  @Input() fieldName?: StateDisplayNeedleFieldsType;
+  @Input() fieldName?: DisplayStateNeedleFieldsType;
   // List of names of loaded images.
-  @Input() loadedImages?: Set<StateImageFieldsType>;
+  @Input() loadedImages?: Set<PreviewStateImageFieldsType>;
   @Input() label = '';
 
   resizeEnabled = false;
@@ -39,7 +39,7 @@ export class NeedleComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges) {
     if (changes['loadedImages']) {
       // TODO(pawelszydlo): clean up this ugle translation.
-      let imageFieldName: StateImageFieldsType = 'needleImage1';
+      let imageFieldName: PreviewStateImageFieldsType = 'needleImage1';
       switch (this.fieldName) {
         case 'needle1':
           imageFieldName = 'needleImage1';

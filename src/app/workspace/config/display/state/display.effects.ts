@@ -6,7 +6,7 @@ import {changedNeedleConfig, recalculateNeedleSize} from "./display.actions";
 import {Store} from "@ngrx/store";
 import {selectNeedleConfigs} from "./display.selectors";
 import {selectAllImages} from "../../../preview/state/preview.selectors";
-import {StateImageFieldsType} from "../../../preview/state/preview.state";
+import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
 
 
 @Injectable()
@@ -18,7 +18,7 @@ export class DisplayEffects {
     withLatestFrom(this.store.select(selectAllImages)),
     concatMap(([[action, needleConfigs], allImages]) => {
       console.log(allImages);
-      const image = allImages[action.needleField as StateImageFieldsType];
+      const image = allImages[action.needleField as PreviewStateImageFieldsType];
       const config = needleConfigs[action.needleField];
       console.log(image, config);
       if (!image || !config) return [];

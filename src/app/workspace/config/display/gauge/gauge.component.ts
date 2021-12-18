@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {
-  StateDisplayGaugeFieldsType
+  DisplayStateGaugeFieldsType
 } from "../state/display.state";
-import {StateImageFieldsType} from "../../../preview/state/preview.state";
+import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
 import {Store} from "@ngrx/store";
 import {changedGaugeConfig} from "../state/display.actions";
 import {GaugeConfig} from "../models/configs";
@@ -17,9 +17,9 @@ export class GaugeComponent {
   // Configuration for this gauge.
   @Input() gaugeConfig?: GaugeConfig;
   // Name of the state field this config corresponds to.
-  @Input() fieldName?: StateDisplayGaugeFieldsType;
+  @Input() fieldName?: DisplayStateGaugeFieldsType;
   // List of names of loaded images.
-  @Input() loadedImages?: Set<StateImageFieldsType>;
+  @Input() loadedImages?: Set<PreviewStateImageFieldsType>;
   @Input() label = '';
 
   GAUGE_FIELD_LABELS = GAUGE_FIELD_LABELS;

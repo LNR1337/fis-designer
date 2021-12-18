@@ -32,34 +32,34 @@ export const DisplayStateFields = [
 export type DisplayStateFieldsType = typeof DisplayStateFields[number];
 
 /** List of all display state fields holding gauge configs. */
-export const StateDisplayGaugeFields = ['gauge1', 'gauge2', 'gauge3'] as const;
+export const DisplayStateGaugeFields = ['gauge1', 'gauge2', 'gauge3'] as const;
 
 /** List of all display state fields holding needle configs. */
-export const StateDisplayNeedleFields = ['needle1', 'needle2', 'needle3'] as const;
+export const DisplayStateNeedleFields = ['needle1', 'needle2', 'needle3'] as const;
 
 /** Type for all valid state field names holding gauge settings. */
-export type StateDisplayGaugeFieldsType = typeof StateDisplayGaugeFields[number];
+export type DisplayStateGaugeFieldsType = typeof DisplayStateGaugeFields[number];
 
 /** Type for all valid state field names holding needle settings. */
-export type StateDisplayNeedleFieldsType = typeof StateDisplayNeedleFields[number];
+export type DisplayStateNeedleFieldsType = typeof DisplayStateNeedleFields[number];
 
 /** Interface type for an object of state fields holding gauge settings. */
-export type StateDisplayGaugeFieldsInterface<T> = { [property in StateDisplayGaugeFieldsType]: T };
+export type DisplayStateGaugeFieldsInterface<T> = { [property in DisplayStateGaugeFieldsType]: T };
 
 /** Interface type for an object of state fields holding needle settings. */
-export type StateDisplayNeedleFieldsInterface<T> = { [property in StateDisplayNeedleFieldsType]: T };
+export type DisplayStateNeedleFieldsInterface<T> = { [property in DisplayStateNeedleFieldsType]: T };
 
 /** Interface type for holding data for all display state fields. */
-export type CompleteDisplayStateFields<T> = { [property in DisplayStateFieldsType]: T };
+export type DisplayStateFieldsInterface<T> = { [property in DisplayStateFieldsType]: T };
 
 /** Interface type for holding data for some of the display state fields. */
-export type PartialDisplayStateFields<T> = Partial<CompleteDisplayStateFields<T>>;
+export type PartialDisplayStateFieldsInterface<T> = Partial<DisplayStateFieldsInterface<T>>;
 
 /** Type of all valid types for config state fields. */
 export type ValidDisplayStateType = number | string | GaugeConfig | NumericalConfig | NeedleConfig;
 
 /** State for the config module. */
-export interface DisplayConfigState extends PartialDisplayStateFields<ValidDisplayStateType> {
+export interface DisplayConfigState extends PartialDisplayStateFieldsInterface<ValidDisplayStateType> {
   gauge1?: GaugeConfig,
   gauge2?: GaugeConfig,
   gauge3?: GaugeConfig,

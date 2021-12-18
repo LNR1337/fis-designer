@@ -1,7 +1,7 @@
-import {StateDisplayGaugeFieldsInterface, StateDisplayNeedleFieldsInterface} from "../state/display.state";
+import {DisplayStateGaugeFieldsInterface, DisplayStateNeedleFieldsInterface} from "../state/display.state";
 import {CompleteGaugeConfigFields, CompleteNeedleConfigFields} from "./configs";
 
-export const GAUGE_LABELS: StateDisplayGaugeFieldsInterface<string> = {
+export const GAUGE_LABELS: DisplayStateGaugeFieldsInterface<string> = {
   gauge1: 'Left gauge',
   gauge2: 'Center gauge',
   gauge3: 'Right gauge',
@@ -14,7 +14,7 @@ export const GAUGE_FIELD_LABELS: CompleteGaugeConfigFields<string> = {
   upperLimit: 'Value upper limit'
 }
 
-export const NEEDLE_LABELS: StateDisplayNeedleFieldsInterface<string> = {
+export const NEEDLE_LABELS: DisplayStateNeedleFieldsInterface<string> = {
   needle1: 'Left needle',
   needle2: 'Center needle',
   needle3: 'Right needle',

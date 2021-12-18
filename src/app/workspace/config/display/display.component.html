@@ -9,7 +9,7 @@
 <div *ngIf="loadedImages | async; let loadedImagesSet" class="settings-form">
   <!-- All gauges -->
   <ng-container *ngIf="gaugesConfigs | async; let configs">
-    <ng-container *ngFor="let configName of StateDisplayGaugeFields">
+    <ng-container *ngFor="let configName of DisplayStateGaugeFields">
       <mat-divider></mat-divider>
       <app-gauge
         [gaugeConfig]="configs[configName]"
@@ -21,7 +21,7 @@
   </ng-container>
   <!-- All needles -->
   <ng-container *ngIf="needlesConfigs | async; let configs">
-    <ng-container *ngFor="let configName of StateDisplayNeedleFields">
+    <ng-container *ngFor="let configName of DisplayStateNeedleFields">
       <mat-divider></mat-divider>
       <app-needle
         [needleConfig]="configs[configName]"

@@ -11,7 +11,7 @@ import { LoadImagesDialogComponent } from '../load-images-dialog/load-images-dia
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, tap } from 'rxjs';
 import { selectAllImages } from '../state/preview.selectors';
-import { PartialStateImages } from '../state/preview.state';
+import { PartialPreviewStateImageFieldsInterface } from '../state/preview.state';
 
 @Component({
   selector: 'app-gauges',
@@ -26,7 +26,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   private displayContext?: CanvasRenderingContext2D;
 
   subscription = new Subscription();
-  images?: PartialStateImages<HTMLImageElement>;
+  images?: PartialPreviewStateImageFieldsInterface<HTMLImageElement>;
 
   constructor(private readonly store: Store) {
     this.subscription.add(
