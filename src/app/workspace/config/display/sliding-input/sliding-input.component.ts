@@ -8,6 +8,7 @@ import {MatSliderChange} from "@angular/material/slider";
 })
 export class SlidingInputComponent {
   @Input() label: string = '';
+  @Input() hint?: string;
   @Input() min?: number;
   @Input() max?: number;
   @Input() value?: number;

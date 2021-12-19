@@ -9,8 +9,6 @@
     "test": "ng test",
     "format": "prettier --write \"./**/*.{ts,js,json,md,html,scss}\"",
     "format-check": "prettier --check \"./**/*.{ts,js,json,md,html,scss}\"",
-    "lint": "eslint . --ext .js,.ts",
-    "lintfix": "eslint . --fix --ext .js,.ts",
     "updateBuildDate": "node ./replace.build.js"
   },
   "private": true,

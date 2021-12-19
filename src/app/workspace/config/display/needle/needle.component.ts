@@ -5,8 +5,8 @@ import {
 import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
 import {Store} from "@ngrx/store";
 import {changedNeedleConfig, recalculateNeedleSize} from "../state/display.actions";
-import {NeedleConfig} from "../models/configs";
-import {NEEDLE_DISPLAY_TO_PREVIEW_FIELD, NEEDLE_FIELD_LABELS} from '../models/configs_metadata';
+import {NeedleConfig, NeedleConfigFields} from "../models/configs";
+import {NEEDLE_DISPLAY_TO_PREVIEW_FIELD, NEEDLE_FIELD_METADATA} from '../models/configs_metadata';
 
 @Component({
   selector: 'app-needle',
@@ -22,7 +22,8 @@ export class NeedleComponent implements OnChanges {
   @Input() label = '';
 
   resizeEnabled = false;
-  NEEDLE_FIELD_LABELS = NEEDLE_FIELD_LABELS;
+  NEEDLE_FIELD_METADATA = NEEDLE_FIELD_METADATA;
+  NeedleConfigFields = NeedleConfigFields;
 
   constructor(private readonly store: Store) {
   }

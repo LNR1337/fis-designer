@@ -5,8 +5,8 @@ import {
 import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
 import {Store} from "@ngrx/store";
 import {changedGaugeConfig} from "../state/display.actions";
-import {GaugeConfig} from "../models/configs";
-import {GAUGE_FIELD_LABELS} from '../models/configs_metadata';
+import {GaugeConfig, GaugeConfigFields} from "../models/configs";
+import {GAUGE_FIELD_METADATA} from '../models/configs_metadata';
 
 @Component({
   selector: 'app-gauge',
@@ -22,7 +22,8 @@ export class GaugeComponent {
   @Input() loadedImages?: Set<PreviewStateImageFieldsType>;
   @Input() label = '';
 
-  GAUGE_FIELD_LABELS = GAUGE_FIELD_LABELS;
+  GAUGE_FIELD_METADATA = GAUGE_FIELD_METADATA;
+  GaugeConfigFields = GaugeConfigFields;
 
   constructor(private readonly store: Store) {
   }

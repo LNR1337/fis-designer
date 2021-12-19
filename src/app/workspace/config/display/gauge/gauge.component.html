@@ -1,26 +1,12 @@
 <h4 class="label">{{ label }}</h4>
 
-<app-sliding-input
-  label="{{ GAUGE_FIELD_LABELS['lowerLimit'] }}"
-  (valueChanged)="valueChanged($event, 'lowerLimit')"
-  [value]="gaugeConfig?.lowerLimit"
-></app-sliding-input>
-<app-sliding-input
-  label="{{ GAUGE_FIELD_LABELS['upperLimit'] }}"
-  (valueChanged)="valueChanged($event, 'upperLimit')"
-  [value]="gaugeConfig?.upperLimit"
-></app-sliding-input>
-<app-sliding-input
-  label="{{ GAUGE_FIELD_LABELS['startAngle'] }}"
-  (valueChanged)="valueChanged($event, 'startAngle')"
-  [min]="0"
-  [max]="360"
-  [value]="gaugeConfig?.startAngle"
-></app-sliding-input>
-<app-sliding-input
-  label="{{ GAUGE_FIELD_LABELS['angularRange'] }}"
-  (valueChanged)="valueChanged($event, 'angularRange')"
-  [min]="0"
-  [max]="360"
-  [value]="gaugeConfig?.angularRange"
-></app-sliding-input>
+<ng-container *ngFor="let fieldName of GaugeConfigFields">
+  <app-sliding-input *ngIf="GAUGE_FIELD_METADATA[fieldName]; let metaData"
+                     [label]="metaData.label ?? ''"
+                     [min]="metaData.min"
+                     [max]="metaData.max"
+                     [hint]="metaData.hint"
+                     (valueChanged)="valueChanged($event, fieldName)"
+                     [value]="gaugeConfig ? gaugeConfig[fieldName] : undefined"
+  ></app-sliding-input>
+</ng-container>

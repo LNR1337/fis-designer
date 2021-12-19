@@ -1,18 +1,24 @@
-import {DisplayStateGaugeFieldsInterface, DisplayStateNeedleFieldsInterface} from "../state/display.state";
-import {GaugeConfigFieldsInterface, NeedleConfigFieldsInterface} from "./configs";
+import {
+  DisplayStateGaugeFieldsInterface,
+  DisplayStateNeedleFieldsInterface
+} from "../state/display.state";
+import {
+  GaugeConfigFieldsInterface,
+  NeedleConfigFieldsInterface,
+} from "./configs";
 import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
+
+export interface ConfigFieldMetadata {
+  label?: string;
+  hint?: string;
+  min?: number,
+  max?: number,
+}
 
 export const GAUGE_LABELS: DisplayStateGaugeFieldsInterface<string> = {
   gauge1: 'Left gauge',
   gauge2: 'Center gauge',
   gauge3: 'Right gauge',
-}
-
-export const GAUGE_FIELD_LABELS: GaugeConfigFieldsInterface<string> = {
-  startAngle: 'Lower limit angle',
-  angularRange: 'Low to high angle',
-  lowerLimit: 'Value lower limit',
-  upperLimit: 'Value upper limit'
 }
 
 export const NEEDLE_LABELS: DisplayStateNeedleFieldsInterface<string> = {
@@ -27,13 +33,31 @@ export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsInterface<
   needle3: 'needleImage3',
 }
 
-export const NEEDLE_FIELD_LABELS: NeedleConfigFieldsInterface<string> = {
- width: 'Width',
- height: 'Height',
- centerX: 'Center X',
- centerY: 'Center Y',
- positionX: 'Position X',
- positionY: 'Position Y',
- indicatorPositionX: 'Indicator X',
- indicatorPositionY: 'Indicator Y',
+export const GAUGE_FIELD_METADATA: GaugeConfigFieldsInterface<ConfigFieldMetadata> = {
+  startAngle: {label: 'Lower limit angle', min: 0, max: 360},
+  angularRange: {label: 'Low to high angle', min: -360, max: 360},
+  lowerLimit: {label: 'Value lower limit'},
+  upperLimit: {label: 'Value upper limit'},
 }
+
+export const NEEDLE_FIELD_METADATA: NeedleConfigFieldsInterface<ConfigFieldMetadata> = {
+  width: {label: 'Width'},
+  height: {label: 'Height'},
+  centerX: {label: 'Center X', min: -200, max: 200},
+  centerY: {label: 'Center Y', min: -200, max: 200},
+  positionX: {label: 'Position X', min: 0, max: 799},
+  positionY: {label: 'Position Y', min: 0, max: 479},
+  indicatorPositionX: {
+    label: 'Indicator X',
+    hint: 'Set to 0 to disable indicator.',
+    min: 0,
+    max: 799
+  },
+  indicatorPositionY: {
+    label: 'Indicator Y',
+    hint: 'Set to 0 to disable indicator.',
+    min: 0,
+    max: 479
+  },
+}
+
