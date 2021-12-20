@@ -19,7 +19,7 @@ export const displayReducer = createReducer(
     ...state,
     activeHightlight: stateField,
   })),
-  on(actions.disableHighlight, (state) => ({
+  on(actions.disableHighlight, state => ({
     ...state,
     activeHightlight: undefined,
   })),
