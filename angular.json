@@ -99,18 +99,9 @@
             ],
             "scripts": []
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
-          }
         }
       }
     }
   },
   "defaultProject": "fis-design",
-  "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
-  }
 }
