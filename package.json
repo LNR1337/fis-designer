@@ -7,6 +7,8 @@
     "build": "node ./replace.build.js; ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "lint": "eslint . --ext .ts",
+    "lintfix": "eslint . --ext .ts --fix",
     "format": "prettier --config ./.prettierrc.json --write \"./**/*.{ts,js,json,md,html,scss}\"",
     "format-check": "prettier --check \"./**/*.{ts,js,json,md,html,scss}\"",
     "updateBuildDate": "node ./replace.build.js"

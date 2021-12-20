@@ -2,7 +2,7 @@ import { QueryList} from '@angular/core';
 import {Component, ViewChildren} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {PartialPreviewStateImageFieldsInterface} from '../state/preview.state';
+import {PartialPreviewStateImageFieldsObject} from '../state/preview.state';
 import { PreviewStateImageFields} from '../state/preview.state';
 import {IMAGE_FILENAME_MATCHERS, MIME_TYPE} from '../models/images_metadata';
 import {selectAllImages} from '../state/preview.selectors';
@@ -23,7 +23,7 @@ export class LoadImagesDialogComponent {
 
   MIME_TYPE = MIME_TYPE;
   stateImageFields = PreviewStateImageFields;
-  currentImages = new Observable<PartialPreviewStateImageFieldsInterface<HTMLImageElement>>();
+  currentImages = new Observable<PartialPreviewStateImageFieldsObject<HTMLImageElement>>();
 
   constructor(readonly store: Store, private readonly snackBar: SnackBarService) {
     this.currentImages = store.select(selectAllImages);

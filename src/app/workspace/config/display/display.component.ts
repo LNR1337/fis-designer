@@ -6,8 +6,8 @@ import {PreviewStateImageFieldsType} from "../../preview/state/preview.state";
 import {map, Observable} from "rxjs";
 import {selectLoadedImageNames} from "../../preview/state/preview.selectors";
 import {
-  DisplayStateNeedleFieldsInterface,
-  DisplayStateGaugeFieldsInterface,
+  DisplayStateNeedleFieldsObject,
+  DisplayStateGaugeFieldsObject,
   DisplayStateGaugeFields,
   DisplayStateNeedleFields, DisplayStateFieldsType
 } from "./state/display.state";
@@ -23,8 +23,8 @@ import {disableHighlight, enableHighlight} from "./state/display.actions";
 })
 export class DisplayComponent {
   loadedImages: Observable<Set<PreviewStateImageFieldsType>>;
-  needlesConfigs: Observable<DisplayStateNeedleFieldsInterface<NeedleConfig>>;
-  gaugesConfigs: Observable<DisplayStateGaugeFieldsInterface<GaugeConfig>>;
+  needlesConfigs: Observable<DisplayStateNeedleFieldsObject<NeedleConfig>>;
+  gaugesConfigs: Observable<DisplayStateGaugeFieldsObject<GaugeConfig>>;
 
   GAUGE_LABELS = GAUGE_LABELS;
   NEEDLE_LABELS = NEEDLE_LABELS;

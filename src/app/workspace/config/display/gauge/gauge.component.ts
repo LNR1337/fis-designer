@@ -31,8 +31,7 @@ export class GaugeComponent {
   valueChanged(value: number, fieldName: keyof GaugeConfig) {
     if (this.gaugeConfig && this.fieldName) {
       this.store.dispatch(changedGaugeConfig({
-        config: {...this.gaugeConfig, [fieldName]: value},
-        displayConfigField: this.fieldName
+        config: {...this.gaugeConfig, [fieldName]: value}, displayConfigField: this.fieldName
       }));
     }
   }

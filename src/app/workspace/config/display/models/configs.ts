@@ -8,14 +8,29 @@ export const GaugeConfigFields = [
 /** Type for all valid field names of gauge config. */
 export type GaugeConfigFieldsType = typeof GaugeConfigFields[number];
 
-/** Interface type for an object holding data for every field in gauge config. */
-export type GaugeConfigFieldsInterface<T> = { [property in GaugeConfigFieldsType]: T };
+/** Object type for holding data for every field in gauge config. */
+export type GaugeConfigFieldsObject<T> = { [property in GaugeConfigFieldsType]: T };
 
-/** Interface type for an object holding data for some fields in gauge config. */
-export type PartialGaugeConfigFieldsInterface<T> = Partial<GaugeConfigFieldsInterface<T>>;
+/** Object type for holding data for some fields in gauge config. */
+export type PartialGaugeConfigFieldsObject<T> = Partial<GaugeConfigFieldsObject<T>>;
 
 /** Configuration of gauge display. */
-export type GaugeConfig = PartialGaugeConfigFieldsInterface<number>;
+export type GaugeConfig = PartialGaugeConfigFieldsObject<number>;
+
+/** Helper function for getting absolute radian angles of min and max needle values. */
+export function getAbsoluteNeedleAngleBounds(config: GaugeConfig): [number, number] {
+  // FIS-Control's angle direction is reversed and translated by 90 degrees.
+  let angleStartDeg = -450 - config.startAngle!;
+  let angleEndDeg = angleStartDeg + config.angularRange!;
+  while (Math.abs(angleStartDeg) >= 360) {
+    angleStartDeg = angleStartDeg % 360;
+  }
+  while (Math.abs(angleEndDeg) >= 360) {
+    angleEndDeg = angleEndDeg % 360;
+  }
+  // At this point angles are in correct angular coordinates, but are in degrees.
+  return [angleStartDeg * Math.PI / 180, angleEndDeg * Math.PI / 180];
+}
 
 // Needles.
 
@@ -27,14 +42,14 @@ export const NeedleConfigFields = [
 /** Type for all valid field names of needle config. */
 export type NeedleConfigFieldsType = typeof NeedleConfigFields[number];
 
-/** Interface type for an object holding data for every field in needle config. */
-export type NeedleConfigFieldsInterface<T> = { [property in NeedleConfigFieldsType]: T };
+/** Object type for an object holding data for every field in needle config. */
+export type NeedleConfigFieldsObject<T> = { [property in NeedleConfigFieldsType]: T };
 
-/** Interface type for an object holding data for some fields in needle config. */
-export type PartialNeedleConfigFieldsInterface<T> = Partial<NeedleConfigFieldsInterface<T>>;
+/** Object type for an object holding data for some fields in needle config. */
+export type PartialNeedleConfigFieldsObject<T> = Partial<NeedleConfigFieldsObject<T>>;
 
 /** Configuration of needle display. */
-export type NeedleConfig = PartialNeedleConfigFieldsInterface<number>;
+export type NeedleConfig = PartialNeedleConfigFieldsObject<number>;
 
 // Numerical.
 
@@ -46,14 +61,14 @@ export const NumericalConfigFields = [
 /** Type for all valid field names of numerical config. */
 export type NumericalConfigFieldsType = typeof NumericalConfigFields[number];
 
-/** Interface type for an object holding data for every field in numerical config. */
-export type NumericalConfigFieldsInterface<T> = { [property in NumericalConfigFieldsType]: T };
+/** Object type for holding data for every field in numerical config. */
+export type NumericalConfigFieldsObject<T> = { [property in NumericalConfigFieldsType]: T };
 
-/** Interface type for an object holding data for some fields in numerical config. */
-export type PartialNumericalConfigFieldsInterface<T> = Partial<NumericalConfigFieldsInterface<T>>;
+/** Object type for holding data for some fields in numerical config. */
+export type PartialNumericalConfigFieldsObject<T> = Partial<NumericalConfigFieldsObject<T>>;
 
 /** Configuration of numerical gauge display. */
-export interface NumericalConfig extends PartialNumericalConfigFieldsInterface<number | boolean> {
+export interface NumericalConfig extends PartialNumericalConfigFieldsObject<number | boolean> {
   positionX?: number;
   positionY?: number;
   centered?: boolean;

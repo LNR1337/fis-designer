@@ -12,9 +12,9 @@ import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state"
 @Injectable()
 export class DisplayEffects {
 
-  debug = createEffect(() => this.actions$.pipe(
-    tap(action => console.log(`ACTION: ${action.type}`, action))
-  ), {dispatch: false});
+  // debug = createEffect(() => this.actions$.pipe(
+  //   tap(action => console.log(`ACTION: ${action.type}`, action))
+  // ), {dispatch: false});
 
   recalculateNeedle = createEffect(() => this.actions$.pipe(
     ofType(recalculateNeedleSize),

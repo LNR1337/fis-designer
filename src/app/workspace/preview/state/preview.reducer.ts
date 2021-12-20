@@ -4,12 +4,11 @@ import {createReducer, on} from '@ngrx/store';
 
 export const PREVIEW_FEATURE_KEY = 'preview';
 
-export const initialState: PreviewState = {};
+export const initialState: PreviewState = {
+  needleAngle1: 0, needleAngle2: 0, needleAngle3: 0,
+};
 
-export const previewReducer = createReducer(
-  initialState,
+export const previewReducer = createReducer(initialState,
   on(actions.loadedImage, (state, {image, imageField}) => ({
-    ...state,
-    [imageField]: image,
-  })),
-);
+    ...state, [imageField]: image,
+  })),);

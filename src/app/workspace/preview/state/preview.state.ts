@@ -23,10 +23,15 @@ export const PreviewStateImageFields = [
 export type PreviewStateImageFieldsType = typeof PreviewStateImageFields[number];
 
 /** Type for an object holding data for all the images. */
-export type PreviewStateImageFieldsInterface<T> = { [property in PreviewStateImageFieldsType]: T };
+export type PreviewStateImageFieldsObject<T> = { [property in PreviewStateImageFieldsType]: T };
 
 /** Type for an object holding data for some of the images. */
-export type PartialPreviewStateImageFieldsInterface<T> = Partial<PreviewStateImageFieldsInterface<T>>;
+export type PartialPreviewStateImageFieldsObject<T> = Partial<PreviewStateImageFieldsObject<T>>;
 
 /** State for the preview module. */
-export type PreviewState = PartialPreviewStateImageFieldsInterface<HTMLImageElement>;
+export interface PreviewState extends PartialPreviewStateImageFieldsObject<HTMLImageElement> {
+  // Internal values.
+  needleAngle1?: number;
+  needleAngle2?: number;
+  needleAngle3?: number;
+}

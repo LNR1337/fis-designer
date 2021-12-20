@@ -43,17 +43,17 @@ export type DisplayStateGaugeFieldsType = typeof DisplayStateGaugeFields[number]
 /** Type for all valid state field names holding needle settings. */
 export type DisplayStateNeedleFieldsType = typeof DisplayStateNeedleFields[number];
 
-/** Interface type for an object of state fields holding gauge settings. */
-export type DisplayStateGaugeFieldsInterface<T> = { [property in DisplayStateGaugeFieldsType]: T };
+/** Object type of state fields holding gauge settings. */
+export type DisplayStateGaugeFieldsObject<T> = { [property in DisplayStateGaugeFieldsType]: T };
 
-/** Interface type for an object of state fields holding needle settings. */
-export type DisplayStateNeedleFieldsInterface<T> = { [property in DisplayStateNeedleFieldsType]: T };
+/** Object type of state fields holding needle settings. */
+export type DisplayStateNeedleFieldsObject<T> = { [property in DisplayStateNeedleFieldsType]: T };
 
-/** Interface type for holding data for all display state fields. */
-export type DisplayStateFieldsInterface<T> = { [property in DisplayStateFieldsType]: T };
+/** Object type of all display state fields. */
+export type DisplayStateFieldsObject<T> = { [property in DisplayStateFieldsType]: T };
 
-/** Interface type for holding data for some of the display state fields. */
-export type PartialDisplayStateFieldsInterface<T> = Partial<DisplayStateFieldsInterface<T>>;
+/** Object type of dome display state fields. */
+export type PartialDisplayStateFieldsObject<T> = Partial<DisplayStateFieldsObject<T>>;
 
 /** Type of all valid types for config state fields. */
 export type ValidDisplayStateType = number | string | GaugeConfig | NumericalConfig | NeedleConfig;
