@@ -12,18 +12,19 @@ import {Subscription} from 'rxjs';
 import {selectAllImages} from '../state/preview.selectors';
 import {PartialPreviewStateImageFieldsInterface} from '../state/preview.state';
 import {
+  DisplayStateFieldsType,
   DisplayStateGaugeFieldsInterface,
   DisplayStateNeedleFieldsInterface
 } from "../../config/display/state/display.state";
 import {GaugeConfig, NeedleConfig} from "../../config/display/models/configs";
 import {
-  selectGaugeConfigs,
+  selectGaugeConfigs, selectHighlight,
   selectNeedleConfigs
 } from "../../config/display/state/display.selectors";
+import {GaugesCompositor} from "./gauges.compositor";
 
-const RULER_COLOR = 'cyan';
-const RULER_COLOR_HIGHLIGHTED = 'red';
 const CENTER_TARGET_SIZE = 10;
+const INDICATOR_SIZE = 7;
 
 @Component({
   selector: 'app-gauges',
@@ -35,12 +36,15 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   @ViewChild('displayCanvas', {static: false})
   displayCanvas?: ElementRef<HTMLCanvasElement>;
   // Context for the main canvas.
-  private displayContext?: CanvasRenderingContext2D;
+  displayContext?: CanvasRenderingContext2D;
+  // Rendering compositor.
+  compositor?: GaugesCompositor;
 
   subscription = new Subscription();
   images?: PartialPreviewStateImageFieldsInterface<HTMLImageElement>;
   needleConfigs?: DisplayStateNeedleFieldsInterface<NeedleConfig>;
   gaugeConfigs?: DisplayStateGaugeFieldsInterface<GaugeConfig>;
+  highlight?: DisplayStateFieldsType;
 
   constructor(private readonly store: Store) {
     this.subscription.add(
@@ -61,6 +65,12 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
         this.redrawAll();
       })
     );
+    this.subscription.add(
+      this.store.select(selectHighlight).subscribe((highlight) => {
+        this.highlight = highlight;
+        this.redrawAll();
+      })
+    );
   }
 
   ngAfterViewInit() {
@@ -75,31 +85,45 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   drawNeedleHighlight(config: NeedleConfig) {
     if (!this.displayCanvas || !this.displayContext) return;
 
-    this.displayContext.strokeStyle = RULER_COLOR;
     this.displayContext.lineWidth = 1;
+    this.displayContext.globalAlpha = 0.7;
 
     // Needle position.
+    this.displayContext.strokeStyle = 'cyan';
     this.displayContext.beginPath();
-    this.displayContext.moveTo(config.positionX! + 0.5, 0);
-    this.displayContext.lineTo(config.positionX!, config.positionY!);
-    this.displayContext.lineTo(0, config.positionY!);
+    this.displayContext.moveTo(config.positionX! + 0.5, 0.5);
+    this.displayContext.lineTo(config.positionX! + 0.5, config.positionY! + 0.5);
+    this.displayContext.lineTo(0.5, config.positionY! + 0.5);
     this.displayContext.stroke();
+
     // Needle size.
-    this.displayContext.strokeRect(config.positionX!, config.positionY!, config.width!, config.height!);
+    this.displayContext.strokeStyle = 'yellow';
+    this.displayContext.strokeRect(config.positionX! + 0.5, config.positionY! + 0.5, config.width! - 1, config.height! - 1);
+
     // Needle center.
-    const centerX = config.positionX! + config.centerX!;
-    const centerY = config.positionY! + config.centerY!;
+    this.displayContext.strokeStyle = 'yellow';
+    const centerX = config.positionX! + config.centerX! + 0.5;
+    const centerY = config.positionY! + config.centerY! + 0.5;
     this.displayContext.beginPath();
-    this.displayContext.moveTo(centerX - CENTER_TARGET_SIZE, centerY);
-    this.displayContext.lineTo(centerX + CENTER_TARGET_SIZE, centerY);
-    this.displayContext.moveTo(centerX, centerY - CENTER_TARGET_SIZE);
-    this.displayContext.lineTo(centerX, centerY + CENTER_TARGET_SIZE);
+    this.displayContext.moveTo(0, centerY);
+    this.displayContext.lineTo(799, centerY);
+    this.displayContext.moveTo(centerX, 0);
+    this.displayContext.lineTo(centerX, 479);
     this.displayContext.stroke();
     this.displayContext.beginPath();
     this.displayContext.ellipse(centerX, centerY, CENTER_TARGET_SIZE, CENTER_TARGET_SIZE, 0, 0, 2 * Math.PI);
     this.displayContext.stroke();
 
+    // Indicator.
+    this.displayContext.strokeStyle = 'cyan';
+    if (config.indicatorPositionX && config.indicatorPositionY) {
+      this.displayContext.beginPath();
+      this.displayContext.ellipse(config.indicatorPositionX + 0.5 - 3, config.indicatorPositionY + 0.5 - 3, INDICATOR_SIZE, INDICATOR_SIZE, 0, 0, 2 * Math.PI);
+      this.displayContext.stroke();
+    }
 
+    this.displayContext.setLineDash([]);
+    this.displayContext.globalAlpha = 1;
   }
 
   drawNeedles() {
@@ -128,7 +152,21 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
     }
 
     this.drawNeedles();
-    this.drawNeedleHighlight(this.needleConfigs.needle1);
+
+    // TODO(pawelszydlo): streamline this.
+    switch (this.highlight) {
+      case('needle1'):
+        this.drawNeedleHighlight(this.needleConfigs.needle1);
+        break;
+      case('needle2'):
+        this.drawNeedleHighlight(this.needleConfigs.needle2);
+        break;
+      case('needle3'):
+        this.drawNeedleHighlight(this.needleConfigs.needle3);
+        break;
+      default:
+        break;
+    }
   }
 
   ngOnDestroy() {

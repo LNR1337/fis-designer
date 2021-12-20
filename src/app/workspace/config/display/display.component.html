@@ -16,6 +16,8 @@
         [fieldName]="configName"
         [loadedImages]="loadedImagesSet"
         label="{{ GAUGE_LABELS[configName] }}"
+        (mouseenter)="highlight(configName)"
+        (mouseleave)="highlightNone()"
       ></app-gauge>
     </ng-container>
   </ng-container>
@@ -28,6 +30,8 @@
         [fieldName]="configName"
         [loadedImages]="loadedImagesSet"
         label="{{ NEEDLE_LABELS[configName] }}"
+        (mouseenter)="highlight(configName)"
+        (mouseleave)="highlightNone()"
       ></app-needle>
     </ng-container>
   </ng-container>

@@ -15,4 +15,12 @@ export const displayReducer = createReducer(
     ...state,
     [displayConfigField]: config,
   })),
+  on(actions.enableHighlight, (state, {stateField}) => ({
+    ...state,
+    activeHightlight: stateField,
+  })),
+  on(actions.disableHighlight, (state) => ({
+    ...state,
+    activeHightlight: undefined,
+  })),
 );

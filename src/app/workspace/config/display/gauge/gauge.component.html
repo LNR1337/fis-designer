@@ -1,12 +1,13 @@
 <h4 class="label">{{ label }}</h4>
 
 <ng-container *ngFor="let fieldName of GaugeConfigFields">
-  <app-sliding-input *ngIf="GAUGE_FIELD_METADATA[fieldName]; let metaData"
-                     [label]="metaData.label ?? ''"
-                     [min]="metaData.min"
-                     [max]="metaData.max"
-                     [hint]="metaData.hint"
-                     (valueChanged)="valueChanged($event, fieldName)"
-                     [value]="gaugeConfig ? gaugeConfig[fieldName] : undefined"
+  <app-sliding-input
+    *ngIf="GAUGE_FIELD_METADATA[fieldName]; let metaData"
+    [label]="metaData.label ?? ''"
+    [min]="metaData.min"
+    [max]="metaData.max"
+    [hint]="metaData.hint"
+    (valueChanged)="valueChanged($event, fieldName)"
+    [value]="gaugeConfig ? gaugeConfig[fieldName] : undefined"
   ></app-sliding-input>
 </ng-container>

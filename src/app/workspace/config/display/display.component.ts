@@ -9,11 +9,12 @@ import {
   DisplayStateNeedleFieldsInterface,
   DisplayStateGaugeFieldsInterface,
   DisplayStateGaugeFields,
-  DisplayStateNeedleFields
+  DisplayStateNeedleFields, DisplayStateFieldsType
 } from "./state/display.state";
 import {selectNeedleConfigs, selectGaugeConfigs} from "./state/display.selectors";
 import {GaugeConfig, NeedleConfig} from "./models/configs";
 import {GAUGE_LABELS, NEEDLE_LABELS} from './models/configs_metadata';
+import {disableHighlight, enableHighlight} from "./state/display.actions";
 
 @Component({
   selector: 'app-display',
@@ -41,5 +42,13 @@ export class DisplayComponent {
       width: '970px',
       disableClose: true,
     });
+  }
+
+  highlight(stateField: DisplayStateFieldsType) {
+    this.store.dispatch(enableHighlight({stateField}));
+  }
+
+  highlightNone() {
+    this.store.dispatch(disableHighlight());
   }
 }

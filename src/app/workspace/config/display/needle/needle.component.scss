@@ -6,13 +6,16 @@
   flex-direction: column;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
+.label {
+  color: map-get($primary, default);
+}
 
-  .label {
-    color: map-get($primary, default);
-  }
+.recalculate-button {
+  position:relative;
+  width: 0;
+  height: 0;
+  left: 250px;
+  top: 65px;
 
   button {
     position: relative;

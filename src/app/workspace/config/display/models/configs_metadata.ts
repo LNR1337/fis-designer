@@ -41,8 +41,8 @@ export const GAUGE_FIELD_METADATA: GaugeConfigFieldsInterface<ConfigFieldMetadat
 }
 
 export const NEEDLE_FIELD_METADATA: NeedleConfigFieldsInterface<ConfigFieldMetadata> = {
-  width: {label: 'Width'},
-  height: {label: 'Height'},
+  width: {label: 'Width', hint: 'Has to match image width.'},
+  height: {label: 'Height', hint: 'Has to match image height.'},
   centerX: {label: 'Center X', min: -200, max: 200},
   centerY: {label: 'Center Y', min: -200, max: 200},
   positionX: {label: 'Position X', min: 0, max: 799},

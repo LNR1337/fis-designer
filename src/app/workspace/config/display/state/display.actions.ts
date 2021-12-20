@@ -1,5 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {
+  DisplayStateFieldsType,
   DisplayStateGaugeFieldsType, DisplayStateNeedleFieldsType
 } from "./display.state";
 import {GaugeConfig, NeedleConfig} from "../models/configs";
@@ -18,4 +19,13 @@ export const changedGaugeConfig = createAction(
 export const changedNeedleConfig = createAction(
   '[Config] Changed needle config',
   props<{config: NeedleConfig, displayConfigField: DisplayStateNeedleFieldsType}>(),
+);
+
+export const enableHighlight = createAction(
+  '[Config] Enable highlighting',
+  props<{stateField: DisplayStateFieldsType}>(),
+);
+
+export const disableHighlight = createAction(
+  '[Config] Disable highlighting',
 );

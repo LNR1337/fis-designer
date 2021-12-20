@@ -24,3 +24,8 @@ export const selectGaugeConfigs = createSelector(
   state => ({
     gauge1: state.gauge1, gauge2: state.gauge2, gauge3: state.gauge3
   } as DisplayStateGaugeFieldsInterface<GaugeConfig>));
+
+/** Selects currently highlighted config. */
+export const selectHighlight = createSelector(
+  displayState, state => state.activeHightlight
+);

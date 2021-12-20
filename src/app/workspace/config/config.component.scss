@@ -1,9 +1,5 @@
 @import 'src/variables';
 
-mwlResizable {
-  box-sizing: border-box; // required for the enableGhostResize option to work
-}
-
 .resizable-wrapper {
   background-color: $background-dialog;
   display: flex;
@@ -14,6 +10,8 @@ mwlResizable {
   min-width: 480px;
   max-width: calc(100% - 8px);
   z-index: 1;
+  resize: horizontal;
+  box-sizing: border-box; // required for the enableGhostResize option to work
 
   .resize-handle {
     width: 7px;

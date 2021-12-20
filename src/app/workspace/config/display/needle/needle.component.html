@@ -1,5 +1,4 @@
-<div class="header">
-  <h4 class="label">{{ label }}</h4>
+<div class="recalculate-button">
   <button mat-icon-button color="primary" [disabled]="!resizeEnabled" (click)="recalculateSize()">
     <mat-icon
       [matTooltip]="
@@ -12,14 +11,16 @@
     </mat-icon>
   </button>
 </div>
+<h4 class="label">{{ label }}</h4>
 
 <ng-container *ngFor="let fieldName of NeedleConfigFields">
-  <app-sliding-input *ngIf="NEEDLE_FIELD_METADATA[fieldName]; let metaData"
-                     [label]="metaData.label ?? ''"
-                     [min]="metaData.min"
-                     [max]="metaData.max"
-                     [hint]="metaData.hint"
-                     (valueChanged)="valueChanged($event, fieldName)"
-                     [value]="needleConfig ? needleConfig[fieldName] : undefined"
+  <app-sliding-input
+    *ngIf="NEEDLE_FIELD_METADATA[fieldName]; let metaData"
+    [label]="metaData.label ?? ''"
+    [min]="metaData.min"
+    [max]="metaData.max"
+    [hint]="metaData.hint"
+    (valueChanged)="valueChanged($event, fieldName)"
+    [value]="needleConfig ? needleConfig[fieldName] : undefined"
   ></app-sliding-input>
 </ng-container>

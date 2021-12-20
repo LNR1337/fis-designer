@@ -59,7 +59,8 @@ export type PartialDisplayStateFieldsInterface<T> = Partial<DisplayStateFieldsIn
 export type ValidDisplayStateType = number | string | GaugeConfig | NumericalConfig | NeedleConfig;
 
 /** State for the config module. */
-export interface DisplayConfigState extends PartialDisplayStateFieldsInterface<ValidDisplayStateType> {
+export interface DisplayConfigState {
+  // TODO(pawelszydlo): somehow enforce fields in this interface.
   gauge1?: GaugeConfig,
   gauge2?: GaugeConfig,
   gauge3?: GaugeConfig,
@@ -84,4 +85,6 @@ export interface DisplayConfigState extends PartialDisplayStateFieldsInterface<V
   fontWarningColor?: string,
   tableBackgroundColor?: string,
   tableFontColor?: string,
+  // Internal utility fields.
+  activeHightlight?: DisplayStateFieldsType,
 }

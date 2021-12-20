@@ -2,7 +2,7 @@
 
 /** All valid field names of gauge config. */
 export const GaugeConfigFields = [
-  'startAngle', 'angularRange', 'lowerLimit', 'upperLimit'
+  'lowerLimit', 'upperLimit', 'startAngle', 'angularRange',
 ] as const;
 
 /** Type for all valid field names of gauge config. */
@@ -21,7 +21,7 @@ export type GaugeConfig = PartialGaugeConfigFieldsInterface<number>;
 
 /** All valid field names of needle config. */
 export const NeedleConfigFields = [
-  'width', 'height', 'centerX', 'centerY', 'positionX', 'positionY', 'indicatorPositionX', 'indicatorPositionY'
+  'width', 'height', 'positionX', 'positionY', 'centerX', 'centerY', 'indicatorPositionX', 'indicatorPositionY'
 ] as const;
 
 /** Type for all valid field names of needle config. */
@@ -53,7 +53,7 @@ export type NumericalConfigFieldsInterface<T> = { [property in NumericalConfigFi
 export type PartialNumericalConfigFieldsInterface<T> = Partial<NumericalConfigFieldsInterface<T>>;
 
 /** Configuration of numerical gauge display. */
-export interface NumericalConfig extends PartialNumericalConfigFieldsInterface<number|boolean>{
+export interface NumericalConfig extends PartialNumericalConfigFieldsInterface<number | boolean> {
   positionX?: number;
   positionY?: number;
   centered?: boolean;
