@@ -97,7 +97,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
 
     // Draw background.
     if (this.images.backgroundImage) {
-      this.compositor.drawImage(this.images.backgroundImage, 0, 0);
+      this.compositor.drawBackground(this.images.backgroundImage, !!this.highlight);
     }
 
     this.drawNeedles();

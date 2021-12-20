@@ -7,6 +7,7 @@
 @include mat.toolbar-theme($theme);
 @include mat.tabs-theme($theme);
 @include mat.slide-toggle-theme($theme);
+@include mat.expansion-theme($theme);
 
 html,
 body {

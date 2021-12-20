@@ -29,10 +29,18 @@ export class GaugesCompositor {
     this.context.setTransform(1, 0, 0, 1, 0, 0);
   }
 
+  drawBackground(image: HTMLImageElement, highlight: boolean) {
+    if (highlight) {
+      this.context.globalAlpha = 0.5;
+    }
+    this.drawImage(image, 0, 0);
+    this.context.globalAlpha = 1;
+  }
+
   drawNeedleCenter(x: number, y: number, showCoords: boolean = true) {
     this.context.globalAlpha = 0.7;
-    this.context.strokeStyle = 'yellow';
-    this.context.fillStyle = 'yellow';
+    this.context.strokeStyle = 'cyan';
+    this.context.fillStyle = 'cyan';
     // Target cross.
     this.context.beginPath();
     this.context.moveTo(x - CENTER_TARGET_SIZE, y);
@@ -46,11 +54,10 @@ export class GaugesCompositor {
     // Coordinate labels.
     if (showCoords) {
       this.context.textAlign = 'start';
-      this.context.textBaseline = 'middle';
-      this.context.fillText(`y:${y - 0.5}`, x + CENTER_TARGET_SIZE + 5, y);
-      this.context.textAlign = 'center';
       this.context.textBaseline = 'top';
-      this.context.fillText(`x:${x - 0.5}`, x, y + CENTER_TARGET_SIZE + 5);
+      this.context.fillText(`y:${y - 0.5}`, x + CENTER_TARGET_SIZE + 5, y + 2);
+      this.context.textBaseline = 'bottom';
+      this.context.fillText(`x:${x - 0.5}`, x + CENTER_TARGET_SIZE + 5, y - 2);
     }
     this.context.globalAlpha = 1;
   }
@@ -102,7 +109,6 @@ export class GaugesCompositor {
   drawNeedleHighlight(config: NeedleConfig) {
     this.context.lineWidth = 1;
     this.context.globalAlpha = 0.7;
-
     // Needle position.
     this.context.strokeStyle = 'cyan';
     this.context.fillStyle = 'cyan';
@@ -113,21 +119,29 @@ export class GaugesCompositor {
     this.context.stroke();
     // Position coordinates.
     this.context.textAlign = 'start';
+    this.context.textBaseline = 'bottom';
+    this.context.fillText(`y:${config.positionY!}`, 5, config.positionY! - 5);
     this.context.textBaseline = 'top';
-    this.context.fillText(`y:${config.positionY!}`, 5, config.positionY! + 5);
-    this.context.fillText(`x:${config.positionX!}`, config.positionX! + 5, 5);
-
+    this.context.textAlign = 'end';
+    this.context.fillText(`x:${config.positionX!}`, config.positionX! - 5, 5);
     // Needle size.
     this.context.strokeStyle = 'yellow';
+    this.context.fillStyle = 'yellow';
     this.context.strokeRect(config.positionX! + 0.5, config.positionY! + 0.5, config.width! - 1,
       config.height! - 1);
-
+    // Needle middle strikethrough.
+    const needleMiddleX = config.positionX! + Math.floor(config.width! / 2) + 0.5;
+    this.context.beginPath();
+    this.context.moveTo(needleMiddleX, 0);
+    this.context.lineTo(needleMiddleX, 479);
+    this.context.stroke();
+    this.context.textAlign = 'end';
+    this.context.textBaseline = 'bottom';
+    this.context.fillText(`x:${needleMiddleX - 0.5}`, needleMiddleX - 5, 474);
     // Needle center.
     const centerX = config.positionX! + config.centerX! + 0.5;
     const centerY = config.positionY! + config.centerY! + 0.5;
-    // Needle center.
     this.drawNeedleCenter(centerX, centerY);
-
     // Indicator.
     this.context.strokeStyle = 'cyan';
     if (config.indicatorPositionX && config.indicatorPositionY) {

@@ -1,6 +1,8 @@
+@import 'src/variables';
+
 .button-bar {
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
   padding: 8px;
 
   button:not(:last-child) {
@@ -9,5 +11,12 @@
 }
 
 .settings-form {
-  padding: 0 0px 32px 0px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+
+  app-needle:not(:first-child), app-gauge:not(:first-child) {
+    border-top: solid 1px $grey-border;
+  }
 }
+

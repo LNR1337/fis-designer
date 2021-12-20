@@ -12,9 +12,10 @@ import {LoadImagesDialogModule} from './load-images-dialog/load-images-dialog.mo
 import {PreviewComponent} from './preview.component';
 import {PREVIEW_FEATURE_KEY, previewReducer} from './state/preview.reducer';
 import { TesterComponent } from './gauges/tester/tester.component';
+import { ToolbarComponent } from './gauges/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [GaugesComponent, PreviewComponent, TesterComponent],
+  declarations: [GaugesComponent, PreviewComponent, TesterComponent, ToolbarComponent],
   imports: [
     CommonModule,
     MatButtonModule,

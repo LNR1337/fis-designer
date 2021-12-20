@@ -1,38 +1,28 @@
-<span class="button-bar">
-  <button mat-flat-button color="primary" class="small-button" (click)="openFileSelectorDialog()">
-    Load images
-  </button>
-  <button mat-flat-button color="primary" class="small-button" disabled>Load design</button>
-  <button mat-flat-button color="primary" class="small-button" disabled>Save design</button>
-</span>
-
 <div *ngIf="loadedImages | async; let loadedImagesSet" class="settings-form">
   <!-- All gauges -->
   <ng-container *ngIf="gaugesConfigs | async; let configs">
-    <ng-container *ngFor="let configName of DisplayStateGaugeFields">
-      <mat-divider></mat-divider>
-      <app-gauge
-        [gaugeConfig]="configs[configName]"
-        [fieldName]="configName"
-        [loadedImages]="loadedImagesSet"
-        label="{{ GAUGE_LABELS[configName] }}"
-        (mouseenter)="highlight(configName)"
-        (mouseleave)="highlightNone()"
-      ></app-gauge>
-    </ng-container>
+    <app-gauge
+      *ngFor="let configName of DisplayStateGaugeFields; let i = index"
+      style="order: {{ i }}"
+      [gaugeConfig]="configs[configName]"
+      [fieldName]="configName"
+      [loadedImages]="loadedImagesSet"
+      label="{{ GAUGE_LABELS[configName] }}"
+      (mouseenter)="highlight(configName)"
+      (mouseleave)="highlightNone()"
+    ></app-gauge>
   </ng-container>
   <!-- All needles -->
   <ng-container *ngIf="needlesConfigs | async; let configs">
-    <ng-container *ngFor="let configName of DisplayStateNeedleFields">
-      <mat-divider></mat-divider>
-      <app-needle
-        [needleConfig]="configs[configName]"
-        [fieldName]="configName"
-        [loadedImages]="loadedImagesSet"
-        label="{{ NEEDLE_LABELS[configName] }}"
-        (mouseenter)="highlight(configName)"
-        (mouseleave)="highlightNone()"
-      ></app-needle>
-    </ng-container>
+    <app-needle *ngFor="let configName of DisplayStateNeedleFields; let i = index"
+                style="order: {{ i }}"
+                [needleConfig]="configs[configName]"
+                [fieldName]="configName"
+                [loadedImages]="loadedImagesSet"
+                label="{{ NEEDLE_LABELS[configName] }}"
+                (mouseenter)="highlight(configName)"
+                (mouseleave)="highlightNone()"
+    ></app-needle>
+
   </ng-container>
 </div>

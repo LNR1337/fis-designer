@@ -1,3 +1,7 @@
-.sweep-toggle {
+@import 'src/variables';
 
+.tester-bar {
+  display: flex;
+  flex-direction: row-reverse;
+  color: $light-grey-item;
 }
