@@ -1,10 +1,8 @@
 import {
-  DisplayStateGaugeFieldsObject,
-  DisplayStateNeedleFieldsObject
+  DisplayStateGaugeFieldsObject, DisplayStateNeedleFieldsObject
 } from "../state/display.state";
 import {
-  GaugeConfigFieldsObject,
-  NeedleConfigFieldsObject,
+  GaugeConfigFieldsObject, NeedleConfigFieldsObject,
 } from "./configs";
 import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
 
@@ -16,21 +14,15 @@ export interface ConfigFieldMetadata {
 }
 
 export const GAUGE_LABELS: DisplayStateGaugeFieldsObject<string> = {
-  gauge1: 'Left gauge',
-  gauge2: 'Center gauge',
-  gauge3: 'Right gauge',
+  gauge1: 'Left gauge', gauge2: 'Center gauge', gauge3: 'Right gauge',
 }
 
 export const NEEDLE_LABELS: DisplayStateNeedleFieldsObject<string> = {
-  needle1: 'Left needle',
-  needle2: 'Center needle',
-  needle3: 'Right needle',
+  needle1: 'Left needle', needle2: 'Center needle', needle3: 'Right needle',
 }
 
 export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<PreviewStateImageFieldsType> = {
-  needle1: 'needleImage1',
-  needle2: 'needleImage2',
-  needle3: 'needleImage3',
+  needle1: 'needleImage1', needle2: 'needleImage2', needle3: 'needleImage3',
 }
 
 export const GAUGE_FIELD_METADATA: GaugeConfigFieldsObject<ConfigFieldMetadata> = {
@@ -43,21 +35,15 @@ export const GAUGE_FIELD_METADATA: GaugeConfigFieldsObject<ConfigFieldMetadata> 
 export const NEEDLE_FIELD_METADATA: NeedleConfigFieldsObject<ConfigFieldMetadata> = {
   width: {label: 'Width', hint: 'Has to match image width.'},
   height: {label: 'Height', hint: 'Has to match image height.'},
-  centerX: {label: 'Center X', min: -200, max: 200},
-  centerY: {label: 'Center Y', min: -200, max: 200},
+  centerX: {label: 'Center X', min: -200, max: 200, hint: 'Relative to position.'},
+  centerY: {label: 'Center Y', min: -200, max: 200, hint: 'Relative to position.'},
   positionX: {label: 'Position X', min: 0, max: 799},
   positionY: {label: 'Position Y', min: 0, max: 479},
   indicatorPositionX: {
-    label: 'Indicator X',
-    hint: 'Set to 0 to disable indicator.',
-    min: 0,
-    max: 799
+    label: 'Indicator X', hint: 'Set to 0 to disable indicator.', min: 0, max: 799
   },
   indicatorPositionY: {
-    label: 'Indicator Y',
-    hint: 'Set to 0 to disable indicator.',
-    min: 0,
-    max: 479
+    label: 'Indicator Y', hint: 'Set to 0 to disable indicator.', min: 0, max: 479
   },
 }
 

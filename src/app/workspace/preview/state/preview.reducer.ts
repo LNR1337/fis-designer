@@ -11,4 +11,8 @@ export const initialState: PreviewState = {
 export const previewReducer = createReducer(initialState,
   on(actions.loadedImage, (state, {image, imageField}) => ({
     ...state, [imageField]: image,
-  })),);
+  })),
+  on(actions.moveNeedles, (state, {needleAngle1, needleAngle2, needleAngle3}) => ({
+    ...state, needleAngle1, needleAngle2, needleAngle3,
+  }))
+);

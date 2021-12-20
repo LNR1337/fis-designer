@@ -20,11 +20,11 @@ export type GaugeConfig = PartialGaugeConfigFieldsObject<number>;
 /** Helper function for getting absolute radian angles of min and max needle values. */
 export function getAbsoluteNeedleAngleBounds(config: GaugeConfig): [number, number] {
   // FIS-Control's angle direction is reversed and translated by 90 degrees.
-  let angleStartDeg = -450 - config.startAngle!;
-  let angleEndDeg = angleStartDeg + config.angularRange!;
+  let angleStartDeg = -90 - config.startAngle!;
   while (Math.abs(angleStartDeg) >= 360) {
     angleStartDeg = angleStartDeg % 360;
   }
+  let angleEndDeg = angleStartDeg + config.angularRange!;
   while (Math.abs(angleEndDeg) >= 360) {
     angleEndDeg = angleEndDeg % 360;
   }

@@ -1,6 +1,5 @@
 import {
-  GaugeConfig, getAbsoluteNeedleAngleBounds,
-  NeedleConfig
+  GaugeConfig, getAbsoluteNeedleAngleBounds, NeedleConfig
 } from "../../config/display/models/configs";
 
 const CENTER_TARGET_SIZE = 10;
@@ -9,6 +8,7 @@ const INDICATOR_SIZE = 7;
 /** Class responsible for rendering gauges on the canvas. */
 export class GaugesCompositor {
   constructor(private context: CanvasRenderingContext2D) {
+    this.context.font = '10px sans-serif';
   }
 
   clearImage() {
@@ -29,9 +29,11 @@ export class GaugesCompositor {
     this.context.setTransform(1, 0, 0, 1, 0, 0);
   }
 
-  drawNeedleCenter(x: number, y: number) {
+  drawNeedleCenter(x: number, y: number, showCoords: boolean = true) {
     this.context.globalAlpha = 0.7;
     this.context.strokeStyle = 'yellow';
+    this.context.fillStyle = 'yellow';
+    // Target cross.
     this.context.beginPath();
     this.context.moveTo(x - CENTER_TARGET_SIZE, y);
     this.context.lineTo(x + CENTER_TARGET_SIZE, y);
@@ -41,6 +43,15 @@ export class GaugesCompositor {
     this.context.beginPath();
     this.context.ellipse(x, y, CENTER_TARGET_SIZE, CENTER_TARGET_SIZE, 0, 0, 2 * Math.PI);
     this.context.stroke();
+    // Coordinate labels.
+    if (showCoords) {
+      this.context.textAlign = 'start';
+      this.context.textBaseline = 'middle';
+      this.context.fillText(`y:${y - 0.5}`, x + CENTER_TARGET_SIZE + 5, y);
+      this.context.textAlign = 'center';
+      this.context.textBaseline = 'top';
+      this.context.fillText(`x:${x - 0.5}`, x, y + CENTER_TARGET_SIZE + 5);
+    }
     this.context.globalAlpha = 1;
   }
 
@@ -53,7 +64,7 @@ export class GaugesCompositor {
     const [angleStart, angleEnd] = getAbsoluteNeedleAngleBounds(gaugeConfig);
 
     // Needle center.
-    this.drawNeedleCenter(needleCenterX, needleCenterY);
+    this.drawNeedleCenter(needleCenterX, needleCenterY, false);
     // Start line.
     this.context.beginPath();
     this.context.strokeStyle = 'green';
@@ -69,14 +80,19 @@ export class GaugesCompositor {
       needleCenterY + 800 * Math.sin(angleEnd));
     this.context.stroke();
     // Direction line.
-    this.context.beginPath();
     let ellipseStart = angleStart;
     let ellipseEnd = angleEnd;
     if (gaugeConfig.angularRange! < 0) {
       [ellipseStart, ellipseEnd] = [ellipseEnd, ellipseStart];
     }
     const ellipseRadius = Math.abs(needleCenterY - needleConfig.positionY!);
+    this.context.beginPath();
     this.context.ellipse(needleCenterX, needleCenterY, ellipseRadius, ellipseRadius, 0,
+      ellipseStart, ellipseEnd);
+    this.context.stroke();
+    const ellipseRadius2 = Math.max(0, ellipseRadius - needleConfig.height!);
+    this.context.beginPath();
+    this.context.ellipse(needleCenterX, needleCenterY, ellipseRadius2, ellipseRadius2, 0,
       ellipseStart, ellipseEnd);
     this.context.stroke();
 
@@ -89,11 +105,17 @@ export class GaugesCompositor {
 
     // Needle position.
     this.context.strokeStyle = 'cyan';
+    this.context.fillStyle = 'cyan';
     this.context.beginPath();
     this.context.moveTo(config.positionX! + 0.5, 0.5);
     this.context.lineTo(config.positionX! + 0.5, config.positionY! + 0.5);
     this.context.lineTo(0.5, config.positionY! + 0.5);
     this.context.stroke();
+    // Position coordinates.
+    this.context.textAlign = 'start';
+    this.context.textBaseline = 'top';
+    this.context.fillText(`y:${config.positionY!}`, 5, config.positionY! + 5);
+    this.context.fillText(`x:${config.positionX!}`, config.positionX! + 5, 5);
 
     // Needle size.
     this.context.strokeStyle = 'yellow';

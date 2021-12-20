@@ -6,6 +6,7 @@
 @include mat.button-theme($theme);
 @include mat.toolbar-theme($theme);
 @include mat.tabs-theme($theme);
+@include mat.slide-toggle-theme($theme);
 
 html,
 body {
