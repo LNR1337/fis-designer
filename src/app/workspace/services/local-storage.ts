@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {DisplayConfigState} from "../config/display/state/display.state";
 
-const DISPLAY_STATE_KEY = 'displayState';
+const STORAGE_KEY = 'savedConfigs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +9,20 @@ export class LocalStorageService {
 
   constructor() { }
 
-  /** Saves app state to local storage under specified name. */
-  saveDisplayState(name: string, state: DisplayConfigState) {
+  /** Saves state to local storage under specified name. */
+  saveState(name: string, state: Object) {
     const stored = this.getWholeStorage();
     stored.set(name, JSON.stringify(state));
-    localStorage.setItem(DISPLAY_STATE_KEY, JSON.stringify(Array.from(stored.entries())));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(stored.entries())));
+  }
+
+  /** Loads state with specified name from local storage. */
+  loadState(name: string): Object {
+    const stored = this.getWholeStorage();
+    if (!stored.has(name)) {
+      throw new Error(`Key ${name} doesn't exist in the storage.`);
+    }
+    return JSON.parse(stored.get(name)!);
   }
 
   /** Gets a list of stored config names. */
@@ -25,7 +33,7 @@ export class LocalStorageService {
 
   /** Loads whole app local storage dict or creates a new one. */
   getWholeStorage(): Map<string, string> {
-    const storage = localStorage.getItem(DISPLAY_STATE_KEY);
+    const storage = localStorage.getItem(STORAGE_KEY);
     if (storage) {
       try {
         return new Map<string, string>(JSON.parse(storage));

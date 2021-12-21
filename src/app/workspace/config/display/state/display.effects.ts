@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {exhaustMap, map, withLatestFrom} from 'rxjs';
+import {withLatestFrom} from 'rxjs';
 import {concatMap, tap} from 'rxjs/operators';
-import {LocalStorageService} from "../../../services/local-storage";
-import {changedNeedleConfig, loadExistingConfigNames, loadedExistingConfigNames, recalculateNeedleSize, saveStateToStorage} from "./display.actions";
+import {changedNeedleConfig, recalculateNeedleSize} from "./display.actions";
 import {Store} from "@ngrx/store";
 import {selectNeedleConfigs} from "./display.selectors";
 import {selectAllImages} from "../../../preview/state/preview.selectors";
@@ -35,28 +34,9 @@ export class DisplayEffects {
     })
   ));
 
-  /** Effect to save current display state to local storage. */
-  saveStateToLocalStorage = createEffect(() => this.actions$.pipe(
-    ofType(saveStateToStorage),
-    withLatestFrom(this.store.select(state => state)),
-    map(([action, state]) => {
-      this.localStorageService.saveDisplayState(action.name, state);
-    })
-  ), {dispatch: false});
-
-  /** Effect to load existing config names from local storage and emit loaded action. */
-  loadExistingConfigNames = createEffect(() => this.actions$.pipe(
-    ofType(loadExistingConfigNames),
-    exhaustMap(() => {
-      const configNames = this.localStorageService.getSavedNames();
-      return [loadedExistingConfigNames({configNames})]
-    })
-  ));
-
   constructor(
     private actions$: Actions,
     private readonly store: Store,
-    private readonly localStorageService: LocalStorageService,
   ) {
   }
 }

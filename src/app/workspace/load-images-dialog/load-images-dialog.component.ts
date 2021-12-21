@@ -2,12 +2,12 @@ import { QueryList} from '@angular/core';
 import {Component, ViewChildren} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {PartialPreviewStateImageFieldsObject} from '../state/preview.state';
-import { PreviewStateImageFields} from '../state/preview.state';
-import {IMAGE_FILENAME_MATCHERS, MIME_TYPE} from '../models/images_metadata';
-import {selectAllImages} from '../state/preview.selectors';
+import {PartialPreviewStateImageFieldsObject} from '../preview/state/preview.state';
+import { PreviewStateImageFields} from '../preview/state/preview.state';
+import {IMAGE_FILENAME_MATCHERS, MIME_TYPE} from '../preview/models/images_metadata';
+import {selectAllImages} from '../preview/state/preview.selectors';
 import {ImageSelectorComponent} from "./image-selector/image-selector.component";
-import {SnackBarService} from "../../services/snack-bar.service";
+import {SnackBarService} from "../services/snack-bar.service";
 
 @Component({
   selector: 'app-load-images-dialog',

@@ -30,15 +30,7 @@ export const disableHighlight = createAction(
   '[Config] Disable highlighting',
 );
 
-export const saveStateToStorage = createAction(
-  '[Config] Save state to local storage',
-  props<{name: string}>(),
-);
-
-export const loadExistingConfigNames = createAction(
-  '[Config] Load existing config names from local storage');
-
-export const loadedExistingConfigNames = createAction(
-  '[Config] Loaded existing config names from local storage',
-  props<{configNames: string[]}>(),
+export const loadDisplayStateFromObject = createAction(
+  '[Config] Load display state from object',
+  props<{object: Object}>(),
 );

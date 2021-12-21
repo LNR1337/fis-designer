@@ -23,8 +23,9 @@ export const displayReducer = createReducer(
     ...state,
     activeHightlight: undefined,
   })),
-  on(actions.loadedExistingConfigNames, (state, {configNames}) => ({
+  // TODO(pawelszydlo): do some data sanitization!
+  on(actions.loadDisplayStateFromObject, (state, {object}) => ({
     ...state,
-    existingConfigNames: configNames,
+    ...object,
   })),
 );

@@ -5,8 +5,7 @@
 
   <div class="config-actions">
     <mat-form-field class="config-field" appearance="standard">
-      <mat-label>Config</mat-label>
-      <input type="text" matInput [matAutocomplete]="auto" placeholder="Enter config name">
+      <input type="text" matInput [matAutocomplete]="auto" placeholder="Config name" #input>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option [value]="configName" *ngFor="let configName of existingConfigNames">
           {{ configName }}
@@ -14,8 +13,13 @@
       </mat-autocomplete>
     </mat-form-field>
 
-    <button mat-icon-button color="primary" class="small-button" (click)="saveDisplayState()">
+    <button mat-icon-button color="primary" (click)="saveConfig(input.value)"
+            matTooltip="Save workspace to your browser's local storage.">
       <mat-icon>save</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" (click)="loadConfig(input.value)"
+            matTooltip="Load workspace from your browser's local storage. This will overwrite your current work!">
+      <mat-icon>publish</mat-icon>
     </button>
   </div>
 </mat-toolbar>

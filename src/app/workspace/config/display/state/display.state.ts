@@ -87,5 +87,4 @@ export interface DisplayConfigState {
   tableFontColor?: string,
   // Internal utility fields.
   activeHightlight?: DisplayStateFieldsType,
-  existingConfigNames?: string[],
 }

@@ -7,14 +7,14 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
-import { IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE } from '../../models/images_metadata';
-import { PreviewStateImageFieldsType } from '../../state/preview.state';
+import { IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE } from '../../preview/models/images_metadata';
+import { PreviewStateImageFieldsType } from '../../preview/state/preview.state';
 import {
-  SnackBarService} from '../../../services/snack-bar.service';
+  SnackBarService} from '../../services/snack-bar.service';
 import {
   SnackType,
-} from '../../../services/snack-bar.service';
-import { loadedImage } from '../../state/preview.actions';
+} from '../../services/snack-bar.service';
+import { loadedImage } from '../../preview/state/preview.actions';
 import { Store } from '@ngrx/store';
 
 enum ButtonState {
