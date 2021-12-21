@@ -13,7 +13,7 @@ export const loadStateFromStorage = createAction(
 export const loadExistingConfigNames = createAction(
   '[IoToolbar] Load existing config names from local storage');
 
-export const loadedExistingConfigNames = createAction(
-  '[IoToolbar] Loaded existing config names from local storage',
+export const loadExistingConfigNamesSuccess = createAction(
+  '[IoToolbar] Load existing config names from local storage successful',
   props<{configNames: string[]}>(),
 );

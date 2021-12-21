@@ -8,7 +8,7 @@ import {PREVIEW_FEATURE_KEY} from '../../preview/state/preview.reducer';
 import {selectPreviewState} from '../../preview/state/preview.selectors';
 import {LocalStorageService} from '../../services/local-storage';
 import {
-  loadExistingConfigNames, loadedExistingConfigNames, loadStateFromStorage, saveStateToStorage,
+  loadExistingConfigNames, loadExistingConfigNamesSuccess, loadStateFromStorage, saveStateToStorage,
 } from './io-toolbar.actions';
 import {Action, Store} from '@ngrx/store';
 
@@ -54,7 +54,7 @@ export class IoToolbarEffects {
   loadExistingConfigNames = createEffect(() => this.actions$.pipe(ofType(loadExistingConfigNames),
     exhaustMap(() => {
       const configNames = this.localStorageService.getSavedNames();
-      return [loadedExistingConfigNames({configNames})];
+      return [loadExistingConfigNamesSuccess({configNames})];
     }),
   ));
 

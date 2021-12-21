@@ -7,7 +7,7 @@ const initialState = {}
 
 export const ioToolbarReducer = createReducer(
   initialState,
-  on(actions.loadedExistingConfigNames, (state, {configNames}) => ({
+  on(actions.loadExistingConfigNamesSuccess, (state, {configNames}) => ({
     ...state,
     existingConfigNames: configNames,
   })),
