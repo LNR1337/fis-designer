@@ -1,8 +1,12 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {StoreModule} from '@ngrx/store';
@@ -18,9 +22,13 @@ import { ToolbarComponent } from './gauges/toolbar/toolbar.component';
   declarations: [GaugesComponent, PreviewComponent, TesterComponent, ToolbarComponent],
   imports: [
     CommonModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     MatToolbarModule,
     FormsModule,
     LoadImagesDialogModule,

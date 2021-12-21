@@ -1,0 +1,14 @@
+.toolbar {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+
+  .config-actions {
+    position: relative;
+    top: 2px;
+
+    mat-form-field {
+      width: 140px;
+    }
+  }
+}

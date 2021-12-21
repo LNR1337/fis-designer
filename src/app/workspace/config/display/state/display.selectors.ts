@@ -29,3 +29,8 @@ export const selectGaugeConfigs = createSelector(
 export const selectHighlight = createSelector(
   displayState, state => state.activeHightlight
 );
+
+/** Selects existing config names. */
+export const selectExistingConfigNames = createSelector(
+  displayState, state => state.existingConfigNames
+);

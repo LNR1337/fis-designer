@@ -23,4 +23,8 @@ export const displayReducer = createReducer(
     ...state,
     activeHightlight: undefined,
   })),
+  on(actions.loadedExistingConfigNames, (state, {configNames}) => ({
+    ...state,
+    existingConfigNames: configNames,
+  })),
 );

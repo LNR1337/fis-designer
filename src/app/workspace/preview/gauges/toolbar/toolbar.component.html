@@ -1,5 +1,21 @@
-<mat-toolbar>
-  <button mat-stroked-button color="primary" class="small-button" (click)="openFileSelectorDialog()">
+<mat-toolbar class="toolbar">
+  <button mat-stroked-button color="primary" (click)="openFileSelectorDialog()">
     Load images
   </button>
+
+  <div class="config-actions">
+    <mat-form-field class="config-field" appearance="standard">
+      <mat-label>Config</mat-label>
+      <input type="text" matInput [matAutocomplete]="auto" placeholder="Enter config name">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option [value]="configName" *ngFor="let configName of existingConfigNames">
+          {{ configName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <button mat-icon-button color="primary" class="small-button" (click)="saveDisplayState()">
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
