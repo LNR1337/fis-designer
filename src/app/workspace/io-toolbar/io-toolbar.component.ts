@@ -1,34 +1,41 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {Store} from "@ngrx/store";
-import {Subscription} from "rxjs";
-import {LoadImagesDialogComponent} from "../load-images-dialog/load-images-dialog.component";
-import {SnackBarService, SnackType} from "../services/snack-bar.service";
+import {MatDialog} from '@angular/material/dialog';
+import {Store} from '@ngrx/store';
+import {Subscription} from 'rxjs';
+import {LoadImagesDialogComponent} from '../load-images-dialog/load-images-dialog.component';
+import {SnackBarService, SnackType} from '../services/snack-bar.service';
 import {
-  loadExistingConfigNames, loadStateFromStorage,
+  loadExistingConfigNames,
+  loadStateFromStorage,
   saveStateToStorage,
 } from './state/io-toolbar.actions';
-import {selectExistingConfigNames} from "./state/io-toolbar.selectors";
+import {selectExistingConfigNames} from './state/io-toolbar.selectors';
 
 @Component({
   selector: 'app-io-toolbar',
   templateUrl: './io-toolbar.component.html',
-  styleUrls: ['./io-toolbar.component.scss']
+  styleUrls: ['./io-toolbar.component.scss'],
 })
 export class IoToolbarComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   existingConfigNames: string[] = [];
 
-  constructor(public dialog: MatDialog, private readonly store: Store,
-              private readonly snackBar: SnackBarService) {
-    this.subscription.add(this.store.select(selectExistingConfigNames).subscribe((names) => {
-      this.existingConfigNames = names ?? [];
-    }));
+  constructor(
+    public dialog: MatDialog,
+    private readonly store: Store,
+    private readonly snackBar: SnackBarService
+  ) {
+    this.subscription.add(
+      this.store.select(selectExistingConfigNames).subscribe(names => {
+        this.existingConfigNames = names ?? [];
+      })
+    );
   }
 
   openFileSelectorDialog() {
     this.dialog.open(LoadImagesDialogComponent, {
-      width: '970px', disableClose: true,
+      width: '970px',
+      disableClose: true,
     });
   }
 
@@ -59,6 +66,4 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
-
 }

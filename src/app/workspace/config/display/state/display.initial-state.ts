@@ -1,12 +1,12 @@
-import {DisplayConfigState} from "./display.state";
-import {GaugeConfig, NeedleConfig} from "../models/configs";
+import {DisplayConfigState} from './display.state';
+import {GaugeConfig, NeedleConfig} from '../models/configs';
 
 const initialGaugeConfig: GaugeConfig = {
   startAngle: 90,
   angularRange: 180,
   lowerLimit: 0,
   upperLimit: 100,
-}
+};
 
 const initialNeedleConfig1: NeedleConfig = {
   width: 47,
@@ -17,18 +17,18 @@ const initialNeedleConfig1: NeedleConfig = {
   positionY: 124,
   indicatorPositionX: 106,
   indicatorPositionY: 121,
-}
+};
 
 const initialNeedleConfig2: NeedleConfig = {
   ...initialNeedleConfig1,
   positionX: 377,
-  indicatorPositionX: 374
+  indicatorPositionX: 374,
 };
 
 const initialNeedleConfig3: NeedleConfig = {
   ...initialNeedleConfig1,
   positionX: 645,
-  indicatorPositionX: 642
+  indicatorPositionX: 642,
 };
 
 /** Initial display state. */

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SlidingInputComponent } from './sliding-input.component';
+import {SlidingInputComponent} from './sliding-input.component';
 
 describe('SlidingInputComponent', () => {
   let component: SlidingInputComponent;
@@ -8,9 +8,8 @@ describe('SlidingInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SlidingInputComponent ]
-    })
-    .compileComponents();
+      declarations: [SlidingInputComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

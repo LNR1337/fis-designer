@@ -1,6 +1,8 @@
 import {
-  GaugeConfig, getAbsoluteNeedleAngleBounds, NeedleConfig
-} from "../../config/display/models/configs";
+  GaugeConfig,
+  getAbsoluteNeedleAngleBounds,
+  NeedleConfig,
+} from '../../config/display/models/configs';
 
 const CENTER_TARGET_SIZE = 10;
 const INDICATOR_SIZE = 7;
@@ -19,8 +21,14 @@ export class GaugesCompositor {
     this.context.drawImage(image, x, y);
   }
 
-  drawImageRotatedAround(image: HTMLImageElement, positionX: number, positionY: number,
-                         rotationX: number, rotationY: number, rotationAngle: number) {
+  drawImageRotatedAround(
+    image: HTMLImageElement,
+    positionX: number,
+    positionY: number,
+    rotationX: number,
+    rotationY: number,
+    rotationAngle: number
+  ) {
     this.context.translate(rotationX, rotationY);
     this.context.rotate(rotationAngle);
     this.context.translate(-rotationX, -rotationY);
@@ -37,7 +45,7 @@ export class GaugesCompositor {
     this.context.globalAlpha = 1;
   }
 
-  drawNeedleCenter(x: number, y: number, showCoords: boolean = true) {
+  drawNeedleCenter(x: number, y: number, showCoords = true) {
     this.context.globalAlpha = 0.7;
     this.context.strokeStyle = 'cyan';
     this.context.fillStyle = 'cyan';
@@ -76,15 +84,19 @@ export class GaugesCompositor {
     this.context.beginPath();
     this.context.strokeStyle = 'green';
     this.context.moveTo(needleCenterX, needleCenterY);
-    this.context.lineTo(needleCenterX + 800 * Math.cos(angleStart),
-      needleCenterY + 800 * Math.sin(angleStart));
+    this.context.lineTo(
+      needleCenterX + 800 * Math.cos(angleStart),
+      needleCenterY + 800 * Math.sin(angleStart)
+    );
     this.context.stroke();
     // End line.
     this.context.beginPath();
     this.context.strokeStyle = 'red';
     this.context.moveTo(needleCenterX, needleCenterY);
-    this.context.lineTo(needleCenterX + 800 * Math.cos(angleEnd),
-      needleCenterY + 800 * Math.sin(angleEnd));
+    this.context.lineTo(
+      needleCenterX + 800 * Math.cos(angleEnd),
+      needleCenterY + 800 * Math.sin(angleEnd)
+    );
     this.context.stroke();
     // Direction line.
     let ellipseStart = angleStart;
@@ -94,13 +106,27 @@ export class GaugesCompositor {
     }
     const ellipseRadius = Math.abs(needleCenterY - needleConfig.positionY!);
     this.context.beginPath();
-    this.context.ellipse(needleCenterX, needleCenterY, ellipseRadius, ellipseRadius, 0,
-      ellipseStart, ellipseEnd);
+    this.context.ellipse(
+      needleCenterX,
+      needleCenterY,
+      ellipseRadius,
+      ellipseRadius,
+      0,
+      ellipseStart,
+      ellipseEnd
+    );
     this.context.stroke();
     const ellipseRadius2 = Math.max(0, ellipseRadius - needleConfig.height!);
     this.context.beginPath();
-    this.context.ellipse(needleCenterX, needleCenterY, ellipseRadius2, ellipseRadius2, 0,
-      ellipseStart, ellipseEnd);
+    this.context.ellipse(
+      needleCenterX,
+      needleCenterY,
+      ellipseRadius2,
+      ellipseRadius2,
+      0,
+      ellipseStart,
+      ellipseEnd
+    );
     this.context.stroke();
 
     this.context.globalAlpha = 1;
@@ -127,8 +153,12 @@ export class GaugesCompositor {
     // Needle size.
     this.context.strokeStyle = 'yellow';
     this.context.fillStyle = 'yellow';
-    this.context.strokeRect(config.positionX! + 0.5, config.positionY! + 0.5, config.width! - 1,
-      config.height! - 1);
+    this.context.strokeRect(
+      config.positionX! + 0.5,
+      config.positionY! + 0.5,
+      config.width! - 1,
+      config.height! - 1
+    );
     // Needle middle strikethrough.
     const needleMiddleX = config.positionX! + Math.floor(config.width! / 2) + 0.5;
     this.context.beginPath();
@@ -146,13 +176,19 @@ export class GaugesCompositor {
     this.context.strokeStyle = 'cyan';
     if (config.indicatorPositionX && config.indicatorPositionY) {
       this.context.beginPath();
-      this.context.ellipse(config.indicatorPositionX + 0.5 - 3, config.indicatorPositionY + 0.5 - 3,
-        INDICATOR_SIZE, INDICATOR_SIZE, 0, 0, 2 * Math.PI);
+      this.context.ellipse(
+        config.indicatorPositionX + 0.5 - 3,
+        config.indicatorPositionY + 0.5 - 3,
+        INDICATOR_SIZE,
+        INDICATOR_SIZE,
+        0,
+        0,
+        2 * Math.PI
+      );
       this.context.stroke();
     }
 
     this.context.setLineDash([]);
     this.context.globalAlpha = 1;
   }
-
 }

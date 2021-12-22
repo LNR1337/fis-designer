@@ -23,7 +23,9 @@ export const PreviewStateImageFields = [
 export type PreviewStateImageFieldsType = typeof PreviewStateImageFields[number];
 
 /** Type for an object holding data for all the images. */
-export type PreviewStateImageFieldsObject<T> = { [property in PreviewStateImageFieldsType]: T };
+export type PreviewStateImageFieldsObject<T> = {
+  [property in PreviewStateImageFieldsType]: T;
+};
 
 /** Type for an object holding data for some of the images. */
 export type PartialPreviewStateImageFieldsObject<T> = Partial<PreviewStateImageFieldsObject<T>>;

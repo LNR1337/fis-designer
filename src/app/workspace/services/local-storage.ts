@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 const STORAGE_KEY = 'savedConfigs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageService {
-
-  constructor() { }
+  constructor() {}
 
   /** Saves state to local storage under specified name. */
   saveState(name: string, state: Object) {
@@ -44,5 +43,4 @@ export class LocalStorageService {
     }
     return new Map<string, string>();
   }
-
 }

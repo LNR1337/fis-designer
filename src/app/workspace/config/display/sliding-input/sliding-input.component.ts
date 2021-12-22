@@ -1,10 +1,10 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {MatSliderChange} from "@angular/material/slider";
+import {MatSliderChange} from '@angular/material/slider';
 
 @Component({
   selector: 'app-sliding-input',
   templateUrl: './sliding-input.component.html',
-  styleUrls: ['./sliding-input.component.scss']
+  styleUrls: ['./sliding-input.component.scss'],
 })
 export class SlidingInputComponent {
   @Input() label = '';
@@ -15,11 +15,10 @@ export class SlidingInputComponent {
 
   @Output() valueChanged = new EventEmitter<number>();
 
-  constructor() {
-  }
+  constructor() {}
 
   get showSlider(): boolean {
-    return (this.min !== undefined && this.max !== undefined);
+    return this.min !== undefined && this.max !== undefined;
   }
 
   changeValue(value: number) {

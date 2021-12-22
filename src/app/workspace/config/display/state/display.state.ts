@@ -1,5 +1,5 @@
 /** Names of state fields containing display settings. */
-import {GaugeConfig, NeedleConfig, NumericalConfig} from "../models/configs";
+import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
 export const DisplayStateFields = [
   'gauge1',
@@ -44,13 +44,19 @@ export type DisplayStateGaugeFieldsType = typeof DisplayStateGaugeFields[number]
 export type DisplayStateNeedleFieldsType = typeof DisplayStateNeedleFields[number];
 
 /** Object type of state fields holding gauge settings. */
-export type DisplayStateGaugeFieldsObject<T> = { [property in DisplayStateGaugeFieldsType]: T };
+export type DisplayStateGaugeFieldsObject<T> = {
+  [property in DisplayStateGaugeFieldsType]: T;
+};
 
 /** Object type of state fields holding needle settings. */
-export type DisplayStateNeedleFieldsObject<T> = { [property in DisplayStateNeedleFieldsType]: T };
+export type DisplayStateNeedleFieldsObject<T> = {
+  [property in DisplayStateNeedleFieldsType]: T;
+};
 
 /** Object type of all display state fields. */
-export type DisplayStateFieldsObject<T> = { [property in DisplayStateFieldsType]: T };
+export type DisplayStateFieldsObject<T> = {
+  [property in DisplayStateFieldsType]: T;
+};
 
 /** Object type of dome display state fields. */
 export type PartialDisplayStateFieldsObject<T> = Partial<DisplayStateFieldsObject<T>>;
@@ -61,30 +67,30 @@ export type ValidDisplayStateType = number | string | GaugeConfig | NumericalCon
 /** State for the config module. */
 export interface DisplayConfigState {
   // TODO(pawelszydlo): somehow enforce fields in this interface.
-  gauge1?: GaugeConfig,
-  gauge2?: GaugeConfig,
-  gauge3?: GaugeConfig,
-  needle1?: NeedleConfig,
-  needle2?: NeedleConfig,
-  needle3?: NeedleConfig,
-  numerical1?: NumericalConfig,
-  numerical2?: NumericalConfig,
-  numerical3?: NumericalConfig,
-  numerical4?: NumericalConfig,
-  numerical5?: NumericalConfig,
-  numerical6?: NumericalConfig,
-  numerical7?: NumericalConfig,
-  numerical8?: NumericalConfig,
-  numerical9?: NumericalConfig,
-  numerical10?: NumericalConfig,
-  fontWidth?: number,
-  fontHeight?: number,
-  fontDotWidth?: number,
-  fontSpacing?: number,
-  fontColor?: string,
-  fontWarningColor?: string,
-  tableBackgroundColor?: string,
-  tableFontColor?: string,
+  gauge1?: GaugeConfig;
+  gauge2?: GaugeConfig;
+  gauge3?: GaugeConfig;
+  needle1?: NeedleConfig;
+  needle2?: NeedleConfig;
+  needle3?: NeedleConfig;
+  numerical1?: NumericalConfig;
+  numerical2?: NumericalConfig;
+  numerical3?: NumericalConfig;
+  numerical4?: NumericalConfig;
+  numerical5?: NumericalConfig;
+  numerical6?: NumericalConfig;
+  numerical7?: NumericalConfig;
+  numerical8?: NumericalConfig;
+  numerical9?: NumericalConfig;
+  numerical10?: NumericalConfig;
+  fontWidth?: number;
+  fontHeight?: number;
+  fontDotWidth?: number;
+  fontSpacing?: number;
+  fontColor?: string;
+  fontWarningColor?: string;
+  tableBackgroundColor?: string;
+  tableFontColor?: string;
   // Internal utility fields.
-  activeHightlight?: DisplayStateFieldsType,
+  activeHightlight?: DisplayStateFieldsType;
 }

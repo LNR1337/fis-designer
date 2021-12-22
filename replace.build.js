@@ -1,10 +1,10 @@
-var replace = require('replace-in-file');
+const replace = require('replace-in-file');
 
 // Get current date.
-var buildDate = new Date();
+let buildDate = new Date();
 const offset = buildDate.getTimezoneOffset();
 buildDate = new Date(buildDate.getTime() - offset * 60 * 1000);
-var buildVersion = buildDate.toISOString().split('T')[0];
+const buildVersion = buildDate.toISOString().split('T')[0];
 
 const options = {
   files: 'src/environments/environment.prod.ts',
@@ -14,7 +14,7 @@ const options = {
 };
 
 try {
-  let changedFiles = replace.sync(options);
+  replace.sync(options);
   console.log('Build version set: ' + buildVersion);
 } catch (error) {
   console.error('Error occurred:', error);

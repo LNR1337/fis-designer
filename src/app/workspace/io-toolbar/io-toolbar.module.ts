@@ -9,17 +9,18 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {EffectsModule} from "@ngrx/effects";
-import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
 
 import {LoadImagesDialogModule} from '../load-images-dialog/load-images-dialog.module';
 import {IoToolbarComponent} from './io-toolbar.component';
-import {IoToolbarEffects} from "./state/io-toolbar.effects";
-import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from "./state/io-toolbar.reducer";
+import {IoToolbarEffects} from './state/io-toolbar.effects';
+import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from './state/io-toolbar.reducer';
 
 @NgModule({
   declarations: [IoToolbarComponent],
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     FormsModule,
     LoadImagesDialogModule,
     MatAutocompleteModule,
@@ -32,7 +33,8 @@ import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from "./state/io-toolbar.reduc
     MatTooltipModule,
     ReactiveFormsModule,
     EffectsModule.forFeature([IoToolbarEffects]),
-    StoreModule.forFeature(IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer),],
+    StoreModule.forFeature(IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer),
+  ],
   exports: [IoToolbarComponent],
 })
 export class IoToolbarModule {}

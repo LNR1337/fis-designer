@@ -1,13 +1,13 @@
-import { QueryList} from '@angular/core';
+import {QueryList} from '@angular/core';
 import {Component, ViewChildren} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {PartialPreviewStateImageFieldsObject} from '../preview/state/preview.state';
-import { PreviewStateImageFields} from '../preview/state/preview.state';
+import {PreviewStateImageFields} from '../preview/state/preview.state';
 import {IMAGE_FILENAME_MATCHERS, MIME_TYPE} from '../preview/models/images_metadata';
 import {selectAllImages} from '../preview/state/preview.selectors';
-import {ImageSelectorComponent} from "./image-selector/image-selector.component";
-import {SnackBarService} from "../services/snack-bar.service";
+import {ImageSelectorComponent} from './image-selector/image-selector.component';
+import {SnackBarService} from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-load-images-dialog',
@@ -42,12 +42,14 @@ export class LoadImagesDialogComponent {
       for (const file of Array.from(input.files)) {
         let found = false;
         for (const imageName of PreviewStateImageFields) {
-          const fileNameWithoutExt = file.name.endsWith('.png') ? file.name.slice(0, file.name.length - 4) : file.name;
+          const fileNameWithoutExt = file.name.endsWith('.png')
+            ? file.name.slice(0, file.name.length - 4)
+            : file.name;
           // If any of the regular expressions matches...
           if (IMAGE_FILENAME_MATCHERS[imageName].some(regExp => regExp.test(fileNameWithoutExt))) {
             // Find the correct input component to put the file in.
             for (const input of this.imageInputs) {
-              if (input.imageName == imageName) {
+              if (input.imageName === imageName) {
                 input.ingestFile(file);
                 found = true;
                 break;
@@ -63,11 +65,14 @@ export class LoadImagesDialogComponent {
       }
 
       if (notFoundImages.length) {
-        this.snackBar.open(`Loaded ${foundImages} ${foundImages === 1 ? 'image' : 'images'}. Couldn't recognize ${notFoundImages.length}.`);
+        this.snackBar.open(
+          `Loaded ${foundImages} ${foundImages === 1 ? 'image' : 'images'}. Couldn't recognize ${
+            notFoundImages.length
+          }.`
+        );
       } else {
         this.snackBar.open(`Successfully loaded all ${foundImages} images.`);
       }
-
     }
   }
 }

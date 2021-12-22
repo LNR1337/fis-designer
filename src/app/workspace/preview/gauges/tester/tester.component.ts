@@ -1,15 +1,11 @@
 import {Component, OnDestroy} from '@angular/core';
-import {MatSlideToggleChange} from "@angular/material/slide-toggle";
-import {Store} from "@ngrx/store";
-import {Subscription, timer} from "rxjs";
-import {GaugeConfig, getAbsoluteNeedleAngleBounds} from "../../../config/display/models/configs";
-import {
-  selectGaugeConfigs
-} from "../../../config/display/state/display.selectors";
-import {
-  DisplayStateGaugeFieldsObject
-} from "../../../config/display/state/display.state";
-import {moveNeedles} from "../../state/preview.actions";
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {Store} from '@ngrx/store';
+import {Subscription, timer} from 'rxjs';
+import {GaugeConfig, getAbsoluteNeedleAngleBounds} from '../../../config/display/models/configs';
+import {selectGaugeConfigs} from '../../../config/display/state/display.selectors';
+import {DisplayStateGaugeFieldsObject} from '../../../config/display/state/display.state';
+import {moveNeedles} from '../../state/preview.actions';
 
 class SweepState {
   sweepDirection: -1 | 1 = 1; // 1 for up, -1 for down;
@@ -39,13 +35,12 @@ class SweepState {
       this.sweepDirection *= -1;
     }
   }
-
 }
 
 @Component({
   selector: 'app-tester',
   templateUrl: './tester.component.html',
-  styleUrls: ['./tester.component.scss']
+  styleUrls: ['./tester.component.scss'],
 })
 export class TesterComponent implements OnDestroy {
   subscription = new Subscription();
@@ -53,9 +48,11 @@ export class TesterComponent implements OnDestroy {
   sweepSubscription?: Subscription;
 
   constructor(private readonly store: Store) {
-    this.subscription.add(this.store.select(selectGaugeConfigs).subscribe((configs) => {
-      this.gaugeConfigs = configs;
-    }));
+    this.subscription.add(
+      this.store.select(selectGaugeConfigs).subscribe(configs => {
+        this.gaugeConfigs = configs;
+      })
+    );
   }
 
   maybeUnsubscribe() {
@@ -68,33 +65,40 @@ export class TesterComponent implements OnDestroy {
     this.maybeUnsubscribe();
     this.sweepSubscription = new Subscription();
 
-    let [minAngle1, maxAngle1] = getAbsoluteNeedleAngleBounds(this.gaugeConfigs!.gauge1);
-    let [minAngle2, maxAngle2] = getAbsoluteNeedleAngleBounds(this.gaugeConfigs!.gauge2);
-    let [minAngle3, maxAngle3] = getAbsoluteNeedleAngleBounds(this.gaugeConfigs!.gauge3)
+    const [minAngle1, maxAngle1] = getAbsoluteNeedleAngleBounds(this.gaugeConfigs!.gauge1);
+    const [minAngle2, maxAngle2] = getAbsoluteNeedleAngleBounds(this.gaugeConfigs!.gauge2);
+    const [minAngle3, maxAngle3] = getAbsoluteNeedleAngleBounds(this.gaugeConfigs!.gauge3);
 
     const sweep1 = new SweepState(minAngle1, maxAngle1);
     const sweep2 = new SweepState(minAngle2, maxAngle2);
     const sweep3 = new SweepState(minAngle3, maxAngle3);
 
-
     // Start emitting sweep actions. Approx 60 fps.
-    this.sweepSubscription.add(timer(0, 16.6).subscribe(() => {
-      sweep1.advance();
-      sweep2.advance();
-      sweep3.advance();
-      this.store.dispatch(moveNeedles({
-        needleAngle1: sweep1.currentAngle,
-        needleAngle2: sweep2.currentAngle,
-        needleAngle3: sweep3.currentAngle,
-      }));
-    }));
+    this.sweepSubscription.add(
+      timer(0, 16.6).subscribe(() => {
+        sweep1.advance();
+        sweep2.advance();
+        sweep3.advance();
+        this.store.dispatch(
+          moveNeedles({
+            needleAngle1: sweep1.currentAngle,
+            needleAngle2: sweep2.currentAngle,
+            needleAngle3: sweep3.currentAngle,
+          })
+        );
+      })
+    );
   }
 
   stopSweeps() {
     this.maybeUnsubscribe();
-    this.store.dispatch(moveNeedles({
-      needleAngle1: 0, needleAngle2: 0, needleAngle3: 0,
-    }));
+    this.store.dispatch(
+      moveNeedles({
+        needleAngle1: 0,
+        needleAngle2: 0,
+        needleAngle3: 0,
+      })
+    );
   }
 
   sweepChange(event: MatSlideToggleChange) {
@@ -109,5 +113,4 @@ export class TesterComponent implements OnDestroy {
     this.subscription.unsubscribe();
     this.maybeUnsubscribe();
   }
-
 }

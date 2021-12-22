@@ -1,22 +1,15 @@
-import {
-  ElementRef, OnChanges, SimpleChanges,
-} from '@angular/core';
-import {
-  Component, Input, ViewChild,
-} from '@angular/core';
+import {ElementRef, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE} from '../../preview/models/images_metadata';
 import {PreviewStateImageFieldsType} from '../../preview/state/preview.state';
-import {
-  SnackBarService,
-} from '../../services/snack-bar.service';
-import {
-  SnackType,
-} from '../../services/snack-bar.service';
+import {SnackBarService} from '../../services/snack-bar.service';
+import {SnackType} from '../../services/snack-bar.service';
 import {loadedImageBuffer} from '../../preview/state/preview.actions';
 import {Store} from '@ngrx/store';
 
 enum ButtonState {
-  LOAD = 'file_upload', LOADED = 'download_done',
+  LOAD = 'file_upload',
+  LOADED = 'download_done',
 }
 
 @Component({
@@ -54,10 +47,12 @@ export class ImageSelectorComponent implements OnChanges {
     const reader = new FileReader();
     reader.onload = () => {
       if (!reader.result) return;
-      this.store.dispatch(loadedImageBuffer({
-        imageBuffer: reader.result as ArrayBuffer,
-        imageField: this.imageName,
-      }));
+      this.store.dispatch(
+        loadedImageBuffer({
+          imageBuffer: reader.result as ArrayBuffer,
+          imageField: this.imageName,
+        })
+      );
       this.disabled = false;
     };
     reader.onerror = () => {
@@ -77,10 +72,11 @@ export class ImageSelectorComponent implements OnChanges {
     if (changes['imageName']) {
       this.label = IMAGE_LABEL[this.imageName];
       const restriction = IMAGE_MAX_SIZE[this.imageName];
-      this.restriction =
-        restriction.pixels ?
-          `Max ${restriction.pixels} pixels (WxH)` :
-          restriction.x && restriction.y ? `Exactly ${restriction.x}x${restriction.y} pixels` : '';
+      this.restriction = restriction.pixels
+        ? `Max ${restriction.pixels} pixels (WxH)`
+        : restriction.x && restriction.y
+        ? `Exactly ${restriction.x}x${restriction.y} pixels`
+        : '';
     }
   }
 }

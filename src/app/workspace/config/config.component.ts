@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
-import { ResizeEvent } from 'angular-resizable-element';
+import {Component} from '@angular/core';
+import {ResizeEvent} from 'angular-resizable-element';
 
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
-  styleUrls: ['./config.component.scss']
+  styleUrls: ['./config.component.scss'],
 })
-export class ConfigComponent{
+export class ConfigComponent {
   public style: object = {};
 
-  constructor() { }
+  constructor() {}
 
   onResizeEnd(event: ResizeEvent): void {
     this.style = {
       width: `${event.rectangle.width}px`,
     };
   }
-
 }

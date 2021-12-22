@@ -4,14 +4,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {StoreModule} from '@ngrx/store';
-import {IoToolbarModule} from "../io-toolbar/io-toolbar.module";
+import {IoToolbarModule} from '../io-toolbar/io-toolbar.module';
 
 import {GaugesComponent} from './gauges/gauges.component';
 import {LoadImagesDialogModule} from '../load-images-dialog/load-images-dialog.module';
 import {PreviewComponent} from './preview.component';
 import {PREVIEW_FEATURE_KEY, previewReducer} from './state/preview.reducer';
-import { TesterComponent } from './gauges/tester/tester.component';
-
+import {TesterComponent} from './gauges/tester/tester.component';
 
 @NgModule({
   declarations: [GaugesComponent, PreviewComponent, TesterComponent],

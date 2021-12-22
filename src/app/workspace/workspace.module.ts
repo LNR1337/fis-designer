@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {ConfigModule} from './config/config.module';
 import {PreviewModule} from './preview/preview.module';
-import {ServicesModule} from "./services/services.module";
+import {ServicesModule} from './services/services.module';
 
 import {WorkspaceComponent} from './workspace.component';
 

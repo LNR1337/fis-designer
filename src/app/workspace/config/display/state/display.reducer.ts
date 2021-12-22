@@ -27,5 +27,5 @@ export const displayReducer = createReducer(
   on(actions.loadDisplayStateFromObject, (state, {object}) => ({
     ...state,
     ...object,
-  })),
+  }))
 );

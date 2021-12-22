@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MiscComponent } from './misc.component';
+import {MiscComponent} from './misc.component';
 
 describe('MiscComponent', () => {
   let component: MiscComponent;
@@ -8,9 +8,8 @@ describe('MiscComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MiscComponent ]
-    })
-    .compileComponents();
+      declarations: [MiscComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

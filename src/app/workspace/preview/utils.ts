@@ -4,8 +4,7 @@ import {PreviewStateImageFieldsType} from './state/preview.state';
 
 /** Converts an array buffer into a base64 encoded string. */
 export function byteToBase64(buffer: ArrayBuffer): string {
-  return btoa(new Uint8Array(buffer)
-    .reduce((data, byte) => data + String.fromCharCode(byte), ''));
+  return btoa(new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
 }
 
 /** Converts a base64 encoded string into an array buffer. */
@@ -14,8 +13,10 @@ export function base64ToArrayBuffer(encodedString: string): ArrayBuffer {
 }
 
 /** Validates the image and returns an error should any be found. */
-function validateImage(image: HTMLImageElement,
-                       imageName: PreviewStateImageFieldsType): string | undefined {
+function validateImage(
+  image: HTMLImageElement,
+  imageName: PreviewStateImageFieldsType
+): string | undefined {
   const restriction = IMAGE_MAX_SIZE[imageName];
   if (restriction.x && restriction.y) {
     if (image.naturalWidth !== restriction.x || image.naturalHeight !== restriction.y) {
@@ -29,14 +30,20 @@ function validateImage(image: HTMLImageElement,
 }
 
 /** Tries to decode and load the image data into a full image element. */
-export function loadImageFromBase64(imageData: string,
-                                    imageField: PreviewStateImageFieldsType): Observable<HTMLImageElement | string> {
+export function loadImageFromBase64(
+  imageData: string,
+  imageField: PreviewStateImageFieldsType
+): Observable<HTMLImageElement | string> {
   // New HTMLImageElement.
   const image = new Image();
   image.src = URL.createObjectURL(new Blob([base64ToArrayBuffer(imageData)], {type: MIME_TYPE}));
-  return from(image.decode().then(() => {
-    const error = validateImage(image, imageField);
-    return error ? error : image;
-  }).catch((encodingError) => (`Error loading image: ${encodingError}`)));
-
+  return from(
+    image
+      .decode()
+      .then(() => {
+        const error = validateImage(image, imageField);
+        return error ? error : image;
+      })
+      .catch(encodingError => `Error loading image: ${encodingError}`)
+  );
 }

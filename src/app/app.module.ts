@@ -23,7 +23,7 @@ import {WorkspaceModule} from './workspace/workspace.module';
         runtimeChecks: {
           strictStateSerializability: true,
         },
-      },
+      }
     ),
     EffectsModule.forRoot([]),
   ],

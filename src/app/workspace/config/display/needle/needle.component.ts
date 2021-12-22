@@ -1,17 +1,15 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {
-  DisplayStateNeedleFieldsType
-} from "../state/display.state";
-import {PreviewStateImageFieldsType} from "../../../preview/state/preview.state";
-import {Store} from "@ngrx/store";
-import {changedNeedleConfig, recalculateNeedleSize} from "../state/display.actions";
-import {NeedleConfig, NeedleConfigFields} from "../models/configs";
+import {DisplayStateNeedleFieldsType} from '../state/display.state';
+import {PreviewStateImageFieldsType} from '../../../preview/state/preview.state';
+import {Store} from '@ngrx/store';
+import {changedNeedleConfig, recalculateNeedleSize} from '../state/display.actions';
+import {NeedleConfig, NeedleConfigFields} from '../models/configs';
 import {NEEDLE_DISPLAY_TO_PREVIEW_FIELD, NEEDLE_FIELD_METADATA} from '../models/configs_metadata';
 
 @Component({
   selector: 'app-needle',
   templateUrl: './needle.component.html',
-  styleUrls: ['./needle.component.scss']
+  styleUrls: ['./needle.component.scss'],
 })
 export class NeedleComponent implements OnChanges {
   @Input() needleConfig?: NeedleConfig;
@@ -25,15 +23,16 @@ export class NeedleComponent implements OnChanges {
   NEEDLE_FIELD_METADATA = NEEDLE_FIELD_METADATA;
   NeedleConfigFields = NeedleConfigFields;
 
-  constructor(private readonly store: Store) {
-  }
+  constructor(private readonly store: Store) {}
 
   valueChanged(value: number, fieldName: keyof NeedleConfig) {
     if (this.needleConfig && this.fieldName) {
-      this.store.dispatch(changedNeedleConfig({
-        config: {...this.needleConfig, [fieldName]: value},
-        displayConfigField: this.fieldName
-      }));
+      this.store.dispatch(
+        changedNeedleConfig({
+          config: {...this.needleConfig, [fieldName]: value},
+          displayConfigField: this.fieldName,
+        })
+      );
     }
   }
 
@@ -49,10 +48,9 @@ export class NeedleComponent implements OnChanges {
       this.store.dispatch(
         recalculateNeedleSize({
           displayStateNeedleField: this.fieldName,
-          previewStateImageField: NEEDLE_DISPLAY_TO_PREVIEW_FIELD[this.fieldName]
+          previewStateImageField: NEEDLE_DISPLAY_TO_PREVIEW_FIELD[this.fieldName],
         })
-      )
+      );
     }
   }
-
 }

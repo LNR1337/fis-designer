@@ -1,10 +1,6 @@
-import { Component, Inject, Injectable } from '@angular/core';
-import {
-  MatSnackBar,
-  MatSnackBarRef} from '@angular/material/snack-bar';
-import {
-  MAT_SNACK_BAR_DATA
-} from '@angular/material/snack-bar';
+import {Component, Inject, Injectable} from '@angular/core';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
 
 /** Available snack bar types. */
 export enum SnackType {
@@ -35,15 +31,10 @@ export class SnackBarComponent {
 export class SnackBarService {
   constructor(private snackBar: MatSnackBar) {}
 
-  open(
-    message: string,
-    type: SnackType = SnackType.INFO,
-    action = 'OK',
-    duration = 5000
-  ) {
+  open(message: string, type: SnackType = SnackType.INFO, action = 'OK', duration = 5000) {
     this.snackBar.openFromComponent(SnackBarComponent, {
       duration,
-      data: { action, type, message },
+      data: {action, type, message},
     });
   }
 }

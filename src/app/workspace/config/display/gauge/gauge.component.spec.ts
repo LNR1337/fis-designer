@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GaugeComponent } from './gauge.component';
+import {GaugeComponent} from './gauge.component';
 
 describe('GaugeComponent', () => {
   let component: GaugeComponent;
@@ -8,9 +8,8 @@ describe('GaugeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GaugeComponent ]
-    })
-    .compileComponents();
+      declarations: [GaugeComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
