@@ -29,6 +29,8 @@ export const selectAllImages = createSelector(selectPreviewState, state => {
     })
   );
   allImagesLoading.subscribe();
+  // TODO(pawelszydlo): This is an incorrect flow, as the selector will return before the images
+  //                    finish loading (loadedImages will be filled with a delay).
   return loadedImages;
 });
 

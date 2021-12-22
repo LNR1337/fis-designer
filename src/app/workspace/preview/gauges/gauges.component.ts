@@ -40,7 +40,8 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
     this.subscription.add(
       this.store.select(selectAllImages).subscribe(images => {
         this.images = images;
-        this.redrawAll();
+        // Bacause the selector returns too early, wee need to "debounce".
+        setTimeout(() => this.redrawAll(), 500);
       })
     );
     this.subscription.add(

@@ -29,14 +29,21 @@ function validateImage(
   return;
 }
 
-/** Tries to decode and load the image data into a full image element. */
+/** Decodes and load the image data into a full image element, or an error message. */
 export function loadImageFromBase64(
   imageData: string,
   imageField: PreviewStateImageFieldsType
 ): Observable<HTMLImageElement | string> {
-  // New HTMLImageElement.
+  return loadImageFromArrayBuffer(base64ToArrayBuffer(imageData), imageField);
+}
+
+/**  Loads the image data into a full image element, or an error message. */
+export function loadImageFromArrayBuffer(
+  imageData: ArrayBuffer,
+  imageField: PreviewStateImageFieldsType
+): Observable<HTMLImageElement | string> {
   const image = new Image();
-  image.src = URL.createObjectURL(new Blob([base64ToArrayBuffer(imageData)], {type: MIME_TYPE}));
+  image.src = URL.createObjectURL(new Blob([imageData], {type: MIME_TYPE}));
   return from(
     image
       .decode()

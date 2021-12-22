@@ -1,8 +1,13 @@
 import {PreviewStateImageFieldsType} from './preview.state';
 import {createAction, props} from '@ngrx/store';
 
-export const loadedImageBuffer = createAction(
-  '[Preview] Loaded an image buffer',
+export const validateAndSaveImageBuffer = createAction(
+  '[Preview] Validate and save an image buffer',
+  props<{imageBuffer: ArrayBuffer; imageField: PreviewStateImageFieldsType}>()
+);
+
+export const saveImageBuffer = createAction(
+  '[Preview] Save an image buffer to state',
   props<{imageBuffer: ArrayBuffer; imageField: PreviewStateImageFieldsType}>()
 );
 

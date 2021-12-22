@@ -4,7 +4,7 @@ import {IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE} from '../../preview/models/image
 import {PreviewStateImageFieldsType} from '../../preview/state/preview.state';
 import {SnackBarService} from '../../services/snack-bar.service';
 import {SnackType} from '../../services/snack-bar.service';
-import {loadedImageBuffer} from '../../preview/state/preview.actions';
+import {validateAndSaveImageBuffer} from '../../preview/state/preview.actions';
 import {Store} from '@ngrx/store';
 
 enum ButtonState {
@@ -48,7 +48,7 @@ export class ImageSelectorComponent implements OnChanges {
     reader.onload = () => {
       if (!reader.result) return;
       this.store.dispatch(
-        loadedImageBuffer({
+        validateAndSaveImageBuffer({
           imageBuffer: reader.result as ArrayBuffer,
           imageField: this.imageName,
         })

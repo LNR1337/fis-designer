@@ -14,7 +14,7 @@ export const initialState: PreviewState = {
 export const previewReducer = createReducer(
   initialState,
   // Image loaded as array buffer. Convert it to base64 and store.
-  on(actions.loadedImageBuffer, (state, {imageBuffer, imageField}) => ({
+  on(actions.saveImageBuffer, (state, {imageBuffer, imageField}) => ({
     ...state,
     [imageField]: byteToBase64(imageBuffer),
   })),
