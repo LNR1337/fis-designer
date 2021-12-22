@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {DisplayStateNeedleFieldsType} from '../state/display.state';
-import {PreviewStateImageFieldsType} from '../../../preview/state/preview.state';
 import {Store} from '@ngrx/store';
 import {changedNeedleConfig, recalculateNeedleSize} from '../state/display.actions';
 import {NeedleConfig, NeedleConfigFields} from '../models/configs';
@@ -16,7 +16,7 @@ export class NeedleComponent implements OnChanges {
   // Name of the state field this config corresponds to.
   @Input() fieldName?: DisplayStateNeedleFieldsType;
   // List of names of loaded images.
-  @Input() loadedImages?: Set<PreviewStateImageFieldsType>;
+  @Input() loadedImages?: Set<ImageStateFieldsType>;
   @Input() label = '';
 
   resizeEnabled = false;

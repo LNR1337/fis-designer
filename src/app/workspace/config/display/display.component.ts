@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {PreviewStateImageFieldsType} from '../../preview/state/preview.state';
 import {map, Observable} from 'rxjs';
+import {ImageStateFieldsType} from '../../image-manager/state/images.state';
 import {selectLoadedImageNames} from '../../preview/state/preview.selectors';
 import {
   DisplayStateNeedleFieldsObject,
@@ -21,7 +21,7 @@ import {disableHighlight, enableHighlight} from './state/display.actions';
   styleUrls: ['./display.component.scss'],
 })
 export class DisplayComponent {
-  loadedImages: Observable<Set<PreviewStateImageFieldsType>>;
+  loadedImages: Observable<Set<ImageStateFieldsType>>;
   needlesConfigs: Observable<DisplayStateNeedleFieldsObject<NeedleConfig>>;
   gaugesConfigs: Observable<DisplayStateGaugeFieldsObject<GaugeConfig>>;
 

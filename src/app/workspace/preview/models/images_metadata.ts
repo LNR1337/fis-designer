@@ -1,6 +1,6 @@
-import {PreviewStateImageFieldsObject} from '../state/preview.state';
-
 /** Acceptable mime types. */
+import {ImageStateFieldsObject} from '../../image-manager/state/images.state';
+
 export const MIME_TYPE = 'image/png';
 
 /** Image size restriction. Value must match if specified. */
@@ -11,7 +11,7 @@ export interface Restriction {
 }
 
 /** Maximum image dimensions. From: https://fis-control.de/graphics-converter.html */
-export const IMAGE_MAX_SIZE: PreviewStateImageFieldsObject<Restriction> = {
+export const IMAGE_MAX_SIZE: ImageStateFieldsObject<Restriction> = {
   backgroundImage: {x: 800, y: 480},
   tableBackgroundImage: {x: 96, y: 96},
   needleImage1: {pixels: 8192},
@@ -32,7 +32,7 @@ export const IMAGE_MAX_SIZE: PreviewStateImageFieldsObject<Restriction> = {
 };
 
 /** Labels for image inputs. */
-export const IMAGE_LABEL: PreviewStateImageFieldsObject<string> = {
+export const IMAGE_LABEL: ImageStateFieldsObject<string> = {
   backgroundImage: 'Gauges background',
   tableBackgroundImage: 'Tables background tile',
   needleImage1: 'Left gauge needle',
@@ -53,7 +53,7 @@ export const IMAGE_LABEL: PreviewStateImageFieldsObject<string> = {
 };
 
 /** Regular expressions for possible names for image files. */
-export const IMAGE_FILENAME_MATCHERS: PreviewStateImageFieldsObject<RegExp[]> = {
+export const IMAGE_FILENAME_MATCHERS: ImageStateFieldsObject<RegExp[]> = {
   backgroundImage: [/background/i, /.*gauges*/i],
   tableBackgroundImage: [/.*table.*/i],
   needleImage1: [/.*needle.*(left|1|one).*/i, /.*(left|1|one).*needle.*/i],

@@ -12,7 +12,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 
-import {LoadImagesDialogModule} from '../load-images-dialog/load-images-dialog.module';
+import {ImageManagerModule} from '../image-manager/image-manager.module';
 import {IoToolbarComponent} from './io-toolbar.component';
 import {IoToolbarEffects} from './state/io-toolbar.effects';
 import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from './state/io-toolbar.reducer';
@@ -22,7 +22,7 @@ import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from './state/io-toolbar.reduc
   imports: [
     CommonModule,
     FormsModule,
-    LoadImagesDialogModule,
+    ImageManagerModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatDialogModule,

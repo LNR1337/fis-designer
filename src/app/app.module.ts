@@ -17,14 +17,7 @@ import {WorkspaceModule} from './workspace/workspace.module';
     BrowserAnimationsModule,
     MatToolbarModule,
     WorkspaceModule,
-    StoreModule.forRoot(
-      {},
-      {
-        runtimeChecks: {
-          strictStateSerializability: true,
-        },
-      }
-    ),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
   ],
   providers: [],

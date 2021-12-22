@@ -2,8 +2,8 @@ import {AfterViewInit, ElementRef, OnDestroy} from '@angular/core';
 import {Component, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
+import {PartialImageStateFieldsObject} from '../../image-manager/state/images.state';
 import {selectAllImages, selectNeedleAngles} from '../state/preview.selectors';
-import {PartialPreviewStateImageFieldsObject} from '../state/preview.state';
 import {
   DisplayStateFieldsType,
   DisplayStateGaugeFieldsObject,
@@ -30,7 +30,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   compositor?: GaugesCompositor;
 
   subscription = new Subscription();
-  images?: PartialPreviewStateImageFieldsObject<HTMLImageElement>;
+  images?: PartialImageStateFieldsObject<HTMLImageElement>;
   needleConfigs?: DisplayStateNeedleFieldsObject<NeedleConfig>;
   gaugeConfigs?: DisplayStateGaugeFieldsObject<GaugeConfig>;
   highlight?: DisplayStateFieldsType;
@@ -40,8 +40,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
     this.subscription.add(
       this.store.select(selectAllImages).subscribe(images => {
         this.images = images;
-        // Bacause the selector returns too early, wee need to "debounce".
-        setTimeout(() => this.redrawAll(), 500);
+        this.redrawAll();
       })
     );
     this.subscription.add(

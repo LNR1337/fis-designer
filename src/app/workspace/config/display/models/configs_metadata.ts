@@ -1,9 +1,9 @@
+import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {
   DisplayStateGaugeFieldsObject,
   DisplayStateNeedleFieldsObject,
 } from '../state/display.state';
 import {GaugeConfigFieldsObject, NeedleConfigFieldsObject} from './configs';
-import {PreviewStateImageFieldsType} from '../../../preview/state/preview.state';
 
 export interface ConfigFieldMetadata {
   label?: string;
@@ -24,7 +24,7 @@ export const NEEDLE_LABELS: DisplayStateNeedleFieldsObject<string> = {
   needle3: 'Right needle',
 };
 
-export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<PreviewStateImageFieldsType> =
+export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<ImageStateFieldsType> =
   {
     needle1: 'needleImage1',
     needle2: 'needleImage2',

@@ -5,12 +5,16 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
 
 import {ImageSelectorComponent} from './image-selector/image-selector.component';
-import {LoadImagesDialogComponent} from './load-images-dialog.component';
+import {ImageManagerComponent} from './image-manager.component';
+import {ImagesEffects} from './state/images.effects';
+import {IMAGES_FEATURE_KEY, imagesReducer} from './state/images.reducer';
 
 @NgModule({
-  declarations: [LoadImagesDialogComponent, ImageSelectorComponent],
+  declarations: [ImageManagerComponent, ImageSelectorComponent],
   imports: [
     CommonModule,
     MatIconModule,
@@ -18,7 +22,9 @@ import {LoadImagesDialogComponent} from './load-images-dialog.component';
     MatDialogModule,
     MatButtonModule,
     MatTooltipModule,
+    EffectsModule.forFeature([ImagesEffects]),
+    StoreModule.forFeature(IMAGES_FEATURE_KEY, imagesReducer),
   ],
-  exports: [LoadImagesDialogComponent],
+  exports: [ImageManagerComponent],
 })
-export class LoadImagesDialogModule {}
+export class ImageManagerModule {}

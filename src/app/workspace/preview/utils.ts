@@ -1,6 +1,6 @@
 import {from, Observable} from 'rxjs';
+import {ImageStateFieldsType} from '../image-manager/state/images.state';
 import {IMAGE_MAX_SIZE, MIME_TYPE} from './models/images_metadata';
-import {PreviewStateImageFieldsType} from './state/preview.state';
 
 /** Converts an array buffer into a base64 encoded string. */
 export function byteToBase64(buffer: ArrayBuffer): string {
@@ -15,7 +15,7 @@ export function base64ToArrayBuffer(encodedString: string): ArrayBuffer {
 /** Validates the image and returns an error should any be found. */
 function validateImage(
   image: HTMLImageElement,
-  imageName: PreviewStateImageFieldsType
+  imageName: ImageStateFieldsType
 ): string | undefined {
   const restriction = IMAGE_MAX_SIZE[imageName];
   if (restriction.x && restriction.y) {
@@ -32,7 +32,7 @@ function validateImage(
 /** Decodes and load the image data into a full image element, or an error message. */
 export function loadImageFromBase64(
   imageData: string,
-  imageField: PreviewStateImageFieldsType
+  imageField: ImageStateFieldsType
 ): Observable<HTMLImageElement | string> {
   return loadImageFromArrayBuffer(base64ToArrayBuffer(imageData), imageField);
 }
@@ -40,7 +40,7 @@ export function loadImageFromBase64(
 /**  Loads the image data into a full image element, or an error message. */
 export function loadImageFromArrayBuffer(
   imageData: ArrayBuffer,
-  imageField: PreviewStateImageFieldsType
+  imageField: ImageStateFieldsType
 ): Observable<HTMLImageElement | string> {
   const image = new Image();
   image.src = URL.createObjectURL(new Blob([imageData], {type: MIME_TYPE}));

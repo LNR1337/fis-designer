@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
+import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {DisplayStateGaugeFieldsType} from '../state/display.state';
-import {PreviewStateImageFieldsType} from '../../../preview/state/preview.state';
 import {Store} from '@ngrx/store';
 import {changedGaugeConfig} from '../state/display.actions';
 import {GaugeConfig, GaugeConfigFields} from '../models/configs';
@@ -17,7 +17,7 @@ export class GaugeComponent {
   // Name of the state field this config corresponds to.
   @Input() fieldName?: DisplayStateGaugeFieldsType;
   // List of names of loaded images.
-  @Input() loadedImages?: Set<PreviewStateImageFieldsType>;
+  @Input() loadedImages?: Set<ImageStateFieldsType>;
   @Input() label = '';
 
   GAUGE_FIELD_METADATA = GAUGE_FIELD_METADATA;

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
-import {LoadImagesDialogComponent} from '../load-images-dialog/load-images-dialog.component';
+import {ImageManagerComponent} from '../image-manager/image-manager.component';
 import {SnackBarService, SnackType} from '../services/snack-bar.service';
 import {
   loadExistingConfigNames,
@@ -33,7 +33,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   }
 
   openFileSelectorDialog() {
-    this.dialog.open(LoadImagesDialogComponent, {
+    this.dialog.open(ImageManagerComponent, {
       width: '970px',
       disableClose: true,
     });

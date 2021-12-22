@@ -1,11 +1,11 @@
 import {ElementRef, OnChanges, SimpleChanges} from '@angular/core';
 import {Component, Input, ViewChild} from '@angular/core';
 import {IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE} from '../../preview/models/images_metadata';
-import {PreviewStateImageFieldsType} from '../../preview/state/preview.state';
 import {SnackBarService} from '../../services/snack-bar.service';
 import {SnackType} from '../../services/snack-bar.service';
-import {validateAndSaveImageBuffer} from '../../preview/state/preview.actions';
+import {validateAndSaveImageBuffer} from '../state/images.actions';
 import {Store} from '@ngrx/store';
+import {ImageStateFieldsType} from '../state/images.state';
 
 enum ButtonState {
   LOAD = 'file_upload',
@@ -27,7 +27,7 @@ export class ImageSelectorComponent implements OnChanges {
   disabled = false;
 
   // This input is made mandatory by the selector, so it will always be set correctly.
-  @Input() imageName: PreviewStateImageFieldsType = 'backgroundImage';
+  @Input() imageName: ImageStateFieldsType = 'backgroundImage';
 
   @Input() currentImageUrl?: string;
 

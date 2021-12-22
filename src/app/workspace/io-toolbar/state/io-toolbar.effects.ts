@@ -4,9 +4,9 @@ import {EMPTY, exhaustMap, mergeMap, of, withLatestFrom} from 'rxjs';
 import {loadDisplayStateFromObject} from '../../config/display/state/display.actions';
 import {DISPLAY_FEATURE_KEY} from '../../config/display/state/display.reducer';
 import {selectDisplayState} from '../../config/display/state/display.selectors';
-import {loadPreviewStateFromObject} from '../../preview/state/preview.actions';
-import {PREVIEW_FEATURE_KEY} from '../../preview/state/preview.reducer';
-import {selectPreviewState} from '../../preview/state/preview.selectors';
+import {loadImagesStateFromObject} from '../../image-manager/state/images.actions';
+import {IMAGES_FEATURE_KEY} from '../../image-manager/state/images.reducer';
+import {selectImagesState} from '../../image-manager/state/images.selectors';
 import {LocalStorageService} from '../../services/local-storage';
 import {
   loadExistingConfigNames,
@@ -23,11 +23,11 @@ export class IoToolbarEffects {
     this.actions$.pipe(
       ofType(saveStateToStorage),
       withLatestFrom(this.store.select(selectDisplayState)),
-      withLatestFrom(this.store.select(selectPreviewState)),
-      mergeMap(([[action, displayState], previewState]) => {
+      withLatestFrom(this.store.select(selectImagesState)),
+      mergeMap(([[action, displayState], imagesState]) => {
         const stateToSave = {
           [DISPLAY_FEATURE_KEY]: displayState,
-          [PREVIEW_FEATURE_KEY]: previewState,
+          [IMAGES_FEATURE_KEY]: imagesState,
         };
         try {
           this.localStorageService.saveState(action.name, stateToSave);
@@ -54,10 +54,10 @@ export class IoToolbarEffects {
               })
             );
           }
-          if (loadedFromState.hasOwnProperty(PREVIEW_FEATURE_KEY)) {
+          if (loadedFromState.hasOwnProperty(IMAGES_FEATURE_KEY)) {
             loadActions.push(
-              loadPreviewStateFromObject({
-                object: (loadedFromState as any)[PREVIEW_FEATURE_KEY],
+              loadImagesStateFromObject({
+                object: (loadedFromState as any)[IMAGES_FEATURE_KEY],
               })
             );
           }

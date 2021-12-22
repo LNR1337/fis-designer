@@ -1,32 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {Actions} from '@ngrx/effects';
 import {Store} from '@ngrx/store';
-import {map} from 'rxjs/operators';
-import {SnackBarService, SnackType} from '../../services/snack-bar.service';
-import {loadImageFromArrayBuffer} from '../utils';
-import {saveImageBuffer, validateAndSaveImageBuffer} from './preview.actions';
+import {SnackBarService} from '../../services/snack-bar.service';
 
 @Injectable()
 export class PreviewEffects {
-  /** Effect to validate the image and show an error or save to state. */
-  validateAndSaveImageBuffer = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(validateAndSaveImageBuffer),
-        map(({imageBuffer, imageField}) => {
-          loadImageFromArrayBuffer(imageBuffer, imageField).subscribe(result => {
-            // String result means an error.
-            if (typeof result === 'string') {
-              this.snackBar.open(result, SnackType.ERROR);
-            } else {
-              this.store.dispatch(saveImageBuffer({imageBuffer, imageField}));
-            }
-          });
-        })
-      ),
-    {dispatch: false}
-  );
-
   constructor(
     private actions$: Actions,
     private readonly snackBar: SnackBarService,

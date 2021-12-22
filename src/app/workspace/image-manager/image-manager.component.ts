@@ -2,28 +2,28 @@ import {QueryList} from '@angular/core';
 import {Component, ViewChildren} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {PartialPreviewStateImageFieldsObject} from '../preview/state/preview.state';
-import {PreviewStateImageFields} from '../preview/state/preview.state';
+import {PartialImageStateFieldsObject} from './state/images.state';
+import {ImageStateFields} from './state/images.state';
 import {IMAGE_FILENAME_MATCHERS, MIME_TYPE} from '../preview/models/images_metadata';
 import {selectAllImages} from '../preview/state/preview.selectors';
 import {ImageSelectorComponent} from './image-selector/image-selector.component';
 import {SnackBarService} from '../services/snack-bar.service';
 
 @Component({
-  selector: 'app-load-images-dialog',
-  templateUrl: './load-images-dialog.component.html',
-  styleUrls: ['./load-images-dialog.component.scss'],
+  selector: 'app-image-manager',
+  templateUrl: './image-manager.html',
+  styleUrls: ['./image-manager.component.scss'],
 })
 /**
  * This component is responsible showing all image inputs.
  */
-export class LoadImagesDialogComponent {
+export class ImageManagerComponent {
   /** Get a handle on all the file selector components. */
   @ViewChildren('imageInput') imageInputs?: QueryList<ImageSelectorComponent>;
 
   MIME_TYPE = MIME_TYPE;
-  stateImageFields = PreviewStateImageFields;
-  currentImages = new Observable<PartialPreviewStateImageFieldsObject<HTMLImageElement>>();
+  stateImageFields = ImageStateFields;
+  currentImages = new Observable<PartialImageStateFieldsObject<HTMLImageElement>>();
 
   constructor(readonly store: Store, private readonly snackBar: SnackBarService) {
     this.currentImages = store.select(selectAllImages);
@@ -41,7 +41,7 @@ export class LoadImagesDialogComponent {
 
       for (const file of Array.from(input.files)) {
         let found = false;
-        for (const imageName of PreviewStateImageFields) {
+        for (const imageName of ImageStateFields) {
           const fileNameWithoutExt = file.name.endsWith('.png')
             ? file.name.slice(0, file.name.length - 4)
             : file.name;

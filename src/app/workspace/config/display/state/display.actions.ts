@@ -1,17 +1,17 @@
 import {createAction, props} from '@ngrx/store';
+import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {
   DisplayStateFieldsType,
   DisplayStateGaugeFieldsType,
   DisplayStateNeedleFieldsType,
 } from './display.state';
 import {GaugeConfig, NeedleConfig} from '../models/configs';
-import {PreviewStateImageFieldsType} from '../../../preview/state/preview.state';
 
 export const recalculateNeedleSize = createAction(
   '[Config] Recalculate needle size',
   props<{
     displayStateNeedleField: DisplayStateNeedleFieldsType;
-    previewStateImageField: PreviewStateImageFieldsType;
+    previewStateImageField: ImageStateFieldsType;
   }>()
 );
 
