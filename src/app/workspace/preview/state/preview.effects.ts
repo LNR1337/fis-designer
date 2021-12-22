@@ -8,7 +8,7 @@ import {saveImageBuffer, validateAndSaveImageBuffer} from './preview.actions';
 
 @Injectable()
 export class PreviewEffects {
-  /** Effect to recalculate needle dimensions based on needle image. */
+  /** Effect to validate the image and show an error or save to state. */
   validateAndSaveImageBuffer = createEffect(
     () =>
       this.actions$.pipe(
