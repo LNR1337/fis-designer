@@ -21,8 +21,7 @@ import {WorkspaceModule} from './workspace/workspace.module';
       {},
       {
         runtimeChecks: {
-          // strictStateSerializability: true,
-          // strictActionSerializability: true,
+          strictStateSerializability: true,
         },
       },
     ),

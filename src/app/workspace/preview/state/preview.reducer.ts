@@ -1,3 +1,4 @@
+import {byteToBase64} from '../utils';
 import * as actions from './preview.actions';
 import {PreviewState} from './preview.state';
 import {createReducer, on} from '@ngrx/store';
@@ -9,10 +10,17 @@ export const initialState: PreviewState = {
 };
 
 export const previewReducer = createReducer(initialState,
-  on(actions.loadedImage, (state, {image, imageField}) => ({
-    ...state, [imageField]: image,
+  // Image loaded as array buffer. Convert it to base64 and store.
+  on(actions.loadedImageBuffer, (state, {imageBuffer, imageField}) => ({
+    ...state,[imageField]: byteToBase64(imageBuffer),
   })),
+  // Change needle angle.
   on(actions.moveNeedles, (state, {needleAngle1, needleAngle2, needleAngle3}) => ({
     ...state, needleAngle1, needleAngle2, needleAngle3,
-  }))
+  })),
+  // TODO(pawelszydlo): do some data sanitization!
+  on(actions.loadPreviewStateFromObject, (state, {object}) => ({
+    ...state,
+    ...object,
+  })),
 );

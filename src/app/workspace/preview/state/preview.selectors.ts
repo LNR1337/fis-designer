@@ -1,7 +1,9 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
+import {forkJoin, of, tap} from 'rxjs';
+import {loadImageFromBase64} from '../utils';
 
 import {PREVIEW_FEATURE_KEY} from './preview.reducer';
-import {PreviewState} from './preview.state';
+import {PartialPreviewStateImageFieldsObject, PreviewState} from './preview.state';
 import {PreviewStateImageFields, PreviewStateImageFieldsType} from './preview.state';
 
 /** Selects the whole preview state. */
@@ -9,8 +11,25 @@ export const selectPreviewState = createFeatureSelector<PreviewState>(PREVIEW_FE
 
 /** Selects all images from the state as an object. */
 export const selectAllImages = createSelector(selectPreviewState,
-  // TODO(pawelszydlo): Create a new object with only the image fields from state.
-  state => state);
+  state => {
+    const loadedImages: PartialPreviewStateImageFieldsObject<HTMLImageElement> =  {};
+    const allImagesLoading = forkJoin(PreviewStateImageFields.map(fieldName => {
+      const encodedData = state[fieldName];
+      // forkJoin requires that all observables emit at least one value.
+      if (!encodedData) return of(undefined);
+      return loadImageFromBase64(encodedData, fieldName).pipe(
+        tap(result => {
+          if (typeof result === "string") {
+            console.error(result);
+          } else {
+            loadedImages[fieldName] = result;
+          }
+        })
+      );
+    }));
+    allImagesLoading.subscribe();
+    return loadedImages;
+  });
 
 /** Selects a list of all image field names that are set. */
 export const selectLoadedImageNames = createSelector(selectPreviewState,

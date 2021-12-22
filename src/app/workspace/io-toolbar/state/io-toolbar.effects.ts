@@ -4,6 +4,7 @@ import {EMPTY, exhaustMap, mergeMap, of, withLatestFrom} from 'rxjs';
 import {loadDisplayStateFromObject} from '../../config/display/state/display.actions';
 import {DISPLAY_FEATURE_KEY} from '../../config/display/state/display.reducer';
 import {selectDisplayState} from '../../config/display/state/display.selectors';
+import {loadPreviewStateFromObject} from '../../preview/state/preview.actions';
 import {PREVIEW_FEATURE_KEY} from '../../preview/state/preview.reducer';
 import {selectPreviewState} from '../../preview/state/preview.selectors';
 import {LocalStorageService} from '../../services/local-storage';
@@ -39,8 +40,11 @@ export class IoToolbarEffects {
       try {
         const loadedFromState = this.localStorageService.loadState(action.name);
         const loadActions: Action[] = [];
-        if (loadedFromState.hasOwnProperty('display')) {
-          loadActions.push(loadDisplayStateFromObject({object: (loadedFromState as any).display}));
+        if (loadedFromState.hasOwnProperty(DISPLAY_FEATURE_KEY)) {
+          loadActions.push(loadDisplayStateFromObject({object: (loadedFromState as any)[DISPLAY_FEATURE_KEY]}));
+        }
+        if (loadedFromState.hasOwnProperty(PREVIEW_FEATURE_KEY)) {
+          loadActions.push(loadPreviewStateFromObject({object: (loadedFromState as any)[PREVIEW_FEATURE_KEY]}));
         }
         return loadActions;
       } catch (e) {

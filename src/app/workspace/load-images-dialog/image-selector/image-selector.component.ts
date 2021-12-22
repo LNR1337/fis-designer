@@ -1,25 +1,22 @@
 import {
-  ElementRef,
-  OnChanges,
-  SimpleChanges} from '@angular/core';
-import {
-  Component,
-  Input,
-  ViewChild,
+  ElementRef, OnChanges, SimpleChanges,
 } from '@angular/core';
-import { IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE } from '../../preview/models/images_metadata';
-import { PreviewStateImageFieldsType } from '../../preview/state/preview.state';
 import {
-  SnackBarService} from '../../services/snack-bar.service';
+  Component, Input, ViewChild,
+} from '@angular/core';
+import {IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE} from '../../preview/models/images_metadata';
+import {PreviewStateImageFieldsType} from '../../preview/state/preview.state';
+import {
+  SnackBarService,
+} from '../../services/snack-bar.service';
 import {
   SnackType,
 } from '../../services/snack-bar.service';
-import { loadedImage } from '../../preview/state/preview.actions';
-import { Store } from '@ngrx/store';
+import {loadedImageBuffer} from '../../preview/state/preview.actions';
+import {Store} from '@ngrx/store';
 
 enum ButtonState {
-  LOAD = 'file_upload',
-  LOADED = 'download_done',
+  LOAD = 'file_upload', LOADED = 'download_done',
 }
 
 @Component({
@@ -41,38 +38,7 @@ export class ImageSelectorComponent implements OnChanges {
 
   @Input() currentImageUrl?: string;
 
-  constructor(
-    private readonly store: Store,
-    private readonly snackBar: SnackBarService
-  ) {}
-
-  validateImage(image: HTMLImageElement): boolean {
-    const restriction = IMAGE_MAX_SIZE[this.imageName];
-    if (restriction.x && restriction.y) {
-      if (
-        image.naturalWidth !== restriction.x ||
-        image.naturalHeight !== restriction.y
-      ) {
-        this.snackBar.open(
-          `The image must be exactly ${restriction.x} by ${restriction.y} pixels.`,
-          SnackType.ERROR
-        );
-
-        return false;
-      }
-    }
-    if (
-      restriction.pixels &&
-      image.naturalWidth * image.naturalHeight > restriction.pixels
-    ) {
-      this.snackBar.open(
-        `The image must have a maximum of ${restriction.pixels} pixels (WxH)`,
-        SnackType.ERROR
-      );
-      return false;
-    }
-    return true;
-  }
+  constructor(private readonly store: Store, private readonly snackBar: SnackBarService) {}
 
   onImageSelected(event: Event) {
     this.disabled = true;
@@ -82,33 +48,17 @@ export class ImageSelectorComponent implements OnChanges {
     }
   }
 
+  /** Loads the file and sends the array buffer with an action. */
   ingestFile(file: File) {
     // Reader for loading data into a blob and assigning it as image src.
     const reader = new FileReader();
     reader.onload = () => {
       if (!reader.result) return;
-      // New image element.
-      const image = new Image();
-      image.src = URL.createObjectURL(
-        new Blob([reader.result], { type: MIME_TYPE })
-      );
-      image
-        .decode()
-        .then(() => {
-          if (this.validateImage(image)) {
-            this.store.dispatch(
-              loadedImage({ image: image, imageField: this.imageName })
-            );
-          }
-          this.disabled = false;
-        })
-        .catch((encodingError) => {
-          this.snackBar.open(
-            `Error loading image: ${encodingError}`,
-            SnackType.ERROR
-          );
-          this.disabled = false;
-        });
+      this.store.dispatch(loadedImageBuffer({
+        imageBuffer: reader.result as ArrayBuffer,
+        imageField: this.imageName,
+      }));
+      this.disabled = false;
     };
     reader.onerror = () => {
       this.snackBar.open('Failed to read image file.', SnackType.ERROR);
@@ -127,11 +77,10 @@ export class ImageSelectorComponent implements OnChanges {
     if (changes['imageName']) {
       this.label = IMAGE_LABEL[this.imageName];
       const restriction = IMAGE_MAX_SIZE[this.imageName];
-      this.restriction = restriction.pixels
-        ? `Max ${restriction.pixels} pixels (WxH)`
-        : restriction.x && restriction.y
-        ? `Exactly ${restriction.x}x${restriction.y} pixels`
-        : '';
+      this.restriction =
+        restriction.pixels ?
+          `Max ${restriction.pixels} pixels (WxH)` :
+          restriction.x && restriction.y ? `Exactly ${restriction.x}x${restriction.y} pixels` : '';
     }
   }
 }

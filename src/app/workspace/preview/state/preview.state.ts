@@ -29,7 +29,9 @@ export type PreviewStateImageFieldsObject<T> = { [property in PreviewStateImageF
 export type PartialPreviewStateImageFieldsObject<T> = Partial<PreviewStateImageFieldsObject<T>>;
 
 /** State for the preview module. */
-export interface PreviewState extends PartialPreviewStateImageFieldsObject<HTMLImageElement> {
+export interface PreviewState extends PartialPreviewStateImageFieldsObject<string> {
+  // Inherited from the parent type are all the image fields as string,
+  // representing all images encoded in base64.
   // Internal values.
   needleAngle1?: number;
   needleAngle2?: number;
