@@ -4,7 +4,7 @@ import {
   NeedleConfig,
 } from '../../config/display/models/configs';
 
-const CENTER_TARGET_SIZE = 10;
+const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
 
 /** Class responsible for rendering gauges on the canvas. */
@@ -51,21 +51,21 @@ export class GaugesCompositor {
     this.context.fillStyle = 'cyan';
     // Target cross.
     this.context.beginPath();
-    this.context.moveTo(x - CENTER_TARGET_SIZE, y);
-    this.context.lineTo(x + CENTER_TARGET_SIZE, y);
-    this.context.moveTo(x, y - CENTER_TARGET_SIZE);
-    this.context.lineTo(x, y + CENTER_TARGET_SIZE);
+    this.context.moveTo(x - CROSS_SIZE, y);
+    this.context.lineTo(x + CROSS_SIZE, y);
+    this.context.moveTo(x, y - CROSS_SIZE);
+    this.context.lineTo(x, y + CROSS_SIZE);
     this.context.stroke();
     this.context.beginPath();
-    this.context.ellipse(x, y, CENTER_TARGET_SIZE, CENTER_TARGET_SIZE, 0, 0, 2 * Math.PI);
+    this.context.ellipse(x, y, CROSS_SIZE, CROSS_SIZE, 0, 0, 2 * Math.PI);
     this.context.stroke();
     // Coordinate labels.
     if (showCoords) {
       this.context.textAlign = 'start';
       this.context.textBaseline = 'top';
-      this.context.fillText(`y:${y - 0.5}`, x + CENTER_TARGET_SIZE + 5, y + 2);
+      this.context.fillText(`y:${y - 0.5}`, x + CROSS_SIZE + 5, y + 2);
       this.context.textBaseline = 'bottom';
-      this.context.fillText(`x:${x - 0.5}`, x + CENTER_TARGET_SIZE + 5, y - 2);
+      this.context.fillText(`x:${x - 0.5}`, x + CROSS_SIZE + 5, y - 2);
     }
     this.context.globalAlpha = 1;
   }
@@ -163,6 +163,8 @@ export class GaugesCompositor {
     const needleMiddleX = config.positionX! + Math.floor(config.width! / 2) + 0.5;
     this.context.beginPath();
     this.context.moveTo(needleMiddleX, 0);
+    this.context.lineTo(needleMiddleX, config.positionY! + CROSS_SIZE + 0.5);
+    this.context.moveTo(needleMiddleX, config.positionY! + config.height! - CROSS_SIZE + 0.5);
     this.context.lineTo(needleMiddleX, 479);
     this.context.stroke();
     this.context.textAlign = 'end';
@@ -173,14 +175,14 @@ export class GaugesCompositor {
     const centerY = config.positionY! + config.centerY! + 0.5;
     this.drawNeedleCenter(centerX, centerY);
     // Indicator.
-    this.context.strokeStyle = 'cyan';
+    this.context.strokeStyle = 'red';
     if (config.indicatorPositionX && config.indicatorPositionY) {
       this.context.beginPath();
       this.context.ellipse(
-        config.indicatorPositionX + 0.5 - 3,
-        config.indicatorPositionY + 0.5 - 3,
-        INDICATOR_SIZE,
-        INDICATOR_SIZE,
+        config.indicatorPositionX + 0.5,
+        config.indicatorPositionY + 0.5,
+        INDICATOR_SIZE / 2,
+        INDICATOR_SIZE / 2,
         0,
         0,
         2 * Math.PI
