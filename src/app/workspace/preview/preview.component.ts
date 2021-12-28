@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-preview',
@@ -6,5 +7,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./preview.component.scss'],
 })
 export class PreviewComponent {
+  version = environment.version;
+
   constructor() {}
 }

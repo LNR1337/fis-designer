@@ -7,6 +7,7 @@ import {SnackBarService, SnackType} from '../services/snack-bar.service';
 import {
   loadExistingConfigNames,
   loadStateFromStorage,
+  saveStateToJSON,
   saveStateToStorage,
 } from './state/io-toolbar.actions';
 import {selectExistingConfigNames} from './state/io-toolbar.selectors';
@@ -45,6 +46,14 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
       return;
     }
     this.store.dispatch(saveStateToStorage({name}));
+  }
+
+  saveConfigToJSON(name: string) {
+    if (!name) {
+      this.snackBar.open('Cannot save under empty name.', SnackType.ERROR);
+      return;
+    }
+    this.store.dispatch(saveStateToJSON({name}));
   }
 
   loadConfig(name: string) {

@@ -6,7 +6,7 @@ import {WorkspaceComponent} from './workspace/workspace.component';
 
 const routes: Routes = [
   {path: 'workspace', component: WorkspaceComponent},
-  {path: 'pages', component: PagesComponent},
+  {path: 'about', component: PagesComponent},
   {path: '', redirectTo: '/workspace', pathMatch: 'full'},
 ];
 

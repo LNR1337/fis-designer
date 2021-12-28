@@ -5,9 +5,9 @@
 @include mat.core-theme($theme);
 @include mat.button-theme($theme);
 @include mat.toolbar-theme($theme);
+@include mat.tooltip-theme($theme);
 @include mat.tabs-theme($theme);
 @include mat.slide-toggle-theme($theme);
-@include mat.expansion-theme($theme);
 @include mat.form-field-theme($theme);
 
 html,
@@ -19,6 +19,11 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   background-color: $background;
+}
+
+a {
+  all: unset;
+  cursor: pointer;
 }
 
 .number-input {

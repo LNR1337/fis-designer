@@ -4,11 +4,16 @@
   justify-content: space-between;
 
   .config-actions {
-    position: relative;
-    top: 2px;
+    display: flex;
+    align-items: center;
 
     mat-form-field {
       width: 140px;
+    }
+
+    mat-divider {
+      height: 32px;
+      margin: 0 8px;
     }
   }
 }

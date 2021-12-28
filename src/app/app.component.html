@@ -1,8 +1,8 @@
 <div class="top-bar-container">
   <mat-toolbar color="primary" class="top-bar mat-elevation-z4">
-    <span class="title">{{ title }}</span>
+    <a class="title" href="/">{{ title }}</a>
     <span class="right-side">
-      <span class="version">v{{ version }}</span>
+      <a mat-button routerLink="/about" title="About"><mat-icon>help_center</mat-icon> About</a>
     </span>
   </mat-toolbar>
 </div>

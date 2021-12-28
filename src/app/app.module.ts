@@ -3,6 +3,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EffectsModule} from '@ngrx/effects';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import {StoreModule} from '@ngrx/store';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -15,6 +17,8 @@ import {WorkspaceModule} from './workspace/workspace.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
     MatToolbarModule,
     WorkspaceModule,
     StoreModule.forRoot({}),

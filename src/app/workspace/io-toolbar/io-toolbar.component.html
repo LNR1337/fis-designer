@@ -1,6 +1,6 @@
 <mat-toolbar class="toolbar">
   <button mat-stroked-button color="primary" (click)="openFileSelectorDialog()">
-    Image manager
+    <mat-icon>collections</mat-icon> Image manager
   </button>
 
   <div class="config-actions">
@@ -13,13 +13,26 @@
       </mat-autocomplete>
     </mat-form-field>
 
-    <button mat-icon-button color="primary" (click)="saveConfig(input.value)"
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <button mat-icon-button (click)="saveConfig(input.value)"
             matTooltip="Save workspace to your browser's local storage.">
       <mat-icon>save</mat-icon>
     </button>
-    <button mat-icon-button color="primary" (click)="loadConfig(input.value)"
+    <button mat-icon-button (click)="loadConfig(input.value)"
             matTooltip="Load workspace from your browser's local storage. This will overwrite your current work!">
       <mat-icon>publish</mat-icon>
+    </button>
+
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <button mat-icon-button (click)="saveConfigToJSON(input.value)"
+            matTooltip="Save workspace as a JSON file.">
+      <mat-icon>file_download</mat-icon>
+    </button>
+    <button mat-icon-button
+            matTooltip="Load workspace from a JSON file. This will overwrite your current work!">
+      <mat-icon>file_upload</mat-icon>
     </button>
   </div>
 </mat-toolbar>
