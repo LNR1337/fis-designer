@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {map, Observable} from 'rxjs';
 import {ImageStateFieldsType} from '../../image-manager/state/images.state';
@@ -27,6 +27,8 @@ import {disableHighlight, enableHighlight} from './state/display.actions';
   styleUrls: ['./display.component.scss'],
 })
 export class DisplayComponent {
+  @Input() page: 'gauges' | 'numerical' = 'gauges';
+
   loadedImages: Observable<Set<ImageStateFieldsType>>;
   needlesConfigs: Observable<DisplayStateNeedleFieldsObject<NeedleConfig>>;
   gaugesConfigs: Observable<DisplayStateGaugeFieldsObject<GaugeConfig>>;

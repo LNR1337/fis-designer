@@ -1,0 +1,7 @@
+<span class="label">{{ label }}:<mat-icon *ngIf="hint" [matTooltip]="hint">help</mat-icon></span>
+
+<mat-slide-toggle
+  color="primary"
+  [checked]="value"
+  (change)="onChangeToggle($event)">
+</mat-slide-toggle>

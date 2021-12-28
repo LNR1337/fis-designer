@@ -1,38 +1,42 @@
 <div *ngIf="loadedImages | async; let loadedImagesSet" class="settings-form">
-  <!-- All gauges -->
-  <ng-container *ngIf="gaugesConfigs | async; let configs">
-    <app-gauge
-      *ngFor="let configName of DisplayStateGaugeFields; let i = index"
-      style="order: {{ i }}"
-      [gaugeConfig]="configs[configName]"
-      [fieldName]="configName"
-      [loadedImages]="loadedImagesSet"
-      label="{{ GAUGE_LABELS[configName] }}"
-      (mouseenter)="highlight(configName)"
-      (mouseleave)="highlightNone()"
-    ></app-gauge>
+  <ng-container *ngIf="page === 'gauges'">
+    <!-- Analog gauges -->
+    <ng-container *ngIf="gaugesConfigs | async; let configs">
+      <app-gauge
+        *ngFor="let configName of DisplayStateGaugeFields; let i = index"
+        style="order: {{ i }}"
+        [gaugeConfig]="configs[configName]"
+        [fieldName]="configName"
+        [loadedImages]="loadedImagesSet"
+        label="{{ GAUGE_LABELS[configName] }}"
+        (mouseenter)="highlight(configName)"
+        (mouseleave)="highlightNone()"
+      ></app-gauge>
+    </ng-container>
+    <!-- Needles -->
+    <ng-container *ngIf="needlesConfigs | async; let configs">
+      <app-needle *ngFor="let configName of DisplayStateNeedleFields; let i = index"
+                  style="order: {{ i }}"
+                  [needleConfig]="configs[configName]"
+                  [fieldName]="configName"
+                  [loadedImages]="loadedImagesSet"
+                  label="{{ NEEDLE_LABELS[configName] }}"
+                  (mouseenter)="highlight(configName)"
+                  (mouseleave)="highlightNone()"
+      ></app-needle>
+    </ng-container>
   </ng-container>
-  <!-- All needles -->
-  <ng-container *ngIf="needlesConfigs | async; let configs">
-    <app-needle *ngFor="let configName of DisplayStateNeedleFields; let i = index"
-                style="order: {{ i }}"
-                [needleConfig]="configs[configName]"
-                [fieldName]="configName"
-                [loadedImages]="loadedImagesSet"
-                label="{{ NEEDLE_LABELS[configName] }}"
-                (mouseenter)="highlight(configName)"
-                (mouseleave)="highlightNone()"
-    ></app-needle>
-  </ng-container>
-  <!-- All numerical gauges -->
-  <ng-container *ngIf="numericalConfigs | async; let configs">
-    <app-numerical *ngFor="let configName of DisplayStateNumericalFields; let i = index"
-                style="order: {{ i + 10 }}"
-                [numericalConfig]="configs[configName]"
-                [fieldName]="configName"
-                label="{{ NUMERICAL_LABELS[configName] }}"
-                (mouseenter)="highlight(configName)"
-                (mouseleave)="highlightNone()"
-    ></app-numerical>
+  <ng-container *ngIf="page === 'numerical'">
+    <!-- Numerical gauges -->
+    <ng-container *ngIf="numericalConfigs | async; let configs">
+      <app-numerical *ngFor="let configName of DisplayStateNumericalFields; let i = index"
+                     style="order: {{ i + 10 }}"
+                     [numericalConfig]="configs[configName]"
+                     [fieldName]="configName"
+                     label="{{ NUMERICAL_LABELS[configName] }}"
+                     (mouseenter)="highlight(configName)"
+                     (mouseleave)="highlightNone()"
+      ></app-numerical>
+    </ng-container>
   </ng-container>
 </div>

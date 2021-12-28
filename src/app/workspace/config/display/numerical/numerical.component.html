@@ -19,3 +19,11 @@
   (valueChanged)="valueChanged($event, 'positionY')"
   [value]="numericalConfig ? numericalConfig['positionY'] : undefined"
 ></app-sliding-input>
+
+<app-toggle-input
+  *ngIf="NUMERICAL_FIELD_METADATA['centered']; let metaData"
+  [label]="metaData.label ?? ''"
+  [hint]="metaData.hint ?? ''"
+  (valueChanged)="valueChanged($event, 'centered')"
+  [value]="numericalConfig ? numericalConfig['centered'] : undefined"
+></app-toggle-input>

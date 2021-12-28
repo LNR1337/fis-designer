@@ -33,24 +33,30 @@ mat-tab-group {
   min-height: 100px;
 }
 
-::ng-deep .mat-tab-label-content {
-  color: map-get($primary, default);
-}
-
-::ng-deep .mat-tab-body-content {
-  &::-webkit-scrollbar {
-    width: 8px;
-    overflow-y: scroll;
-    background: $background-dialog;
-    border-left: solid 1px $grey-border;
+::ng-deep {
+  div.mat-tab-label {
+    min-width: 120px;
   }
 
-  &::-webkit-scrollbar-thumb {
-    background: $grey-border;
-    border-radius: 4px;
+  .mat-tab-label-content {
+    color: map-get($primary, default);
+  }
 
-    &:hover {
-      background: $grey-item;
+  .mat-tab-body-content {
+    &::-webkit-scrollbar {
+      width: 8px;
+      overflow-y: scroll;
+      background: $background-dialog;
+      border-left: solid 1px $grey-border;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $grey-border;
+      border-radius: 4px;
+
+      &:hover {
+        background: $grey-item;
+      }
     }
   }
 }

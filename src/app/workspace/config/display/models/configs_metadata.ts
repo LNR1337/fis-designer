@@ -30,16 +30,16 @@ export const NEEDLE_LABELS: DisplayStateNeedleFieldsObject<string> = {
 };
 
 export const NUMERICAL_LABELS: DisplayStateNumericalFieldsObject<string> = {
-  numerical1: 'Numerical gauge 1',
-  numerical2: 'Numerical gauge 2',
-  numerical3: 'Numerical gauge 3',
-  numerical4: 'Numerical gauge 4',
-  numerical5: 'Numerical gauge 5',
-  numerical6: 'Numerical gauge 6',
-  numerical7: 'Numerical gauge 7',
-  numerical8: 'Numerical gauge 8',
-  numerical9: 'Numerical gauge 9',
-  numerical10: 'Numerical gauge 10',
+  numerical1: 'Digital gauge 1',
+  numerical2: 'Digital gauge 2',
+  numerical3: 'Digital gauge 3',
+  numerical4: 'Digital gauge 4',
+  numerical5: 'Digital gauge 5',
+  numerical6: 'Digital gauge 6',
+  numerical7: 'Digital gauge 7',
+  numerical8: 'Digital gauge 8',
+  numerical9: 'Digital gauge 9',
+  numerical10: 'Digital gauge 10',
 };
 
 export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<ImageStateFieldsType> =

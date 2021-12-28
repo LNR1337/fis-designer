@@ -1,0 +1,29 @@
+@import 'src/variables';
+
+:host {
+  display: flex;
+  align-content: center;
+  margin-bottom: 4px;
+}
+
+.label {
+  color: $light-grey-item;
+  width: 120px;
+  line-height: 36px;
+  margin-right: 16px;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: space-between;
+
+  mat-icon {
+    position: relative;
+    top: 10px;
+    font-size: 120%;
+    opacity: 0.7;
+  }
+}
+
+mat-slide-toggle {
+  position: relative;
+  top: 6px;
+}

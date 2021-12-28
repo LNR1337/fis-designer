@@ -6,6 +6,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
@@ -17,6 +18,7 @@ import {NumericalComponent} from './numerical/numerical.component';
 import {SlidingInputComponent} from './sliding-input/sliding-input.component';
 import {DisplayEffects} from './state/display.effects';
 import {DISPLAY_FEATURE_KEY, displayReducer} from './state/display.reducer';
+import {ToggleInputComponent} from './toggle-input/toggle-input.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import {DISPLAY_FEATURE_KEY, displayReducer} from './state/display.reducer';
     NeedleComponent,
     NumericalComponent,
     SlidingInputComponent,
+    ToggleInputComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,7 @@ import {DISPLAY_FEATURE_KEY, displayReducer} from './state/display.reducer';
     MatInputModule,
     MatIconModule,
     MatSliderModule,
+    MatSlideToggleModule,
     MatTooltipModule,
     EffectsModule.forFeature([DisplayEffects]),
     StoreModule.forFeature(DISPLAY_FEATURE_KEY, displayReducer),

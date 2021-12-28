@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
+import {Store} from '@ngrx/store';
 import {NumericalConfig} from '../models/configs';
 import {NUMERICAL_FIELD_METADATA} from '../models/configs_metadata';
+import {changedNeedleConfig, changedNumericalConfig} from '../state/display.actions';
 import {DisplayStateNumericalFieldsType} from '../state/display.state';
 
 @Component({
@@ -16,10 +18,16 @@ export class NumericalComponent {
 
   NUMERICAL_FIELD_METADATA = NUMERICAL_FIELD_METADATA;
 
-  constructor() {}
+  constructor(private readonly store: Store) {}
 
-  valueChanged(value: number, fieldName: keyof NumericalConfig) {
+  valueChanged(value: number | boolean, fieldName: keyof NumericalConfig) {
     if (this.numericalConfig && this.fieldName) {
+      this.store.dispatch(
+        changedNumericalConfig({
+          config: {...this.numericalConfig, [fieldName]: value},
+          displayConfigField: this.fieldName,
+        })
+      );
     }
   }
 }
