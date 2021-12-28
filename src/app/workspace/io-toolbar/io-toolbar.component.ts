@@ -24,6 +24,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   disableSaveLoad = false;
 
   @ViewChild('configInput') configInput?: ElementRef;
+  @ViewChild('nameInput') nameInput?: ElementRef;
 
   constructor(
     public dialog: MatDialog,
@@ -57,10 +58,23 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     setTimeout(() => this.enableButtons(), 500);
   }
 
+  clearJSONinput() {
+    if (this.configInput) {
+      this.configInput.nativeElement.value = '';
+    }
+  }
+
+  focusNameInput() {
+    if (this.nameInput) {
+      this.nameInput.nativeElement.focus();
+    }
+  }
+
   saveConfigLocal(name: string) {
     this.debounceButtons();
     if (!name) {
       this.snackBar.open('Cannot save under empty name.', SnackType.ERROR);
+      this.focusNameInput();
       return;
     }
     this.store.dispatch(saveStateToStorage({name}));
@@ -70,6 +84,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     this.debounceButtons();
     if (!name) {
       this.snackBar.open('Cannot save under empty name.', SnackType.ERROR);
+      this.focusNameInput();
       return;
     }
     this.store.dispatch(downloadStateAsJSON({name}));
@@ -78,7 +93,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   loadConfigLocal(name: string) {
     this.debounceButtons();
     if (!name) {
-      this.snackBar.open('Choose name of the config to load.', SnackType.ERROR);
+      this.snackBar.open('Choose the config to load.', SnackType.ERROR);
       return;
     }
     if (!this.existingConfigNames.includes(name)) {
@@ -101,16 +116,12 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
           })
         );
         this.enableButtons();
-        if (this.configInput) {
-          this.configInput.nativeElement.value = '';
-        }
+        this.clearJSONinput();
       };
       reader.onerror = () => {
         this.snackBar.open('Failed to read config file.', SnackType.ERROR);
         this.enableButtons();
-        if (this.configInput) {
-          this.configInput.nativeElement.value = '';
-        }
+        this.clearJSONinput();
       };
       reader.readAsArrayBuffer(input.files[0]);
     }

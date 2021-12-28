@@ -5,7 +5,7 @@
 
   <div class="config-actions">
     <mat-form-field class="config-field" appearance="standard">
-      <input type="text" matInput [matAutocomplete]="auto" placeholder="Config name" #input>
+      <input type="text" matInput [matAutocomplete]="auto" placeholder="Config name" #nameInput>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option [value]="configName" *ngFor="let configName of existingConfigNames">
           {{ configName }}
@@ -15,20 +15,19 @@
 
     <mat-divider [vertical]="true"></mat-divider>
 
-    <button mat-icon-button (click)="saveConfigLocal(input.value)" [disabled]="disableSaveLoad"
+    <button mat-icon-button (click)="saveConfigLocal(nameInput.value)" [disabled]="disableSaveLoad"
             matTooltip="Save workspace to your browser's local storage.">
-      <mat-icon>save</mat-icon>
+      <mat-icon>save_alt</mat-icon>
     </button>
-    <button mat-icon-button (click)="loadConfigLocal(input.value)" [disabled]="disableSaveLoad"
+    <button mat-icon-button (click)="loadConfigLocal(nameInput.value)" [disabled]="disableSaveLoad"
             matTooltip="Load workspace from your browser's local storage. This will overwrite your current work!">
-      <mat-icon>publish</mat-icon>
+      <mat-icon>upload_file</mat-icon>
     </button>
 
     <mat-divider [vertical]="true"></mat-divider>
-
-    <button mat-icon-button (click)="saveConfigToJSON(input.value)" [disabled]="disableSaveLoad"
+    <button mat-icon-button (click)="saveConfigToJSON(nameInput.value)" [disabled]="disableSaveLoad"
             matTooltip="Save workspace as a JSON file. * DO NOT LOAD THIS FILE INTO FIS-CONTROL! *">
-      <mat-icon>file_download</mat-icon>
+      <mat-icon>save</mat-icon>
     </button>
     <input hidden (change)="onConfigSelected($event)" #configInput type="file" accept="application/json" />
     <button mat-icon-button [disabled]="disableSaveLoad" (click)="configInput.click()"
