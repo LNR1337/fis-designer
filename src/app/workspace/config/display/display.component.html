@@ -23,6 +23,16 @@
                 (mouseenter)="highlight(configName)"
                 (mouseleave)="highlightNone()"
     ></app-needle>
-
+  </ng-container>
+  <!-- All numerical gauges -->
+  <ng-container *ngIf="numericalConfigs | async; let configs">
+    <app-numerical *ngFor="let configName of DisplayStateNumericalFields; let i = index"
+                style="order: {{ i + 10 }}"
+                [numericalConfig]="configs[configName]"
+                [fieldName]="configName"
+                label="{{ NUMERICAL_LABELS[configName] }}"
+                (mouseenter)="highlight(configName)"
+                (mouseleave)="highlightNone()"
+    ></app-numerical>
   </ng-container>
 </div>

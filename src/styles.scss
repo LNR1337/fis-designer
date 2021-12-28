@@ -3,12 +3,14 @@
 
 // Emit theme-dependent styles for common features used across multiple components.
 @include mat.core-theme($theme);
+// Individual module themes. Slider is intentionally omitted to keep it gray.
+@include mat.card-theme($theme);
 @include mat.button-theme($theme);
+@include mat.form-field-theme($theme);
+@include mat.slide-toggle-theme($theme);
+@include mat.tabs-theme($theme);
 @include mat.toolbar-theme($theme);
 @include mat.tooltip-theme($theme);
-@include mat.tabs-theme($theme);
-@include mat.slide-toggle-theme($theme);
-@include mat.form-field-theme($theme);
 
 html,
 body {
@@ -23,7 +25,9 @@ body {
 
 a {
   all: unset;
+  color: inherit;
   cursor: pointer;
+  border-bottom: solid 1px rgba(255,255,255, 0.5);
 }
 
 .number-input {

@@ -2,8 +2,13 @@ import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {
   DisplayStateGaugeFieldsObject,
   DisplayStateNeedleFieldsObject,
+  DisplayStateNumericalFieldsObject,
 } from '../state/display.state';
-import {GaugeConfigFieldsObject, NeedleConfigFieldsObject} from './configs';
+import {
+  GaugeConfigFieldsObject,
+  NeedleConfigFieldsObject,
+  NumericalConfigFieldsObject,
+} from './configs';
 
 export interface ConfigFieldMetadata {
   label?: string;
@@ -24,6 +29,19 @@ export const NEEDLE_LABELS: DisplayStateNeedleFieldsObject<string> = {
   needle3: 'Right needle',
 };
 
+export const NUMERICAL_LABELS: DisplayStateNumericalFieldsObject<string> = {
+  numerical1: 'Numerical gauge 1',
+  numerical2: 'Numerical gauge 2',
+  numerical3: 'Numerical gauge 3',
+  numerical4: 'Numerical gauge 4',
+  numerical5: 'Numerical gauge 5',
+  numerical6: 'Numerical gauge 6',
+  numerical7: 'Numerical gauge 7',
+  numerical8: 'Numerical gauge 8',
+  numerical9: 'Numerical gauge 9',
+  numerical10: 'Numerical gauge 10',
+};
+
 export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<ImageStateFieldsType> =
   {
     needle1: 'needleImage1',
@@ -36,6 +54,17 @@ export const GAUGE_FIELD_METADATA: GaugeConfigFieldsObject<ConfigFieldMetadata> 
   angularRange: {label: 'Low to high angle', min: -360, max: 360},
   lowerLimit: {label: 'Value lower limit'},
   upperLimit: {label: 'Value upper limit'},
+};
+
+export const NUMERICAL_FIELD_METADATA: NumericalConfigFieldsObject<ConfigFieldMetadata> = {
+  positionX: {label: 'Position X', min: 0, max: 799, hint: 'Set to 0 to disable gauge.'},
+  positionY: {label: 'Position Y', min: 0, max: 479, hint: 'Set to 0 to disable gauge.'},
+  centered: {
+    label: 'Centered',
+    hint:
+      'Center gauge on the X position. Otherwise, the' +
+      " position is the gauge's top right corner.",
+  },
 };
 
 export const NEEDLE_FIELD_METADATA: NeedleConfigFieldsObject<ConfigFieldMetadata> = {

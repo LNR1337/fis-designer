@@ -1,0 +1,14 @@
+@import 'src/variables';
+
+:host {
+  height: calc(100% - $top-bar-height);
+  margin: calc($top-bar-height + 16px) auto 16px auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  max-width: 800px;
+}
+
+.section {
+  margin: 16px 8px;
+}

@@ -14,6 +14,11 @@
   display: flex;
   justify-content: space-between;
 
+  a {
+    all: unset;
+    cursor: pointer;
+  }
+
   .title {
     font-family: 'Rajdhani', sans-serif;
     font-size: 32px;

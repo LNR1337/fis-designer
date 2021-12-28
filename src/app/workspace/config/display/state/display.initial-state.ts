@@ -1,5 +1,5 @@
 import {DisplayConfigState} from './display.state';
-import {GaugeConfig, NeedleConfig} from '../models/configs';
+import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
 const initialGaugeConfig: GaugeConfig = {
   startAngle: 90,
@@ -31,6 +31,12 @@ const initialNeedleConfig3: NeedleConfig = {
   indicatorPositionX: 642,
 };
 
+const initialNumericalConfig: NumericalConfig = {
+  positionX: 0,
+  positionY: 0,
+  centered: false,
+};
+
 /** Initial display state. */
 export const initialDisplayConfigState: DisplayConfigState = {
   gauge1: initialGaugeConfig,
@@ -39,4 +45,14 @@ export const initialDisplayConfigState: DisplayConfigState = {
   needle1: initialNeedleConfig1,
   needle2: initialNeedleConfig2,
   needle3: initialNeedleConfig3,
+  numerical1: initialNumericalConfig,
+  numerical2: initialNumericalConfig,
+  numerical3: initialNumericalConfig,
+  numerical4: initialNumericalConfig,
+  numerical5: initialNumericalConfig,
+  numerical6: initialNumericalConfig,
+  numerical7: initialNumericalConfig,
+  numerical8: initialNumericalConfig,
+  numerical9: initialNumericalConfig,
+  numerical10: initialNumericalConfig,
 };

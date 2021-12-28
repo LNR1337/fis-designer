@@ -5,8 +5,9 @@ import {
   DisplayConfigState,
   DisplayStateNeedleFieldsObject,
   DisplayStateGaugeFieldsObject,
+  DisplayStateNumericalFieldsObject,
 } from './display.state';
-import {GaugeConfig, NeedleConfig} from '../models/configs';
+import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
 /** Selector for the whole state. */
 export const selectDisplayState = createFeatureSelector<DisplayConfigState>(DISPLAY_FEATURE_KEY);
@@ -31,6 +32,24 @@ export const selectGaugeConfigs = createSelector(
       gauge2: state.gauge2,
       gauge3: state.gauge3,
     } as DisplayStateGaugeFieldsObject<GaugeConfig>)
+);
+
+/** Selects the numerical configs. */
+export const selectNumericalConfigs = createSelector(
+  selectDisplayState,
+  state =>
+    ({
+      numerical1: state.numerical1,
+      numerical2: state.numerical2,
+      numerical3: state.numerical3,
+      numerical4: state.numerical4,
+      numerical5: state.numerical5,
+      numerical6: state.numerical6,
+      numerical7: state.numerical7,
+      numerical8: state.numerical8,
+      numerical9: state.numerical9,
+      numerical10: state.numerical10,
+    } as DisplayStateNumericalFieldsObject<NumericalConfig>)
 );
 
 /** Selects currently highlighted config. */

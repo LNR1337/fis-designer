@@ -9,6 +9,7 @@ import {StoreModule} from '@ngrx/store';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {PagesModule} from './pages/pages.module';
 import {WorkspaceModule} from './workspace/workspace.module';
 
 @NgModule({
@@ -20,6 +21,7 @@ import {WorkspaceModule} from './workspace/workspace.module';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    PagesModule,
     WorkspaceModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
