@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
@@ -6,8 +6,9 @@ import {ImageManagerComponent} from '../image-manager/image-manager.component';
 import {SnackBarService, SnackType} from '../services/snack-bar.service';
 import {
   loadExistingConfigNames,
+  loadStateFromBufferJSON,
   loadStateFromStorage,
-  saveStateToJSON,
+  downloadStateAsJSON,
   saveStateToStorage,
 } from './state/io-toolbar.actions';
 import {selectExistingConfigNames} from './state/io-toolbar.selectors';
@@ -20,6 +21,9 @@ import {selectExistingConfigNames} from './state/io-toolbar.selectors';
 export class IoToolbarComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   existingConfigNames: string[] = [];
+  disableSaveLoad = false;
+
+  @ViewChild('configInput') configInput?: ElementRef;
 
   constructor(
     public dialog: MatDialog,
@@ -40,7 +44,21 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  saveConfig(name: string) {
+  enableButtons() {
+    this.disableSaveLoad = false;
+  }
+
+  disableButtons() {
+    this.disableSaveLoad = true;
+  }
+
+  debounceButtons() {
+    this.disableSaveLoad = true;
+    setTimeout(() => this.enableButtons(), 500);
+  }
+
+  saveConfigLocal(name: string) {
+    this.debounceButtons();
     if (!name) {
       this.snackBar.open('Cannot save under empty name.', SnackType.ERROR);
       return;
@@ -49,14 +67,16 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   }
 
   saveConfigToJSON(name: string) {
+    this.debounceButtons();
     if (!name) {
       this.snackBar.open('Cannot save under empty name.', SnackType.ERROR);
       return;
     }
-    this.store.dispatch(saveStateToJSON({name}));
+    this.store.dispatch(downloadStateAsJSON({name}));
   }
 
-  loadConfig(name: string) {
+  loadConfigLocal(name: string) {
+    this.debounceButtons();
     if (!name) {
       this.snackBar.open('Choose name of the config to load.', SnackType.ERROR);
       return;
@@ -66,6 +86,34 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
       return;
     }
     this.store.dispatch(loadStateFromStorage({name}));
+  }
+
+  onConfigSelected(event: Event) {
+    this.disableButtons();
+    const input = event.currentTarget as HTMLInputElement;
+    if (input.files && input.files.length) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (!reader.result) return;
+        this.store.dispatch(
+          loadStateFromBufferJSON({
+            loadedBuffer: reader.result as ArrayBuffer,
+          })
+        );
+        this.enableButtons();
+        if (this.configInput) {
+          this.configInput.nativeElement.value = '';
+        }
+      };
+      reader.onerror = () => {
+        this.snackBar.open('Failed to read config file.', SnackType.ERROR);
+        this.enableButtons();
+        if (this.configInput) {
+          this.configInput.nativeElement.value = '';
+        }
+      };
+      reader.readAsArrayBuffer(input.files[0]);
+    }
   }
 
   ngOnInit() {

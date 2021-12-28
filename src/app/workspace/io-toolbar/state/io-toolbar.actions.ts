@@ -10,13 +10,13 @@ export const loadStateFromStorage = createAction(
   props<{name: string}>()
 );
 
-export const saveStateToJSON = createAction(
+export const downloadStateAsJSON = createAction(
   '[IoToolbar] Save state to JSON file',
   props<{name: string}>()
 );
 
-export const loadStateFromJSON = createAction(
-  '[IoToolbar] Load state from JSON file',
+export const loadStateFromBufferJSON = createAction(
+  '[IoToolbar] Load state from JSON file array buffer',
   props<{loadedBuffer: ArrayBuffer}>()
 );
 
