@@ -37,11 +37,28 @@ export const DisplayStateGaugeFields = ['gauge1', 'gauge2', 'gauge3'] as const;
 /** List of all display state fields holding needle configs. */
 export const DisplayStateNeedleFields = ['needle1', 'needle2', 'needle3'] as const;
 
+/** List of all display state fields holding needle configs. */
+export const DisplayStateNumericalFields = [
+  'numerical1',
+  'numerical2',
+  'numerical3',
+  'numerical4',
+  'numerical5',
+  'numerical6',
+  'numerical7',
+  'numerical8',
+  'numerical9',
+  'numerical10',
+] as const;
+
 /** Type for all valid state field names holding gauge settings. */
 export type DisplayStateGaugeFieldsType = typeof DisplayStateGaugeFields[number];
 
 /** Type for all valid state field names holding needle settings. */
 export type DisplayStateNeedleFieldsType = typeof DisplayStateNeedleFields[number];
+
+/** Type for all valid state field names holding numerical settings. */
+export type DisplayStateNumericalFieldsType = typeof DisplayStateNumericalFields[number];
 
 /** Object type of state fields holding gauge settings. */
 export type DisplayStateGaugeFieldsObject<T> = {
@@ -53,12 +70,17 @@ export type DisplayStateNeedleFieldsObject<T> = {
   [property in DisplayStateNeedleFieldsType]: T;
 };
 
+/** Object type of state fields holding numerical settings. */
+export type DisplayStateNumericalFieldsObject<T> = {
+  [property in DisplayStateNumericalFieldsType]: T;
+};
+
 /** Object type of all display state fields. */
 export type DisplayStateFieldsObject<T> = {
   [property in DisplayStateFieldsType]: T;
 };
 
-/** Object type of dome display state fields. */
+/** Object type of some display state fields. */
 export type PartialDisplayStateFieldsObject<T> = Partial<DisplayStateFieldsObject<T>>;
 
 /** Type of all valid types for config state fields. */

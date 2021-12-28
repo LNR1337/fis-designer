@@ -47,7 +47,6 @@ export class IoToolbarEffects {
         withLatestFrom(this.store.select(selectStateToSave)),
         map(([action, stateToSave]) => {
           const blob = new Blob([JSON.stringify(stateToSave)], {type: 'application/json'});
-          const url = window.URL.createObjectURL(blob);
           saveAs(blob, `${action.name}.fis-designer.json`);
         })
       ),

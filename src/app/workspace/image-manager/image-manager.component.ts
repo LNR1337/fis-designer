@@ -4,7 +4,7 @@ import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {PartialImageStateFieldsObject} from './state/images.state';
 import {ImageStateFields} from './state/images.state';
-import {IMAGE_FILENAME_MATCHERS, MIME_TYPE} from '../preview/models/images_metadata';
+import {IMAGE_FILENAME_MATCHERS, MIME_TYPE} from './models/images_metadata';
 import {selectAllImages} from '../preview/state/preview.selectors';
 import {ImageSelectorComponent} from './image-selector/image-selector.component';
 import {SnackBarService} from '../services/snack-bar.service';

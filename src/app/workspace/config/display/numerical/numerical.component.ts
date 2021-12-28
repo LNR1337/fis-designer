@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {NumericalConfig} from '../models/configs';
+import {DisplayStateNumericalFieldsType} from '../state/display.state';
 
 @Component({
   selector: 'app-numerical',
@@ -6,6 +8,11 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./numerical.component.scss'],
 })
 export class NumericalComponent implements OnInit {
+  @Input() numericalConfig?: NumericalConfig;
+  // Name of the state field this config corresponds to.
+  @Input() fieldName?: DisplayStateNumericalFieldsType;
+  @Input() label = '';
+
   constructor() {}
 
   ngOnInit(): void {}

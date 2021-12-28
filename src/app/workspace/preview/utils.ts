@@ -1,6 +1,6 @@
 import {from, Observable} from 'rxjs';
 import {ImageStateFieldsType} from '../image-manager/state/images.state';
-import {IMAGE_MAX_SIZE, MIME_TYPE} from './models/images_metadata';
+import {IMAGE_MAX_SIZE, MIME_TYPE} from '../image-manager/models/images_metadata';
 
 /** Converts an array buffer into a base64 encoded string. */
 export function byteToBase64(buffer: ArrayBuffer): string {

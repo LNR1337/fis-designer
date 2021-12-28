@@ -1,6 +1,8 @@
 import {ElementRef, OnChanges, SimpleChanges} from '@angular/core';
 import {Component, Input, ViewChild} from '@angular/core';
-import {IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE} from '../../preview/models/images_metadata';
+import {saveAs} from 'file-saver';
+
+import {IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE} from '../models/images_metadata';
 import {SnackBarService} from '../../services/snack-bar.service';
 import {SnackType} from '../../services/snack-bar.service';
 import {validateAndSaveImageBuffer} from '../state/images.actions';
@@ -77,6 +79,12 @@ export class ImageSelectorComponent implements OnChanges {
         : restriction.x && restriction.y
         ? `Exactly ${restriction.x}x${restriction.y} pixels`
         : '';
+    }
+  }
+
+  downloadImage() {
+    if (this.currentImageUrl) {
+      saveAs(this.currentImageUrl, `${this.label}.png`);
     }
   }
 }

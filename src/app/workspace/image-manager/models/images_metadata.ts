@@ -1,5 +1,5 @@
 /** Acceptable mime types. */
-import {ImageStateFieldsObject} from '../../image-manager/state/images.state';
+import {ImageStateFieldsObject} from '../state/images.state';
 
 export const MIME_TYPE = 'image/png';
 
