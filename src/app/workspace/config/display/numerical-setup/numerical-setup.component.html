@@ -1,3 +1,16 @@
+<div class="recalculate-button">
+  <button mat-icon-button color="primary" [disabled]="!resizeEnabled" (click)="recalculateSize()">
+    <mat-icon
+      [matTooltip]="
+        resizeEnabled
+          ? 'Set digits dimensions to match loaded images.'
+          : 'Not all digit images loaded yet.'
+      "
+    >
+      photo_size_select_large
+    </mat-icon>
+  </button>
+</div>
 <h4 class="label">{{ label }}</h4>
 
 <ng-container *ngFor="let fieldName of numericalFields">

@@ -29,6 +29,7 @@
   <ng-container *ngIf="page === 'numerical'">
     <!-- Numerical display setup -->
     <app-numerical-setup *ngIf="setupConfig | async; let config" [setupConfig]="config"
+                         [loadedImages]="loadedImagesSet"
                          label="Font settings"></app-numerical-setup>
     <!-- Numerical gauges -->
     <ng-container *ngIf="numericalConfigs | async; let configs">

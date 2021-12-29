@@ -19,6 +19,22 @@ export const ImageStateFields = [
   'digitDot',
 ] as const;
 
+/** Names of image state fields holding digits. */
+export const ImageStateDigitFields = [
+  'digit0',
+  'digit1',
+  'digit2',
+  'digit3',
+  'digit4',
+  'digit5',
+  'digit6',
+  'digit7',
+  'digit8',
+  'digit9',
+  'digitMinus',
+  'digitDot',
+] as const;
+
 /** Type for all valid image state field names. */
 export type ImageStateFieldsType = typeof ImageStateFields[number];
 

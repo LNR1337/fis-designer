@@ -18,6 +18,8 @@ export const recalculateNeedleSize = createAction(
   }>()
 );
 
+export const recalculateDigitsSize = createAction('[Config] Recalculate digits size');
+
 export const changedGaugeConfig = createAction(
   '[Config] Changed gauge config',
   props<{

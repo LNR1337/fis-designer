@@ -1,7 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, SimpleChanges} from '@angular/core';
 import {Store} from '@ngrx/store';
+import {
+  ImageStateDigitFields,
+  ImageStateFieldsType,
+} from '../../../image-manager/state/images.state';
 import {SETUP_FIELDS_METADATA} from '../models/configs_metadata';
-import {changedDisplaySetupConfig, changedNumericalConfig} from '../state/display.actions';
+import {changedDisplaySetupConfig, recalculateDigitsSize} from '../state/display.actions';
 import {
   DisplayStateSetupFieldsColor,
   DisplayStateSetupFieldsConfig,
@@ -15,14 +19,31 @@ import {
   styleUrls: ['./numerical-setup.component.scss'],
 })
 export class NumericalSetupComponent {
+  // List of names of loaded images.
+  @Input() loadedImages?: Set<ImageStateFieldsType>;
   @Input() setupConfig?: DisplayStateSetupFieldsConfig;
   @Input() label = '';
 
   SETUP_FIELDS_METADATA = SETUP_FIELDS_METADATA;
   numericalFields = DisplayStateSetupFieldsNumerical;
   colorFields = DisplayStateSetupFieldsColor;
+  resizeEnabled = false;
 
   constructor(private readonly store: Store) {}
+
+  recalculateSize() {
+    if (this.setupConfig) {
+      this.store.dispatch(recalculateDigitsSize());
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['loadedImages'] && this.setupConfig) {
+      const loadedDigits = ImageStateDigitFields.filter(image => this.loadedImages!.has(image));
+      this.resizeEnabled =
+        !!this.loadedImages && loadedDigits.length === ImageStateDigitFields.length;
+    }
+  }
 
   valueChanged(value: number | string, fieldName: DisplayStateSetupFieldsType) {
     if (!this.setupConfig) return;
