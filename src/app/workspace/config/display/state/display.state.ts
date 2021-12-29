@@ -26,6 +26,7 @@ export const DisplayStateFields = [
   'fontWarningColor',
   'tableBackgroundColor',
   'tableFontColor',
+  'useBuiltInNumericals',
 ] as const;
 
 /** Type for all valid display state field names. */
@@ -59,6 +60,7 @@ export const DisplayStateSetupFields = [
   'fontSpacing',
   'fontColor',
   'fontWarningColor',
+  'useBuiltInNumericals',
 ] as const;
 
 /** List of all display state fields holding numerical setup values. */
@@ -71,6 +73,9 @@ export const DisplayStateSetupFieldsNumerical = [
 
 /** List of all display state fields holding color setup values. */
 export const DisplayStateSetupFieldsColor = ['fontColor', 'fontWarningColor'] as const;
+
+/** List of all display state fields holding boolean values. */
+export const DisplayStateSetupFieldsBoolean = ['useBuiltInNumericals'] as const;
 
 /** Type for all valid state field names holding gauge settings. */
 export type DisplayStateGaugeFieldsType = typeof DisplayStateGaugeFields[number];
@@ -105,7 +110,9 @@ export type DisplayStateSetupFieldsObject<T> = {
 };
 
 /** Object holding a part of state responsible for numerical setup. */
-export type DisplayStateSetupFieldsConfig = DisplayStateSetupFieldsObject<string | number>;
+export type DisplayStateSetupFieldsConfig = DisplayStateSetupFieldsObject<
+  string | number | boolean
+>;
 
 /** Object type of all display state fields. */
 export type DisplayStateFieldsObject<T> = {
@@ -143,6 +150,7 @@ export interface DisplayConfigState {
   fontSpacing?: number;
   fontColor?: string;
   fontWarningColor?: string;
+  useBuiltInNumericals?: boolean;
   // Internal utility fields.
   activeHightlight?: DisplayStateFieldsType;
 }

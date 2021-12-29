@@ -50,6 +50,10 @@ export const SETUP_FIELDS_METADATA: DisplayStateSetupFieldsObject<ConfigFieldMet
   fontSpacing: {label: 'Digit spacing', hint: 'Additional space between digits.', min: 0},
   fontColor: {label: 'Normal color'},
   fontWarningColor: {label: 'Warning color'},
+  useBuiltInNumericals: {
+    label: 'GTI gauges',
+    hint: 'Show built in digital gauges in the' + ' middle of each analog gauge.',
+  },
 };
 
 export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<ImageStateFieldsType> =

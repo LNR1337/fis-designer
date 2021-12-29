@@ -10,5 +10,4 @@ export class PagesComponent {
   constructor(titleService: Title) {
     titleService.setTitle('FIS-Designer - About');
   }
-
 }

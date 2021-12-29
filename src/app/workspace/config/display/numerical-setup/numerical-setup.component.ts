@@ -7,6 +7,7 @@ import {
 import {SETUP_FIELDS_METADATA} from '../models/configs_metadata';
 import {changedDisplaySetupConfig, recalculateDigitsSize} from '../state/display.actions';
 import {
+  DisplayStateSetupFieldsBoolean,
   DisplayStateSetupFieldsColor,
   DisplayStateSetupFieldsConfig,
   DisplayStateSetupFieldsNumerical,
@@ -27,6 +28,7 @@ export class NumericalSetupComponent {
   SETUP_FIELDS_METADATA = SETUP_FIELDS_METADATA;
   numericalFields = DisplayStateSetupFieldsNumerical;
   colorFields = DisplayStateSetupFieldsColor;
+  boolFields = DisplayStateSetupFieldsBoolean;
   resizeEnabled = false;
 
   constructor(private readonly store: Store) {}
@@ -45,7 +47,7 @@ export class NumericalSetupComponent {
     }
   }
 
-  valueChanged(value: number | string, fieldName: DisplayStateSetupFieldsType) {
+  valueChanged(value: number | string | boolean, fieldName: DisplayStateSetupFieldsType) {
     if (!this.setupConfig) return;
     this.store.dispatch(
       changedDisplaySetupConfig({
@@ -68,5 +70,13 @@ export class NumericalSetupComponent {
     }
     if (!this.setupConfig) return '';
     return this.setupConfig[fieldName] as string;
+  }
+
+  getBooleanValue(fieldName: DisplayStateSetupFieldsType): boolean {
+    if (!(this.boolFields as ReadonlyArray<string>).includes(fieldName)) {
+      throw new Error('Getting boolean value of non-boolean field.');
+    }
+    if (!this.setupConfig) return false;
+    return this.setupConfig[fieldName] as boolean;
   }
 }

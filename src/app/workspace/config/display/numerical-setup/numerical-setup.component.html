@@ -13,6 +13,14 @@
 </div>
 <h4 class="label">{{ label }}</h4>
 
+<app-toggle-input
+  *ngIf="SETUP_FIELDS_METADATA['useBuiltInNumericals']; let metaData"
+  [label]="metaData.label ?? ''"
+  [hint]="metaData.hint ?? ''"
+  (valueChanged)="valueChanged($event, 'useBuiltInNumericals')"
+  [value]="getBooleanValue('useBuiltInNumericals')"
+></app-toggle-input>
+
 <ng-container *ngFor="let fieldName of numericalFields">
   <app-sliding-input
     *ngIf="SETUP_FIELDS_METADATA[fieldName]; let metaData"
