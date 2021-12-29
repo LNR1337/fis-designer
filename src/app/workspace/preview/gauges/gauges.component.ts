@@ -204,6 +204,58 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
       case 'numerical10':
         this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical10, this.setupConfig);
         break;
+      case 'fontWidth':
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical1,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical2,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical3,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical4,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical5,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical6,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical7,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical8,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical9,
+          this.setupConfig,
+          false
+        );
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical10,
+          this.setupConfig,
+          false
+        );
+        break;
 
       default:
         break;

@@ -75,11 +75,14 @@ export class GaugesCompositor {
 
   drawNumericalHighlight(
     numericalConfig: NumericalConfig,
-    numericalSetup: DisplayStateSetupFieldsConfig
+    numericalSetup: DisplayStateSetupFieldsConfig,
+    drawPosition = true
   ) {
     if (!numericalConfig.positionX || !numericalConfig.positionY) return;
 
-    this.drawPosition(numericalConfig.positionX!, numericalConfig.positionY!);
+    if (drawPosition) {
+      this.drawPosition(numericalConfig.positionX!, numericalConfig.positionY!);
+    }
     // Bracket.
     this.context.globalAlpha = 0.7;
     const fontWidth = numericalSetup.fontWidth as number;
