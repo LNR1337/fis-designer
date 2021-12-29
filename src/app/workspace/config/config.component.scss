@@ -34,8 +34,11 @@ mat-tab-group {
 }
 
 ::ng-deep {
-  div.mat-tab-label {
-    min-width: 120px;
+  div.mat-tab-labels {
+    div.mat-tab-label {
+      flex-grow: 1;
+      min-width: 100px;
+    }
   }
 
   .mat-tab-label-content {

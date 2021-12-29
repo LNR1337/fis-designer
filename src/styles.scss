@@ -58,3 +58,9 @@ a {
 .number-input .wide {
   width: 60px;
 }
+
+@media (max-width: $mobile-width-breakpoint) {
+  .mobile-hide {
+    display: none;
+  }
+}
