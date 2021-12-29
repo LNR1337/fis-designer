@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-workspace',
@@ -6,5 +7,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./workspace.component.scss'],
 })
 export class WorkspaceComponent {
-  constructor() {}
+  constructor(titleService: Title) {
+    titleService.setTitle('FIS-Designer');
+  }
 }
