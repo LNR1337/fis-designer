@@ -2,10 +2,13 @@ import {
   GaugeConfig,
   getAbsoluteNeedleAngleBounds,
   NeedleConfig,
+  NumericalConfig,
 } from '../../config/display/models/configs';
+import {DisplayStateSetupFieldsConfig} from '../../config/display/state/display.state';
 
 const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
+const NUMERICAL_DIGITS = 4;
 
 /** Class responsible for rendering gauges on the canvas. */
 export class GaugesCompositor {
@@ -66,6 +69,31 @@ export class GaugesCompositor {
       this.context.fillText(`y:${y - 0.5}`, x + CROSS_SIZE + 5, y + 2);
       this.context.textBaseline = 'bottom';
       this.context.fillText(`x:${x - 0.5}`, x + CROSS_SIZE + 5, y - 2);
+    }
+    this.context.globalAlpha = 1;
+  }
+
+  drawNumericalHighlight(
+    numericalConfig: NumericalConfig,
+    numericalSetup: DisplayStateSetupFieldsConfig
+  ) {
+    if (!numericalConfig.positionX || !numericalConfig.positionY) return;
+
+    this.drawPosition(numericalConfig.positionX!, numericalConfig.positionY!);
+    // Bracket.
+    this.context.globalAlpha = 0.7;
+    const fontWidth = numericalSetup.fontWidth as number;
+    const fontHeight = numericalSetup.fontHeight as number;
+    const fontSpacing = numericalSetup.fontSpacing as number;
+    this.context.strokeStyle = 'yellow';
+    const totalWidth = NUMERICAL_DIGITS * fontWidth + (NUMERICAL_DIGITS - 1) * fontSpacing;
+    const x =
+      numericalConfig.positionX! -
+      (numericalConfig.centered ? Math.floor(totalWidth / 2) : totalWidth) +
+      0.5;
+    for (let i = 0; i < NUMERICAL_DIGITS; i++) {
+      const rectX = x + i * (fontWidth + fontSpacing);
+      this.context.strokeRect(rectX, numericalConfig.positionY! + 0.5, fontWidth, fontHeight);
     }
     this.context.globalAlpha = 1;
   }
@@ -132,24 +160,32 @@ export class GaugesCompositor {
     this.context.globalAlpha = 1;
   }
 
+  drawPosition(x: number, y: number) {
+    this.context.lineWidth = 1;
+    this.context.globalAlpha = 0.7;
+    // Lines
+    this.context.strokeStyle = 'cyan';
+    this.context.beginPath();
+    this.context.moveTo(x + 0.5, 0.5);
+    this.context.lineTo(x + 0.5, y + 0.5);
+    this.context.lineTo(0.5, y + 0.5);
+    this.context.stroke();
+    // Coordinates.
+    this.context.fillStyle = 'cyan';
+    this.context.textAlign = 'start';
+    this.context.textBaseline = 'bottom';
+    this.context.fillText(`y:${y}`, 5, y - 5);
+    this.context.textBaseline = 'top';
+    this.context.textAlign = 'end';
+    this.context.fillText(`x:${x}`, x - 5, 5);
+    this.context.globalAlpha = 1;
+  }
+
   drawNeedleHighlight(config: NeedleConfig) {
     this.context.lineWidth = 1;
     this.context.globalAlpha = 0.7;
     // Needle position.
-    this.context.strokeStyle = 'cyan';
-    this.context.fillStyle = 'cyan';
-    this.context.beginPath();
-    this.context.moveTo(config.positionX! + 0.5, 0.5);
-    this.context.lineTo(config.positionX! + 0.5, config.positionY! + 0.5);
-    this.context.lineTo(0.5, config.positionY! + 0.5);
-    this.context.stroke();
-    // Position coordinates.
-    this.context.textAlign = 'start';
-    this.context.textBaseline = 'bottom';
-    this.context.fillText(`y:${config.positionY!}`, 5, config.positionY! - 5);
-    this.context.textBaseline = 'top';
-    this.context.textAlign = 'end';
-    this.context.fillText(`x:${config.positionX!}`, config.positionX! - 5, 5);
+    this.drawPosition(config.positionX!, config.positionY!);
     // Needle size.
     this.context.strokeStyle = 'yellow';
     this.context.fillStyle = 'yellow';
@@ -190,7 +226,6 @@ export class GaugesCompositor {
       this.context.stroke();
     }
 
-    this.context.setLineDash([]);
     this.context.globalAlpha = 1;
   }
 }

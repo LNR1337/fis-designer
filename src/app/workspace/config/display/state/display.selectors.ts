@@ -54,7 +54,7 @@ export const selectNumericalConfigs = createSelector(
 );
 
 /** Selects setup values. */
-export const selectSetupValues = createSelector(
+export const selectDisplaySetupValues = createSelector(
   selectDisplayState,
   state =>
     ({
