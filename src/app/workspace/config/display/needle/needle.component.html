@@ -19,7 +19,7 @@
     [label]="metaData.label ?? ''"
     [min]="metaData.min"
     [max]="metaData.max"
-    [hint]="metaData.hint"
+    [hint]="metaData.hint ?? ''"
     (valueChanged)="valueChanged($event, fieldName)"
     [value]="needleConfig ? needleConfig[fieldName] : undefined"
   ></app-sliding-input>

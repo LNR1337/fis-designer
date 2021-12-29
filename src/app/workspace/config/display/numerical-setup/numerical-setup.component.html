@@ -1,0 +1,13 @@
+<h4 class="label">{{ label }}</h4>
+
+<ng-container *ngFor="let fieldName of numericalFields">
+  <app-sliding-input
+    *ngIf="SETUP_FIELDS_METADATA[fieldName]; let metaData"
+    [label]="metaData.label ?? ''"
+    [min]="metaData.min"
+    [max]="metaData.max"
+    [hint]="metaData.hint ?? ''"
+    (valueChanged)="valueChanged($event, fieldName)"
+    [value]="getNumericalValue(fieldName)"
+  ></app-sliding-input>
+</ng-container>

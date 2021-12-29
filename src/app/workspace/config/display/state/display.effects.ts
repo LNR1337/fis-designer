@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {withLatestFrom} from 'rxjs';
+import {filter, withLatestFrom} from 'rxjs';
 import {concatMap, tap} from 'rxjs/operators';
+import {environment} from '../../../../../environments/environment';
 import {changedNeedleConfig, recalculateNeedleSize} from './display.actions';
 import {Store} from '@ngrx/store';
 import {selectNeedleConfigs} from './display.selectors';
@@ -10,7 +11,11 @@ import {selectAllImages} from '../../../preview/state/preview.selectors';
 @Injectable()
 export class DisplayEffects {
   debug = createEffect(
-    () => this.actions$.pipe(tap(action => console.log(`ACTION: ${action.type}`, action))),
+    () =>
+      this.actions$.pipe(
+        filter(() => !environment.production),
+        tap(action => console.log(`ACTION: ${action.type}`, action))
+      ),
     {dispatch: false}
   );
 

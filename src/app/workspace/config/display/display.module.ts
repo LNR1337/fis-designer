@@ -14,6 +14,7 @@ import {StoreModule} from '@ngrx/store';
 import {DisplayComponent} from './display.component';
 import {GaugeComponent} from './gauge/gauge.component';
 import {NeedleComponent} from './needle/needle.component';
+import {NumericalSetupComponent} from './numerical-setup/numerical-setup.component';
 import {NumericalComponent} from './numerical/numerical.component';
 import {SlidingInputComponent} from './sliding-input/sliding-input.component';
 import {DisplayEffects} from './state/display.effects';
@@ -26,6 +27,7 @@ import {ToggleInputComponent} from './toggle-input/toggle-input.component';
     GaugeComponent,
     NeedleComponent,
     NumericalComponent,
+    NumericalSetupComponent,
     SlidingInputComponent,
     ToggleInputComponent,
   ],

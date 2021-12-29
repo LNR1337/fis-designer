@@ -6,6 +6,7 @@ import {
   DisplayStateNeedleFieldsObject,
   DisplayStateGaugeFieldsObject,
   DisplayStateNumericalFieldsObject,
+  DisplayStateSetupFieldsConfig,
 } from './display.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
@@ -50,6 +51,22 @@ export const selectNumericalConfigs = createSelector(
       numerical9: state.numerical9,
       numerical10: state.numerical10,
     } as DisplayStateNumericalFieldsObject<NumericalConfig>)
+);
+
+/** Selects setup values. */
+export const selectSetupValues = createSelector(
+  selectDisplayState,
+  state =>
+    ({
+      fontWidth: state.fontWidth,
+      fontHeight: state.fontHeight,
+      fontDotWidth: state.fontDotWidth,
+      fontSpacing: state.fontSpacing,
+      fontColor: state.fontColor,
+      fontWarningColor: state.fontWarningColor,
+      tableBackgroundColor: state.tableBackgroundColor,
+      tableFontColor: state.tableFontColor,
+    } as DisplayStateSetupFieldsConfig)
 );
 
 /** Selects currently highlighted config. */

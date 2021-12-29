@@ -55,4 +55,12 @@ export const initialDisplayConfigState: DisplayConfigState = {
   numerical8: initialNumericalConfig,
   numerical9: initialNumericalConfig,
   numerical10: initialNumericalConfig,
+  fontWidth: 0,
+  fontHeight: 0,
+  fontDotWidth: 0,
+  fontSpacing: 0,
+  fontColor: '#ffffff',
+  fontWarningColor: '#ff0000',
+  tableBackgroundColor: '#000000',
+  tableFontColor: '#ffffff',
 };

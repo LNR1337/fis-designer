@@ -27,6 +27,9 @@
     </ng-container>
   </ng-container>
   <ng-container *ngIf="page === 'numerical'">
+    <!-- Numerical display setup -->
+    <app-numerical-setup *ngIf="setupConfig | async; let config" [setupConfig]="config"
+                         label="Font settings"></app-numerical-setup>
     <!-- Numerical gauges -->
     <ng-container *ngIf="numericalConfigs | async; let configs">
       <app-numerical *ngFor="let configName of DisplayStateNumericalFields; let i = index"

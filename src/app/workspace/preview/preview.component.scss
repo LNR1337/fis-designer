@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
   display: flex;
+  min-width: 550px;
 }
 
 .copyright {
@@ -17,4 +18,19 @@
 
 .preview {
   margin: auto;
+}
+
+@media (max-width: $mobile-width-breakpoint) {
+  .copyright {
+    display: none;
+  }
+
+  .preview {
+    height: 100%;
+    overflow: hidden;
+
+    app-gauges {
+      height: 100%;
+    }
+  }
 }

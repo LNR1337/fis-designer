@@ -7,14 +7,15 @@ export const DISPLAY_FEATURE_KEY = 'display';
 
 export const displayReducer = createReducer(
   initialDisplayConfigState,
-  on(actions.changedGaugeConfig, (state, {config, displayConfigField}) => ({
-    ...state,
-    [displayConfigField]: config,
-  })),
-  on(actions.changedNeedleConfig, (state, {config, displayConfigField}) => ({
-    ...state,
-    [displayConfigField]: config,
-  })),
+  on(
+    actions.changedGaugeConfig,
+    actions.changedNeedleConfig,
+    actions.changedNumericalConfig,
+    (state, {config, displayConfigField}) => ({
+      ...state,
+      [displayConfigField]: config,
+    })
+  ),
   on(actions.enableHighlight, (state, {stateField}) => ({
     ...state,
     activeHightlight: stateField,

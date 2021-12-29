@@ -1,17 +1,17 @@
 @import 'src/variables';
 
-.resizable-wrapper {
+.sidebar {
   background-color: $background-dialog;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   height: 100%;
   position: relative;
-  min-width: 480px;
+  min-width: $sidebar-desktop-min-width;
   max-width: calc(100% - 8px);
   z-index: 1;
   resize: horizontal;
-  box-sizing: border-box; // required for the enableGhostResize option to work
+  box-sizing: border-box;
 
   .resize-handle {
     width: 7px;
@@ -57,6 +57,17 @@ mat-tab-group {
       &:hover {
         background: $grey-item;
       }
+    }
+  }
+}
+
+@media (max-width: $mobile-width-breakpoint) {
+  .sidebar {
+    width: 100%;
+    max-width: 100%;
+
+    .resize-handle {
+      display: none;
     }
   }
 }

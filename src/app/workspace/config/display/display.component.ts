@@ -11,11 +11,14 @@ import {
   DisplayStateNumericalFields,
   DisplayStateFieldsType,
   DisplayStateNumericalFieldsObject,
+  DisplayStateSetupFieldsObject,
+  DisplayStateSetupFieldsConfig,
 } from './state/display.state';
 import {
   selectNeedleConfigs,
   selectGaugeConfigs,
   selectNumericalConfigs,
+  selectSetupValues,
 } from './state/display.selectors';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from './models/configs';
 import {GAUGE_LABELS, NEEDLE_LABELS, NUMERICAL_LABELS} from './models/configs_metadata';
@@ -33,6 +36,7 @@ export class DisplayComponent {
   needlesConfigs: Observable<DisplayStateNeedleFieldsObject<NeedleConfig>>;
   gaugesConfigs: Observable<DisplayStateGaugeFieldsObject<GaugeConfig>>;
   numericalConfigs: Observable<DisplayStateNumericalFieldsObject<NumericalConfig>>;
+  setupConfig: Observable<DisplayStateSetupFieldsConfig>;
 
   GAUGE_LABELS = GAUGE_LABELS;
   NEEDLE_LABELS = NEEDLE_LABELS;
@@ -48,6 +52,7 @@ export class DisplayComponent {
     this.needlesConfigs = store.select(selectNeedleConfigs);
     this.gaugesConfigs = store.select(selectGaugeConfigs);
     this.numericalConfigs = store.select(selectNumericalConfigs);
+    this.setupConfig = store.select(selectSetupValues);
   }
 
   highlight(stateField: DisplayStateFieldsType) {

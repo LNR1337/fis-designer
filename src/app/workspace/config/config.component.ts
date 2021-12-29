@@ -13,7 +13,7 @@ export class ConfigComponent {
 
   onResizeEnd(event: ResizeEvent): void {
     this.style = {
-      width: `${event.rectangle.width}px`,
+      width: `${Math.min(event.rectangle.width ?? 480, window.screen.width)}px`,
     };
   }
 }

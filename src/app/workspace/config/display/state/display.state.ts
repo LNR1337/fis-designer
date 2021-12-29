@@ -51,6 +51,34 @@ export const DisplayStateNumericalFields = [
   'numerical10',
 ] as const;
 
+/** List of all display state fields holding setup values. */
+export const DisplayStateSetupFields = [
+  'fontWidth',
+  'fontHeight',
+  'fontDotWidth',
+  'fontSpacing',
+  'fontColor',
+  'fontWarningColor',
+  'tableBackgroundColor',
+  'tableFontColor',
+] as const;
+
+/** List of all display state fields holding numerical setup values. */
+export const DisplayStateSetupFieldsNumerical = [
+  'fontWidth',
+  'fontHeight',
+  'fontDotWidth',
+  'fontSpacing',
+] as const;
+
+/** List of all display state fields holding color setup values. */
+export const DisplayStateSetupFieldsColor = [
+  'fontColor',
+  'fontWarningColor',
+  'tableBackgroundColor',
+  'tableFontColor',
+] as const;
+
 /** Type for all valid state field names holding gauge settings. */
 export type DisplayStateGaugeFieldsType = typeof DisplayStateGaugeFields[number];
 
@@ -59,6 +87,9 @@ export type DisplayStateNeedleFieldsType = typeof DisplayStateNeedleFields[numbe
 
 /** Type for all valid state field names holding numerical settings. */
 export type DisplayStateNumericalFieldsType = typeof DisplayStateNumericalFields[number];
+
+/** Type for all valid state field names holding setup values. */
+export type DisplayStateSetupFieldsType = typeof DisplayStateSetupFields[number];
 
 /** Object type of state fields holding gauge settings. */
 export type DisplayStateGaugeFieldsObject<T> = {
@@ -74,6 +105,14 @@ export type DisplayStateNeedleFieldsObject<T> = {
 export type DisplayStateNumericalFieldsObject<T> = {
   [property in DisplayStateNumericalFieldsType]: T;
 };
+
+/** Object type of state fields holding setup values. */
+export type DisplayStateSetupFieldsObject<T> = {
+  [property in DisplayStateSetupFieldsType]: T;
+};
+
+/** Object holding a part of state responsible for numerical setup. */
+export type DisplayStateSetupFieldsConfig = DisplayStateSetupFieldsObject<string | number>;
 
 /** Object type of all display state fields. */
 export type DisplayStateFieldsObject<T> = {

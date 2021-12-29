@@ -20,6 +20,8 @@ $top-bar-height: 56px;
 $grey-border: rgb(82, 82, 82);
 $grey-item: rgb(117, 117, 117);
 $light-grey-item: rgb(167, 182, 189);
+$sidebar-desktop-min-width: 480px;
+$mobile-width-breakpoint: 800px;
 
 $background: map-get(mat.$dark-theme-background-palette, background);
 $background-dialog: map-get(mat.$dark-theme-background-palette, dialog);

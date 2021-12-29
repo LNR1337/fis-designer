@@ -3,6 +3,7 @@ import {
   DisplayStateGaugeFieldsObject,
   DisplayStateNeedleFieldsObject,
   DisplayStateNumericalFieldsObject,
+  DisplayStateSetupFieldsObject,
 } from '../state/display.state';
 import {
   GaugeConfigFieldsObject,
@@ -40,6 +41,17 @@ export const NUMERICAL_LABELS: DisplayStateNumericalFieldsObject<string> = {
   numerical8: 'Digital gauge 8',
   numerical9: 'Digital gauge 9',
   numerical10: 'Digital gauge 10',
+};
+
+export const SETUP_FIELDS_METADATA: DisplayStateSetupFieldsObject<ConfigFieldMetadata> = {
+  fontWidth: {label: 'Digit width'},
+  fontHeight: {label: 'Digit height'},
+  fontDotWidth: {label: 'Dot width'},
+  fontSpacing: {label: 'Digit spacing', hint: 'Additional space between digits.'},
+  fontColor: {label: 'Normal color'},
+  fontWarningColor: {label: 'Warning color'},
+  tableBackgroundColor: {label: 'Table view background'},
+  tableFontColor: {label: 'Table view font color'},
 };
 
 export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<ImageStateFieldsType> =

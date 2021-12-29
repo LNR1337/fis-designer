@@ -1,5 +1,9 @@
 @import 'src/variables';
 
+:host {
+  min-width: $sidebar-desktop-min-width;
+}
+
 .top-bar-container {
   position: fixed;
   top: 0;

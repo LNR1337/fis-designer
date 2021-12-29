@@ -1,0 +1,11 @@
+@import 'src/variables';
+
+:host {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  color: map-get($primary, default);
+}
