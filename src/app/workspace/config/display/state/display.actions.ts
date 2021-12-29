@@ -5,6 +5,8 @@ import {
   DisplayStateGaugeFieldsType,
   DisplayStateNeedleFieldsType,
   DisplayStateNumericalFieldsType,
+  DisplayStateSetupFieldsConfig,
+  DisplayStateSetupFieldsType,
 } from './display.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
@@ -37,6 +39,13 @@ export const changedNumericalConfig = createAction(
   props<{
     config: NumericalConfig;
     displayConfigField: DisplayStateNumericalFieldsType;
+  }>()
+);
+
+export const changedDisplaySetupConfig = createAction(
+  '[Config] Changed display setup config',
+  props<{
+    config: DisplayStateSetupFieldsConfig;
   }>()
 );
 

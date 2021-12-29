@@ -64,8 +64,6 @@ export const selectSetupValues = createSelector(
       fontSpacing: state.fontSpacing,
       fontColor: state.fontColor,
       fontWarningColor: state.fontWarningColor,
-      tableBackgroundColor: state.tableBackgroundColor,
-      tableFontColor: state.tableFontColor,
     } as DisplayStateSetupFieldsConfig)
 );
 

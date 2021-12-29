@@ -1,0 +1,45 @@
+@import 'src/variables';
+
+:host {
+  display: flex;
+  align-content: center;
+  margin-bottom: 4px;
+}
+
+.label {
+  color: $light-grey-item;
+  width: 120px;
+  line-height: 36px;
+  margin-right: 16px;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: space-between;
+
+  mat-icon {
+    position: relative;
+    top: 10px;
+    font-size: 120%;
+    opacity: 0.7;
+  }
+}
+
+
+.color-input-wrapper {
+  width: 70px;
+  height: 28px;
+  padding: 2px 0;
+  background-color: $background;
+  border: solid 2px $grey-item;
+  border-radius: 4px;
+
+  &:hover,
+  &:focus {
+    border: solid 2px $light-grey-item;
+    outline: none;
+  }
+
+  input {
+    height: 28px;
+    margin: 0;
+  }
+}

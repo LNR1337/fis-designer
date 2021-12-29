@@ -11,3 +11,13 @@
     [value]="getNumericalValue(fieldName)"
   ></app-sliding-input>
 </ng-container>
+
+<ng-container *ngFor="let fieldName of colorFields">
+  <app-color-input
+    *ngIf="SETUP_FIELDS_METADATA[fieldName]; let metaData"
+    [label]="metaData.label ?? ''"
+    [hint]="metaData.hint ?? ''"
+    (valueChanged)="valueChanged($event, fieldName)"
+    [value]="getStringValue(fieldName)"
+  ></app-color-input>
+</ng-container>

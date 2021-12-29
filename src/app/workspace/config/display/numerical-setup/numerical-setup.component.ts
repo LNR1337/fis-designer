@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {NumericalConfig} from '../models/configs';
 import {SETUP_FIELDS_METADATA} from '../models/configs_metadata';
+import {changedDisplaySetupConfig, changedNumericalConfig} from '../state/display.actions';
 import {
   DisplayStateSetupFieldsColor,
   DisplayStateSetupFieldsConfig,
@@ -24,7 +24,14 @@ export class NumericalSetupComponent {
 
   constructor(private readonly store: Store) {}
 
-  valueChanged(value: number | string, fieldName: DisplayStateSetupFieldsType) {}
+  valueChanged(value: number | string, fieldName: DisplayStateSetupFieldsType) {
+    if (!this.setupConfig) return;
+    this.store.dispatch(
+      changedDisplaySetupConfig({
+        config: {...this.setupConfig, [fieldName]: value},
+      })
+    );
+  }
 
   getNumericalValue(fieldName: DisplayStateSetupFieldsType): number {
     if (!(this.numericalFields as ReadonlyArray<string>).includes(fieldName)) {

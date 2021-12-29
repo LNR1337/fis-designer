@@ -44,14 +44,12 @@ export const NUMERICAL_LABELS: DisplayStateNumericalFieldsObject<string> = {
 };
 
 export const SETUP_FIELDS_METADATA: DisplayStateSetupFieldsObject<ConfigFieldMetadata> = {
-  fontWidth: {label: 'Digit width'},
-  fontHeight: {label: 'Digit height'},
-  fontDotWidth: {label: 'Dot width'},
-  fontSpacing: {label: 'Digit spacing', hint: 'Additional space between digits.'},
+  fontWidth: {label: 'Digit width', min: 0},
+  fontHeight: {label: 'Digit height', min: 0},
+  fontDotWidth: {label: 'Dot width', min: 0},
+  fontSpacing: {label: 'Digit spacing', hint: 'Additional space between digits.', min: 0},
   fontColor: {label: 'Normal color'},
   fontWarningColor: {label: 'Warning color'},
-  tableBackgroundColor: {label: 'Table view background'},
-  tableFontColor: {label: 'Table view font color'},
 };
 
 export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<ImageStateFieldsType> =

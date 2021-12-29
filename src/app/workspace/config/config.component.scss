@@ -65,6 +65,7 @@ mat-tab-group {
   .sidebar {
     width: 100%;
     max-width: 100%;
+    min-width: 200px;
 
     .resize-handle {
       display: none;

@@ -61,6 +61,4 @@ export const initialDisplayConfigState: DisplayConfigState = {
   fontSpacing: 0,
   fontColor: '#ffffff',
   fontWarningColor: '#ff0000',
-  tableBackgroundColor: '#000000',
-  tableFontColor: '#ffffff',
 };

@@ -59,8 +59,6 @@ export const DisplayStateSetupFields = [
   'fontSpacing',
   'fontColor',
   'fontWarningColor',
-  'tableBackgroundColor',
-  'tableFontColor',
 ] as const;
 
 /** List of all display state fields holding numerical setup values. */
@@ -72,12 +70,7 @@ export const DisplayStateSetupFieldsNumerical = [
 ] as const;
 
 /** List of all display state fields holding color setup values. */
-export const DisplayStateSetupFieldsColor = [
-  'fontColor',
-  'fontWarningColor',
-  'tableBackgroundColor',
-  'tableFontColor',
-] as const;
+export const DisplayStateSetupFieldsColor = ['fontColor', 'fontWarningColor'] as const;
 
 /** Type for all valid state field names holding gauge settings. */
 export type DisplayStateGaugeFieldsType = typeof DisplayStateGaugeFields[number];
@@ -125,7 +118,7 @@ export type PartialDisplayStateFieldsObject<T> = Partial<DisplayStateFieldsObjec
 /** Type of all valid types for config state fields. */
 export type ValidDisplayStateType = number | string | GaugeConfig | NumericalConfig | NeedleConfig;
 
-/** State for the config module. */
+/** State for the display config module. */
 export interface DisplayConfigState {
   // TODO(pawelszydlo): somehow enforce fields in this interface.
   gauge1?: GaugeConfig;
@@ -150,8 +143,6 @@ export interface DisplayConfigState {
   fontSpacing?: number;
   fontColor?: string;
   fontWarningColor?: string;
-  tableBackgroundColor?: string;
-  tableFontColor?: string;
   // Internal utility fields.
   activeHightlight?: DisplayStateFieldsType;
 }
