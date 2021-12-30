@@ -64,8 +64,9 @@ export const selectDisplaySetupValues = createSelector(
       fontSpacing: state.fontSpacing,
       fontColor: state.fontColor,
       fontWarningColor: state.fontWarningColor,
+      useBuiltInNumericals: state.useBuiltInNumericals,
     } as DisplayStateSetupFieldsConfig)
 );
 
 /** Selects currently highlighted config. */
-export const selectHighlight = createSelector(selectDisplayState, state => state.activeHightlight);
+export const selectHighlight = createSelector(selectDisplayState, state => state.activeHighlight);

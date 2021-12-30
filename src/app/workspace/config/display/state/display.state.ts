@@ -152,5 +152,5 @@ export interface DisplayConfigState {
   fontWarningColor?: string;
   useBuiltInNumericals?: boolean;
   // Internal utility fields.
-  activeHightlight?: DisplayStateFieldsType;
+  activeHighlight?: DisplayStateFieldsType;
 }

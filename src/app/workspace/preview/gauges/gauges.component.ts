@@ -204,7 +204,13 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
       case 'numerical10':
         this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical10, this.setupConfig);
         break;
-      case 'fontWidth':
+      case 'fontWidth': // Placeholder for all digital gauges setup.
+        this.compositor.drawGTIHighlight(
+          this.setupConfig,
+          this.needleConfigs.needle1,
+          this.needleConfigs.needle2,
+          this.needleConfigs.needle3
+        );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical1,
           this.setupConfig,

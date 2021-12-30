@@ -23,11 +23,11 @@ export const displayReducer = createReducer(
   })),
   on(actions.enableHighlight, (state, {stateField}) => ({
     ...state,
-    activeHightlight: stateField,
+    activeHighlight: stateField,
   })),
   on(actions.disableHighlight, state => ({
     ...state,
-    activeHightlight: undefined,
+    activeHighlight: undefined,
   })),
   // TODO(pawelszydlo): do some data sanitization!
   on(actions.loadDisplayStateFromObject, (state, {object}) => ({

@@ -1,9 +1,7 @@
 import {Component, Input, SimpleChanges} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {
-  ImageStateDigitFields,
-  ImageStateFieldsType,
-} from '../../../image-manager/state/images.state';
+import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
+import {containsAllDigitImages} from '../../../image-manager/utils';
 import {SETUP_FIELDS_METADATA} from '../models/configs_metadata';
 import {changedDisplaySetupConfig, recalculateDigitsSize} from '../state/display.actions';
 import {
@@ -40,10 +38,8 @@ export class NumericalSetupComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['loadedImages'] && this.setupConfig) {
-      const loadedDigits = ImageStateDigitFields.filter(image => this.loadedImages!.has(image));
-      this.resizeEnabled =
-        !!this.loadedImages && loadedDigits.length === ImageStateDigitFields.length;
+    if (changes['loadedImages'] && this.setupConfig && this.loadedImages) {
+      this.resizeEnabled = containsAllDigitImages(this.loadedImages);
     }
   }
 

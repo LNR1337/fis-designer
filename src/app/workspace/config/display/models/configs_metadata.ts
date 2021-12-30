@@ -52,7 +52,9 @@ export const SETUP_FIELDS_METADATA: DisplayStateSetupFieldsObject<ConfigFieldMet
   fontWarningColor: {label: 'Warning color'},
   useBuiltInNumericals: {
     label: 'GTI gauges',
-    hint: 'Show built in digital gauges in the' + ' middle of each analog gauge.',
+    hint:
+      'Show built in digital gauges in the middle of each analog gauge. These are' +
+      ' visually independent from other digital gauges.',
   },
 };
 

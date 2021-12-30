@@ -8,7 +8,9 @@ import {DisplayStateSetupFieldsConfig} from '../../config/display/state/display.
 
 const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
-const NUMERICAL_DIGITS = 4;
+const NUMERICAL_DIGITS = 3;
+const GTI_FONT_WIDTH = 28;
+const GTI_FONT_HEIGHT = 24;
 
 /** Class responsible for rendering gauges on the canvas. */
 export class GaugesCompositor {
@@ -71,6 +73,32 @@ export class GaugesCompositor {
       this.context.fillText(`x:${x - 0.5}`, x + CROSS_SIZE + 5, y - 2);
     }
     this.context.globalAlpha = 1;
+  }
+
+  drawGTIHighlight(
+    numericalSetup: DisplayStateSetupFieldsConfig,
+    needleConfig1: NeedleConfig,
+    needleConfig2: NeedleConfig,
+    needleConfig3: NeedleConfig
+  ) {
+    if (!numericalSetup.useBuiltInNumericals) return;
+
+    const totalWidth = NUMERICAL_DIGITS * GTI_FONT_WIDTH;
+
+    for (const config of [needleConfig1, needleConfig2, needleConfig3]) {
+      const needleCenterX = config.positionX! + config.centerX! + 0.5;
+      const needleCenterY = config.positionY! + config.centerY! + 0.5;
+      this.drawNeedleCenter(needleCenterX, needleCenterY, false);
+      const x = needleCenterX - Math.floor(totalWidth / 2);
+      const y = needleCenterY - Math.floor(GTI_FONT_HEIGHT / 2);
+      this.context.globalAlpha = 0.7;
+      this.context.strokeStyle = 'yellow';
+      for (let i = 0; i < NUMERICAL_DIGITS; i++) {
+        const rectX = x + i * GTI_FONT_WIDTH;
+        this.context.strokeRect(rectX, y + 0.5, GTI_FONT_WIDTH, GTI_FONT_HEIGHT);
+      }
+      this.context.globalAlpha = 1;
+    }
   }
 
   drawNumericalHighlight(
