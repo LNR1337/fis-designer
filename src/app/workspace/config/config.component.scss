@@ -38,6 +38,7 @@ mat-tab-group {
     div.mat-tab-label {
       flex-grow: 1;
       min-width: 100px;
+      user-select: none;
     }
   }
 

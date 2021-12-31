@@ -1,7 +1,7 @@
 <div class="recalculate-button">
   <button mat-icon-button color="primary" [disabled]="!resizeEnabled" (click)="recalculateSize()">
     <mat-icon
-      [matTooltip]="
+      [tooltip]="
         resizeEnabled
           ? 'Set needle dimensions to match the needle image.'
           : 'No needle image loaded yet.'

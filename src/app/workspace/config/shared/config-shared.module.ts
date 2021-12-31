@@ -6,7 +6,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {TooltipModule} from '../../tooltip/tooltip.module';
 
 import {ColorInputComponent} from './color-input/color-input.component';
 import {SlidingInputComponent} from './sliding-input/sliding-input.component';
@@ -22,7 +22,7 @@ import {ToggleInputComponent} from './toggle-input/toggle-input.component';
     MatIconModule,
     MatSliderModule,
     MatSlideToggleModule,
-    MatTooltipModule,
+    TooltipModule,
   ],
   exports: [ColorInputComponent, SlidingInputComponent, ToggleInputComponent],
 })

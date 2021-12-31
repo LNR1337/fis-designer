@@ -5,7 +5,7 @@
   [enableGhostResize]="true"
   (resizeEnd)="onResizeEnd($event)"
 >
-  <mat-tab-group animationDuration="200ms" color="primary" selectedIndex="0"
+  <mat-tab-group animationDuration="200ms" selectedIndex="0"
                  [disablePagination]="true">
     <mat-tab label="Analog">
       <app-display page="gauges"></app-display>
@@ -13,10 +13,10 @@
     <mat-tab label="Digital">
       <app-display page="numerical"></app-display>
     </mat-tab>
-    <mat-tab label="Tables">
+    <mat-tab label="Tables" disabled>
       <app-tables></app-tables>
     </mat-tab>
-    <mat-tab label="Misc">
+    <mat-tab label="Misc" disabled>
       <app-misc></app-misc>
     </mat-tab>
   </mat-tab-group>

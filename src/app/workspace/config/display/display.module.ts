@@ -3,9 +3,9 @@ import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
-import {MatTooltipModule} from '@angular/material/tooltip';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
+import {TooltipModule} from '../../tooltip/tooltip.module';
 import {ConfigSharedModule} from '../shared/config-shared.module';
 
 import {DisplayComponent} from './display.component';
@@ -30,7 +30,7 @@ import {DISPLAY_FEATURE_KEY, displayReducer} from './state/display.reducer';
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
-    MatTooltipModule,
+    TooltipModule,
     EffectsModule.forFeature([DisplayEffects]),
     StoreModule.forFeature(DISPLAY_FEATURE_KEY, displayReducer),
   ],

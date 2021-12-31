@@ -1,0 +1,14 @@
+@import 'src/variables';
+
+:host {
+  max-width: 300px;
+  opacity: 0;
+}
+
+ .tooltip {
+  background-color: $background-tooltip;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 200;
+}

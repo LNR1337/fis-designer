@@ -9,11 +9,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTooltipModule} from '@angular/material/tooltip';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 
 import {ImageManagerModule} from '../image-manager/image-manager.module';
+import {TooltipModule} from '../tooltip/tooltip.module';
 import {IoToolbarComponent} from './io-toolbar.component';
 import {IoToolbarEffects} from './state/io-toolbar.effects';
 import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from './state/io-toolbar.reducer';
@@ -32,7 +32,7 @@ import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from './state/io-toolbar.reduc
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
-    MatTooltipModule,
+    TooltipModule,
     ReactiveFormsModule,
     EffectsModule.forFeature([IoToolbarEffects]),
     StoreModule.forFeature(IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer),

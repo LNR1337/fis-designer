@@ -16,22 +16,22 @@
     <mat-divider [vertical]="true"></mat-divider>
 
     <button mat-icon-button (click)="saveConfigLocal(nameInput.value)" [disabled]="disableSaveLoad"
-            matTooltip="Save workspace to your browser's local storage.">
+            tooltip="Save workspace to your browser's local storage.">
       <mat-icon>save_alt</mat-icon>
     </button>
     <button mat-icon-button (click)="loadConfigLocal(nameInput.value)" [disabled]="disableSaveLoad"
-            matTooltip="Load workspace from your browser's local storage. This will overwrite your current work!">
+            tooltip="Load workspace from your browser's local storage.<br><br>This will overwrite your current work!">
       <mat-icon>upload_file</mat-icon>
     </button>
 
     <mat-divider [vertical]="true"></mat-divider>
     <button mat-icon-button (click)="saveConfigToJSON(nameInput.value)" [disabled]="disableSaveLoad"
-            matTooltip="Save workspace as a JSON file. * DO NOT LOAD THIS FILE INTO FIS-CONTROL! *">
+            tooltip="Save workspace as a JSON file.<br><br><b>Do not load this file into FIS-Control!</b>">
       <mat-icon>save</mat-icon>
     </button>
     <input hidden (change)="onConfigSelected($event)" #configInput type="file" accept="application/json" />
     <button mat-icon-button [disabled]="disableSaveLoad" (click)="configInput.click()"
-            matTooltip="Load workspace from a JSON file. This will overwrite your current work!">
+            tooltip="Load workspace from a JSON file.<br><br>This will overwrite your current work!">
       <mat-icon>file_upload</mat-icon>
     </button>
   </div>

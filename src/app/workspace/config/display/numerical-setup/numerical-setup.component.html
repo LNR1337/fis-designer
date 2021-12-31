@@ -1,7 +1,7 @@
 <div class="recalculate-button">
   <button mat-icon-button color="primary" [disabled]="!resizeEnabled" (click)="recalculateSize()">
     <mat-icon
-      [matTooltip]="
+      [tooltip]="
         resizeEnabled
           ? 'Set digits dimensions to match loaded images.'
           : 'Not all digit images loaded yet.'

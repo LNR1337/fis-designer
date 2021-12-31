@@ -23,6 +23,9 @@ $light-grey-item: rgb(167, 182, 189);
 $sidebar-desktop-min-width: 480px;
 $mobile-width-breakpoint: 800px;
 
+// Backgrounds - darkest to lightest.
+$background-bar: map-get(mat.$dark-theme-background-palette, app-bar);
 $background: map-get(mat.$dark-theme-background-palette, background);
 $background-dialog: map-get(mat.$dark-theme-background-palette, dialog);
-$background-bar: map-get(mat.$dark-theme-background-palette, app-bar);
+$background-tooltip: map-get(mat.$dark-theme-background-palette, tooltip);
+
