@@ -40,7 +40,9 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
 
   openFileSelectorDialog() {
     this.dialog.open(ImageManagerComponent, {
-      width: '970px',
+      width: '950px',
+      maxWidth: '100vw',
+      maxHeight: '90vh',
       disableClose: true,
     });
   }

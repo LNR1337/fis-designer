@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Project images</h2>
 <mat-dialog-content *ngIf="currentImages | async as images">
-  <div>
+  <div class="column">
     <app-file-button
       *ngFor="let imageName of stateImageFields | slice: 0:5"
       [imageName]="imageName"
@@ -8,7 +8,7 @@
       #imageInput
     ></app-file-button>
   </div>
-  <div>
+  <div class="column">
     <app-file-button
       *ngFor="let imageName of stateImageFields | slice: 5:11"
       [imageName]="imageName"
@@ -16,7 +16,7 @@
       #imageInput
     ></app-file-button>
   </div>
-  <div>
+  <div class="column">
     <app-file-button
       *ngFor="let imageName of stateImageFields | slice: 11"
       [imageName]="imageName"

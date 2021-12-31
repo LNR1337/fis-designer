@@ -21,7 +21,6 @@ export function assureDigitDimensions(state: PreviewState): ImageStateDigitField
     const digit = state[digitName];
     if (digit) {
       if (digitName !== ImageStateDotField) {
-        // Assume the dot will not be first. Set correct dimensions.
         if (expectedFontHeight === 0 && expectedFontWidth === 0) {
           expectedFontHeight = digit.naturalHeight;
           expectedFontWidth = digit.naturalWidth;
@@ -34,6 +33,10 @@ export function assureDigitDimensions(state: PreviewState): ImageStateDigitField
       } else {
         // Dot.
         if (expectedFontHeight !== digit.naturalHeight) {
+          if (expectedFontHeight === 0) {
+            // Dot should not have been first to be checked.
+            return;
+          }
           return digitName;
         }
       }
