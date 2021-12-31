@@ -37,4 +37,12 @@ export class SnackBarService {
       data: {action, type, message},
     });
   }
+
+  error(message: string) {
+    this.open(message, SnackType.ERROR);
+  }
+
+  info(message: string) {
+    this.open(message);
+  }
 }

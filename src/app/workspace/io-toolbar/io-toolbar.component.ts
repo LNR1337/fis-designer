@@ -73,7 +73,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   saveConfigLocal(name: string) {
     this.debounceButtons();
     if (!name) {
-      this.snackBar.open('Cannot save under empty name.', SnackType.ERROR);
+      this.snackBar.error('Cannot save under empty name.');
       this.focusNameInput();
       return;
     }
@@ -83,7 +83,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   saveConfigToJSON(name: string) {
     this.debounceButtons();
     if (!name) {
-      this.snackBar.open('Cannot save under empty name.', SnackType.ERROR);
+      this.snackBar.error('Cannot save under empty name.');
       this.focusNameInput();
       return;
     }
@@ -93,11 +93,11 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   loadConfigLocal(name: string) {
     this.debounceButtons();
     if (!name) {
-      this.snackBar.open('Choose the config to load.', SnackType.ERROR);
+      this.snackBar.error('Choose the config to load.');
       return;
     }
     if (!this.existingConfigNames.includes(name)) {
-      this.snackBar.open(`Config "${name}" doesn't exist.`, SnackType.ERROR);
+      this.snackBar.error(`Config "${name}" doesn't exist.`);
       return;
     }
     this.store.dispatch(loadStateFromStorage({name}));
@@ -119,7 +119,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
         this.clearJSONinput();
       };
       reader.onerror = () => {
-        this.snackBar.open('Failed to read config file.', SnackType.ERROR);
+        this.snackBar.error('Failed to read config file.');
         this.enableButtons();
         this.clearJSONinput();
       };

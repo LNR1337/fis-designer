@@ -24,7 +24,7 @@ export class ImagesEffects {
           loadImageFromArrayBuffer(imageBuffer, imageField).subscribe(result => {
             // String result means an error.
             if (typeof result === 'string') {
-              this.snackBar.open(result, SnackType.ERROR);
+              this.snackBar.error(result);
             } else {
               this.store.dispatch(saveImageBuffer({imageBuffer, imageField}));
               this.store.dispatch(saveImage({image: result, imageField}));

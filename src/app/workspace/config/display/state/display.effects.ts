@@ -3,10 +3,17 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {filter, withLatestFrom} from 'rxjs';
 import {concatMap, tap} from 'rxjs/operators';
 import {environment} from '../../../../../environments/environment';
-import {changedNeedleConfig, recalculateNeedleSize} from './display.actions';
+import {containsAllDigitImages} from '../../../image-manager/utils';
+import {SnackBarService} from '../../../services/snack-bar.service';
+import {
+  changedDisplaySetupConfig,
+  changedNeedleConfig,
+  recalculateDigitsSize,
+  recalculateNeedleSize,
+} from './display.actions';
 import {Store} from '@ngrx/store';
-import {selectNeedleConfigs} from './display.selectors';
-import {selectAllImages} from '../../../preview/state/preview.selectors';
+import {selectDisplaySetupValues, selectNeedleConfigs} from './display.selectors';
+import {selectAllImages, selectLoadedImageNames} from '../../../preview/state/preview.selectors';
 
 @Injectable()
 export class DisplayEffects {
@@ -43,5 +50,37 @@ export class DisplayEffects {
     )
   );
 
-  constructor(private actions$: Actions, private readonly store: Store) {}
+  /** Effect to recalculate digit font dimensions based on loaded images. */
+  recalculateDigitsSize = createEffect(() =>
+    this.actions$.pipe(
+      ofType(recalculateDigitsSize),
+      withLatestFrom(this.store.select(selectDisplaySetupValues)),
+      withLatestFrom(this.store.select(selectAllImages)),
+      withLatestFrom(this.store.select(selectLoadedImageNames)),
+      concatMap(([[[action, setupConfig], allImages], loadedImageNames]) => {
+        if (!containsAllDigitImages(new Set(loadedImageNames))) {
+          this.snackBar.error('Not all digit images are loaded yet.');
+        }
+        const fontWidth = allImages.digit0!.naturalWidth;
+        const fontHeight = allImages.digit0!.naturalHeight;
+        const dotWidth = allImages.digitDot!.naturalWidth;
+        return [
+          changedDisplaySetupConfig({
+            config: {
+              ...setupConfig,
+              fontWidth: fontWidth,
+              fontHeight: fontHeight,
+              fontDotWidth: dotWidth,
+            },
+          }),
+        ];
+      })
+    )
+  );
+
+  constructor(
+    private actions$: Actions,
+    private readonly snackBar: SnackBarService,
+    private readonly store: Store
+  ) {}
 }

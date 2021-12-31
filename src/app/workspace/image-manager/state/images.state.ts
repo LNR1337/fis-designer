@@ -35,6 +35,12 @@ export const ImageStateDigitFields = [
   'digitDot',
 ] as const;
 
+/** Field containing the dot. */
+export const ImageStateDotField = 'digitDot';
+
+/** Type for all valid image state field names containing digits. */
+export type ImageStateDigitFieldsType = typeof ImageStateDigitFields[number];
+
 /** Type for all valid image state field names. */
 export type ImageStateFieldsType = typeof ImageStateFields[number];
 

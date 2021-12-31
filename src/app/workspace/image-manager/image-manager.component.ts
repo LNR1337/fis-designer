@@ -1,13 +1,14 @@
 import {QueryList} from '@angular/core';
 import {Component, ViewChildren} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import {PartialImageStateFieldsObject} from './state/images.state';
 import {ImageStateFields} from './state/images.state';
-import {IMAGE_FILENAME_MATCHERS, MIME_TYPE} from './models/images_metadata';
+import {IMAGE_FILENAME_MATCHERS, IMAGE_LABEL, MIME_TYPE} from './models/images_metadata';
 import {selectAllImages} from '../preview/state/preview.selectors';
 import {ImageSelectorComponent} from './image-selector/image-selector.component';
 import {SnackBarService} from '../services/snack-bar.service';
+import {assureDigitDimensions} from './utils';
 
 @Component({
   selector: 'app-image-manager',
@@ -26,7 +27,14 @@ export class ImageManagerComponent {
   currentImages = new Observable<PartialImageStateFieldsObject<HTMLImageElement>>();
 
   constructor(readonly store: Store, private readonly snackBar: SnackBarService) {
-    this.currentImages = store.select(selectAllImages);
+    this.currentImages = store.select(selectAllImages).pipe(
+      tap(images => {
+        const problematicDigit = assureDigitDimensions(images);
+        if (problematicDigit) {
+          this.snackBar.error(`${IMAGE_LABEL[problematicDigit]} has incorrect dimensions.`);
+        }
+      })
+    );
   }
 
   onMultiImageSelected(event: Event) {
@@ -65,13 +73,13 @@ export class ImageManagerComponent {
       }
 
       if (notFoundImages.length) {
-        this.snackBar.open(
+        this.snackBar.info(
           `Loaded ${foundImages} ${foundImages === 1 ? 'image' : 'images'}. Couldn't recognize ${
             notFoundImages.length
           }.`
         );
       } else {
-        this.snackBar.open(`Successfully loaded all ${foundImages} images.`);
+        this.snackBar.info(`Successfully loaded all ${foundImages} images.`);
       }
     }
   }

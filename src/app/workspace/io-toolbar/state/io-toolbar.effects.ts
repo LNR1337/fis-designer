@@ -32,7 +32,7 @@ export class IoToolbarEffects {
         try {
           this.localStorageService.saveState(action.name, stateToSave);
         } catch (e) {
-          this.snackBar.open(`Error saving config: ${e}`);
+          this.snackBar.error(`Error saving config: ${e}`);
         }
         return of(loadExistingConfigNames());
       })
@@ -62,7 +62,7 @@ export class IoToolbarEffects {
           const loadedFromState = this.localStorageService.loadState(action.name);
           return [loadedSerializedState({loadedObject: loadedFromState})];
         } catch (e) {
-          this.snackBar.open(`Error loading config from local storage: ${e}`);
+          this.snackBar.error(`Error loading config from local storage: ${e}`);
           return EMPTY;
         }
       })
@@ -79,7 +79,7 @@ export class IoToolbarEffects {
           const loadedFromFile = JSON.parse(encoder.decode(action.loadedBuffer));
           return [loadedSerializedState({loadedObject: loadedFromFile})];
         } catch (e) {
-          this.snackBar.open(`Error loading config from file: ${e}`);
+          this.snackBar.error(`Error loading config from file: ${e}`);
           return EMPTY;
         }
       })

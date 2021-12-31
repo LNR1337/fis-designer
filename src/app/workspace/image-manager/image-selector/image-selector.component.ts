@@ -58,7 +58,7 @@ export class ImageSelectorComponent implements OnChanges {
       this.disabled = false;
     };
     reader.onerror = () => {
-      this.snackBar.open('Failed to read image file.', SnackType.ERROR);
+      this.snackBar.error('Failed to read image file.');
     };
     reader.readAsArrayBuffer(file);
   }
