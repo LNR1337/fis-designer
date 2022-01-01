@@ -12,7 +12,7 @@ import {assureDigitDimensions} from './utils';
 
 @Component({
   selector: 'app-image-manager',
-  templateUrl: './image-manager.html',
+  templateUrl: './image-manager.component.html',
   styleUrls: ['./image-manager.component.scss'],
 })
 /**
@@ -35,6 +35,16 @@ export class ImageManagerComponent {
         }
       })
     );
+  }
+
+  downloadAll() {
+    if (!this.imageInputs) {
+      console.error('What happened to the image input components?');
+      return;
+    }
+    for (let i = 0; i < this.imageInputs.length; i++) {
+      setTimeout(() => this.imageInputs!.get(i)!.downloadImage(), i * 200);
+    }
   }
 
   onMultiImageSelected(event: Event) {

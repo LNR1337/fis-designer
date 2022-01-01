@@ -1,6 +1,6 @@
 import {from, Observable} from 'rxjs';
 import {ImageStateFieldsType} from '../image-manager/state/images.state';
-import {IMAGE_MAX_SIZE, MIME_TYPE} from '../image-manager/models/images_metadata';
+import {IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE} from '../image-manager/models/images_metadata';
 
 /** Converts an array buffer into a base64 encoded string. */
 export function byteToBase64(buffer: ArrayBuffer): string {
@@ -20,7 +20,7 @@ function validateImage(
   const restriction = IMAGE_MAX_SIZE[imageName];
   if (restriction.x && restriction.y) {
     if (image.naturalWidth !== restriction.x || image.naturalHeight !== restriction.y) {
-      return `The image must be exactly ${restriction.x} by ${restriction.y} pixels.`;
+      return `${IMAGE_LABEL[imageName]} must be exactly ${restriction.x} by ${restriction.y} pixels (was ${image.naturalWidth} by ${image.naturalHeight}).`;
     }
   }
   if (restriction.pixels && image.naturalWidth * image.naturalHeight > restriction.pixels) {

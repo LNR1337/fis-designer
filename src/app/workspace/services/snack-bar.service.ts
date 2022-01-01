@@ -39,6 +39,7 @@ export class SnackBarService {
   }
 
   error(message: string) {
+    console.error(message);
     this.open(message, SnackType.ERROR);
   }
 

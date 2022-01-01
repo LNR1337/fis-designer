@@ -54,7 +54,7 @@ export const IMAGE_LABEL: ImageStateFieldsObject<string> = {
 
 /** Regular expressions for possible names for image files. */
 export const IMAGE_FILENAME_MATCHERS: ImageStateFieldsObject<RegExp[]> = {
-  backgroundImage: [/background/i, /.*gauges*/i],
+  backgroundImage: [/background/i, /.*gauges.*/i],
   tableBackgroundImage: [/.*table.*/i],
   needleImage1: [/.*needle.*(left|1|one).*/i, /.*(left|1|one).*needle.*/i],
   needleImage2: [/.*needle.*(center|middle|2|two).*/i, /.*(center|middle|2|two).*needle.*/i],

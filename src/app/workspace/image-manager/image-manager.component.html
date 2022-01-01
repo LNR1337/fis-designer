@@ -41,7 +41,16 @@
     tooltip="Upload multiple images and try to guess their intended role based on their file names."
   >
     <mat-icon>collections</mat-icon>
-    Bulk load images
+    Bulk upload
+  </button>
+  <button
+    mat-raised-button
+    (click)="downloadAll()"
+    tooltip="Download all images used in the project."
+    color="primary"
+  >
+    <mat-icon>download_for_offline</mat-icon>
+    Download all
   </button>
   <button mat-raised-button mat-dialog-close color="primary">
     <mat-icon>close</mat-icon>
