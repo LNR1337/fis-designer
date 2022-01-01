@@ -95,7 +95,7 @@ export class GaugesCompositor {
       this.context.strokeStyle = 'yellow';
       for (let i = 0; i < NUMERICAL_DIGITS; i++) {
         const rectX = x + i * GTI_FONT_WIDTH;
-        this.context.strokeRect(rectX, y + 0.5, GTI_FONT_WIDTH, GTI_FONT_HEIGHT);
+        this.context.strokeRect(rectX, y, GTI_FONT_WIDTH - 1, GTI_FONT_HEIGHT - 1);
       }
       this.context.globalAlpha = 1;
     }
@@ -124,7 +124,12 @@ export class GaugesCompositor {
       0.5;
     for (let i = 0; i < NUMERICAL_DIGITS; i++) {
       const rectX = x + i * (fontWidth + fontSpacing);
-      this.context.strokeRect(rectX, numericalConfig.positionY! + 0.5, fontWidth, fontHeight);
+      this.context.strokeRect(
+        rectX,
+        numericalConfig.positionY! + 0.5,
+        fontWidth - 1,
+        fontHeight - 1
+      );
     }
     this.context.globalAlpha = 1;
   }
