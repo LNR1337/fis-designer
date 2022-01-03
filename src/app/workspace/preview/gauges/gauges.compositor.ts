@@ -4,7 +4,7 @@ import {
   NeedleConfig,
   NumericalConfig,
 } from '../../config/models/configs';
-import {ConfigStateSetupFieldsConfig} from '../../config/state/config.state';
+import {ConfigStateDigitSetupFieldsConfig} from '../../config/state/config.state';
 
 const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
@@ -76,12 +76,12 @@ export class GaugesCompositor {
   }
 
   drawGTIHighlight(
-    numericalSetup: ConfigStateSetupFieldsConfig,
+    numericalSetup: ConfigStateDigitSetupFieldsConfig,
     needleConfig1: NeedleConfig,
     needleConfig2: NeedleConfig,
     needleConfig3: NeedleConfig
   ) {
-    if (!numericalSetup.useBuiltInNumericals) return;
+    if (!numericalSetup.useBuiltInNumericalGauges) return;
 
     const totalWidth = NUMERICAL_DIGITS * GTI_FONT_WIDTH;
 
@@ -103,7 +103,7 @@ export class GaugesCompositor {
 
   drawNumericalHighlight(
     numericalConfig: NumericalConfig,
-    numericalSetup: ConfigStateSetupFieldsConfig,
+    numericalSetup: ConfigStateDigitSetupFieldsConfig,
     drawPosition = true
   ) {
     if (!numericalConfig.positionX || !numericalConfig.positionY) return;

@@ -4,7 +4,7 @@ import {EMPTY, exhaustMap, mergeMap, map, of, withLatestFrom} from 'rxjs';
 import {saveAs} from 'file-saver';
 
 import {loadConfigStateFromObject} from '../../config/state/config.actions';
-import {DISPLAY_FEATURE_KEY} from '../../config/state/config.reducer';
+import {CONFIG_FEATURE_KEY} from '../../config/state/config.reducer';
 import {loadImagesStateFromObject} from '../../image-manager/state/images.actions';
 import {IMAGES_FEATURE_KEY} from '../../image-manager/state/images.reducer';
 import {LocalStorageService} from '../../services/local-storage';
@@ -92,10 +92,10 @@ export class IoToolbarEffects {
       ofType(loadedSerializedState),
       mergeMap(({loadedObject}) => {
         const loadActions: Action[] = [];
-        if (loadedObject.hasOwnProperty(DISPLAY_FEATURE_KEY)) {
+        if (loadedObject.hasOwnProperty(CONFIG_FEATURE_KEY)) {
           loadActions.push(
             loadConfigStateFromObject({
-              object: (loadedObject as any)[DISPLAY_FEATURE_KEY],
+              object: (loadedObject as any)[CONFIG_FEATURE_KEY],
             })
           );
         }

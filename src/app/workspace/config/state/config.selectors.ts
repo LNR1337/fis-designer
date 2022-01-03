@@ -1,17 +1,17 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
-import {DISPLAY_FEATURE_KEY} from './config.reducer';
+import {CONFIG_FEATURE_KEY} from './config.reducer';
 import {
   ConfigState,
   ConfigStateNeedleFieldsObject,
   ConfigStateGaugeFieldsObject,
   ConfigStateNumericalFieldsObject,
-  ConfigStateSetupFieldsConfig,
+  ConfigStateDigitSetupFieldsConfig,
 } from './config.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
 /** Selector for the whole state. */
-export const selectConfigState = createFeatureSelector<ConfigState>(DISPLAY_FEATURE_KEY);
+export const selectConfigState = createFeatureSelector<ConfigState>(CONFIG_FEATURE_KEY);
 
 /** Selects the needles' configs. */
 export const selectNeedleConfigs = createSelector(
@@ -64,8 +64,8 @@ export const selectDisplaySetupValues = createSelector(
       fontSpacing: state.fontSpacing,
       fontColor: state.fontColor,
       fontWarningColor: state.fontWarningColor,
-      useBuiltInNumericals: state.useBuiltInNumericals,
-    } as ConfigStateSetupFieldsConfig)
+      useBuiltInNumericalGauges: state.useBuiltInNumericalGauges,
+    } as ConfigStateDigitSetupFieldsConfig)
 );
 
 /** Selects currently highlighted config. */

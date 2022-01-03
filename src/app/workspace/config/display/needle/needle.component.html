@@ -7,7 +7,7 @@
           : 'No needle image loaded yet.'
       "
     >
-      photo_size_select_large
+      aspect_ratio
     </mat-icon>
   </button>
 </div>
@@ -16,10 +16,7 @@
 <ng-container *ngFor="let fieldName of NeedleConfigFields">
   <app-sliding-input
     *ngIf="NEEDLE_FIELD_METADATA[fieldName]; let metaData"
-    [label]="metaData.label ?? ''"
-    [min]="metaData.min"
-    [max]="metaData.max"
-    [hint]="metaData.hint ?? ''"
+    [metaData]="metaData"
     (valueChanged)="valueChanged($event, fieldName)"
     [value]="needleConfig ? needleConfig[fieldName] : undefined"
   ></app-sliding-input>

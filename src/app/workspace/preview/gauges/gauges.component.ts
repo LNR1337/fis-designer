@@ -9,7 +9,7 @@ import {
   ConfigStateGaugeFieldsObject,
   ConfigStateNeedleFieldsObject,
   ConfigStateNumericalFieldsObject,
-  ConfigStateSetupFieldsConfig,
+  ConfigStateDigitSetupFieldsConfig,
 } from '../../config/state/config.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../../config/models/configs';
 import {
@@ -38,7 +38,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   needleConfigs?: ConfigStateNeedleFieldsObject<NeedleConfig>;
   gaugeConfigs?: ConfigStateGaugeFieldsObject<GaugeConfig>;
   numericalConfigs?: ConfigStateNumericalFieldsObject<NumericalConfig>;
-  setupConfig?: ConfigStateSetupFieldsConfig;
+  setupConfig?: ConfigStateDigitSetupFieldsConfig;
   highlight?: ConfigStateFieldsType;
   needleAngles?: number[];
 

@@ -5,11 +5,11 @@ import {containsAllDigitImages} from '../../../image-manager/utils';
 import {SETUP_FIELDS_METADATA} from '../../models/configs_metadata';
 import {changedDisplaySetupConfig, recalculateDigitsSize} from '../../state/config.actions';
 import {
-  ConfigStateSetupFieldsBoolean,
-  ConfigStateSetupFieldsColor,
-  ConfigStateSetupFieldsConfig,
-  ConfigStateSetupFieldsNumerical,
-  ConfigStateSetupFieldsType,
+  ConfigStateFieldsColorSet,
+  ConfigStateDigitSetupFieldsConfig,
+  ConfigStateFieldsNumericalSet,
+  ConfigStateDigitSetupFieldsType,
+  ConfigStateDigitSetupFields,
 } from '../../state/config.state';
 
 @Component({
@@ -20,13 +20,13 @@ import {
 export class NumericalSetupComponent {
   // List of names of loaded images.
   @Input() loadedImages?: Set<ImageStateFieldsType>;
-  @Input() setupConfig?: ConfigStateSetupFieldsConfig;
+  @Input() setupConfig?: ConfigStateDigitSetupFieldsConfig;
   @Input() label = '';
 
   SETUP_FIELDS_METADATA = SETUP_FIELDS_METADATA;
-  numericalFields = ConfigStateSetupFieldsNumerical;
-  colorFields = ConfigStateSetupFieldsColor;
-  boolFields = ConfigStateSetupFieldsBoolean;
+  allFields = ConfigStateDigitSetupFields;
+  numericalFields = ConfigStateFieldsNumericalSet;
+  colorFields = ConfigStateFieldsColorSet;
   resizeEnabled = false;
 
   constructor(private readonly store: Store) {}
@@ -43,7 +43,7 @@ export class NumericalSetupComponent {
     }
   }
 
-  valueChanged(value: number | string | boolean, fieldName: ConfigStateSetupFieldsType) {
+  valueChanged(value: number | string | boolean, fieldName: ConfigStateDigitSetupFieldsType) {
     if (!this.setupConfig) return;
     this.store.dispatch(
       changedDisplaySetupConfig({
@@ -52,26 +52,17 @@ export class NumericalSetupComponent {
     );
   }
 
-  getNumericalValue(fieldName: ConfigStateSetupFieldsType): number {
-    if (!(this.numericalFields as ReadonlyArray<string>).includes(fieldName)) {
-      throw new Error('Getting numerical value of non-numerical field.');
-    }
+  getNumericalValue(fieldName: ConfigStateDigitSetupFieldsType): number {
     if (!this.setupConfig) return 0;
     return this.setupConfig[fieldName] as number;
   }
 
-  getStringValue(fieldName: ConfigStateSetupFieldsType): string {
-    if (!(this.colorFields as ReadonlyArray<string>).includes(fieldName)) {
-      throw new Error('Getting string value of non-string field.');
-    }
+  getStringValue(fieldName: ConfigStateDigitSetupFieldsType): string {
     if (!this.setupConfig) return '';
     return this.setupConfig[fieldName] as string;
   }
 
-  getBooleanValue(fieldName: ConfigStateSetupFieldsType): boolean {
-    if (!(this.boolFields as ReadonlyArray<string>).includes(fieldName)) {
-      throw new Error('Getting boolean value of non-boolean field.');
-    }
+  getBooleanValue(fieldName: ConfigStateDigitSetupFieldsType): boolean {
     if (!this.setupConfig) return false;
     return this.setupConfig[fieldName] as boolean;
   }

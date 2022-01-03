@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {MatSliderChange} from '@angular/material/slider';
+import {ConfigFieldMetadata} from '../../models/configs_metadata';
 
 @Component({
   selector: 'app-sliding-input',
@@ -7,10 +8,7 @@ import {MatSliderChange} from '@angular/material/slider';
   styleUrls: ['./sliding-input.component.scss'],
 })
 export class SlidingInputComponent {
-  @Input() label = '';
-  @Input() hint?: string;
-  @Input() min?: number;
-  @Input() max?: number;
+  @Input() metaData?: ConfigFieldMetadata;
   @Input() value?: number;
 
   @Output() valueChanged = new EventEmitter<number>();
@@ -18,15 +16,20 @@ export class SlidingInputComponent {
   constructor() {}
 
   get showSlider(): boolean {
-    return this.min !== undefined && this.max !== undefined;
+    return (
+      !!this.metaData &&
+      !this.metaData.hideSlider &&
+      this.metaData.min !== undefined &&
+      this.metaData.max !== undefined
+    );
   }
 
   changeValue(value: number) {
-    if (this.min !== undefined && value < this.min) {
-      value = this.min;
+    if (this.metaData && this.metaData.min !== undefined && value < this.metaData.min) {
+      value = this.metaData.min;
     }
-    if (this.max !== undefined && value > this.max) {
-      value = this.max;
+    if (this.metaData && this.metaData.max !== undefined && value > this.metaData.max) {
+      value = this.metaData.max;
     }
     this.value = value;
     this.valueChanged.emit(value);

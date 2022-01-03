@@ -1,8 +1,8 @@
-<span class="label">{{ label }}:<mat-icon *ngIf="hint" [tooltip]="hint">help</mat-icon></span>
+<span class="label">{{ metaData?.label }}:<mat-icon *ngIf="metaData?.hint" [tooltip]="metaData!.hint!">help</mat-icon></span>
 <mat-slider
   *ngIf="showSlider"
-  [min]="min"
-  [max]="max"
+  [min]="metaData?.min"
+  [max]="metaData?.max"
   step="1"
   [value]="value"
   (input)="onChangeSlider($event)"
@@ -16,6 +16,6 @@
   type="number"
   [value]="value"
   (change)="onChangeField($event)"
-  [max]="max"
-  [min]="min"
+  [max]="metaData?.max"
+  [min]="metaData?.min"
 />

@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
 
-  app-needle:not(:first-child), app-gauge:not(:first-child) {
+  .settings-element:not(:first-child) {
     border-top: solid 1px $grey-border;
   }
 }

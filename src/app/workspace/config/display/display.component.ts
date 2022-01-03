@@ -11,7 +11,7 @@ import {
   ConfigStateNumericalFields,
   ConfigStateFieldsType,
   ConfigStateNumericalFieldsObject,
-  ConfigStateSetupFieldsConfig,
+  ConfigStateDigitSetupFieldsConfig,
 } from '../state/config.state';
 import {
   selectNeedleConfigs,
@@ -35,7 +35,7 @@ export class DisplayComponent {
   needlesConfigs: Observable<ConfigStateNeedleFieldsObject<NeedleConfig>>;
   gaugesConfigs: Observable<ConfigStateGaugeFieldsObject<GaugeConfig>>;
   numericalConfigs: Observable<ConfigStateNumericalFieldsObject<NumericalConfig>>;
-  setupConfig: Observable<ConfigStateSetupFieldsConfig>;
+  setupConfig: Observable<ConfigStateDigitSetupFieldsConfig>;
 
   GAUGE_LABELS = GAUGE_LABELS;
   NEEDLE_LABELS = NEEDLE_LABELS;

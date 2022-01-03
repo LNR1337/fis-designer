@@ -3,10 +3,7 @@
 <ng-container *ngFor="let fieldName of GaugeConfigFields">
   <app-sliding-input
     *ngIf="GAUGE_FIELD_METADATA[fieldName]; let metaData"
-    [label]="metaData.label ?? ''"
-    [min]="metaData.min"
-    [max]="metaData.max"
-    [hint]="metaData.hint"
+    [metaData]="metaData"
     (valueChanged)="valueChanged($event, fieldName)"
     [value]="gaugeConfig ? gaugeConfig[fieldName] : undefined"
   ></app-sliding-input>

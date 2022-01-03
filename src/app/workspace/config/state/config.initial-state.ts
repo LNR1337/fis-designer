@@ -61,5 +61,5 @@ export const initialConfigState: ConfigState = {
   fontSpacing: 0,
   fontColor: '#ffffff',
   fontWarningColor: '#ff0000',
-  useBuiltInNumericals: false,
+  useBuiltInNumericalGauges: false,
 };

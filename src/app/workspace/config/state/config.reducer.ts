@@ -4,7 +4,7 @@ import * as actions from './config.actions';
 import {initialConfigState} from './config.initial-state';
 import {ConfigState} from './config.state';
 
-export const DISPLAY_FEATURE_KEY = 'display';
+export const CONFIG_FEATURE_KEY = 'config';
 
 export const configReducer = createReducer(
   initialConfigState,

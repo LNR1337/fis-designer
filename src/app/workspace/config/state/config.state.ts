@@ -1,7 +1,7 @@
 /** Names of state fields containing display settings. */
-import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
+import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
 
-// ------------- Field lists -------------
+// -------------------------- Whole config --------------------------
 
 export const ConfigStateFields = [
   'gauge1',
@@ -28,16 +28,91 @@ export const ConfigStateFields = [
   'fontWarningColor',
   'tableBackgroundColor',
   'tableFontColor',
-  'useBuiltInNumericals',
+  'useBuiltInNumericalGauges',
 ] as const;
+
+/** Set of all config state fields holding numerical values. */
+export const ConfigStateFieldsNumericalSet = new Set([
+  'fontWidth',
+  'fontHeight',
+  'fontDotWidth',
+  'fontSpacing',
+  'language',
+  'autostart',
+  'bluetooth',
+  'car',
+  'mainLayout',
+  'firstTable',
+]);
+
+/** Set of all config state fields holding color setup values. */
+export const ConfigStateFieldsColorSet = new Set([
+  'fontColor',
+  'fontWarningColor',
+  'tableBackgroundColor',
+  'tableFontColor',
+]);
+
+/** Set of all config state fields holding boolean values. */
+export const ConfigStateFieldsBooleanSet = new Set([
+  'useBuiltInNumericalGauges',
+  'useTableBackgroundImage',
+  'useTableBackgroundImage',
+  'useSteeringWheelRoller',
+  'driveSelect',
+  'showEgtToCan',
+  'supportLowResolution',
+  'ignorePdc',
+  'scrollAllTables',
+  'hideStatusbarOnGauge',
+  'hideStatusbarOnTable',
+  'useVirtualCockpitLayout',
+  'useStarButton',
+  'hideOnDriveSelectButton',
+  'hideOnMmiButton',
+  'externalCanWarning',
+]);
+
+/** Type for all valid config state field names. */
+export type ConfigStateFieldsType = typeof ConfigStateFields[number];
+
+/** Object type of all config state fields. */
+export type ConfigStateFieldsObject<T> = {
+  [property in ConfigStateFieldsType]: T;
+};
+
+/** Object type of some config state fields. */
+export type PartialConfigStateFieldsObject<T> = Partial<ConfigStateFieldsObject<T>>;
+
+// -------------------------- Gauges --------------------------
 
 /** List of all config state fields holding gauge configs. */
 export const ConfigStateGaugeFields = ['gauge1', 'gauge2', 'gauge3'] as const;
 
+/** Type for all valid state field names holding gauge settings. */
+export type ConfigStateGaugeFieldsType = typeof ConfigStateGaugeFields[number];
+
+/** Object type of state fields holding gauge settings. */
+export type ConfigStateGaugeFieldsObject<T> = {
+  [property in ConfigStateGaugeFieldsType]: T;
+};
+
+// -------------------------- Needles --------------------------
+
 /** List of all config state fields holding needle configs. */
 export const ConfigStateNeedleFields = ['needle1', 'needle2', 'needle3'] as const;
 
-/** List of all config state fields holding needle configs. */
+/** Type for all valid state field names holding needle settings. */
+export type ConfigStateNeedleFieldsType = typeof ConfigStateNeedleFields[number];
+
+/** Object type of state fields holding needle settings. */
+export type ConfigStateNeedleFieldsObject<T> = {
+  [property in ConfigStateNeedleFieldsType]: T;
+};
+
+// -------------------------- Numerical gauges --------------------------
+
+/** List of all config state fields holding numerical configs. */
 export const ConfigStateNumericalFields = [
   'numerical1',
   'numerical2',
@@ -51,85 +126,54 @@ export const ConfigStateNumericalFields = [
   'numerical10',
 ] as const;
 
-/** List of all config state fields holding setup values. */
-export const ConfigStateSetupFields = [
-  'fontWidth',
-  'fontHeight',
-  'fontDotWidth',
-  'fontSpacing',
-  'fontColor',
-  'fontWarningColor',
-  'useBuiltInNumericals',
-] as const;
-
-/** List of all config state fields holding numerical setup values. */
-export const ConfigStateSetupFieldsNumerical = [
-  'fontWidth',
-  'fontHeight',
-  'fontDotWidth',
-  'fontSpacing',
-] as const;
-
-/** List of all config state fields holding color setup values. */
-export const ConfigStateSetupFieldsColor = ['fontColor', 'fontWarningColor'] as const;
-
-/** List of all config state fields holding boolean values. */
-export const ConfigStateSetupFieldsBoolean = ['useBuiltInNumericals'] as const;
-
-// ------------- Union types -------------
-
-/** Type for all valid config state field names. */
-export type ConfigStateFieldsType = typeof ConfigStateFields[number];
-
-/** Type for all valid state field names holding gauge settings. */
-export type ConfigStateGaugeFieldsType = typeof ConfigStateGaugeFields[number];
-
-/** Type for all valid state field names holding needle settings. */
-export type ConfigStateNeedleFieldsType = typeof ConfigStateNeedleFields[number];
-
 /** Type for all valid state field names holding numerical settings. */
 export type ConfigStateNumericalFieldsType = typeof ConfigStateNumericalFields[number];
-
-/** Type for all valid state field names holding setup values. */
-export type ConfigStateSetupFieldsType = typeof ConfigStateSetupFields[number];
-
-// ------------- Object types -------------
-
-/** Object type of state fields holding gauge settings. */
-export type ConfigStateGaugeFieldsObject<T> = {
-  [property in ConfigStateGaugeFieldsType]: T;
-};
-
-/** Object type of state fields holding needle settings. */
-export type ConfigStateNeedleFieldsObject<T> = {
-  [property in ConfigStateNeedleFieldsType]: T;
-};
 
 /** Object type of state fields holding numerical settings. */
 export type ConfigStateNumericalFieldsObject<T> = {
   [property in ConfigStateNumericalFieldsType]: T;
 };
 
+// -------------------------- Tables --------------------------
+
+/** List of all config state fields holding table configs. */
+export const ConfigStateTableFields = ['table1', 'table2', 'table3', 'table4', 'table5'] as const;
+
+/** Type for all valid state field names holding table settings. */
+export type ConfigStateTableFieldsType = typeof ConfigStateTableFields[number];
+
+/** Object type of state fields holding table settings. */
+export type ConfigStateTableFieldsObject<T> = {
+  [property in ConfigStateTableFieldsType]: T;
+};
+
+// -------------------------- Digits setup --------------------------
+
+/** List of all config state fields holding setup values. */
+export const ConfigStateDigitSetupFields = [
+  'fontWidth',
+  'fontHeight',
+  'fontDotWidth',
+  'fontSpacing',
+  'fontColor',
+  'fontWarningColor',
+  'useBuiltInNumericalGauges',
+] as const;
+
+/** Type for all valid state field names holding setup values. */
+export type ConfigStateDigitSetupFieldsType = typeof ConfigStateDigitSetupFields[number];
+
 /** Object type of state fields holding setup values. */
-export type ConfigStateSetupFieldsObject<T> = {
-  [property in ConfigStateSetupFieldsType]: T;
+export type ConfigStateDigitSetupFieldsObject<T> = {
+  [property in ConfigStateDigitSetupFieldsType]: T;
 };
 
 /** Object holding a part of state responsible for numerical setup. */
-export type ConfigStateSetupFieldsConfig = ConfigStateSetupFieldsObject<string | number | boolean>;
+export type ConfigStateDigitSetupFieldsConfig = ConfigStateDigitSetupFieldsObject<
+  string | number | boolean
+>;
 
-/** Object type of all config state fields. */
-export type ConfigStateFieldsObject<T> = {
-  [property in ConfigStateFieldsType]: T;
-};
-
-/** Object type of some config state fields. */
-export type PartialConfigStateFieldsObject<T> = Partial<ConfigStateFieldsObject<T>>;
-
-// ------------- State -------------
-
-/** Type of all valid types for config state fields. */
-export type ValidConfigStateType = number | string | GaugeConfig | NumericalConfig | NeedleConfig;
+// -------------------------- State --------------------------
 
 /** State for the config module. */
 export interface ConfigState {
@@ -150,13 +194,43 @@ export interface ConfigState {
   numerical8?: NumericalConfig;
   numerical9?: NumericalConfig;
   numerical10?: NumericalConfig;
+  table1?: TableConfig;
+  table2?: TableConfig;
+  table3?: TableConfig;
+  table4?: TableConfig;
+  table5?: TableConfig;
+  // Digital gauges settings.
   fontWidth?: number;
   fontHeight?: number;
   fontDotWidth?: number;
   fontSpacing?: number;
   fontColor?: string;
   fontWarningColor?: string;
-  useBuiltInNumericals?: boolean;
+  useBuiltInNumericalGauges?: boolean;
+  // Table view.
+  useTableBackgroundImage?: boolean;
+  tableBackgroundColor?: string;
+  tableFontColor?: string;
+  // General settings.
+  language?: number;
+  autostart?: number;
+  bluetooth?: number;
+  car?: number;
+  mainLayout?: number;
+  firstTable?: number;
+  useSteeringWheelRoller?: boolean;
+  driveSelect?: boolean;
+  showEgtToCan?: boolean;
+  supportLowResolution?: boolean;
+  ignorePdc?: boolean;
+  scrollAllTables?: boolean;
+  hideStatusbarOnGauge?: boolean;
+  hideStatusbarOnTable?: boolean;
+  useVirtualCockpitLayout?: boolean;
+  useStarButton?: boolean;
+  hideOnDriveSelectButton?: boolean;
+  hideOnMmiButton?: boolean;
+  externalCanWarning?: boolean;
   // Internal utility fields.
   activeHighlight?: ConfigStateFieldsType;
 }

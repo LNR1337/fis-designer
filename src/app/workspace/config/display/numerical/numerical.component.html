@@ -2,20 +2,14 @@
 
 <app-sliding-input
   *ngIf="NUMERICAL_FIELD_METADATA['positionX']; let metaData"
-  [label]="metaData.label ?? ''"
-  [min]="metaData.min"
-  [max]="metaData.max"
-  [hint]="metaData.hint ?? ''"
+  [metaData]="metaData"
   (valueChanged)="valueChanged($event, 'positionX')"
   [value]="numericalConfig ? numericalConfig['positionX'] : undefined"
 ></app-sliding-input>
 
 <app-sliding-input
   *ngIf="NUMERICAL_FIELD_METADATA['positionY']; let metaData"
-  [label]="metaData.label ?? ''"
-  [min]="metaData.min"
-  [max]="metaData.max"
-  [hint]="metaData.hint ?? ''"
+  [metaData]="metaData"
   (valueChanged)="valueChanged($event, 'positionY')"
   [value]="numericalConfig ? numericalConfig['positionY'] : undefined"
 ></app-sliding-input>

@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {DISPLAY_FEATURE_KEY} from '../../config/state/config.reducer';
+import {CONFIG_FEATURE_KEY} from '../../config/state/config.reducer';
 import {selectConfigState} from '../../config/state/config.selectors';
 import {IMAGES_FEATURE_KEY} from '../../image-manager/state/images.reducer';
 import {selectImagesState} from '../../image-manager/state/images.selectors';
@@ -19,7 +19,7 @@ export const selectStateToSave = createSelector(
   selectConfigState,
   selectImagesState,
   (configState, imagesState) => ({
-    [DISPLAY_FEATURE_KEY]: configState,
+    [CONFIG_FEATURE_KEY]: configState,
     [IMAGES_FEATURE_KEY]: imagesState,
   })
 );

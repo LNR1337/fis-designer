@@ -7,38 +7,36 @@
           : 'Not all digit images loaded yet.'
       "
     >
-      photo_size_select_large
+      aspect_ratio
     </mat-icon>
   </button>
 </div>
-<h4 class="label">{{ label }}</h4>
 
 <app-toggle-input
-  *ngIf="SETUP_FIELDS_METADATA['useBuiltInNumericals']; let metaData"
+  *ngIf="SETUP_FIELDS_METADATA['useBuiltInNumericalGauges']; let metaData"
   [label]="metaData.label ?? ''"
   [hint]="metaData.hint ?? ''"
-  (valueChanged)="valueChanged($event, 'useBuiltInNumericals')"
-  [value]="getBooleanValue('useBuiltInNumericals')"
+  (valueChanged)="valueChanged($event, 'useBuiltInNumericalGauges')"
+  [value]="getBooleanValue('useBuiltInNumericalGauges')"
 ></app-toggle-input>
 
-<ng-container *ngFor="let fieldName of numericalFields">
-  <app-sliding-input
-    *ngIf="SETUP_FIELDS_METADATA[fieldName]; let metaData"
-    [label]="metaData.label ?? ''"
-    [min]="metaData.min"
-    [max]="metaData.max"
-    [hint]="metaData.hint ?? ''"
-    (valueChanged)="valueChanged($event, fieldName)"
-    [value]="getNumericalValue(fieldName)"
-  ></app-sliding-input>
-</ng-container>
+<ng-container *ngFor="let fieldName of allFields">
+  <ng-container *ngIf="numericalFields.has(fieldName)">
+    <app-sliding-input
+      *ngIf="SETUP_FIELDS_METADATA[fieldName]; let metaData"
+      [metaData]="metaData"
+      (valueChanged)="valueChanged($event, fieldName)"
+      [value]="getNumericalValue(fieldName)"
+    ></app-sliding-input>
+  </ng-container>
 
-<ng-container *ngFor="let fieldName of colorFields">
-  <app-color-input
-    *ngIf="SETUP_FIELDS_METADATA[fieldName]; let metaData"
-    [label]="metaData.label ?? ''"
-    [hint]="metaData.hint ?? ''"
-    (valueChanged)="valueChanged($event, fieldName)"
-    [value]="getStringValue(fieldName)"
-  ></app-color-input>
+  <ng-container *ngIf="colorFields.has(fieldName)">
+    <app-color-input
+      *ngIf="SETUP_FIELDS_METADATA[fieldName]; let metaData"
+      [label]="metaData.label ?? ''"
+      [hint]="metaData.hint ?? ''"
+      (valueChanged)="valueChanged($event, fieldName)"
+      [value]="getStringValue(fieldName)"
+    ></app-color-input>
+  </ng-container>
 </ng-container>

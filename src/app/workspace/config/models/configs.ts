@@ -1,4 +1,4 @@
-// Gauges.
+// -------------------------- Gauges --------------------------
 
 /** All valid field names of gauge config. */
 export const GaugeConfigFields = [
@@ -37,7 +37,7 @@ export function getAbsoluteNeedleAngleBounds(config: GaugeConfig): [number, numb
   return [(angleStartDeg * Math.PI) / 180, (angleEndDeg * Math.PI) / 180];
 }
 
-// Needles.
+// -------------------------- Needles --------------------------
 
 /** All valid field names of needle config. */
 export const NeedleConfigFields = [
@@ -65,7 +65,7 @@ export type PartialNeedleConfigFieldsObject<T> = Partial<NeedleConfigFieldsObjec
 /** Configuration of needle display. */
 export type NeedleConfig = PartialNeedleConfigFieldsObject<number>;
 
-// Numerical.
+// -------------------------- Numerical gauges --------------------------
 
 /** All valid field names of numerical config. */
 export const NumericalConfigFields = ['positionX', 'positionY', 'centered'] as const;
@@ -86,4 +86,61 @@ export interface NumericalConfig extends PartialNumericalConfigFieldsObject<numb
   positionX?: number;
   positionY?: number;
   centered?: boolean;
+}
+
+// -------------------------- Tables --------------------------
+
+/** All valid field names of table row config. */
+export const TableRowConfigFields = [
+  'measurementId',
+  'label',
+  'unit',
+  'decimalPlaces',
+  'factor',
+  'pressureTag',
+  'lowerWarning',
+  'upperWarning',
+] as const;
+
+/** Type for all valid field names of table row config. */
+export type TableRowConfigFieldsType = typeof TableRowConfigFields[number];
+
+/** Object type for holding data for every field in table row config. */
+export type TableRowConfigFieldsObject<T> = {
+  [property in TableRowConfigFieldsType]: T;
+};
+
+/** Object type for holding data for some fields in table row config. */
+export type PartialTableRowConfigFieldsObject<T> = Partial<TableRowConfigFieldsObject<T>>;
+
+/** Configuration of a table row. */
+export interface TableRowConfig extends PartialTableRowConfigFieldsObject<number | string> {
+  measurementId?: number;
+  label?: string;
+  unit?: string;
+  decimalPlaces?: number;
+  factor?: number;
+  pressureTag?: number;
+  lowerWarning?: number;
+  upperWarning?: number;
+}
+
+/** All valid field names of table config. */
+export const TableConfigFields = ['controlUnitId', 'rows'] as const;
+
+/** Type for all valid field names of table config. */
+export type TableConfigFieldsType = typeof TableConfigFields[number];
+
+/** Object type for holding data for every field in table config. */
+export type TableConfigFieldsObject<T> = {
+  [property in TableConfigFieldsType]: T;
+};
+
+/** Object type for holding data for some fields in table config. */
+export type PartialTableConfigFieldsObject<T> = Partial<TableConfigFieldsObject<T>>;
+
+/** Configuration of a table. */
+export interface TableConfig extends PartialTableConfigFieldsObject<number | TableRowConfig[]> {
+  controlUnitId?: number;
+  rows?: TableRowConfig[];
 }
