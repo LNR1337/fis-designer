@@ -25,14 +25,30 @@
     </button>
 
     <mat-divider [vertical]="true"></mat-divider>
+
     <button mat-icon-button (click)="saveConfigToJSON(nameInput.value)" [disabled]="disableSaveLoad"
-            tooltip="Save workspace as a JSON file.<br><br><b>Do not load this file into FIS-Control!</b>">
+            tooltip="Save complete workspace as a JSON file.<br><br><b>Do not load this file into FIS-Control!</b>">
       <mat-icon>save</mat-icon>
     </button>
     <input hidden (change)="onConfigSelected($event)" #configInput type="file" accept="application/json" />
     <button mat-icon-button [disabled]="disableSaveLoad" (click)="configInput.click()"
             tooltip="Load workspace from a JSON file.<br><br>This will overwrite your current work!">
       <mat-icon>file_upload</mat-icon>
+    </button>
+
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <button mat-icon-button (click)="saveConfigAsBinary(nameInput.value)" [disabled]="disableSaveLoad"
+            tooltip="Save FIS-Control binary config." color="primary">
+      <mat-icon>save</mat-icon>
+    </button>
+    <button mat-icon-button (click)="saveBackgroundAsBinary(nameInput.value)" [disabled]="disableSaveLoad"
+            tooltip="Save FIS-Control background file." color="primary">
+      <mat-icon>wallpaper</mat-icon>
+    </button>
+    <button mat-icon-button (click)="saveNeedlesAsBinary(nameInput.value)" [disabled]="disableSaveLoad"
+            tooltip="Save FIS-Control needles file." color="primary">
+      <mat-icon>speed</mat-icon>
     </button>
   </div>
 </mat-toolbar>

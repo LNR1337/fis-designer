@@ -15,3 +15,13 @@ export const loadImagesStateFromObject = createAction(
   '[Images] Load images state from object',
   props<{object: Object}>()
 );
+
+export const downloadNeedlesAsBinary = createAction(
+  '[Images] Download needles and digits as binary file',
+  props<{name: string}>()
+);
+
+export const downloadBackgroundAsBinary = createAction(
+  '[Images] Download backgrounds as binary file',
+  props<{name: string}>()
+);

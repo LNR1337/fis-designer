@@ -15,6 +15,11 @@ export const downloadStateAsJSON = createAction(
   props<{name: string}>()
 );
 
+export const downloadStateAsBinary = createAction(
+  '[IoToolbar] Save state to binary file',
+  props<{name: string}>()
+);
+
 export const loadStateFromBufferJSON = createAction(
   '[IoToolbar] Load state from JSON file array buffer',
   props<{loadedBuffer: ArrayBuffer}>()

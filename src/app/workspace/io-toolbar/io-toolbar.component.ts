@@ -3,13 +3,18 @@ import {MatDialog} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
 import {ImageManagerComponent} from '../image-manager/image-manager.component';
-import {SnackBarService, SnackType} from '../services/snack-bar.service';
+import {
+  downloadBackgroundAsBinary,
+  downloadNeedlesAsBinary,
+} from '../image-manager/state/images.actions';
+import {SnackBarService} from '../services/snack-bar.service';
 import {
   loadExistingConfigNames,
   loadStateFromBufferJSON,
   loadStateFromStorage,
   downloadStateAsJSON,
   saveStateToStorage,
+  downloadStateAsBinary,
 } from './state/io-toolbar.actions';
 import {selectExistingConfigNames} from './state/io-toolbar.selectors';
 
@@ -84,12 +89,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
 
   saveConfigToJSON(name: string) {
     this.debounceButtons();
-    if (!name) {
-      this.snackBar.error('Cannot save under empty name.');
-      this.focusNameInput();
-      return;
-    }
-    this.store.dispatch(downloadStateAsJSON({name}));
+    this.store.dispatch(downloadStateAsJSON({name: name ?? 'design'}));
   }
 
   loadConfigLocal(name: string) {
@@ -103,6 +103,21 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
       return;
     }
     this.store.dispatch(loadStateFromStorage({name}));
+  }
+
+  saveConfigAsBinary(name: string) {
+    this.debounceButtons();
+    this.store.dispatch(downloadStateAsBinary({name}));
+  }
+
+  saveBackgroundAsBinary(name: string) {
+    this.debounceButtons();
+    this.store.dispatch(downloadBackgroundAsBinary({name}));
+  }
+
+  saveNeedlesAsBinary(name: string) {
+    this.debounceButtons();
+    this.store.dispatch(downloadNeedlesAsBinary({name}));
   }
 
   onConfigSelected(event: Event) {
