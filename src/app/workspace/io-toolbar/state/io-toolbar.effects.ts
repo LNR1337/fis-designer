@@ -3,8 +3,8 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {EMPTY, exhaustMap, mergeMap, map, of, withLatestFrom} from 'rxjs';
 import {saveAs} from 'file-saver';
 
-import {loadDisplayStateFromObject} from '../../config/display/state/display.actions';
-import {DISPLAY_FEATURE_KEY} from '../../config/display/state/display.reducer';
+import {loadConfigStateFromObject} from '../../config/state/config.actions';
+import {DISPLAY_FEATURE_KEY} from '../../config/state/config.reducer';
 import {loadImagesStateFromObject} from '../../image-manager/state/images.actions';
 import {IMAGES_FEATURE_KEY} from '../../image-manager/state/images.reducer';
 import {LocalStorageService} from '../../services/local-storage';
@@ -94,7 +94,7 @@ export class IoToolbarEffects {
         const loadActions: Action[] = [];
         if (loadedObject.hasOwnProperty(DISPLAY_FEATURE_KEY)) {
           loadActions.push(
-            loadDisplayStateFromObject({
+            loadConfigStateFromObject({
               object: (loadedObject as any)[DISPLAY_FEATURE_KEY],
             })
           );

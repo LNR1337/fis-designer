@@ -3,8 +3,8 @@ import {
   getAbsoluteNeedleAngleBounds,
   NeedleConfig,
   NumericalConfig,
-} from '../../config/display/models/configs';
-import {DisplayStateSetupFieldsConfig} from '../../config/display/state/display.state';
+} from '../../config/models/configs';
+import {ConfigStateSetupFieldsConfig} from '../../config/state/config.state';
 
 const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
@@ -76,7 +76,7 @@ export class GaugesCompositor {
   }
 
   drawGTIHighlight(
-    numericalSetup: DisplayStateSetupFieldsConfig,
+    numericalSetup: ConfigStateSetupFieldsConfig,
     needleConfig1: NeedleConfig,
     needleConfig2: NeedleConfig,
     needleConfig3: NeedleConfig
@@ -103,7 +103,7 @@ export class GaugesCompositor {
 
   drawNumericalHighlight(
     numericalConfig: NumericalConfig,
-    numericalSetup: DisplayStateSetupFieldsConfig,
+    numericalSetup: ConfigStateSetupFieldsConfig,
     drawPosition = true
   ) {
     if (!numericalConfig.positionX || !numericalConfig.positionY) return;

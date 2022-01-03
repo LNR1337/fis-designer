@@ -3,7 +3,7 @@
     <!-- Analog gauges -->
     <ng-container *ngIf="gaugesConfigs | async; let configs">
       <app-gauge
-        *ngFor="let configName of DisplayStateGaugeFields; let i = index"
+        *ngFor="let configName of ConfigStateGaugeFields; let i = index"
         style="order: {{ i }}"
         [gaugeConfig]="configs[configName]"
         [fieldName]="configName"
@@ -15,7 +15,7 @@
     </ng-container>
     <!-- Needles -->
     <ng-container *ngIf="needlesConfigs | async; let configs">
-      <app-needle *ngFor="let configName of DisplayStateNeedleFields; let i = index"
+      <app-needle *ngFor="let configName of ConfigStateNeedleFields; let i = index"
                   style="order: {{ i }}"
                   [needleConfig]="configs[configName]"
                   [fieldName]="configName"
@@ -35,7 +35,7 @@
                          label="Digital gauges settings"></app-numerical-setup>
     <!-- Numerical gauges -->
     <ng-container *ngIf="numericalConfigs | async; let configs">
-      <app-numerical *ngFor="let configName of DisplayStateNumericalFields; let i = index"
+      <app-numerical *ngFor="let configName of ConfigStateNumericalFields; let i = index"
                      style="order: {{ i + 10 }}"
                      [numericalConfig]="configs[configName]"
                      [fieldName]="configName"

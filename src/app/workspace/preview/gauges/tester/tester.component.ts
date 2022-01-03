@@ -2,9 +2,9 @@ import {Component, OnDestroy} from '@angular/core';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Store} from '@ngrx/store';
 import {Subscription, timer} from 'rxjs';
-import {GaugeConfig, getAbsoluteNeedleAngleBounds} from '../../../config/display/models/configs';
-import {selectGaugeConfigs} from '../../../config/display/state/display.selectors';
-import {DisplayStateGaugeFieldsObject} from '../../../config/display/state/display.state';
+import {GaugeConfig, getAbsoluteNeedleAngleBounds} from '../../../config/models/configs';
+import {selectGaugeConfigs} from '../../../config/state/config.selectors';
+import {ConfigStateGaugeFieldsObject} from '../../../config/state/config.state';
 import {moveNeedles} from '../../state/preview.actions';
 
 class SweepState {
@@ -44,7 +44,7 @@ class SweepState {
 })
 export class TesterComponent implements OnDestroy {
   subscription = new Subscription();
-  gaugeConfigs?: DisplayStateGaugeFieldsObject<GaugeConfig>;
+  gaugeConfigs?: ConfigStateGaugeFieldsObject<GaugeConfig>;
   sweepSubscription?: Subscription;
 
   constructor(private readonly store: Store) {

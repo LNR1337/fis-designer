@@ -4,25 +4,24 @@ import {map, Observable} from 'rxjs';
 import {ImageStateFieldsType} from '../../image-manager/state/images.state';
 import {selectLoadedImageNames} from '../../preview/state/preview.selectors';
 import {
-  DisplayStateNeedleFieldsObject,
-  DisplayStateGaugeFieldsObject,
-  DisplayStateGaugeFields,
-  DisplayStateNeedleFields,
-  DisplayStateNumericalFields,
-  DisplayStateFieldsType,
-  DisplayStateNumericalFieldsObject,
-  DisplayStateSetupFieldsObject,
-  DisplayStateSetupFieldsConfig,
-} from './state/display.state';
+  ConfigStateNeedleFieldsObject,
+  ConfigStateGaugeFieldsObject,
+  ConfigStateGaugeFields,
+  ConfigStateNeedleFields,
+  ConfigStateNumericalFields,
+  ConfigStateFieldsType,
+  ConfigStateNumericalFieldsObject,
+  ConfigStateSetupFieldsConfig,
+} from '../state/config.state';
 import {
   selectNeedleConfigs,
   selectGaugeConfigs,
   selectNumericalConfigs,
   selectDisplaySetupValues,
-} from './state/display.selectors';
-import {GaugeConfig, NeedleConfig, NumericalConfig} from './models/configs';
-import {GAUGE_LABELS, NEEDLE_LABELS, NUMERICAL_LABELS} from './models/configs_metadata';
-import {disableHighlight, enableHighlight} from './state/display.actions';
+} from '../state/config.selectors';
+import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
+import {GAUGE_LABELS, NEEDLE_LABELS, NUMERICAL_LABELS} from '../models/configs_metadata';
+import {disableHighlight, enableHighlight} from '../state/config.actions';
 
 @Component({
   selector: 'app-display',
@@ -33,17 +32,17 @@ export class DisplayComponent {
   @Input() page: 'gauges' | 'numerical' = 'gauges';
 
   loadedImages: Observable<Set<ImageStateFieldsType>>;
-  needlesConfigs: Observable<DisplayStateNeedleFieldsObject<NeedleConfig>>;
-  gaugesConfigs: Observable<DisplayStateGaugeFieldsObject<GaugeConfig>>;
-  numericalConfigs: Observable<DisplayStateNumericalFieldsObject<NumericalConfig>>;
-  setupConfig: Observable<DisplayStateSetupFieldsConfig>;
+  needlesConfigs: Observable<ConfigStateNeedleFieldsObject<NeedleConfig>>;
+  gaugesConfigs: Observable<ConfigStateGaugeFieldsObject<GaugeConfig>>;
+  numericalConfigs: Observable<ConfigStateNumericalFieldsObject<NumericalConfig>>;
+  setupConfig: Observable<ConfigStateSetupFieldsConfig>;
 
   GAUGE_LABELS = GAUGE_LABELS;
   NEEDLE_LABELS = NEEDLE_LABELS;
   NUMERICAL_LABELS = NUMERICAL_LABELS;
-  DisplayStateGaugeFields = DisplayStateGaugeFields;
-  DisplayStateNeedleFields = DisplayStateNeedleFields;
-  DisplayStateNumericalFields = DisplayStateNumericalFields;
+  ConfigStateGaugeFields = ConfigStateGaugeFields;
+  ConfigStateNeedleFields = ConfigStateNeedleFields;
+  ConfigStateNumericalFields = ConfigStateNumericalFields;
 
   constructor(private readonly store: Store) {
     this.loadedImages = store
@@ -55,7 +54,7 @@ export class DisplayComponent {
     this.setupConfig = store.select(selectDisplaySetupValues);
   }
 
-  highlight(stateField: DisplayStateFieldsType) {
+  highlight(stateField: ConfigStateFieldsType) {
     this.store.dispatch(enableHighlight({stateField}));
   }
 

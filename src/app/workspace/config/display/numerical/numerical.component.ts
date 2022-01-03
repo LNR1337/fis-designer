@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {NumericalConfig} from '../models/configs';
-import {NUMERICAL_FIELD_METADATA} from '../models/configs_metadata';
-import {changedNeedleConfig, changedNumericalConfig} from '../state/display.actions';
-import {DisplayStateNumericalFieldsType} from '../state/display.state';
+import {NumericalConfig} from '../../models/configs';
+import {NUMERICAL_FIELD_METADATA} from '../../models/configs_metadata';
+import {changedNeedleConfig, changedNumericalConfig} from '../../state/config.actions';
+import {ConfigStateNumericalFieldsType} from '../../state/config.state';
 
 @Component({
   selector: 'app-numerical',
@@ -13,7 +13,7 @@ import {DisplayStateNumericalFieldsType} from '../state/display.state';
 export class NumericalComponent {
   @Input() numericalConfig?: NumericalConfig;
   // Name of the state field this config corresponds to.
-  @Input() fieldName?: DisplayStateNumericalFieldsType;
+  @Input() fieldName?: ConfigStateNumericalFieldsType;
   @Input() label = '';
 
   NUMERICAL_FIELD_METADATA = NUMERICAL_FIELD_METADATA;

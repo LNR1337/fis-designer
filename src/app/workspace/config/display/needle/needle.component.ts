@@ -1,10 +1,13 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
-import {DisplayStateNeedleFieldsType} from '../state/display.state';
+import {ConfigStateNeedleFieldsType} from '../../state/config.state';
 import {Store} from '@ngrx/store';
-import {changedNeedleConfig, recalculateNeedleSize} from '../state/display.actions';
-import {NeedleConfig, NeedleConfigFields} from '../models/configs';
-import {NEEDLE_DISPLAY_TO_PREVIEW_FIELD, NEEDLE_FIELD_METADATA} from '../models/configs_metadata';
+import {changedNeedleConfig, recalculateNeedleSize} from '../../state/config.actions';
+import {NeedleConfig, NeedleConfigFields} from '../../models/configs';
+import {
+  NEEDLE_DISPLAY_TO_PREVIEW_FIELD,
+  NEEDLE_FIELD_METADATA,
+} from '../../models/configs_metadata';
 
 @Component({
   selector: 'app-needle',
@@ -14,7 +17,7 @@ import {NEEDLE_DISPLAY_TO_PREVIEW_FIELD, NEEDLE_FIELD_METADATA} from '../models/
 export class NeedleComponent implements OnChanges {
   @Input() needleConfig?: NeedleConfig;
   // Name of the state field this config corresponds to.
-  @Input() fieldName?: DisplayStateNeedleFieldsType;
+  @Input() fieldName?: ConfigStateNeedleFieldsType;
   // List of names of loaded images.
   @Input() loadedImages?: Set<ImageStateFieldsType>;
   @Input() label = '';
@@ -47,7 +50,7 @@ export class NeedleComponent implements OnChanges {
     if (this.fieldName) {
       this.store.dispatch(
         recalculateNeedleSize({
-          displayStateNeedleField: this.fieldName,
+          configStateNeedleField: this.fieldName,
           previewStateImageField: NEEDLE_DISPLAY_TO_PREVIEW_FIELD[this.fieldName],
         })
       );

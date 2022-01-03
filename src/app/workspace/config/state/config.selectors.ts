@@ -1,43 +1,43 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
-import {DISPLAY_FEATURE_KEY} from './display.reducer';
+import {DISPLAY_FEATURE_KEY} from './config.reducer';
 import {
-  DisplayConfigState,
-  DisplayStateNeedleFieldsObject,
-  DisplayStateGaugeFieldsObject,
-  DisplayStateNumericalFieldsObject,
-  DisplayStateSetupFieldsConfig,
-} from './display.state';
+  ConfigState,
+  ConfigStateNeedleFieldsObject,
+  ConfigStateGaugeFieldsObject,
+  ConfigStateNumericalFieldsObject,
+  ConfigStateSetupFieldsConfig,
+} from './config.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
 /** Selector for the whole state. */
-export const selectDisplayState = createFeatureSelector<DisplayConfigState>(DISPLAY_FEATURE_KEY);
+export const selectConfigState = createFeatureSelector<ConfigState>(DISPLAY_FEATURE_KEY);
 
 /** Selects the needles' configs. */
 export const selectNeedleConfigs = createSelector(
-  selectDisplayState,
+  selectConfigState,
   state =>
     ({
       needle1: state.needle1,
       needle2: state.needle2,
       needle3: state.needle3,
-    } as DisplayStateNeedleFieldsObject<NeedleConfig>)
+    } as ConfigStateNeedleFieldsObject<NeedleConfig>)
 );
 
 /** Selects the gauges' configs. */
 export const selectGaugeConfigs = createSelector(
-  selectDisplayState,
+  selectConfigState,
   state =>
     ({
       gauge1: state.gauge1,
       gauge2: state.gauge2,
       gauge3: state.gauge3,
-    } as DisplayStateGaugeFieldsObject<GaugeConfig>)
+    } as ConfigStateGaugeFieldsObject<GaugeConfig>)
 );
 
 /** Selects the numerical configs. */
 export const selectNumericalConfigs = createSelector(
-  selectDisplayState,
+  selectConfigState,
   state =>
     ({
       numerical1: state.numerical1,
@@ -50,12 +50,12 @@ export const selectNumericalConfigs = createSelector(
       numerical8: state.numerical8,
       numerical9: state.numerical9,
       numerical10: state.numerical10,
-    } as DisplayStateNumericalFieldsObject<NumericalConfig>)
+    } as ConfigStateNumericalFieldsObject<NumericalConfig>)
 );
 
 /** Selects setup values. */
 export const selectDisplaySetupValues = createSelector(
-  selectDisplayState,
+  selectConfigState,
   state =>
     ({
       fontWidth: state.fontWidth,
@@ -65,8 +65,8 @@ export const selectDisplaySetupValues = createSelector(
       fontColor: state.fontColor,
       fontWarningColor: state.fontWarningColor,
       useBuiltInNumericals: state.useBuiltInNumericals,
-    } as DisplayStateSetupFieldsConfig)
+    } as ConfigStateSetupFieldsConfig)
 );
 
 /** Selects currently highlighted config. */
-export const selectHighlight = createSelector(selectDisplayState, state => state.activeHighlight);
+export const selectHighlight = createSelector(selectConfigState, state => state.activeHighlight);

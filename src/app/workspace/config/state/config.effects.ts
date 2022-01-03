@@ -2,21 +2,21 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {filter, withLatestFrom} from 'rxjs';
 import {concatMap, tap} from 'rxjs/operators';
-import {environment} from '../../../../../environments/environment';
-import {containsAllDigitImages} from '../../../image-manager/utils';
-import {SnackBarService} from '../../../services/snack-bar.service';
+import {environment} from '../../../../environments/environment';
+import {containsAllDigitImages} from '../../image-manager/utils';
+import {SnackBarService} from '../../services/snack-bar.service';
 import {
   changedDisplaySetupConfig,
   changedNeedleConfig,
   recalculateDigitsSize,
   recalculateNeedleSize,
-} from './display.actions';
+} from './config.actions';
 import {Store} from '@ngrx/store';
-import {selectDisplaySetupValues, selectNeedleConfigs} from './display.selectors';
-import {selectAllImages, selectLoadedImageNames} from '../../../preview/state/preview.selectors';
+import {selectDisplaySetupValues, selectNeedleConfigs} from './config.selectors';
+import {selectAllImages, selectLoadedImageNames} from '../../preview/state/preview.selectors';
 
 @Injectable()
-export class DisplayEffects {
+export class ConfigEffects {
   debug = createEffect(
     () =>
       this.actions$.pipe(
@@ -34,7 +34,7 @@ export class DisplayEffects {
       withLatestFrom(this.store.select(selectAllImages)),
       concatMap(([[action, needleConfigs], allImages]) => {
         const image = allImages[action.previewStateImageField];
-        const config = needleConfigs[action.displayStateNeedleField];
+        const config = needleConfigs[action.configStateNeedleField];
         if (!image || !config) return [];
         return [
           changedNeedleConfig({
@@ -43,7 +43,7 @@ export class DisplayEffects {
               width: image.naturalWidth,
               height: image.naturalHeight,
             },
-            displayConfigField: action.displayStateNeedleField,
+            displayConfigField: action.configStateNeedleField,
           }),
         ];
       })

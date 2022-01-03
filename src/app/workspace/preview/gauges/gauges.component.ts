@@ -5,20 +5,20 @@ import {Observable, Subscription} from 'rxjs';
 import {PartialImageStateFieldsObject} from '../../image-manager/state/images.state';
 import {selectAllImages, selectNeedleAngles} from '../state/preview.selectors';
 import {
-  DisplayStateFieldsType,
-  DisplayStateGaugeFieldsObject,
-  DisplayStateNeedleFieldsObject,
-  DisplayStateNumericalFieldsObject,
-  DisplayStateSetupFieldsConfig,
-} from '../../config/display/state/display.state';
-import {GaugeConfig, NeedleConfig, NumericalConfig} from '../../config/display/models/configs';
+  ConfigStateFieldsType,
+  ConfigStateGaugeFieldsObject,
+  ConfigStateNeedleFieldsObject,
+  ConfigStateNumericalFieldsObject,
+  ConfigStateSetupFieldsConfig,
+} from '../../config/state/config.state';
+import {GaugeConfig, NeedleConfig, NumericalConfig} from '../../config/models/configs';
 import {
   selectDisplaySetupValues,
   selectGaugeConfigs,
   selectHighlight,
   selectNeedleConfigs,
   selectNumericalConfigs,
-} from '../../config/display/state/display.selectors';
+} from '../../config/state/config.selectors';
 import {GaugesCompositor} from './gauges.compositor';
 
 @Component({
@@ -35,11 +35,11 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
 
   subscription = new Subscription();
   images?: PartialImageStateFieldsObject<HTMLImageElement>;
-  needleConfigs?: DisplayStateNeedleFieldsObject<NeedleConfig>;
-  gaugeConfigs?: DisplayStateGaugeFieldsObject<GaugeConfig>;
-  numericalConfigs?: DisplayStateNumericalFieldsObject<NumericalConfig>;
-  setupConfig?: DisplayStateSetupFieldsConfig;
-  highlight?: DisplayStateFieldsType;
+  needleConfigs?: ConfigStateNeedleFieldsObject<NeedleConfig>;
+  gaugeConfigs?: ConfigStateGaugeFieldsObject<GaugeConfig>;
+  numericalConfigs?: ConfigStateNumericalFieldsObject<NumericalConfig>;
+  setupConfig?: ConfigStateSetupFieldsConfig;
+  highlight?: ConfigStateFieldsType;
   needleAngles?: number[];
 
   constructor(private readonly store: Store) {

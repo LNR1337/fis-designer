@@ -1,13 +1,13 @@
 import {createReducer, on} from '@ngrx/store';
 
-import * as actions from './display.actions';
-import {initialDisplayConfigState} from './display.initial-state';
-import {DisplayConfigState} from './display.state';
+import * as actions from './config.actions';
+import {initialConfigState} from './config.initial-state';
+import {ConfigState} from './config.state';
 
 export const DISPLAY_FEATURE_KEY = 'display';
 
-export const displayReducer = createReducer(
-  initialDisplayConfigState,
+export const configReducer = createReducer(
+  initialConfigState,
   on(
     actions.changedGaugeConfig,
     actions.changedNeedleConfig,
@@ -19,7 +19,7 @@ export const displayReducer = createReducer(
   ),
   on(actions.changedDisplaySetupConfig, (state, {config}) => ({
     ...state,
-    ...(config as DisplayConfigState), // TODO(pawelszydlo): type hack.
+    ...(config as ConfigState), // TODO(pawelszydlo): type hack.
   })),
   on(actions.enableHighlight, (state, {stateField}) => ({
     ...state,
@@ -30,7 +30,7 @@ export const displayReducer = createReducer(
     activeHighlight: undefined,
   })),
   // TODO(pawelszydlo): do some data sanitization!
-  on(actions.loadDisplayStateFromObject, (state, {object}) => ({
+  on(actions.loadConfigStateFromObject, (state, {object}) => ({
     ...state,
     ...object,
   }))

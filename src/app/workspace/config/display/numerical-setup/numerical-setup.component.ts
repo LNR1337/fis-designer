@@ -2,15 +2,15 @@ import {Component, Input, SimpleChanges} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {containsAllDigitImages} from '../../../image-manager/utils';
-import {SETUP_FIELDS_METADATA} from '../models/configs_metadata';
-import {changedDisplaySetupConfig, recalculateDigitsSize} from '../state/display.actions';
+import {SETUP_FIELDS_METADATA} from '../../models/configs_metadata';
+import {changedDisplaySetupConfig, recalculateDigitsSize} from '../../state/config.actions';
 import {
-  DisplayStateSetupFieldsBoolean,
-  DisplayStateSetupFieldsColor,
-  DisplayStateSetupFieldsConfig,
-  DisplayStateSetupFieldsNumerical,
-  DisplayStateSetupFieldsType,
-} from '../state/display.state';
+  ConfigStateSetupFieldsBoolean,
+  ConfigStateSetupFieldsColor,
+  ConfigStateSetupFieldsConfig,
+  ConfigStateSetupFieldsNumerical,
+  ConfigStateSetupFieldsType,
+} from '../../state/config.state';
 
 @Component({
   selector: 'app-numerical-setup',
@@ -20,13 +20,13 @@ import {
 export class NumericalSetupComponent {
   // List of names of loaded images.
   @Input() loadedImages?: Set<ImageStateFieldsType>;
-  @Input() setupConfig?: DisplayStateSetupFieldsConfig;
+  @Input() setupConfig?: ConfigStateSetupFieldsConfig;
   @Input() label = '';
 
   SETUP_FIELDS_METADATA = SETUP_FIELDS_METADATA;
-  numericalFields = DisplayStateSetupFieldsNumerical;
-  colorFields = DisplayStateSetupFieldsColor;
-  boolFields = DisplayStateSetupFieldsBoolean;
+  numericalFields = ConfigStateSetupFieldsNumerical;
+  colorFields = ConfigStateSetupFieldsColor;
+  boolFields = ConfigStateSetupFieldsBoolean;
   resizeEnabled = false;
 
   constructor(private readonly store: Store) {}
@@ -43,7 +43,7 @@ export class NumericalSetupComponent {
     }
   }
 
-  valueChanged(value: number | string | boolean, fieldName: DisplayStateSetupFieldsType) {
+  valueChanged(value: number | string | boolean, fieldName: ConfigStateSetupFieldsType) {
     if (!this.setupConfig) return;
     this.store.dispatch(
       changedDisplaySetupConfig({
@@ -52,7 +52,7 @@ export class NumericalSetupComponent {
     );
   }
 
-  getNumericalValue(fieldName: DisplayStateSetupFieldsType): number {
+  getNumericalValue(fieldName: ConfigStateSetupFieldsType): number {
     if (!(this.numericalFields as ReadonlyArray<string>).includes(fieldName)) {
       throw new Error('Getting numerical value of non-numerical field.');
     }
@@ -60,7 +60,7 @@ export class NumericalSetupComponent {
     return this.setupConfig[fieldName] as number;
   }
 
-  getStringValue(fieldName: DisplayStateSetupFieldsType): string {
+  getStringValue(fieldName: ConfigStateSetupFieldsType): string {
     if (!(this.colorFields as ReadonlyArray<string>).includes(fieldName)) {
       throw new Error('Getting string value of non-string field.');
     }
@@ -68,7 +68,7 @@ export class NumericalSetupComponent {
     return this.setupConfig[fieldName] as string;
   }
 
-  getBooleanValue(fieldName: DisplayStateSetupFieldsType): boolean {
+  getBooleanValue(fieldName: ConfigStateSetupFieldsType): boolean {
     if (!(this.boolFields as ReadonlyArray<string>).includes(fieldName)) {
       throw new Error('Getting boolean value of non-boolean field.');
     }

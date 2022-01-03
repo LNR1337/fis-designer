@@ -1,19 +1,18 @@
 import {createAction, props} from '@ngrx/store';
-import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
+import {ImageStateFieldsType} from '../../image-manager/state/images.state';
 import {
-  DisplayStateFieldsType,
-  DisplayStateGaugeFieldsType,
-  DisplayStateNeedleFieldsType,
-  DisplayStateNumericalFieldsType,
-  DisplayStateSetupFieldsConfig,
-  DisplayStateSetupFieldsType,
-} from './display.state';
+  ConfigStateFieldsType,
+  ConfigStateGaugeFieldsType,
+  ConfigStateNeedleFieldsType,
+  ConfigStateNumericalFieldsType,
+  ConfigStateSetupFieldsConfig,
+} from './config.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
 export const recalculateNeedleSize = createAction(
   '[Config] Recalculate needle size',
   props<{
-    displayStateNeedleField: DisplayStateNeedleFieldsType;
+    configStateNeedleField: ConfigStateNeedleFieldsType;
     previewStateImageField: ImageStateFieldsType;
   }>()
 );
@@ -24,7 +23,7 @@ export const changedGaugeConfig = createAction(
   '[Config] Changed gauge config',
   props<{
     config: GaugeConfig;
-    displayConfigField: DisplayStateGaugeFieldsType;
+    displayConfigField: ConfigStateGaugeFieldsType;
   }>()
 );
 
@@ -32,7 +31,7 @@ export const changedNeedleConfig = createAction(
   '[Config] Changed needle config',
   props<{
     config: NeedleConfig;
-    displayConfigField: DisplayStateNeedleFieldsType;
+    displayConfigField: ConfigStateNeedleFieldsType;
   }>()
 );
 
@@ -40,25 +39,25 @@ export const changedNumericalConfig = createAction(
   '[Config] Changed numerical config',
   props<{
     config: NumericalConfig;
-    displayConfigField: DisplayStateNumericalFieldsType;
+    displayConfigField: ConfigStateNumericalFieldsType;
   }>()
 );
 
 export const changedDisplaySetupConfig = createAction(
   '[Config] Changed display setup config',
   props<{
-    config: DisplayStateSetupFieldsConfig;
+    config: ConfigStateSetupFieldsConfig;
   }>()
 );
 
 export const enableHighlight = createAction(
   '[Config] Enable highlighting',
-  props<{stateField: DisplayStateFieldsType}>()
+  props<{stateField: ConfigStateFieldsType}>()
 );
 
 export const disableHighlight = createAction('[Config] Disable highlighting');
 
-export const loadDisplayStateFromObject = createAction(
-  '[Config] Load display state from object',
+export const loadConfigStateFromObject = createAction(
+  '[Config] Load config state from object',
   props<{object: Object}>()
 );

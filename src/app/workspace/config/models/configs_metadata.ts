@@ -1,10 +1,10 @@
-import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
+import {ImageStateFieldsType} from '../../image-manager/state/images.state';
 import {
-  DisplayStateGaugeFieldsObject,
-  DisplayStateNeedleFieldsObject,
-  DisplayStateNumericalFieldsObject,
-  DisplayStateSetupFieldsObject,
-} from '../state/display.state';
+  ConfigStateGaugeFieldsObject,
+  ConfigStateNeedleFieldsObject,
+  ConfigStateNumericalFieldsObject,
+  ConfigStateSetupFieldsObject,
+} from '../state/config.state';
 import {
   GaugeConfigFieldsObject,
   NeedleConfigFieldsObject,
@@ -18,19 +18,19 @@ export interface ConfigFieldMetadata {
   max?: number;
 }
 
-export const GAUGE_LABELS: DisplayStateGaugeFieldsObject<string> = {
+export const GAUGE_LABELS: ConfigStateGaugeFieldsObject<string> = {
   gauge1: 'Left gauge',
   gauge2: 'Center gauge',
   gauge3: 'Right gauge',
 };
 
-export const NEEDLE_LABELS: DisplayStateNeedleFieldsObject<string> = {
+export const NEEDLE_LABELS: ConfigStateNeedleFieldsObject<string> = {
   needle1: 'Left needle',
   needle2: 'Center needle',
   needle3: 'Right needle',
 };
 
-export const NUMERICAL_LABELS: DisplayStateNumericalFieldsObject<string> = {
+export const NUMERICAL_LABELS: ConfigStateNumericalFieldsObject<string> = {
   numerical1: 'Digital gauge 1',
   numerical2: 'Digital gauge 2',
   numerical3: 'Digital gauge 3',
@@ -43,7 +43,7 @@ export const NUMERICAL_LABELS: DisplayStateNumericalFieldsObject<string> = {
   numerical10: 'Digital gauge 10',
 };
 
-export const SETUP_FIELDS_METADATA: DisplayStateSetupFieldsObject<ConfigFieldMetadata> = {
+export const SETUP_FIELDS_METADATA: ConfigStateSetupFieldsObject<ConfigFieldMetadata> = {
   fontWidth: {label: 'Digit width', min: 0},
   fontHeight: {label: 'Digit height', min: 0},
   fontDotWidth: {label: 'Dot width', min: 0},
@@ -58,7 +58,7 @@ export const SETUP_FIELDS_METADATA: DisplayStateSetupFieldsObject<ConfigFieldMet
   },
 };
 
-export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: DisplayStateNeedleFieldsObject<ImageStateFieldsType> =
+export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: ConfigStateNeedleFieldsObject<ImageStateFieldsType> =
   {
     needle1: 'needleImage1',
     needle2: 'needleImage2',

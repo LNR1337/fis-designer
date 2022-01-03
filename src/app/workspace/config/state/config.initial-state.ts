@@ -1,4 +1,4 @@
-import {DisplayConfigState} from './display.state';
+import {ConfigState} from './config.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
 const initialGaugeConfig: GaugeConfig = {
@@ -37,8 +37,8 @@ const initialNumericalConfig: NumericalConfig = {
   centered: false,
 };
 
-/** Initial display state. */
-export const initialDisplayConfigState: DisplayConfigState = {
+/** Initial config state. */
+export const initialConfigState: ConfigState = {
   gauge1: initialGaugeConfig,
   gauge2: initialGaugeConfig,
   gauge3: initialGaugeConfig,
