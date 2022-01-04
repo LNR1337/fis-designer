@@ -10,7 +10,7 @@ import {ConfigFieldMetadata} from '../../models/configs_metadata';
 export class SlidingInputComponent {
   @Input() metaData?: ConfigFieldMetadata;
   @Input() value?: number;
-
+  @Input() rightLabel = false;
   @Output() valueChanged = new EventEmitter<number>();
 
   constructor() {}

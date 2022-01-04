@@ -10,6 +10,7 @@ export class ToggleInputComponent {
   @Input() label = '';
   @Input() hint?: string;
   @Input() value?: boolean;
+  @Input() rightLabel = false;
 
   @Output() valueChanged = new EventEmitter<boolean>();
 

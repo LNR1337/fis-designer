@@ -6,13 +6,13 @@ import {environment} from '../../../../environments/environment';
 import {containsAllDigitImages} from '../../image-manager/utils';
 import {SnackBarService} from '../../services/snack-bar.service';
 import {
-  changedDisplaySetupConfig,
+  changedGeneralFieldsConfig,
   changedNeedleConfig,
   recalculateDigitsSize,
   recalculateNeedleSize,
 } from './config.actions';
 import {Store} from '@ngrx/store';
-import {selectDisplaySetupValues, selectNeedleConfigs} from './config.selectors';
+import {selectGeneralFieldsConfig, selectNeedleConfigs} from './config.selectors';
 import {selectAllImages, selectLoadedImageNames} from '../../preview/state/preview.selectors';
 
 @Injectable()
@@ -54,10 +54,10 @@ export class ConfigEffects {
   recalculateDigitsSize = createEffect(() =>
     this.actions$.pipe(
       ofType(recalculateDigitsSize),
-      withLatestFrom(this.store.select(selectDisplaySetupValues)),
+      withLatestFrom(this.store.select(selectGeneralFieldsConfig)),
       withLatestFrom(this.store.select(selectAllImages)),
       withLatestFrom(this.store.select(selectLoadedImageNames)),
-      concatMap(([[[action, setupConfig], allImages], loadedImageNames]) => {
+      concatMap(([[[action, generalConfig], allImages], loadedImageNames]) => {
         if (!containsAllDigitImages(new Set(loadedImageNames))) {
           this.snackBar.error('Not all digit images are loaded yet.');
         }
@@ -65,9 +65,9 @@ export class ConfigEffects {
         const fontHeight = allImages.digit0!.naturalHeight;
         const dotWidth = allImages.digitDot!.naturalWidth;
         return [
-          changedDisplaySetupConfig({
+          changedGeneralFieldsConfig({
             config: {
-              ...setupConfig,
+              ...generalConfig,
               fontWidth: fontWidth,
               fontHeight: fontHeight,
               fontDotWidth: dotWidth,

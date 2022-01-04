@@ -9,7 +9,7 @@ import {ConfigSharedModule} from '../shared/config-shared.module';
 import {DisplayComponent} from './display.component';
 import {GaugeComponent} from './gauge/gauge.component';
 import {NeedleComponent} from './needle/needle.component';
-import {NumericalSetupComponent} from './numerical-setup/numerical-setup.component';
+import {GeneralComponent} from './general/general.component';
 import {NumericalComponent} from './numerical/numerical.component';
 
 @NgModule({
@@ -18,7 +18,7 @@ import {NumericalComponent} from './numerical/numerical.component';
     GaugeComponent,
     NeedleComponent,
     NumericalComponent,
-    NumericalSetupComponent,
+    GeneralComponent,
   ],
   imports: [
     CommonModule,

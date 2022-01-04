@@ -4,7 +4,7 @@ import {
   NeedleConfig,
   NumericalConfig,
 } from '../../config/models/configs';
-import {ConfigStateDigitSetupFieldsConfig} from '../../config/state/config.state';
+import {ConfigStateGeneralFieldsConfig} from '../../config/state/config.state';
 
 const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
@@ -76,12 +76,12 @@ export class GaugesCompositor {
   }
 
   drawGTIHighlight(
-    numericalSetup: ConfigStateDigitSetupFieldsConfig,
+    generalSetup: ConfigStateGeneralFieldsConfig,
     needleConfig1: NeedleConfig,
     needleConfig2: NeedleConfig,
     needleConfig3: NeedleConfig
   ) {
-    if (!numericalSetup.useBuiltInNumericalGauges) return;
+    if (!generalSetup.useBuiltInNumericalGauges) return;
 
     const totalWidth = NUMERICAL_DIGITS * GTI_FONT_WIDTH;
 
@@ -103,7 +103,7 @@ export class GaugesCompositor {
 
   drawNumericalHighlight(
     numericalConfig: NumericalConfig,
-    numericalSetup: ConfigStateDigitSetupFieldsConfig,
+    generalSetup: ConfigStateGeneralFieldsConfig,
     drawPosition = true
   ) {
     if (!numericalConfig.positionX || !numericalConfig.positionY) return;
@@ -113,9 +113,9 @@ export class GaugesCompositor {
     }
     // Bracket.
     this.context.globalAlpha = 0.7;
-    const fontWidth = numericalSetup.fontWidth as number;
-    const fontHeight = numericalSetup.fontHeight as number;
-    const fontSpacing = numericalSetup.fontSpacing as number;
+    const fontWidth = generalSetup.fontWidth as number;
+    const fontHeight = generalSetup.fontHeight as number;
+    const fontSpacing = generalSetup.fontSpacing as number;
     this.context.strokeStyle = 'yellow';
     const totalWidth = NUMERICAL_DIGITS * fontWidth + (NUMERICAL_DIGITS - 1) * fontSpacing;
     const x =

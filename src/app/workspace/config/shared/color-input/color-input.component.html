@@ -1,5 +1,12 @@
-<span class="label">{{ label }}:<mat-icon *ngIf="hint" [tooltip]="hint">help</mat-icon></span>
-
-<span class="color-input-wrapper">
-<input matInput type="color" [value]="value" (change)="onChangeField($event)" />
+<span [class.right-label]="rightLabel" class="wrapper">
+  <span class="label" [tooltip]="hint ?? ''" [class.right-label]="rightLabel">
+    {{ label }}
+    <mat-icon *ngIf="hint" class="hint-icon">help</mat-icon>
+  </span>
+  <span class="color-input-wrapper" >
+    <input matInput type="color" [value]="value" (change)="onChangeField($event)"/>
+  </span>
 </span>
+
+
+

@@ -33,6 +33,7 @@ export class TooltipDirective implements OnInit {
 
   @HostListener('mouseenter')
   show() {
+    if (!this.text) return;
     if (this.overlayRef?.hasAttached()) this.overlayRef!.detach();
     const tooltipRef: ComponentRef<TooltipComponent> = this.overlayRef!.attach(
       new ComponentPortal(TooltipComponent)

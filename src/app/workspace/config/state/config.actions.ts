@@ -5,7 +5,7 @@ import {
   ConfigStateGaugeFieldsType,
   ConfigStateNeedleFieldsType,
   ConfigStateNumericalFieldsType,
-  ConfigStateDigitSetupFieldsConfig,
+  ConfigStateGeneralFieldsConfig,
 } from './config.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 
@@ -43,10 +43,10 @@ export const changedNumericalConfig = createAction(
   }>()
 );
 
-export const changedDisplaySetupConfig = createAction(
-  '[Config] Changed display setup config',
+export const changedGeneralFieldsConfig = createAction(
+  '[Config] Changed general fields config',
   props<{
-    config: ConfigStateDigitSetupFieldsConfig;
+    config: ConfigStateGeneralFieldsConfig;
   }>()
 );
 

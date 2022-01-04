@@ -1,88 +1,68 @@
 /** Names of state fields containing display settings. */
-import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
+import {
+  GaugeConfig,
+  GaugeConfigFields,
+  NeedleConfig,
+  NumericalConfig,
+  TableConfig,
+} from '../models/configs';
 
 // -------------------------- Whole config --------------------------
 
-export const ConfigStateFields = [
-  'gauge1',
-  'gauge2',
-  'gauge3',
-  'needle1',
-  'needle2',
-  'needle3',
-  'numerical1',
-  'numerical2',
-  'numerical3',
-  'numerical4',
-  'numerical5',
-  'numerical6',
-  'numerical7',
-  'numerical8',
-  'numerical9',
-  'numerical10',
-  'fontWidth',
-  'fontHeight',
-  'fontDotWidth',
-  'fontSpacing',
-  'fontColor',
-  'fontWarningColor',
-  'tableBackgroundColor',
-  'tableFontColor',
-  'useBuiltInNumericalGauges',
-] as const;
-
-/** Set of all config state fields holding numerical values. */
-export const ConfigStateFieldsNumericalSet = new Set([
-  'fontWidth',
-  'fontHeight',
-  'fontDotWidth',
-  'fontSpacing',
-  'language',
-  'autostart',
-  'bluetooth',
-  'car',
-  'mainLayout',
-  'firstTable',
-]);
-
-/** Set of all config state fields holding color setup values. */
-export const ConfigStateFieldsColorSet = new Set([
-  'fontColor',
-  'fontWarningColor',
-  'tableBackgroundColor',
-  'tableFontColor',
-]);
-
-/** Set of all config state fields holding boolean values. */
-export const ConfigStateFieldsBooleanSet = new Set([
-  'useBuiltInNumericalGauges',
-  'useTableBackgroundImage',
-  'useTableBackgroundImage',
-  'useSteeringWheelRoller',
-  'driveSelect',
-  'showEgtToCan',
-  'supportLowResolution',
-  'ignorePdc',
-  'scrollAllTables',
-  'hideStatusbarOnGauge',
-  'hideStatusbarOnTable',
-  'useVirtualCockpitLayout',
-  'useStarButton',
-  'hideOnDriveSelectButton',
-  'hideOnMmiButton',
-  'externalCanWarning',
-]);
-
-/** Type for all valid config state field names. */
-export type ConfigStateFieldsType = typeof ConfigStateFields[number];
-
-/** Object type of all config state fields. */
-export type ConfigStateFieldsObject<T> = {
-  [property in ConfigStateFieldsType]: T;
-};
-
-/** Object type of some config state fields. */
-export type PartialConfigStateFieldsObject<T> = Partial<ConfigStateFieldsObject<T>>;
+// export const ConfigStateFields = [
+//   'gauge1',
+//   'gauge2',
+//   'gauge3',
+//   'needle1',
+//   'needle2',
+//   'needle3',
+//   'numerical1',
+//   'numerical2',
+//   'numerical3',
+//   'numerical4',
+//   'numerical5',
+//   'numerical6',
+//   'numerical7',
+//   'numerical8',
+//   'numerical9',
+//   'numerical10',
+//   'table1',
+//   'table2',
+//   'table3',
+//   'table4',
+//   'table5',
+//   // Digital gauges settings.
+//   'fontWidth',
+//   'fontHeight',
+//   'fontDotWidth',
+//   'fontSpacing',
+//   'fontColor',
+//   'fontWarningColor',
+//   'useBuiltInNumericalGauges',
+//   'hideStatusbarOnGauge',
+//   // Table view.
+//   'hideStatusbarOnTable',
+//   'useTableBackgroundImage',
+//   'tableBackgroundColor',
+//   'tableFontColor',
+//   'firstTable',
+//   'scrollAllTables',
+//   'useVirtualCockpitLayout',
+//   // General settings.
+//   'language',
+//   'autostart',
+//   'bluetooth',
+//   'car',
+//   'useSteeringWheelRoller',
+//   'driveSelect',
+//   'showEgtToCan',
+//   'supportLowResolution',
+//   'ignorePdc',
+//   'useStarButton',
+//   'hideOnDriveSelectButton',
+//   'hideOnMmiButton',
+//   'externalCanWarning',
+// ] as const;
 
 // -------------------------- Gauges --------------------------
 
@@ -147,10 +127,10 @@ export type ConfigStateTableFieldsObject<T> = {
   [property in ConfigStateTableFieldsType]: T;
 };
 
-// -------------------------- Digits setup --------------------------
+// -------------------------- General state fields --------------------------
 
-/** List of all config state fields holding setup values. */
-export const ConfigStateDigitSetupFields = [
+export const ConfigStateGeneralGaugesFields = ['hideStatusbarOnGauge'] as const;
+export const ConfigStateGeneralNumericalFields = [
   'fontWidth',
   'fontHeight',
   'fontDotWidth',
@@ -159,21 +139,110 @@ export const ConfigStateDigitSetupFields = [
   'fontWarningColor',
   'useBuiltInNumericalGauges',
 ] as const;
+export const ConfigStateGeneralTableFields = [
+  'tableBackgroundColor',
+  'tableFontColor',
+  'useTableBackgroundImage',
+  'hideStatusbarOnTable',
+  'useVirtualCockpitLayout',
+  'scrollAllTables',
+  'firstTable',
+] as const;
+export const ConfigStateGeneralMiscFields = [
+  'language',
+  'autostart',
+  'bluetooth',
+  'car',
+  'useSteeringWheelRoller',
+  'driveSelect',
+  'showEgtToCan',
+  'supportLowResolution',
+  'ignorePdc',
+  'useStarButton',
+  'hideOnDriveSelectButton',
+  'hideOnMmiButton',
+  'externalCanWarning',
+] as const;
 
-/** Type for all valid state field names holding setup values. */
-export type ConfigStateDigitSetupFieldsType = typeof ConfigStateDigitSetupFields[number];
+/** List of all config state fields holding simple values. */
+export const ConfigStateGeneralFields = [
+  ...ConfigStateGeneralGaugesFields,
+  ...ConfigStateGeneralNumericalFields,
+  ...ConfigStateGeneralTableFields,
+  ...ConfigStateGeneralMiscFields,
+] as const;
 
-/** Object type of state fields holding setup values. */
-export type ConfigStateDigitSetupFieldsObject<T> = {
-  [property in ConfigStateDigitSetupFieldsType]: T;
+/** Type for all valid state field names holding simple values. */
+export type ConfigStateGeneralFieldsType = typeof ConfigStateGeneralFields[number];
+
+/** Object type of state fields holding simple values. */
+export type ConfigStateGeneralFieldsObject<T> = {
+  [property in ConfigStateGeneralFieldsType]: T;
 };
 
-/** Object holding a part of state responsible for numerical setup. */
-export type ConfigStateDigitSetupFieldsConfig = ConfigStateDigitSetupFieldsObject<
+/** Object holding a part of state responsible for simple setup values. */
+export type ConfigStateGeneralFieldsConfig = ConfigStateGeneralFieldsObject<
   string | number | boolean
 >;
 
 // -------------------------- State --------------------------
+
+export const ConfigStateFields = [
+  ...ConfigStateGaugeFields,
+  ...ConfigStateNeedleFields,
+  ...ConfigStateNumericalFields,
+  ...ConfigStateTableFields,
+  ...ConfigStateGeneralFields,
+] as const;
+
+/** Set of all config state fields holding numerical values. */
+export const ConfigStateFieldsNumericalSet = new Set([
+  'fontWidth',
+  'fontHeight',
+  'fontDotWidth',
+  'fontSpacing',
+  'language',
+  'autostart',
+  'bluetooth',
+  'car',
+  'firstTable',
+]);
+
+/** Set of all config state fields holding color setup values. */
+export const ConfigStateFieldsColorSet = new Set([
+  'fontColor',
+  'fontWarningColor',
+  'tableBackgroundColor',
+  'tableFontColor',
+]);
+
+/** Set of all config state fields holding boolean values. */
+export const ConfigStateFieldsBooleanSet = new Set([
+  'useBuiltInNumericalGauges',
+  'useTableBackgroundImage',
+  'useTableBackgroundImage',
+  'useSteeringWheelRoller',
+  'driveSelect',
+  'showEgtToCan',
+  'supportLowResolution',
+  'ignorePdc',
+  'scrollAllTables',
+  'hideStatusbarOnGauge',
+  'hideStatusbarOnTable',
+  'useVirtualCockpitLayout',
+  'useStarButton',
+  'hideOnDriveSelectButton',
+  'hideOnMmiButton',
+  'externalCanWarning',
+]);
+
+/** Type for all valid config state field names. */
+export type ConfigStateFieldsType = typeof ConfigStateFields[number];
+
+/** Object type of all config state fields. */
+export type ConfigStateFieldsObject<T> = {
+  [property in ConfigStateFieldsType]: T;
+};
 
 /** State for the config module. */
 export interface ConfigState {
@@ -207,26 +276,25 @@ export interface ConfigState {
   fontColor?: string;
   fontWarningColor?: string;
   useBuiltInNumericalGauges?: boolean;
+  hideStatusbarOnGauge?: boolean;
   // Table view.
   useTableBackgroundImage?: boolean;
   tableBackgroundColor?: string;
   tableFontColor?: string;
+  firstTable?: number;
+  scrollAllTables?: boolean;
+  hideStatusbarOnTable?: boolean;
+  useVirtualCockpitLayout?: boolean;
   // General settings.
   language?: number;
   autostart?: number;
   bluetooth?: number;
   car?: number;
-  mainLayout?: number;
-  firstTable?: number;
   useSteeringWheelRoller?: boolean;
   driveSelect?: boolean;
   showEgtToCan?: boolean;
   supportLowResolution?: boolean;
   ignorePdc?: boolean;
-  scrollAllTables?: boolean;
-  hideStatusbarOnGauge?: boolean;
-  hideStatusbarOnTable?: boolean;
-  useVirtualCockpitLayout?: boolean;
   useStarButton?: boolean;
   hideOnDriveSelectButton?: boolean;
   hideOnMmiButton?: boolean;

@@ -10,7 +10,7 @@ export class ColorInputComponent {
   @Input() label = '';
   @Input() hint?: string;
   @Input() value?: string;
-
+  @Input() rightLabel = false;
   @Output() valueChanged = new EventEmitter<string>();
 
   constructor() {}

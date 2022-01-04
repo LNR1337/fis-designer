@@ -1,5 +1,19 @@
 <div *ngIf="loadedImages | async; let loadedImagesSet" class="settings-form">
+<ng-container *ngIf="generalConfig | async; let generalConfig">
+  <!-- Page: gauges -->
+
   <ng-container *ngIf="page === 'gauges'">
+    <!-- Gauges view settings -->
+    <app-general
+      class="settings-element"
+      style="order: -10"
+      [loadedImages]="loadedImagesSet"
+      [generalConfig]="generalConfig"
+      [showFields]="ConfigStateGeneralGaugesFields"
+      label="Gauge view settings"
+      (mouseenter)="highlight('hideStatusbarOnGauge')"
+      (mouseleave)="highlightNone()"
+    ></app-general>
     <!-- Analog gauges -->
     <ng-container *ngIf="gaugesConfigs | async; let configs">
       <app-gauge
@@ -9,7 +23,7 @@
         [gaugeConfig]="configs[configName]"
         [fieldName]="configName"
         [loadedImages]="loadedImagesSet"
-        label="{{ GAUGE_LABELS[configName] }}"
+        label="{{ STATE_FIELDS_METADATA[configName].label }}"
         (mouseenter)="highlight(configName)"
         (mouseleave)="highlightNone()"
       ></app-gauge>
@@ -22,20 +36,28 @@
                   [needleConfig]="configs[configName]"
                   [fieldName]="configName"
                   [loadedImages]="loadedImagesSet"
-                  label="{{ NEEDLE_LABELS[configName] }}"
+                  label="{{ STATE_FIELDS_METADATA[configName].label }}"
                   (mouseenter)="highlight(configName)"
                   (mouseleave)="highlightNone()"
       ></app-needle>
     </ng-container>
   </ng-container>
+
+  <!-- Page: numerical -->
+
   <ng-container *ngIf="page === 'numerical'">
-    <!-- Numerical display setup -->
-    <app-numerical-setup *ngIf="setupConfig | async; let config" [setupConfig]="config"
-                         class="settings-element"
-                         [loadedImages]="loadedImagesSet"
-                         (mouseenter)="highlight('fontWidth')"
-                         (mouseleave)="highlightNone()"
-                         label="Digital gauges settings"></app-numerical-setup>
+    <!-- Numerical view settings -->
+    <app-general
+      class="settings-element"
+      style="order: -10"
+      [loadedImages]="loadedImagesSet"
+      [generalConfig]="generalConfig"
+      [showFields]="ConfigStateGeneralNumericalFields"
+      [rightLabel]="false"
+      label="Digital view settings"
+      (mouseenter)="highlight('fontWidth')"
+      (mouseleave)="highlightNone()"
+    ></app-general>
     <!-- Numerical gauges -->
     <ng-container *ngIf="numericalConfigs | async; let configs">
       <app-numerical *ngFor="let configName of ConfigStateNumericalFields; let i = index"
@@ -43,10 +65,46 @@
                      style="order: {{ i + 10 }}"
                      [numericalConfig]="configs[configName]"
                      [fieldName]="configName"
-                     label="{{ NUMERICAL_LABELS[configName] }}"
+                     label="{{ STATE_FIELDS_METADATA[configName].label }}"
                      (mouseenter)="highlight(configName)"
                      (mouseleave)="highlightNone()"
       ></app-numerical>
     </ng-container>
   </ng-container>
+
+  <!-- Page: tables -->
+
+  <ng-container *ngIf="page === 'tables'">
+    <!-- Table view settings -->
+    <app-general
+      class="settings-element"
+      style="order: -10"
+      [loadedImages]="loadedImagesSet"
+      [generalConfig]="generalConfig"
+      [showFields]="ConfigStateGeneralTableFields"
+      [rightLabel]="true"
+      label="Table view settings"
+      (mouseenter)="highlight('hideStatusbarOnTable')"
+      (mouseleave)="highlightNone()"
+    ></app-general>
+  </ng-container>
+
+  <!-- Page: misc -->
+
+  <ng-container *ngIf="page === 'misc'">
+    <!-- Misc view settings -->
+    <app-general
+      class="settings-element"
+      style="order: -10"
+      [loadedImages]="loadedImagesSet"
+      [generalConfig]="generalConfig"
+      [showFields]="ConfigStateGeneralMiscFields"
+      [rightLabel]="true"
+      label="Miscellaneous options"
+      (mouseenter)="highlight('language')"
+      (mouseleave)="highlightNone()"
+    ></app-general>
+  </ng-container>
+
+</ng-container>
 </div>

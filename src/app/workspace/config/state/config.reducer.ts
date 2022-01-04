@@ -17,7 +17,7 @@ export const configReducer = createReducer(
       [displayConfigField]: config,
     })
   ),
-  on(actions.changedDisplaySetupConfig, (state, {config}) => ({
+  on(actions.changedGeneralFieldsConfig, (state, {config}) => ({
     ...state,
     ...(config as ConfigState), // TODO(pawelszydlo): type hack.
   })),

@@ -11,16 +11,20 @@ import {
   ConfigStateNumericalFields,
   ConfigStateFieldsType,
   ConfigStateNumericalFieldsObject,
-  ConfigStateDigitSetupFieldsConfig,
+  ConfigStateGeneralFieldsConfig,
+  ConfigStateGeneralGaugesFields,
+  ConfigStateGeneralNumericalFields,
+  ConfigStateGeneralTableFields,
+  ConfigStateGeneralMiscFields,
 } from '../state/config.state';
 import {
   selectNeedleConfigs,
   selectGaugeConfigs,
   selectNumericalConfigs,
-  selectDisplaySetupValues,
+  selectGeneralFieldsConfig,
 } from '../state/config.selectors';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
-import {GAUGE_LABELS, NEEDLE_LABELS, NUMERICAL_LABELS} from '../models/configs_metadata';
+import {STATE_FIELDS_METADATA} from '../models/configs_metadata';
 import {disableHighlight, enableHighlight} from '../state/config.actions';
 
 @Component({
@@ -29,20 +33,23 @@ import {disableHighlight, enableHighlight} from '../state/config.actions';
   styleUrls: ['./display.component.scss'],
 })
 export class DisplayComponent {
-  @Input() page: 'gauges' | 'numerical' = 'gauges';
+  @Input() page: 'gauges' | 'numerical' | 'tables' | 'misc' = 'gauges';
 
   loadedImages: Observable<Set<ImageStateFieldsType>>;
   needlesConfigs: Observable<ConfigStateNeedleFieldsObject<NeedleConfig>>;
   gaugesConfigs: Observable<ConfigStateGaugeFieldsObject<GaugeConfig>>;
   numericalConfigs: Observable<ConfigStateNumericalFieldsObject<NumericalConfig>>;
-  setupConfig: Observable<ConfigStateDigitSetupFieldsConfig>;
+  generalConfig: Observable<ConfigStateGeneralFieldsConfig>;
 
-  GAUGE_LABELS = GAUGE_LABELS;
-  NEEDLE_LABELS = NEEDLE_LABELS;
-  NUMERICAL_LABELS = NUMERICAL_LABELS;
+  STATE_FIELDS_METADATA = STATE_FIELDS_METADATA;
+
   ConfigStateGaugeFields = ConfigStateGaugeFields;
   ConfigStateNeedleFields = ConfigStateNeedleFields;
   ConfigStateNumericalFields = ConfigStateNumericalFields;
+  ConfigStateGeneralGaugesFields = ConfigStateGeneralGaugesFields;
+  ConfigStateGeneralNumericalFields = ConfigStateGeneralNumericalFields;
+  ConfigStateGeneralTableFields = ConfigStateGeneralTableFields;
+  ConfigStateGeneralMiscFields = ConfigStateGeneralMiscFields;
 
   constructor(private readonly store: Store) {
     this.loadedImages = store
@@ -51,7 +58,7 @@ export class DisplayComponent {
     this.needlesConfigs = store.select(selectNeedleConfigs);
     this.gaugesConfigs = store.select(selectGaugeConfigs);
     this.numericalConfigs = store.select(selectNumericalConfigs);
-    this.setupConfig = store.select(selectDisplaySetupValues);
+    this.generalConfig = store.select(selectGeneralFieldsConfig);
   }
 
   highlight(stateField: ConfigStateFieldsType) {

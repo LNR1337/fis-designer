@@ -7,14 +7,14 @@ import {selectAllImages, selectNeedleAngles} from '../state/preview.selectors';
 import {
   ConfigStateFieldsType,
   ConfigStateGaugeFieldsObject,
+  ConfigStateGeneralFieldsConfig,
   ConfigStateNeedleFieldsObject,
   ConfigStateNumericalFieldsObject,
-  ConfigStateDigitSetupFieldsConfig,
 } from '../../config/state/config.state';
 import {GaugeConfig, NeedleConfig, NumericalConfig} from '../../config/models/configs';
 import {
-  selectDisplaySetupValues,
   selectGaugeConfigs,
+  selectGeneralFieldsConfig,
   selectHighlight,
   selectNeedleConfigs,
   selectNumericalConfigs,
@@ -38,7 +38,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
   needleConfigs?: ConfigStateNeedleFieldsObject<NeedleConfig>;
   gaugeConfigs?: ConfigStateGaugeFieldsObject<GaugeConfig>;
   numericalConfigs?: ConfigStateNumericalFieldsObject<NumericalConfig>;
-  setupConfig?: ConfigStateDigitSetupFieldsConfig;
+  generalConfig?: ConfigStateGeneralFieldsConfig;
   highlight?: ConfigStateFieldsType;
   needleAngles?: number[];
 
@@ -68,8 +68,8 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
       })
     );
     this.subscription.add(
-      this.store.select(selectDisplaySetupValues).subscribe(config => {
-        this.setupConfig = config;
+      this.store.select(selectGeneralFieldsConfig).subscribe(config => {
+        this.generalConfig = config;
         this.redrawAll();
       })
     );
@@ -140,7 +140,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
       !this.gaugeConfigs ||
       !this.needleConfigs ||
       !this.numericalConfigs ||
-      !this.setupConfig
+      !this.generalConfig
     )
       return;
 
@@ -177,90 +177,120 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
         this.compositor.drawGaugeHighlight(this.gaugeConfigs.gauge3, this.needleConfigs.needle3);
         break;
       case 'numerical1':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical1, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical1,
+          this.generalConfig
+        );
         break;
       case 'numerical2':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical2, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical2,
+          this.generalConfig
+        );
         break;
       case 'numerical3':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical3, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical3,
+          this.generalConfig
+        );
         break;
       case 'numerical4':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical4, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical4,
+          this.generalConfig
+        );
         break;
       case 'numerical5':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical5, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical5,
+          this.generalConfig
+        );
         break;
       case 'numerical6':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical6, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical6,
+          this.generalConfig
+        );
         break;
       case 'numerical7':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical7, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical7,
+          this.generalConfig
+        );
         break;
       case 'numerical8':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical8, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical8,
+          this.generalConfig
+        );
         break;
       case 'numerical9':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical9, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical9,
+          this.generalConfig
+        );
         break;
       case 'numerical10':
-        this.compositor.drawNumericalHighlight(this.numericalConfigs.numerical10, this.setupConfig);
+        this.compositor.drawNumericalHighlight(
+          this.numericalConfigs.numerical10,
+          this.generalConfig
+        );
         break;
       case 'fontWidth': // Placeholder for all digital gauges setup.
         this.compositor.drawGTIHighlight(
-          this.setupConfig,
+          this.generalConfig,
           this.needleConfigs.needle1,
           this.needleConfigs.needle2,
           this.needleConfigs.needle3
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical1,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical2,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical3,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical4,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical5,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical6,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical7,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical8,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical9,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         this.compositor.drawNumericalHighlight(
           this.numericalConfigs.numerical10,
-          this.setupConfig,
+          this.generalConfig,
           false
         );
         break;

@@ -1,0 +1,37 @@
+<h4 class="group-label">{{ label }}</h4>
+
+<ng-container *ngFor="let fieldName of showFields">
+  <!-- Number -->
+  <ng-container *ngIf="numericalFields.has(fieldName)">
+    <app-sliding-input
+      *ngIf="STATE_FIELDS_METADATA[fieldName]; let metaData"
+      [metaData]="metaData"
+      [rightLabel]="rightLabel"
+      (valueChanged)="valueChanged($event, fieldName)"
+      [value]="getNumericalValue(fieldName)"
+    ></app-sliding-input>
+  </ng-container>
+  <!-- Color -->
+  <ng-container *ngIf="colorFields.has(fieldName)">
+    <app-color-input
+      *ngIf="STATE_FIELDS_METADATA[fieldName]; let metaData"
+      [label]="metaData.label ?? ''"
+      [rightLabel]="rightLabel"
+      [hint]="metaData.hint ?? ''"
+      (valueChanged)="valueChanged($event, fieldName)"
+      [value]="getStringValue(fieldName)"
+    ></app-color-input>
+  </ng-container>
+  <!-- Boolean -->
+  <ng-container *ngIf="booleanFields.has(fieldName)">
+    <app-toggle-input
+      *ngIf="STATE_FIELDS_METADATA[fieldName]; let metaData"
+      [label]="metaData.label ?? ''"
+      [rightLabel]="rightLabel"
+      [hint]="metaData.hint ?? ''"
+      (valueChanged)="valueChanged($event, fieldName)"
+      [value]="getBooleanValue(fieldName)"
+    ></app-toggle-input>
+  </ng-container>
+
+</ng-container>

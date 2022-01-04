@@ -1,21 +1,26 @@
-<span class="label">{{ metaData?.label }}:<mat-icon *ngIf="metaData?.hint" [tooltip]="metaData!.hint!">help</mat-icon></span>
-<mat-slider
-  *ngIf="showSlider"
-  [min]="metaData?.min"
-  [max]="metaData?.max"
-  step="1"
-  [value]="value"
-  (input)="onChangeSlider($event)"
-  (change)="onChangeSlider($event)"
-></mat-slider>
-<input
-  mat-input
-  class="number-input"
-  [class.wide]="!showSlider"
-  maxlength="3"
-  type="number"
-  [value]="value"
-  (change)="onChangeField($event)"
-  [max]="metaData?.max"
-  [min]="metaData?.min"
-/>
+<span class="wrapper" [class.right-label]="rightLabel">
+  <span class="label" [class.right-label]="rightLabel" [tooltip]="metaData?.hint ?? ''">
+    {{ metaData?.label }}
+    <mat-icon *ngIf="metaData?.hint" class="hint-icon">help</mat-icon>
+  </span>
+  <mat-slider
+    *ngIf="showSlider"
+    [min]="metaData?.min"
+    [max]="metaData?.max"
+    step="1"
+    [value]="value"
+    (input)="onChangeSlider($event)"
+    (change)="onChangeSlider($event)"
+  ></mat-slider>
+  <input
+    mat-input
+    class="number-input"
+    [class.wide]="!showSlider"
+    maxlength="3"
+    type="number"
+    [value]="value"
+    (change)="onChangeField($event)"
+    [max]="metaData?.max"
+    [min]="metaData?.min"
+  />
+</span>

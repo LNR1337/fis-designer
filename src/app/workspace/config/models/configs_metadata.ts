@@ -1,11 +1,5 @@
 import {ImageStateFieldsType} from '../../image-manager/state/images.state';
-import {
-  ConfigStateGaugeFieldsObject,
-  ConfigStateNeedleFieldsObject,
-  ConfigStateNumericalFieldsObject,
-  ConfigStateDigitSetupFieldsObject,
-  ConfigStateTableFieldsObject,
-} from '../state/config.state';
+import {ConfigStateFieldsObject, ConfigStateNeedleFieldsObject} from '../state/config.state';
 import {
   GaugeConfigFieldsObject,
   NeedleConfigFieldsObject,
@@ -14,12 +8,14 @@ import {
   TableRowConfigFieldsObject,
 } from './configs';
 
+/** Metadata for config field display. */
 export interface ConfigFieldMetadata {
   label?: string;
   hint?: string;
   min?: number;
   max?: number;
   hideSlider?: boolean;
+  options?: Map<number, string>;
 }
 
 export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: ConfigStateNeedleFieldsObject<ImageStateFieldsType> =
@@ -31,40 +27,35 @@ export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: ConfigStateNeedleFieldsObject<Imag
 
 // -------------------------- State fields --------------------------
 
-export const GAUGE_LABELS: ConfigStateGaugeFieldsObject<string> = {
-  gauge1: 'Left gauge',
-  gauge2: 'Center gauge',
-  gauge3: 'Right gauge',
-};
-
-export const NEEDLE_LABELS: ConfigStateNeedleFieldsObject<string> = {
-  needle1: 'Left needle',
-  needle2: 'Center needle',
-  needle3: 'Right needle',
-};
-
-export const TABLE_LABELS: ConfigStateTableFieldsObject<string> = {
-  table1: 'Table 1',
-  table2: 'Table 2',
-  table3: 'Table 3',
-  table4: 'Table 4',
-  table5: 'Table 5',
-};
-
-export const NUMERICAL_LABELS: ConfigStateNumericalFieldsObject<string> = {
-  numerical1: 'Digital gauge 1',
-  numerical2: 'Digital gauge 2',
-  numerical3: 'Digital gauge 3',
-  numerical4: 'Digital gauge 4',
-  numerical5: 'Digital gauge 5',
-  numerical6: 'Digital gauge 6',
-  numerical7: 'Digital gauge 7',
-  numerical8: 'Digital gauge 8',
-  numerical9: 'Digital gauge 9',
-  numerical10: 'Digital gauge 10',
-};
-
-export const SETUP_FIELDS_METADATA: ConfigStateDigitSetupFieldsObject<ConfigFieldMetadata> = {
+/** Metadata for all config state fields. */
+export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata> = {
+  // Gauges
+  hideStatusbarOnGauge: {label: 'Hide status bar'},
+  gauge1: {label: 'Left gauge'},
+  gauge2: {label: 'Center gauge'},
+  gauge3: {label: 'Right gauge'},
+  // Needles.
+  needle1: {label: 'Left needle'},
+  needle2: {label: 'Center needle'},
+  needle3: {label: 'Right needle'},
+  // Tables.
+  table1: {label: 'Table 1'},
+  table2: {label: 'Table 2'},
+  table3: {label: 'Table 3'},
+  table4: {label: 'Table 4'},
+  table5: {label: 'Table 5'},
+  // Numerical gauges.
+  numerical1: {label: 'Digital gauge 1'},
+  numerical2: {label: 'Digital gauge 2'},
+  numerical3: {label: 'Digital gauge 3'},
+  numerical4: {label: 'Digital gauge 4'},
+  numerical5: {label: 'Digital gauge 5'},
+  numerical6: {label: 'Digital gauge 6'},
+  numerical7: {label: 'Digital gauge 7'},
+  numerical8: {label: 'Digital gauge 8'},
+  numerical9: {label: 'Digital gauge 9'},
+  numerical10: {label: 'Digital gauge 10'},
+  // Digital gauges setup.
   fontWidth: {label: 'Digit width', min: 0, max: 255, hideSlider: true},
   fontHeight: {label: 'Digit height', min: 0, max: 255, hideSlider: true},
   fontDotWidth: {label: 'Dot width', min: 0, max: 255, hideSlider: true},
@@ -83,6 +74,102 @@ export const SETUP_FIELDS_METADATA: ConfigStateDigitSetupFieldsObject<ConfigFiel
       'Show built in digital gauges in the middle of each analog gauge. These are' +
       ' visually independent from other digital gauges.',
   },
+  // Tables setup.
+  useTableBackgroundImage: {label: 'Use background image if provided'},
+  tableBackgroundColor: {label: 'Background color'},
+  tableFontColor: {label: 'Font color'},
+  firstTable: {
+    label: 'Initial table view',
+    options: new Map<number, string>([
+      [0, 'Table 1'],
+      [1, 'Table 2'],
+      [2, 'Table 3'],
+      [3, 'Table 4'],
+      [4, 'Table 5'],
+    ]),
+  },
+  scrollAllTables: {
+    label: 'Scroll through all tables',
+    hint: 'Allow scrolling through all the tables. Otherwise, show just the initial one.',
+  },
+  hideStatusbarOnTable: {label: 'Hide status bar'},
+  useVirtualCockpitLayout: {
+    label: 'Adapt layout to virtual cockpit window',
+    hint: 'Modify the table display to fit in a virtual cockpit window',
+  },
+  // General settings.
+  language: {
+    label: 'Language',
+    options: new Map<number, string>([
+      [0, 'English'],
+      [1, 'German'],
+    ]),
+  },
+  autostart: {
+    label: 'Auto-start',
+    options: new Map<number, string>([
+      [0, 'Off'],
+      [1, 'On'],
+      [2, 'On with needle sweep'],
+      [3, 'On with needle sweep (1 second delay)'],
+      [4, 'On with needle sweep (2 seconds delay)'],
+      [5, 'On with needle sweep (3 seconds delay)'],
+      [6, 'On with needle sweep (4 seconds delay)'],
+      [7, 'On with needle sweep (5 seconds delay)'],
+    ]),
+  },
+  bluetooth: {
+    label: 'Bluetooth',
+    options: new Map<number, string>([
+      [0, 'Auto-off'],
+      [1, 'Always on'],
+    ]),
+  },
+  car: {
+    label: 'Car model',
+    options: new Map<number, string>([
+      [0, 'unknown'],
+      [1, 'Audi A1 8X (05/2010 - )'],
+      [2, 'Audi A4 8K (05/2009 - 08/2015)'],
+      [3, 'Audi A5 8T (11/2008 - 06/2016)'],
+      [4, 'Audi A6 4F'],
+      [5, 'Audi Q5 8R (11/2008 - 2017)'],
+      [6, 'Audi A8 4H (03/2010 - )'],
+      [7, 'Audi Q3 8U (10/2011 - )'],
+      [8, 'Audi A6 4G (04/2011 - 09/2014)'],
+      [9, 'Audi A3 8V'],
+      [10, 'Audi A6 4G (09/2014 - )'],
+      [11, 'Seat Leon 5F'],
+      [12, 'VW Passat B8'],
+      [13, 'VW Golf Mk7'],
+      [14, 'Audi TT 8S'],
+      [15, 'VW Polo 6C'],
+    ]),
+  },
+  useSteeringWheelRoller: {label: 'Control FIS-Control with steering wheel roller'},
+  driveSelect: {
+    label: 'Reselect dynamic drive mode after ignition',
+    hint: 'Only for RSQ3. Enables the exhaust flap.',
+  },
+  showEgtToCan: {
+    label: 'Show EGT from ECUMaster EGT to CAN',
+    hint: 'Show EGT reported by ECUMaster EGT-to-CAN in the lower left corner of the gauges.',
+  },
+  supportLowResolution: {
+    label: 'Support low resolution display',
+    hint: 'Change the table and notifications font to fit on a smaller screen.',
+  },
+  ignorePdc: {
+    label: 'Do not hide while reversing',
+    hint: 'Ignore reverse camera and parking distance control.',
+  },
+  useStarButton: {label: 'Operate using star button only', hint: 'For A3 8V and TT 8S.'},
+  hideOnDriveSelectButton: {
+    label: 'Hide when drive select button is pressed',
+    hint: 'For A3 8V face-lift.',
+  },
+  hideOnMmiButton: {label: 'Hide when MMI button is pressed', hint: 'For A3 8V face-lift.'},
+  externalCanWarning: {label: 'Send warning status to external CAN board'},
 };
 
 // -------------------------- Config fields --------------------------

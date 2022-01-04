@@ -1,9 +1,27 @@
 @import 'src/variables';
 
 :host {
-  display: flex;
-  align-content: center;
   margin-bottom: 4px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  &.right-label {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+}
+
+.label {
+  &:not(.right-label) {
+    margin-right: 16px;
+  }
+
+  &.right-label {
+    margin-left: 16px;
+  }
 }
 
 mat-slider {
@@ -17,23 +35,6 @@ mat-slider {
   }
 }
 
-.wide {
+input.wide {
   width: 70px;
-}
-
-.label {
-  color: $light-grey-item;
-  width: 120px;
-  line-height: 36px;
-  margin-right: 16px;
-  display: flex;
-  flex-flow: row-reverse nowrap;
-  justify-content: space-between;
-
-  mat-icon {
-    position: relative;
-    top: 10px;
-    font-size: 120%;
-    opacity: 0.7;
-  }
 }

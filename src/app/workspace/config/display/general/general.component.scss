@@ -6,10 +6,6 @@
   flex-direction: column;
 }
 
-.label {
-  color: map-get($primary, default);
-}
-
 .recalculate-button {
   position: relative;
   width: 0;

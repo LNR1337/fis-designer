@@ -7,13 +7,11 @@ import {ResizableModule} from 'angular-resizable-element';
 
 import {ConfigComponent} from './config.component';
 import {DisplayModule} from './display/display.module';
-import {MiscComponent} from './misc/misc.component';
 import {ConfigEffects} from './state/config.effects';
 import {configReducer, CONFIG_FEATURE_KEY} from './state/config.reducer';
-import {TablesComponent} from './tables/tables.component';
 
 @NgModule({
-  declarations: [ConfigComponent, TablesComponent, MiscComponent],
+  declarations: [ConfigComponent],
   imports: [
     CommonModule,
     DisplayModule,

@@ -1,5 +1,11 @@
 import {ConfigState} from './config.state';
-import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
+import {
+  GaugeConfig,
+  NeedleConfig,
+  NumericalConfig,
+  TableConfig,
+  TableRowConfig,
+} from '../models/configs';
 
 const initialGaugeConfig: GaugeConfig = {
   startAngle: 90,
@@ -37,6 +43,22 @@ const initialNumericalConfig: NumericalConfig = {
   centered: false,
 };
 
+const initialTableRowConfig: TableRowConfig = {
+  measurementId: 0,
+  label: '',
+  unit: '',
+  decimalPlaces: 2,
+  factor: 0,
+  pressureTag: 0,
+  lowerWarning: 0,
+  upperWarning: 0,
+};
+
+const initialTableConfig: TableConfig = {
+  controlUnitId: 0,
+  rows: new Array<TableRowConfig>(10).fill(initialTableRowConfig),
+};
+
 /** Initial config state. */
 export const initialConfigState: ConfigState = {
   gauge1: initialGaugeConfig,
@@ -55,6 +77,12 @@ export const initialConfigState: ConfigState = {
   numerical8: initialNumericalConfig,
   numerical9: initialNumericalConfig,
   numerical10: initialNumericalConfig,
+  table1: initialTableConfig,
+  table2: initialTableConfig,
+  table3: initialTableConfig,
+  table4: initialTableConfig,
+  table5: initialTableConfig,
+  // Digital gauges setup.
   fontWidth: 0,
   fontHeight: 0,
   fontDotWidth: 0,
@@ -62,4 +90,27 @@ export const initialConfigState: ConfigState = {
   fontColor: '#ffffff',
   fontWarningColor: '#ff0000',
   useBuiltInNumericalGauges: false,
+  hideStatusbarOnGauge: false,
+  // Table view.
+  useTableBackgroundImage: false,
+  tableBackgroundColor: '#000000',
+  tableFontColor: '#ffffff',
+  firstTable: 0,
+  scrollAllTables: false,
+  hideStatusbarOnTable: false,
+  useVirtualCockpitLayout: false,
+  // General settings.
+  language: 0,
+  autostart: 0,
+  bluetooth: 0,
+  car: 0,
+  useSteeringWheelRoller: false,
+  driveSelect: false,
+  showEgtToCan: false,
+  supportLowResolution: false,
+  ignorePdc: false,
+  useStarButton: false,
+  hideOnDriveSelectButton: false,
+  hideOnMmiButton: false,
+  externalCanWarning: false,
 };

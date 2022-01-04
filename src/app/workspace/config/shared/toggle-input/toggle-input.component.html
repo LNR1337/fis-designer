@@ -1,7 +1,13 @@
-<span class="label">{{ label }}:<mat-icon *ngIf="hint" [tooltip]="hint">help</mat-icon></span>
-
 <mat-slide-toggle
   color="primary"
+  [class.right-label]="rightLabel"
   [checked]="value"
-  (change)="onChangeToggle($event)">
+  (change)="onChangeToggle($event)"
+  [tooltip]="hint ?? ''"
+  [labelPosition]="rightLabel ? 'after' : 'before'"
+>
+    <span class="label" [class.right-label]="rightLabel">
+    {{ label }}
+    <mat-icon class="hint-icon" *ngIf="hint">help</mat-icon>
+    </span>
 </mat-slide-toggle>
