@@ -19,6 +19,7 @@ export class SlidingInputComponent {
     return (
       !!this.metaData &&
       !this.metaData.hideSlider &&
+      !this.rightLabel &&
       this.metaData.min !== undefined &&
       this.metaData.max !== undefined
     );

@@ -1,68 +1,5 @@
 /** Names of state fields containing display settings. */
-import {
-  GaugeConfig,
-  GaugeConfigFields,
-  NeedleConfig,
-  NumericalConfig,
-  TableConfig,
-} from '../models/configs';
-
-// -------------------------- Whole config --------------------------
-
-// export const ConfigStateFields = [
-//   'gauge1',
-//   'gauge2',
-//   'gauge3',
-//   'needle1',
-//   'needle2',
-//   'needle3',
-//   'numerical1',
-//   'numerical2',
-//   'numerical3',
-//   'numerical4',
-//   'numerical5',
-//   'numerical6',
-//   'numerical7',
-//   'numerical8',
-//   'numerical9',
-//   'numerical10',
-//   'table1',
-//   'table2',
-//   'table3',
-//   'table4',
-//   'table5',
-//   // Digital gauges settings.
-//   'fontWidth',
-//   'fontHeight',
-//   'fontDotWidth',
-//   'fontSpacing',
-//   'fontColor',
-//   'fontWarningColor',
-//   'useBuiltInNumericalGauges',
-//   'hideStatusbarOnGauge',
-//   // Table view.
-//   'hideStatusbarOnTable',
-//   'useTableBackgroundImage',
-//   'tableBackgroundColor',
-//   'tableFontColor',
-//   'firstTable',
-//   'scrollAllTables',
-//   'useVirtualCockpitLayout',
-//   // General settings.
-//   'language',
-//   'autostart',
-//   'bluetooth',
-//   'car',
-//   'useSteeringWheelRoller',
-//   'driveSelect',
-//   'showEgtToCan',
-//   'supportLowResolution',
-//   'ignorePdc',
-//   'useStarButton',
-//   'hideOnDriveSelectButton',
-//   'hideOnMmiButton',
-//   'externalCanWarning',
-// ] as const;
+import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
 
 // -------------------------- Gauges --------------------------
 
@@ -201,6 +138,10 @@ export const ConfigStateFieldsNumericalSet = new Set([
   'fontHeight',
   'fontDotWidth',
   'fontSpacing',
+]);
+
+/** Set of all config state fields holding numerical values coming from a select. */
+export const ConfigStateFieldsNumericalSelectSet = new Set([
   'language',
   'autostart',
   'bluetooth',

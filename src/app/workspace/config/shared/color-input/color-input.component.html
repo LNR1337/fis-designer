@@ -3,9 +3,7 @@
     {{ label }}
     <mat-icon *ngIf="hint" class="hint-icon">help</mat-icon>
   </span>
-  <span class="color-input-wrapper" >
-    <input matInput type="color" [value]="value" (change)="onChangeField($event)"/>
-  </span>
+  <input class="single-input" type="color" [value]="value" (change)="onChangeField($event)"/>
 </span>
 
 

@@ -7,6 +7,7 @@
 @include mat.card-theme($theme);
 @include mat.button-theme($theme);
 @include mat.form-field-theme($theme);
+@include mat.select-theme($theme);
 @include mat.slide-toggle-theme($theme);
 @include mat.tabs-theme($theme);
 @include mat.toolbar-theme($theme);
@@ -16,6 +17,7 @@ body {
   height: 100%;
   overflow: hidden;
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -28,7 +30,7 @@ a {
   all: unset;
   color: inherit;
   cursor: pointer;
-  border-bottom: solid 1px rgba(255,255,255, 0.5);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.5);
 }
 
 // Forms.
@@ -58,7 +60,8 @@ a {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-  width: 120px;
+  width: $form-left-side-width;
+  max-width: $form-left-side-max-width;
 
   .hint-icon {
     position: relative;
@@ -67,10 +70,12 @@ a {
   }
 }
 
-.number-input {
-  width: 46px;
+.single-input {
+  box-sizing: border-box;
+  width: 80px;
   height: 32px;
-  padding: 0 0 0 8px;
+  padding: 2px 8px;
+  line-height: 28px;
   background-color: $background;
   border: solid 2px $grey-item;
   border-radius: 4px;
@@ -92,8 +97,11 @@ a {
   }
 }
 
-.number-input .wide {
-  width: 60px;
+.right-label {
+  .single-input {
+    width: $form-left-side-width;
+    max-width: $form-left-side-max-width;
+  }
 }
 
 @media (max-width: $mobile-width-breakpoint) {

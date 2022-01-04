@@ -177,8 +177,8 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
 export const GAUGE_FIELD_METADATA: GaugeConfigFieldsObject<ConfigFieldMetadata> = {
   startAngle: {label: 'Lower limit angle', min: 0, max: 360},
   angularRange: {label: 'Low to high angle', min: -360, max: 360},
-  lowerLimit: {label: 'Value lower limit', min: -2147483.648, max: 2147483.64, hideSlider: true},
-  upperLimit: {label: 'Value upper limit', min: -2147483.648, max: 2147483.64, hideSlider: true},
+  lowerLimit: {label: 'Value lower limit', min: -2147483, max: 2147483, hideSlider: true},
+  upperLimit: {label: 'Value upper limit', min: -2147483, max: 2147483, hideSlider: true},
 };
 
 export const NUMERICAL_FIELD_METADATA: NumericalConfigFieldsObject<ConfigFieldMetadata> = {

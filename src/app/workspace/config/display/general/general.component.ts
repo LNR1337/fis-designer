@@ -6,6 +6,7 @@ import {changedGeneralFieldsConfig} from '../../state/config.actions';
 import {
   ConfigStateFieldsBooleanSet,
   ConfigStateFieldsColorSet,
+  ConfigStateFieldsNumericalSelectSet,
   ConfigStateFieldsNumericalSet,
   ConfigStateGeneralFieldsConfig,
   ConfigStateGeneralFieldsType,
@@ -28,6 +29,7 @@ export class GeneralComponent {
   numericalFields = ConfigStateFieldsNumericalSet;
   colorFields = ConfigStateFieldsColorSet;
   booleanFields = ConfigStateFieldsBooleanSet;
+  selectFields = ConfigStateFieldsNumericalSelectSet;
 
   constructor(private readonly store: Store) {}
 

@@ -33,5 +33,16 @@
       [value]="getBooleanValue(fieldName)"
     ></app-toggle-input>
   </ng-container>
+  <!-- Select -->
+  <ng-container *ngIf="selectFields.has(fieldName)">
+    <app-select-input
+      *ngIf="STATE_FIELDS_METADATA[fieldName]; let metaData"
+      [metaData]="metaData"
+      [rightLabel]="rightLabel"
+      (valueChanged)="valueChanged($event, fieldName)"
+      [value]="getNumericalValue(fieldName)"
+    ></app-select-input>
+  </ng-container>
+
 
 </ng-container>

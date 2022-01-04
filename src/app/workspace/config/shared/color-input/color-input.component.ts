@@ -1,5 +1,4 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-color-input',

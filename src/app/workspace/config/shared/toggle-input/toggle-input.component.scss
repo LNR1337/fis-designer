@@ -11,21 +11,28 @@
   .mat-slide-toggle {
     color: $light-grey-item;
     height: 36px;
+    width: 100%;
 
     &:not(.right-label) {
       .mat-slide-toggle-content {
         margin-right: 8px;
+        width: $form-left-side-width;
+        max-width: $form-left-side-max-width;
+
+        .label {
+          width: 100%;
+        }
       }
     }
 
     &.right-label {
       .mat-slide-toggle-content {
-        margin-left: 8px;
+        margin-left: 12px;
       }
     }
 
     &.right-label {
-      margin-left: 44px;
+      margin-left: calc(min(#{$form-left-side-width}, #{$form-left-side-max-width}) - 40px);
     }
   }
 }
