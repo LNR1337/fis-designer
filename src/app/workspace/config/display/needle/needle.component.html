@@ -1,3 +1,16 @@
+<div class="recalculate-button">
+  <button mat-icon-button color="primary" [disabled]="!resizeEnabled" (click)="recalculateSize()">
+    <mat-icon
+      [tooltip]="
+        resizeEnabled
+          ? 'Set needle dimensions to match the needle image.'
+          : 'No needle image loaded yet.'
+      "
+    >
+      aspect_ratio
+    </mat-icon>
+  </button>
+</div>
 <h4 class="group-label">{{ label }}</h4>
 
 <ng-container *ngFor="let fieldName of NeedleConfigFields">

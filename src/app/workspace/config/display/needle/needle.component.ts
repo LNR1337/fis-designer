@@ -1,10 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {ConfigStateNeedleFieldsType} from '../../state/config.state';
 import {Store} from '@ngrx/store';
-import {changedNeedleConfig} from '../../state/config.actions';
+import {changedNeedleConfig, recalculateNeedleSize} from '../../state/config.actions';
 import {NeedleConfig, NeedleConfigFields} from '../../models/configs';
 import {
+  NEEDLE_DISPLAY_TO_PREVIEW_FIELD,
   NEEDLE_FIELD_METADATA,
 } from '../../models/configs_metadata';
 
@@ -13,7 +14,7 @@ import {
   templateUrl: './needle.component.html',
   styleUrls: ['./needle.component.scss'],
 })
-export class NeedleComponent {
+export class NeedleComponent implements OnChanges {
   @Input() needleConfig?: NeedleConfig;
   // Name of the state field this config corresponds to.
   @Input() fieldName?: ConfigStateNeedleFieldsType;
@@ -21,6 +22,7 @@ export class NeedleComponent {
   @Input() loadedImages?: Set<ImageStateFieldsType>;
   @Input() label = '';
 
+  resizeEnabled = false;
   NEEDLE_FIELD_METADATA = NEEDLE_FIELD_METADATA;
   NeedleConfigFields = NeedleConfigFields;
 
@@ -32,6 +34,24 @@ export class NeedleComponent {
         changedNeedleConfig({
           config: {...this.needleConfig, [fieldName]: value},
           displayConfigField: this.fieldName,
+        })
+      );
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['loadedImages'] && this.fieldName) {
+      const previewImageField = NEEDLE_DISPLAY_TO_PREVIEW_FIELD[this.fieldName];
+      this.resizeEnabled = !!this.loadedImages && this.loadedImages.has(previewImageField);
+    }
+  }
+
+  recalculateSize() {
+    if (this.fieldName) {
+      this.store.dispatch(
+        recalculateNeedleSize({
+          configStateNeedleField: this.fieldName,
+          previewStateImageField: NEEDLE_DISPLAY_TO_PREVIEW_FIELD[this.fieldName],
         })
       );
     }
