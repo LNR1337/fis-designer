@@ -30,7 +30,7 @@ export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: ConfigStateNeedleFieldsObject<Imag
 /** Metadata for all config state fields. */
 export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata> = {
   // Gauges
-  hideStatusbarOnGauge: {label: 'Hide status bar'},
+  hideStatusBarOnGauge: {label: 'Hide status bar'},
   gauge1: {label: 'Left gauge'},
   gauge2: {label: 'Center gauge'},
   gauge3: {label: 'Right gauge'},
@@ -92,7 +92,7 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
     label: 'Scroll through all tables',
     hint: 'Allow scrolling through all the tables. Otherwise, show just the initial one.',
   },
-  hideStatusbarOnTable: {label: 'Hide status bar'},
+  hideStatusBarOnTable: {label: 'Hide status bar'},
   useVirtualCockpitLayout: {
     label: 'Adapt layout to virtual cockpit window',
     hint: 'Modify the table display to fit in a virtual cockpit window',

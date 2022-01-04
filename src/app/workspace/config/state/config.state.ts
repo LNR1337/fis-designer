@@ -66,7 +66,7 @@ export type ConfigStateTableFieldsObject<T> = {
 
 // -------------------------- General state fields --------------------------
 
-export const ConfigStateGeneralGaugesFields = ['hideStatusbarOnGauge'] as const;
+export const ConfigStateGeneralGaugesFields = ['hideStatusBarOnGauge'] as const;
 export const ConfigStateGeneralNumericalFields = [
   'fontWidth',
   'fontHeight',
@@ -80,7 +80,7 @@ export const ConfigStateGeneralTableFields = [
   'tableBackgroundColor',
   'tableFontColor',
   'useTableBackgroundImage',
-  'hideStatusbarOnTable',
+  'hideStatusBarOnTable',
   'useVirtualCockpitLayout',
   'scrollAllTables',
   'firstTable',
@@ -168,8 +168,8 @@ export const ConfigStateFieldsBooleanSet = new Set([
   'supportLowResolution',
   'ignorePdc',
   'scrollAllTables',
-  'hideStatusbarOnGauge',
-  'hideStatusbarOnTable',
+  'hideStatusBarOnGauge',
+  'hideStatusBarOnTable',
   'useVirtualCockpitLayout',
   'useStarButton',
   'hideOnDriveSelectButton',
@@ -217,14 +217,14 @@ export interface ConfigState {
   fontColor?: string;
   fontWarningColor?: string;
   useBuiltInNumericalGauges?: boolean;
-  hideStatusbarOnGauge?: boolean;
+  hideStatusBarOnGauge?: boolean;
   // Table view.
   useTableBackgroundImage?: boolean;
   tableBackgroundColor?: string;
   tableFontColor?: string;
   firstTable?: number;
   scrollAllTables?: boolean;
-  hideStatusbarOnTable?: boolean;
+  hideStatusBarOnTable?: boolean;
   useVirtualCockpitLayout?: boolean;
   // General settings.
   language?: number;

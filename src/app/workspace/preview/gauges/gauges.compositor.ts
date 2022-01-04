@@ -7,18 +7,17 @@ import {
 import {ConfigStateGeneralFieldsConfig} from '../../config/state/config.state';
 
 const GUIDES_FONT = '10px sans-serif';
+const STATUS_BAR_FONT = '22px sans-serif';
 const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
 const NUMERICAL_DIGITS = 3;
 const GTI_FONT_WIDTH = 28;
 const GTI_FONT_HEIGHT = 24;
-const STATUS_BAR_HEIGHT = 24;
+const STATUS_BAR_HEIGHT = 40;
 
 /** Class responsible for rendering gauges on the canvas. */
 export class GaugesCompositor {
-  constructor(private context: CanvasRenderingContext2D) {
-    this.context.font = GUIDES_FONT;
-  }
+  constructor(private context: CanvasRenderingContext2D) {}
 
   clearImage() {
     this.context.clearRect(0, 0, 800, 480);
@@ -47,15 +46,35 @@ export class GaugesCompositor {
   drawBackground(image: HTMLImageElement, highlight: boolean) {
     if (highlight) {
       this.context.globalAlpha = 0.5;
+    } else {
+      this.context.globalAlpha = 1;
     }
     this.drawImage(image, 0, 0);
     this.context.globalAlpha = 1;
+  }
+
+  drawStatusBar() {
+    const statusBarY = 479.5 - STATUS_BAR_HEIGHT;
+    this.context.globalAlpha = 1;
+    this.context.font = STATUS_BAR_FONT;
+    this.context.fillStyle = '#444444';
+    this.context.fillRect(0.5, statusBarY, 799, STATUS_BAR_HEIGHT);
+    this.context.fillStyle = '#666666';
+    this.context.fillRect(0.5, statusBarY, 799, 4);
+    this.context.fillStyle = '#999999';
+    this.context.fillRect(0.5, statusBarY, 799, 3);
+    this.context.fillStyle = '#ffffff';
+    this.context.textAlign = 'center';
+    this.context.textBaseline = 'top';
+    const date = new Date();
+    this.context.fillText(`${date.getHours()}:${date.getMinutes()}`, 399, statusBarY + 10);
   }
 
   drawNeedleCenter(x: number, y: number, showCoords = true) {
     this.context.globalAlpha = 0.7;
     this.context.strokeStyle = 'cyan';
     this.context.fillStyle = 'cyan';
+    this.context.font = GUIDES_FONT;
     // Target cross.
     this.context.beginPath();
     this.context.moveTo(x - CROSS_SIZE, y);
@@ -201,6 +220,7 @@ export class GaugesCompositor {
   drawPosition(x: number, y: number) {
     this.context.lineWidth = 1;
     this.context.globalAlpha = 0.7;
+    this.context.font = GUIDES_FONT;
     // Lines
     this.context.strokeStyle = 'cyan';
     this.context.beginPath();
@@ -230,6 +250,7 @@ export class GaugesCompositor {
   drawNeedleHighlight(config: NeedleConfig) {
     this.context.lineWidth = 1;
     this.context.globalAlpha = 0.7;
+    this.context.font = GUIDES_FONT;
     // Needle position.
     this.drawPosition(config.positionX!, config.positionY!);
     // Needle size.

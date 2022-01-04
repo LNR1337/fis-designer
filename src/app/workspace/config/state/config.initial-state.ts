@@ -90,14 +90,14 @@ export const initialConfigState: ConfigState = {
   fontColor: '#ffffff',
   fontWarningColor: '#ff0000',
   useBuiltInNumericalGauges: false,
-  hideStatusbarOnGauge: false,
+  hideStatusBarOnGauge: false,
   // Table view.
   useTableBackgroundImage: false,
   tableBackgroundColor: '#000000',
   tableFontColor: '#ffffff',
   firstTable: 0,
   scrollAllTables: false,
-  hideStatusbarOnTable: false,
+  hideStatusBarOnTable: false,
   useVirtualCockpitLayout: false,
   // General settings.
   language: 0,

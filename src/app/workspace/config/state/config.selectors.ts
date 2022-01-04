@@ -62,9 +62,9 @@ export const selectGeneralFieldsConfig = createSelector(
     fontColor: state.fontColor!,
     fontWarningColor: state.fontWarningColor!,
     useBuiltInNumericalGauges: state.useBuiltInNumericalGauges!,
-    hideStatusbarOnGauge: state.hideStatusbarOnGauge!,
+    hideStatusBarOnGauge: state.hideStatusBarOnGauge!,
     // Table view.
-    hideStatusbarOnTable: state.hideStatusbarOnTable!,
+    hideStatusBarOnTable: state.hideStatusBarOnTable!,
     useTableBackgroundImage: state.useTableBackgroundImage!,
     tableBackgroundColor: state.tableBackgroundColor!,
     tableFontColor: state.tableFontColor!,

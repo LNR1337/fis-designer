@@ -155,10 +155,15 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
     // Draw the needles.
     this.drawNeedles();
 
+    // Draw the status bar.
+    if (!this.generalConfig?.hideStatusBarOnGauge) {
+      this.compositor.drawStatusBar();
+    }
+
     // Draw the highlights and guides.
     // TODO(pawelszydlo): streamline this.
     switch (this.highlight) {
-      case 'hideStatusbarOnGauge':
+      case 'hideStatusBarOnGauge':
         this.compositor.drawStatusBarHighlight();
         break;
       case 'needle1':
