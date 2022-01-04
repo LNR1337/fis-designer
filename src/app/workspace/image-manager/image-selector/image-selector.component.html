@@ -1,7 +1,7 @@
 <div class="preview" [ngStyle]="{'background-image': 'url(' + currentImageUrl + ')'}">
   <div class="download" *ngIf="currentImageUrl" (click)="downloadImage()"><mat-icon>download</mat-icon></div>
 </div>
-<div class="label">
+<div class="description">
   <div>{{ label }}</div>
   <div class="restriction">{{ restriction }}</div>
 </div>

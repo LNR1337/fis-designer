@@ -6,16 +6,18 @@ import {
 } from '../../config/models/configs';
 import {ConfigStateGeneralFieldsConfig} from '../../config/state/config.state';
 
+const GUIDES_FONT = '10px sans-serif';
 const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
 const NUMERICAL_DIGITS = 3;
 const GTI_FONT_WIDTH = 28;
 const GTI_FONT_HEIGHT = 24;
+const STATUS_BAR_HEIGHT = 24;
 
 /** Class responsible for rendering gauges on the canvas. */
 export class GaugesCompositor {
   constructor(private context: CanvasRenderingContext2D) {
-    this.context.font = '10px sans-serif';
+    this.context.font = GUIDES_FONT;
   }
 
   clearImage() {
@@ -214,6 +216,19 @@ export class GaugesCompositor {
     this.context.textBaseline = 'top';
     this.context.textAlign = 'end';
     this.context.fillText(`x:${x}`, x - 5, 5);
+    this.context.globalAlpha = 1;
+  }
+
+  drawStatusBarHighlight() {
+    this.context.lineWidth = 1;
+    this.context.globalAlpha = 0.7;
+    this.context.strokeStyle = 'yellow';
+    this.context.strokeRect(
+      0.5,
+      479.5 - STATUS_BAR_HEIGHT,
+      799,
+      STATUS_BAR_HEIGHT
+    );
     this.context.globalAlpha = 1;
   }
 
