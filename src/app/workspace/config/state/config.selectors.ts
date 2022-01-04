@@ -13,6 +13,9 @@ import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
 /** Selector for the whole state. */
 export const selectConfigState = createFeatureSelector<ConfigState>(CONFIG_FEATURE_KEY);
 
+/** Selects the config's name */
+export const selectConfigName = createSelector(selectConfigState, state => state.configName);
+
 /** Selects the needles' configs. */
 export const selectNeedleConfigs = createSelector(
   selectConfigState,

@@ -53,11 +53,15 @@ export class GaugesCompositor {
     this.context.globalAlpha = 1;
   }
 
-  drawStatusBar() {
+  drawStatusBar(highlight: boolean) {
+    if (highlight) {
+      this.context.globalAlpha = 0.5;
+    } else {
+      this.context.globalAlpha = 1;
+    }
     const statusBarY = 479.5 - STATUS_BAR_HEIGHT;
-    this.context.globalAlpha = 1;
     this.context.font = STATUS_BAR_FONT;
-    this.context.fillStyle = '#444444';
+    this.context.fillStyle = '#333333';
     this.context.fillRect(0.5, statusBarY, 799, STATUS_BAR_HEIGHT);
     this.context.fillStyle = '#666666';
     this.context.fillRect(0.5, statusBarY, 799, 4);
@@ -67,7 +71,8 @@ export class GaugesCompositor {
     this.context.textAlign = 'center';
     this.context.textBaseline = 'top';
     const date = new Date();
-    this.context.fillText(`${date.getHours()}:${date.getMinutes()}`, 399, statusBarY + 10);
+    this.context.fillText(`${date.toTimeString().substr(0, 5)}`, 399, statusBarY + 10);
+    this.context.globalAlpha = 1;
   }
 
   drawNeedleCenter(x: number, y: number, showCoords = true) {

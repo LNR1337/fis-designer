@@ -157,7 +157,7 @@ export class GaugesComponent implements AfterViewInit, OnDestroy {
 
     // Draw the status bar.
     if (!this.generalConfig?.hideStatusBarOnGauge) {
-      this.compositor.drawStatusBar();
+      this.compositor.drawStatusBar(!!this.highlight);
     }
 
     // Draw the highlights and guides.

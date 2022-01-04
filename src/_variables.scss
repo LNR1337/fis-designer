@@ -15,11 +15,14 @@ $theme: mat.define-dark-theme(
   )
 );
 
-// Other styles.
+// Other colors.
 $top-bar-height: 56px;
 $grey-border: rgb(82, 82, 82);
 $grey-item: rgb(117, 117, 117);
 $light-grey-item: rgb(167, 182, 189);
+$primary-text: map-get($primary, 500);
+
+// Width.
 $sidebar-desktop-min-width: 480px;
 $mobile-width-breakpoint: 800px;
 

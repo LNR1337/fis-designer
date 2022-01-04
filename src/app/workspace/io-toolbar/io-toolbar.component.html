@@ -1,54 +1,70 @@
 <mat-toolbar class="toolbar">
+  <input hidden (change)="onConfigSelected($event)" #configInput type="file"
+         accept="application/json"/>
+
   <button mat-stroked-button color="primary" (click)="openFileSelectorDialog()">
-    <mat-icon>collections</mat-icon><span class="mobile-hide"> Image manager</span>
+    <mat-icon>collections</mat-icon>
+    <span class="mobile-hide"> Image manager</span>
   </button>
 
-  <div class="config-actions">
-    <mat-form-field class="config-field" appearance="standard">
-      <input type="text" matInput [matAutocomplete]="auto" placeholder="Config name" #nameInput>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option [value]="configName" *ngFor="let configName of existingConfigNames">
-          {{ configName }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+  <mat-form-field class="config-name" appearance="standard">
+    <input type="text" matInput placeholder="Config name" #configNameInput [value]="configName"
+           (change)="onConfigNameChange($event)"/>
+  </mat-form-field>
 
-    <mat-divider [vertical]="true"></mat-divider>
-
-    <button mat-icon-button (click)="saveConfigLocal(nameInput.value)" [disabled]="disableSaveLoad"
-            tooltip="Save workspace to your browser's local storage.">
+  <button mat-stroked-button [matMenuTriggerFor]="saveMenu" color="primary">
+    <mat-icon>save</mat-icon>
+    <span class="mobile-hide"> Load & save</span>
+  </button>
+  <mat-menu #saveMenu="matMenu" xPosition="before">
+    <!-- Local storage -->
+    <button mat-menu-item (click)="saveConfigLocal()">
       <mat-icon>save_alt</mat-icon>
+      <span>Save to browser storage</span>
     </button>
-    <button mat-icon-button (click)="loadConfigLocal(nameInput.value)" [disabled]="disableSaveLoad"
-            tooltip="Load workspace from your browser's local storage.<br><br>This will overwrite your current work!">
-      <mat-icon>upload_file</mat-icon>
-    </button>
-
-    <mat-divider [vertical]="true"></mat-divider>
-
-    <button mat-icon-button (click)="saveConfigToJSON(nameInput.value)" [disabled]="disableSaveLoad"
-            tooltip="Save complete workspace as a JSON file.<br><br><b>Do not load this file into FIS-Control!</b>">
-      <mat-icon>save</mat-icon>
-    </button>
-    <input hidden (change)="onConfigSelected($event)" #configInput type="file" accept="application/json" />
-    <button mat-icon-button [disabled]="disableSaveLoad" (click)="configInput.click()"
-            tooltip="Load workspace from a JSON file.<br><br>This will overwrite your current work!">
+    <button mat-menu-item [mat-menu-trigger-for]="localConfigs">
       <mat-icon>file_upload</mat-icon>
+      <span>Load from browser storage</span>
     </button>
+    <mat-divider></mat-divider>
+    <!-- JSON -->
+    <button mat-menu-item (click)="saveConfigToJSON()">
+      <mat-icon>save</mat-icon>
+      <span>Download as JSON</span>
+    </button>
+    <button mat-menu-item (click)="configInput.click()">
+      <mat-icon>upload_file</mat-icon>
+      <span>Load full config from JSON</span>
+    </button>
+    <button mat-menu-item (click)="configInput.click()" disabled>
+      <mat-icon>upload_file</mat-icon>
+      <span>Load visual config from JSON</span>
+    </button>
+    <mat-divider></mat-divider>
+    <!-- Binary -->
+    <button mat-menu-item (click)="saveConfigAsBinary()" class="primary-text" disabled>
+      <mat-icon color="primary">settings_applications</mat-icon>
+      <span>Save FIS-Control settings file</span>
+    </button>
+    <button mat-menu-item class="primary-text" disabled>
+      <mat-icon color="primary">file_upload</mat-icon>
+      <span>Load FIS-Control settings file</span>
+    </button>
+    <button mat-menu-item (click)="saveBackgroundAsBinary()" class="primary-text" disabled>
+      <mat-icon color="primary">wallpaper</mat-icon>
+      <span>Save FIS-Control background file</span>
+    </button>
+    <button mat-menu-item (click)="saveNeedlesAsBinary()" class="primary-text" disabled>
+      <mat-icon color="primary">speed</mat-icon>
+      <span>Save FIS-Control needles file</span>
+    </button>
+  </mat-menu>
 
-    <mat-divider [vertical]="true"></mat-divider>
-
-    <button mat-icon-button (click)="saveConfigAsBinary(nameInput.value)" [disabled]="disableSaveLoad"
-            tooltip="Save FIS-Control binary config." color="primary">
-      <mat-icon>settings_applications</mat-icon>
-    </button>
-    <button mat-icon-button (click)="saveBackgroundAsBinary(nameInput.value)" [disabled]="disableSaveLoad"
-            tooltip="Save FIS-Control background file." color="primary">
-      <mat-icon>wallpaper</mat-icon>
-    </button>
-    <button mat-icon-button (click)="saveNeedlesAsBinary(nameInput.value)" [disabled]="disableSaveLoad"
-            tooltip="Save FIS-Control needles file." color="primary">
-      <mat-icon>speed</mat-icon>
-    </button>
-  </div>
+  <mat-menu #localConfigs="matMenu" xPosition="after">
+    <button *ngFor="let name of existingConfigNames" mat-menu-item (click)="loadConfigLocal(name)">{{name}}</button>
+    <button *ngIf="!existingConfigNames.length" mat-menu-item disabled>No stored configs</button>
+  </mat-menu>
 </mat-toolbar>
+
+
+

@@ -7,7 +7,8 @@
 @include mat.card-theme($theme);
 @include mat.button-theme($theme);
 @include mat.form-field-theme($theme);
-@include mat.select-theme($theme);
+@include mat.icon-theme($theme);
+@include mat.menu-theme($theme);
 @include mat.slide-toggle-theme($theme);
 @include mat.tabs-theme($theme);
 @include mat.toolbar-theme($theme);
@@ -32,6 +33,10 @@ a {
   color: inherit;
   cursor: pointer;
   border-bottom: solid 1px rgba(255, 255, 255, 0.5);
+}
+
+.primary-text {
+  color: $primary-text;
 }
 
 // Forms.

@@ -3,18 +3,9 @@
   display: flex;
   justify-content: space-between;
 
-  .config-actions {
-    display: flex;
-    align-items: center;
-    opacity: .7;
-
-    mat-form-field {
-      width: 140px;
-    }
-
-    mat-divider {
-      height: 32px;
-      margin: 0 8px;
-    }
+  .config-name {
+    position: relative;
+    top:-2px;
+    text-align: center;
   }
 }

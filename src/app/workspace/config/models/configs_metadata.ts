@@ -29,6 +29,7 @@ export const NEEDLE_DISPLAY_TO_PREVIEW_FIELD: ConfigStateNeedleFieldsObject<Imag
 
 /** Metadata for all config state fields. */
 export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata> = {
+  configName: {label: 'Config name'},
   // Gauges
   hideStatusBarOnGauge: {label: 'Hide status bar'},
   gauge1: {label: 'Left gauge'},

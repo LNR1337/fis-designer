@@ -2,6 +2,8 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {MatDialog} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
+import {changeProjectName} from '../config/state/config.actions';
+import {selectConfigName} from '../config/state/config.selectors';
 import {ImageManagerComponent} from '../image-manager/image-manager.component';
 import {
   downloadBackgroundAsBinary,
@@ -26,10 +28,10 @@ import {selectExistingConfigNames} from './state/io-toolbar.selectors';
 export class IoToolbarComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   existingConfigNames: string[] = [];
-  disableSaveLoad = false;
+  configName = '';
 
   @ViewChild('configInput') configInput?: ElementRef;
-  @ViewChild('nameInput') nameInput?: ElementRef;
+  @ViewChild('configNameInput') configNameInput?: ElementRef;
 
   constructor(
     public dialog: MatDialog,
@@ -39,6 +41,11 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.store.select(selectExistingConfigNames).subscribe(names => {
         this.existingConfigNames = names ?? [];
+      })
+    );
+    this.subscription.add(
+      this.store.select(selectConfigName).subscribe(name => {
+        this.configName = name ?? '';
       })
     );
   }
@@ -52,17 +59,17 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  enableButtons() {
-    this.disableSaveLoad = false;
+  onConfigNameChange(event: Event) {
+    this.store.dispatch(changeProjectName({name: (event.target as HTMLInputElement).value}));
   }
 
-  disableButtons() {
-    this.disableSaveLoad = true;
-  }
-
-  debounceButtons() {
-    this.disableSaveLoad = true;
-    setTimeout(() => this.enableButtons(), 500);
+  get hasConfigName(): boolean {
+    if (!this.configName) {
+      this.snackBar.error('Name your config first.');
+      this.focusNameInput();
+      return false;
+    }
+    return true;
   }
 
   clearJSONinput() {
@@ -72,28 +79,26 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   }
 
   focusNameInput() {
-    if (this.nameInput) {
-      this.nameInput.nativeElement.focus();
+    if (this.configNameInput) {
+      this.configNameInput.nativeElement.focus();
     }
   }
 
-  saveConfigLocal(name: string) {
-    this.debounceButtons();
-    if (!name) {
-      this.snackBar.error('Cannot save under empty name.');
-      this.focusNameInput();
+  saveConfigLocal() {
+    if (!this.hasConfigName) {
       return;
     }
-    this.store.dispatch(saveStateToStorage({name}));
+    this.store.dispatch(saveStateToStorage({name: this.configName}));
   }
 
-  saveConfigToJSON(name: string) {
-    this.debounceButtons();
-    this.store.dispatch(downloadStateAsJSON({name: name ?? 'design'}));
+  saveConfigToJSON() {
+    if (!this.hasConfigName) {
+      return;
+    }
+    this.store.dispatch(downloadStateAsJSON({name: this.configName}));
   }
 
   loadConfigLocal(name: string) {
-    this.debounceButtons();
     if (!name) {
       this.snackBar.error('Choose the config to load.');
       return;
@@ -105,23 +110,28 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     this.store.dispatch(loadStateFromStorage({name}));
   }
 
-  saveConfigAsBinary(name: string) {
-    this.debounceButtons();
-    this.store.dispatch(downloadStateAsBinary({name}));
+  saveConfigAsBinary() {
+    if (!this.hasConfigName) {
+      return;
+    }
+    this.store.dispatch(downloadStateAsBinary({name: this.configName}));
   }
 
-  saveBackgroundAsBinary(name: string) {
-    this.debounceButtons();
-    this.store.dispatch(downloadBackgroundAsBinary({name}));
+  saveBackgroundAsBinary() {
+    if (!this.hasConfigName) {
+      return;
+    }
+    this.store.dispatch(downloadBackgroundAsBinary({name: this.configName}));
   }
 
-  saveNeedlesAsBinary(name: string) {
-    this.debounceButtons();
-    this.store.dispatch(downloadNeedlesAsBinary({name}));
+  saveNeedlesAsBinary() {
+    if (!this.hasConfigName) {
+      return;
+    }
+    this.store.dispatch(downloadNeedlesAsBinary({name: this.configName}));
   }
 
   onConfigSelected(event: Event) {
-    this.disableButtons();
     const input = event.currentTarget as HTMLInputElement;
     if (input.files && input.files.length) {
       const reader = new FileReader();
@@ -132,12 +142,10 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
             loadedBuffer: reader.result as ArrayBuffer,
           })
         );
-        this.enableButtons();
         this.clearJSONinput();
       };
       reader.onerror = () => {
         this.snackBar.error('Failed to read config file.');
-        this.enableButtons();
         this.clearJSONinput();
       };
       reader.readAsArrayBuffer(input.files[0]);

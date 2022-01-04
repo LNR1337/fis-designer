@@ -6,7 +6,7 @@ import {STATE_FIELDS_METADATA} from '../../models/configs_metadata';
 import {changedGeneralFieldsConfig, recalculateDigitsSize} from '../../state/config.actions';
 import {
   ConfigStateFieldsBooleanSet,
-  ConfigStateFieldsColorSet,
+  ConfigStateFieldsStringSet,
   ConfigStateFieldsNumericalSelectSet,
   ConfigStateFieldsNumericalSet,
   ConfigStateGeneralFieldsConfig,
@@ -28,7 +28,7 @@ export class GeneralComponent implements OnChanges {
 
   STATE_FIELDS_METADATA = STATE_FIELDS_METADATA;
   numericalFields = ConfigStateFieldsNumericalSet;
-  colorFields = ConfigStateFieldsColorSet;
+  colorFields = ConfigStateFieldsStringSet;
   booleanFields = ConfigStateFieldsBooleanSet;
   selectFields = ConfigStateFieldsNumericalSelectSet;
   resizeEnabled = false;

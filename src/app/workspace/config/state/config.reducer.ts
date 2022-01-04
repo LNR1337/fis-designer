@@ -1,4 +1,5 @@
 import {createReducer, on} from '@ngrx/store';
+import {changeProjectName} from './config.actions';
 
 import * as actions from './config.actions';
 import {initialConfigState} from './config.initial-state';
@@ -6,7 +7,7 @@ import {
   ConfigState,
   ConfigStateFields,
   ConfigStateFieldsBooleanSet,
-  ConfigStateFieldsColorSet,
+  ConfigStateFieldsStringSet,
   ConfigStateFieldsNumericalSelectSet,
   ConfigStateFieldsNumericalSet,
 } from './config.state';
@@ -36,6 +37,10 @@ export const configReducer = createReducer(
     ...state,
     activeHighlight: undefined,
   })),
+  on(actions.changeProjectName, (state, {name}) => ({
+    ...state,
+    configName: name,
+  })),
   on(actions.loadConfigStateFromObject, (state, {object}) => {
     const newState: {[k: string]: any} = {};
     for (const fieldName of ConfigStateFields) {
@@ -57,7 +62,7 @@ export const configReducer = createReducer(
             continue;
           }
         }
-        if (ConfigStateFieldsColorSet.has(fieldName)) {
+        if (ConfigStateFieldsStringSet.has(fieldName)) {
           if (typeof value !== 'string') {
             console.error(`Incorrect field "${fieldName}": expected string, got ${typeof value}.`);
             continue;

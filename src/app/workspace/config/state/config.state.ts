@@ -130,6 +130,7 @@ export const ConfigStateFields = [
   ...ConfigStateNumericalFields,
   ...ConfigStateTableFields,
   ...ConfigStateGeneralFields,
+  'configName',
 ] as const;
 
 /** Set of all config state fields holding numerical values. */
@@ -149,12 +150,13 @@ export const ConfigStateFieldsNumericalSelectSet = new Set([
   'firstTable',
 ]);
 
-/** Set of all config state fields holding color setup values. */
-export const ConfigStateFieldsColorSet = new Set([
+/** Set of all config state fields holding string setup values. */
+export const ConfigStateFieldsStringSet = new Set([
   'fontColor',
   'fontWarningColor',
   'tableBackgroundColor',
   'tableFontColor',
+  'configName',
 ]);
 
 /** Set of all config state fields holding boolean values. */
@@ -241,5 +243,6 @@ export interface ConfigState {
   hideOnMmiButton?: boolean;
   externalCanWarning?: boolean;
   // Internal utility fields.
+  configName?: string;
   activeHighlight?: ConfigStateFieldsType;
 }
