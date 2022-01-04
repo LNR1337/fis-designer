@@ -223,12 +223,7 @@ export class GaugesCompositor {
     this.context.lineWidth = 1;
     this.context.globalAlpha = 0.7;
     this.context.strokeStyle = 'yellow';
-    this.context.strokeRect(
-      0.5,
-      479.5 - STATUS_BAR_HEIGHT,
-      799,
-      STATUS_BAR_HEIGHT
-    );
+    this.context.strokeRect(0.5, 479.5 - STATUS_BAR_HEIGHT, 799, STATUS_BAR_HEIGHT);
     this.context.globalAlpha = 1;
   }
 
