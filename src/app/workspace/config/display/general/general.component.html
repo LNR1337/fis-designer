@@ -1,4 +1,18 @@
-<h4 class="group-label">{{ label }}</h4>
+<h4 class="group-label">
+  {{ label }}
+  <button *ngIf="showFields.includes('fontWidth')" mat-icon-button color="primary"
+          [disabled]="!resizeEnabled" (click)="recalculateSize()">
+    <mat-icon
+      [tooltip]="
+        resizeEnabled
+          ? 'Set digits\' dimensions to match loaded images.'
+          : 'Not all digit images loaded yet.'
+      "
+    >
+      aspect_ratio
+    </mat-icon>
+  </button>
+</h4>
 
 <ng-container *ngFor="let fieldName of showFields">
   <!-- Number -->

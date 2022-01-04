@@ -1,8 +1,9 @@
-import {Component, Input, SimpleChanges} from '@angular/core';
+import {Component, Input, SimpleChanges, OnChanges} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
+import {containsAllDigitImages} from '../../../image-manager/utils';
 import {STATE_FIELDS_METADATA} from '../../models/configs_metadata';
-import {changedGeneralFieldsConfig} from '../../state/config.actions';
+import {changedGeneralFieldsConfig, recalculateDigitsSize} from '../../state/config.actions';
 import {
   ConfigStateFieldsBooleanSet,
   ConfigStateFieldsColorSet,
@@ -17,7 +18,7 @@ import {
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.scss'],
 })
-export class GeneralComponent {
+export class GeneralComponent implements OnChanges {
   // List of names of loaded images.
   @Input() loadedImages?: Set<ImageStateFieldsType>;
   @Input() generalConfig?: ConfigStateGeneralFieldsConfig;
@@ -30,6 +31,7 @@ export class GeneralComponent {
   colorFields = ConfigStateFieldsColorSet;
   booleanFields = ConfigStateFieldsBooleanSet;
   selectFields = ConfigStateFieldsNumericalSelectSet;
+  resizeEnabled = false;
 
   constructor(private readonly store: Store) {}
 
@@ -55,5 +57,17 @@ export class GeneralComponent {
   getBooleanValue(fieldName: ConfigStateGeneralFieldsType): boolean {
     if (!this.generalConfig) return false;
     return this.generalConfig[fieldName] as boolean;
+  }
+
+  recalculateSize() {
+    if (this.generalConfig) {
+      this.store.dispatch(recalculateDigitsSize());
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['loadedImages'] && this.generalConfig && this.loadedImages) {
+      this.resizeEnabled = containsAllDigitImages(this.loadedImages);
+    }
   }
 }
