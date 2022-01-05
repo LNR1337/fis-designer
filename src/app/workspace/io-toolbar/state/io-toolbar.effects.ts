@@ -7,19 +7,25 @@ import {loadConfigStateFromObject} from '../../config/state/config.actions';
 import {CONFIG_FEATURE_KEY} from '../../config/state/config.reducer';
 import {loadImagesStateFromObject} from '../../image-manager/state/images.actions';
 import {IMAGES_FEATURE_KEY} from '../../image-manager/state/images.reducer';
-import {LocalStorageService} from '../../services/local-storage';
+import {LocalStorageService} from '../../services/local-storage.service';
 import {SnackBarService} from '../../services/snack-bar.service';
 import {
-  loadedSerializedState,
+  downloadCompoundStateAsJSON,
+  loadCompoundStateFromBinary,
+  loadCompoundStateFromJSON,
+} from '../serialization-utils';
+import {
+  loadedCompoundState,
   loadExistingConfigNames,
   loadExistingConfigNamesSuccess,
   loadStateFromStorage,
   saveStateToStorage,
   downloadStateAsJSON,
   loadStateFromBufferJSON,
+  loadStateFromBufferBinary,
 } from './io-toolbar.actions';
 import {Action, Store} from '@ngrx/store';
-import {selectStateToSave} from './io-toolbar.selectors';
+import {selectCompoundState} from './io-toolbar.selectors';
 
 @Injectable()
 export class IoToolbarEffects {
@@ -27,10 +33,10 @@ export class IoToolbarEffects {
   saveStateToLocalStorage = createEffect(() =>
     this.actions$.pipe(
       ofType(saveStateToStorage),
-      withLatestFrom(this.store.select(selectStateToSave)),
-      mergeMap(([action, stateToSave]) => {
+      withLatestFrom(this.store.select(selectCompoundState)),
+      mergeMap(([action, compoundState]) => {
         try {
-          this.localStorageService.saveState(action.name, stateToSave);
+          this.localStorageService.saveState(action.name, compoundState);
         } catch (e) {
           this.snackBar.error(`Error saving config: ${e}`);
         }
@@ -44,10 +50,9 @@ export class IoToolbarEffects {
     () =>
       this.actions$.pipe(
         ofType(downloadStateAsJSON),
-        withLatestFrom(this.store.select(selectStateToSave)),
-        map(([action, stateToSave]) => {
-          const blob = new Blob([JSON.stringify(stateToSave)], {type: 'application/json'});
-          saveAs(blob, `${action.name}.fis-designer.json`);
+        withLatestFrom(this.store.select(selectCompoundState)),
+        map(([action, compoundState]) => {
+          downloadCompoundStateAsJSON(compoundState, action.name);
         })
       ),
     {dispatch: false}
@@ -59,8 +64,8 @@ export class IoToolbarEffects {
       ofType(loadStateFromStorage),
       mergeMap(action => {
         try {
-          const loadedFromState = this.localStorageService.loadState(action.name);
-          return [loadedSerializedState({loadedObject: loadedFromState})];
+          const compoundState = this.localStorageService.loadState(action.name);
+          return [loadedCompoundState({compoundState})];
         } catch (e) {
           this.snackBar.error(`Error loading config from local storage: ${e}`);
           return EMPTY;
@@ -75,9 +80,8 @@ export class IoToolbarEffects {
       ofType(loadStateFromBufferJSON),
       mergeMap(action => {
         try {
-          const encoder = new TextDecoder('utf-8');
-          const loadedFromFile = JSON.parse(encoder.decode(action.loadedBuffer));
-          return [loadedSerializedState({loadedObject: loadedFromFile})];
+          const compoundState = loadCompoundStateFromJSON(action.loadedBuffer);
+          return [loadedCompoundState({compoundState})];
         } catch (e) {
           this.snackBar.error(`Error loading config from file: ${e}`);
           return EMPTY;
@@ -86,27 +90,35 @@ export class IoToolbarEffects {
     )
   );
 
-  /** Effect to load state from an object. */
-  loadedSerializedState = createEffect(() =>
+  /** Effect to load state from settings binary array buffer. */
+  loadStateFromBufferBinary = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadedSerializedState),
-      mergeMap(({loadedObject}) => {
-        const loadActions: Action[] = [];
-        if (loadedObject.hasOwnProperty(CONFIG_FEATURE_KEY)) {
-          loadActions.push(
-            loadConfigStateFromObject({
-              object: (loadedObject as any)[CONFIG_FEATURE_KEY],
-            })
-          );
+      ofType(loadStateFromBufferBinary),
+      mergeMap(action => {
+        try {
+          const compoundState = loadCompoundStateFromBinary(action.loadedBuffer, action.fileName);
+          return [loadedCompoundState({compoundState})];
+        } catch (e) {
+          this.snackBar.error(`Error loading config from file: ${e}`);
+          return EMPTY;
         }
-        if (loadedObject.hasOwnProperty(IMAGES_FEATURE_KEY)) {
-          loadActions.push(
-            loadImagesStateFromObject({
-              object: (loadedObject as any)[IMAGES_FEATURE_KEY],
-            })
-          );
-        }
-        return loadActions;
+      })
+    )
+  );
+
+  /** Effect to handle loaded compound state. */
+  loadedCompoundState = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadedCompoundState),
+      mergeMap(({compoundState}) => {
+        return [
+          loadConfigStateFromObject({
+            object: compoundState[CONFIG_FEATURE_KEY],
+          }),
+          loadImagesStateFromObject({
+            object: compoundState[IMAGES_FEATURE_KEY],
+          }),
+        ];
       })
     )
   );

@@ -1,4 +1,5 @@
 import {createAction, props} from '@ngrx/store';
+import {CompoundState} from '../serialization-utils';
 
 export const saveStateToStorage = createAction(
   '[IoToolbar] Save state to local storage',
@@ -25,9 +26,14 @@ export const loadStateFromBufferJSON = createAction(
   props<{loadedBuffer: ArrayBuffer}>()
 );
 
-export const loadedSerializedState = createAction(
+export const loadStateFromBufferBinary = createAction(
+  '[IoToolbar] Load state from binary file array buffer',
+  props<{loadedBuffer: ArrayBuffer; fileName: string}>()
+);
+
+export const loadedCompoundState = createAction(
   '[IoToolbar] A serialized state has been loaded',
-  props<{loadedObject: Object}>()
+  props<{compoundState: CompoundState}>()
 );
 
 export const loadExistingConfigNames = createAction(

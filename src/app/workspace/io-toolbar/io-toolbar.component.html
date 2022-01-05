@@ -1,6 +1,8 @@
 <mat-toolbar class="toolbar">
-  <input hidden (change)="onConfigSelected($event)" #configInput type="file"
+  <input hidden (change)="onConfigSelected($event)" #jsonConfigInput type="file"
          accept="application/json"/>
+
+  <input hidden (change)="onBinaryConfigSelected($event)" #binaryConfigInput type="file" />
 
   <button mat-stroked-button color="primary" (click)="openFileSelectorDialog()">
     <mat-icon>collections</mat-icon>
@@ -32,11 +34,11 @@
       <mat-icon>save</mat-icon>
       <span>Download as JSON</span>
     </button>
-    <button mat-menu-item (click)="configInput.click()">
+    <button mat-menu-item (click)="jsonConfigInput.click()">
       <mat-icon>upload_file</mat-icon>
       <span>Load full config from JSON</span>
     </button>
-    <button mat-menu-item (click)="configInput.click()" disabled>
+    <button mat-menu-item (click)="jsonConfigInput.click()" disabled>
       <mat-icon>upload_file</mat-icon>
       <span>Load visual config from JSON</span>
     </button>
@@ -46,7 +48,7 @@
       <mat-icon color="primary">settings_applications</mat-icon>
       <span>Save FIS-Control settings file</span>
     </button>
-    <button mat-menu-item class="primary-text" disabled>
+    <button mat-menu-item class="primary-text" (click)="binaryConfigInput.click()">
       <mat-icon color="primary">file_upload</mat-icon>
       <span>Load FIS-Control settings file</span>
     </button>

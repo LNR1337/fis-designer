@@ -97,7 +97,7 @@ export const TableRowConfigFields = [
   'unit',
   'decimalPlaces',
   'factor',
-  'pressureTag',
+  'calculationId',
   'lowerWarning',
   'upperWarning',
 ] as const;
@@ -120,7 +120,7 @@ export interface TableRowConfig extends PartialTableRowConfigFieldsObject<number
   unit?: string;
   decimalPlaces?: number;
   factor?: number;
-  pressureTag?: number;
+  calculationId?: number;
   lowerWarning?: number;
   upperWarning?: number;
 }

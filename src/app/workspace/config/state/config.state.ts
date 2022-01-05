@@ -91,7 +91,7 @@ export const ConfigStateGeneralMiscFields = [
   'bluetooth',
   'car',
   'useSteeringWheelRoller',
-  'driveSelect',
+  'driveSelectReselect',
   'showEgtToCan',
   'supportLowResolution',
   'ignorePdc',
@@ -165,7 +165,7 @@ export const ConfigStateFieldsBooleanSet = new Set([
   'useTableBackgroundImage',
   'useTableBackgroundImage',
   'useSteeringWheelRoller',
-  'driveSelect',
+  'driveSelectReselect',
   'showEgtToCan',
   'supportLowResolution',
   'ignorePdc',
@@ -234,7 +234,7 @@ export interface ConfigState {
   bluetooth?: number;
   car?: number;
   useSteeringWheelRoller?: boolean;
-  driveSelect?: boolean;
+  driveSelectReselect?: boolean;
   showEgtToCan?: boolean;
   supportLowResolution?: boolean;
   ignorePdc?: boolean;

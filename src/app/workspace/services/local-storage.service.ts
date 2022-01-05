@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {assertIsCompoundState, CompoundState} from '../io-toolbar/serialization-utils';
 
 const STORAGE_KEY = 'savedConfigs';
 
@@ -8,20 +9,20 @@ const STORAGE_KEY = 'savedConfigs';
 export class LocalStorageService {
   constructor() {}
 
-  /** Saves state to local storage under specified name. */
-  saveState(name: string, state: Object) {
+  /** Saves compound state to local storage under specified name. */
+  saveState(name: string, state: CompoundState) {
     const stored = this.getWholeStorage();
     stored.set(name, JSON.stringify(state));
     localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(stored.entries())));
   }
 
-  /** Loads state with specified name from local storage. */
-  loadState(name: string): Object {
+  /** Loads compound state with specified name from local storage. */
+  loadState(name: string): CompoundState {
     const stored = this.getWholeStorage();
     if (!stored.has(name)) {
       throw new Error(`Key ${name} doesn't exist in the storage.`);
     }
-    return JSON.parse(stored.get(name)!);
+    return assertIsCompoundState(JSON.parse(stored.get(name)!));
   }
 
   /** Gets a list of stored config names. */

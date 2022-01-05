@@ -10,6 +10,7 @@ import {
   downloadNeedlesAsBinary,
 } from '../image-manager/state/images.actions';
 import {SnackBarService} from '../services/snack-bar.service';
+import {loadCompoundStateFromBinary} from './serialization-utils';
 import {
   loadExistingConfigNames,
   loadStateFromBufferJSON,
@@ -17,6 +18,7 @@ import {
   downloadStateAsJSON,
   saveStateToStorage,
   downloadStateAsBinary,
+  loadStateFromBufferBinary,
 } from './state/io-toolbar.actions';
 import {selectExistingConfigNames} from './state/io-toolbar.selectors';
 
@@ -30,7 +32,8 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   existingConfigNames: string[] = [];
   configName = '';
 
-  @ViewChild('configInput') configInput?: ElementRef;
+  @ViewChild('jsonConfigInput') jsonConfigInput?: ElementRef;
+  @ViewChild('binaryConfigInput') binaryConfigInput?: ElementRef;
   @ViewChild('configNameInput') configNameInput?: ElementRef;
 
   constructor(
@@ -72,9 +75,12 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  clearJSONinput() {
-    if (this.configInput) {
-      this.configInput.nativeElement.value = '';
+  clearFileInputs() {
+    if (this.jsonConfigInput) {
+      this.jsonConfigInput.nativeElement.value = '';
+    }
+    if (this.binaryConfigInput) {
+      this.binaryConfigInput.nativeElement.value = '';
     }
   }
 
@@ -131,25 +137,47 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     this.store.dispatch(downloadNeedlesAsBinary({name: this.configName}));
   }
 
-  onConfigSelected(event: Event) {
+  readFileEvent(event: Event, callback: (result: ArrayBuffer, fileName: string) => void) {
     const input = event.currentTarget as HTMLInputElement;
     if (input.files && input.files.length) {
       const reader = new FileReader();
+      const name = input.files[0].name;
       reader.onload = () => {
-        if (!reader.result) return;
-        this.store.dispatch(
-          loadStateFromBufferJSON({
-            loadedBuffer: reader.result as ArrayBuffer,
-          })
-        );
-        this.clearJSONinput();
+        if (!reader.result) {
+          this.snackBar.error('Failed to read config file.');
+          return;
+        }
+        callback(reader.result as ArrayBuffer, name);
       };
       reader.onerror = () => {
         this.snackBar.error('Failed to read config file.');
-        this.clearJSONinput();
+      };
+      reader.onloadend = () => {
+        this.clearFileInputs();
       };
       reader.readAsArrayBuffer(input.files[0]);
     }
+  }
+
+  onConfigSelected(event: Event) {
+    this.readFileEvent(event, (result, fileName) => {
+      this.store.dispatch(
+        loadStateFromBufferJSON({
+          loadedBuffer: result,
+        })
+      );
+    });
+  }
+
+  onBinaryConfigSelected(event: Event) {
+    this.readFileEvent(event, (result, fileName) => {
+      this.store.dispatch(
+        loadStateFromBufferBinary({
+          loadedBuffer: result,
+          fileName: fileName.split('.')[0],
+        })
+      );
+    });
   }
 
   ngOnInit() {

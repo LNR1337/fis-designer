@@ -49,7 +49,7 @@ const initialTableRowConfig: TableRowConfig = {
   unit: '',
   decimalPlaces: 2,
   factor: 0,
-  pressureTag: 0,
+  calculationId: 0,
   lowerWarning: 0,
   upperWarning: 0,
 };
@@ -105,7 +105,7 @@ export const initialConfigState: ConfigState = {
   bluetooth: 0,
   car: 0,
   useSteeringWheelRoller: false,
-  driveSelect: false,
+  driveSelectReselect: false,
   showEgtToCan: false,
   supportLowResolution: false,
   ignorePdc: false,

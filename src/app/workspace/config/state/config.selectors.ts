@@ -80,7 +80,7 @@ export const selectGeneralFieldsConfig = createSelector(
     bluetooth: state.bluetooth!,
     car: state.car!,
     useSteeringWheelRoller: state.useSteeringWheelRoller!,
-    driveSelect: state.driveSelect!,
+    driveSelectReselect: state.driveSelectReselect!,
     showEgtToCan: state.showEgtToCan!,
     supportLowResolution: state.supportLowResolution!,
     ignorePdc: state.ignorePdc!,

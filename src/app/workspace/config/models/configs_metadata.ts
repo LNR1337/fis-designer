@@ -148,7 +148,7 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
     ]),
   },
   useSteeringWheelRoller: {label: 'Control FIS-Control with steering wheel roller'},
-  driveSelect: {
+  driveSelectReselect: {
     label: 'Reselect dynamic drive mode after ignition',
     hint: 'Only for RSQ3. Enables the exhaust flap.',
   },
@@ -235,7 +235,7 @@ export const TABLE_ROW_FIELD_METADATA: TableRowConfigFieldsObject<ConfigFieldMet
   unit: {label: 'unit', hint: 'Enter *lambda* for the λ symbol.'},
   decimalPlaces: {label: 'Decimals', hint: 'Used only for digital gauge display.'},
   factor: {label: 'Conversion'},
-  pressureTag: {label: 'Boost calculation'},
+  calculationId: {label: 'Calculation'},
   lowerWarning: {label: 'Lower warning'},
   upperWarning: {label: 'Upper warning'},
 };
