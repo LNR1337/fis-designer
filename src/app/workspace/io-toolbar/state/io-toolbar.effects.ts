@@ -1,16 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {EMPTY, exhaustMap, mergeMap, map, of, withLatestFrom} from 'rxjs';
-import {saveAs} from 'file-saver';
 
 import {loadConfigStateFromObject} from '../../config/state/config.actions';
 import {CONFIG_FEATURE_KEY} from '../../config/state/config.reducer';
 import {loadImagesStateFromObject} from '../../image-manager/state/images.actions';
 import {IMAGES_FEATURE_KEY} from '../../image-manager/state/images.reducer';
+import {selectImagesState} from '../../image-manager/state/images.selectors';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {SnackBarService} from '../../services/snack-bar.service';
 import {
+  downloadBackgroundImagesAsBinary,
+  downloadCompoundStateAsBinary,
   downloadCompoundStateAsJSON,
+  downloadNeedleImagesAsBinary,
   loadCompoundStateFromBinary,
   loadCompoundStateFromJSON,
 } from '../serialization-utils';
@@ -23,6 +26,9 @@ import {
   downloadStateAsJSON,
   loadStateFromBufferJSON,
   loadStateFromBufferBinary,
+  downloadStateAsBinary,
+  downloadBackgroundAsBinary,
+  downloadNeedlesAsBinary,
 } from './io-toolbar.actions';
 import {Action, Store} from '@ngrx/store';
 import {selectCompoundState} from './io-toolbar.selectors';
@@ -52,7 +58,62 @@ export class IoToolbarEffects {
         ofType(downloadStateAsJSON),
         withLatestFrom(this.store.select(selectCompoundState)),
         map(([action, compoundState]) => {
-          downloadCompoundStateAsJSON(compoundState, action.name);
+          try {
+            downloadCompoundStateAsJSON(compoundState, action.name);
+          } catch (e) {
+            this.snackBar.error(`Error saving config to JSON: ${e}`);
+          }
+        })
+      ),
+    {dispatch: false}
+  );
+
+  /** Effect to save current state to binary file. */
+  downloadStateAsBinary = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(downloadStateAsBinary),
+        withLatestFrom(this.store.select(selectCompoundState)),
+        map(([action, compoundState]) => {
+          try {
+            downloadCompoundStateAsBinary(compoundState, action.name);
+          } catch (e) {
+            this.snackBar.error(`Error saving binary config: ${e}`);
+          }
+        })
+      ),
+    {dispatch: false}
+  );
+
+  /** Effect to save background images to binary file. */
+  downloadBackgroundAsBinary = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(downloadBackgroundAsBinary),
+        withLatestFrom(this.store.select(selectImagesState)),
+        map(([action, imagesState]) => {
+          try {
+            downloadBackgroundImagesAsBinary(imagesState, action.name);
+          } catch (e) {
+            this.snackBar.error(`Error saving backgrounds binary: ${e}`);
+          }
+        })
+      ),
+    {dispatch: false}
+  );
+
+  /** Effect to save needles and digits images to binary file. */
+  downloadNeedlesAsBinary = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(downloadNeedlesAsBinary),
+        withLatestFrom(this.store.select(selectImagesState)),
+        map(([action, imagesState]) => {
+          try {
+            downloadNeedleImagesAsBinary(imagesState, action.name);
+          } catch (e) {
+            this.snackBar.error(`Error saving needles binary: ${e}`);
+          }
         })
       ),
     {dispatch: false}

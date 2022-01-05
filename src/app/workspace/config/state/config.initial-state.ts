@@ -98,7 +98,7 @@ export const initialConfigState: ConfigState = {
   firstTable: 0,
   scrollAllTables: false,
   hideStatusBarOnTable: false,
-  useVirtualCockpitLayout: false,
+  virtualCockpitFriendlyTables: false,
   // General settings.
   language: 0,
   autostart: 0,

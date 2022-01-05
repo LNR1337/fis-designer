@@ -21,6 +21,16 @@ export const downloadStateAsBinary = createAction(
   props<{name: string}>()
 );
 
+export const downloadNeedlesAsBinary = createAction(
+  '[IoToolbar] Download needles and digits as binary file',
+  props<{name: string}>()
+);
+
+export const downloadBackgroundAsBinary = createAction(
+  '[IoToolbar] Download backgrounds as binary file',
+  props<{name: string}>()
+);
+
 export const loadStateFromBufferJSON = createAction(
   '[IoToolbar] Load state from JSON file array buffer',
   props<{loadedBuffer: ArrayBuffer}>()

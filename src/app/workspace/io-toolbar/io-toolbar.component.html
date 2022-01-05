@@ -11,7 +11,7 @@
 
   <mat-form-field class="config-name" appearance="standard">
     <input type="text" matInput placeholder="Config name" #configNameInput [value]="configName"
-           (change)="onConfigNameChange($event)"/>
+           (change)="onConfigNameChange($event)" autocomplete="off"/>
   </mat-form-field>
 
   <button mat-stroked-button [matMenuTriggerFor]="saveMenu" color="primary">
@@ -44,7 +44,7 @@
     </button>
     <mat-divider></mat-divider>
     <!-- Binary -->
-    <button mat-menu-item (click)="saveConfigAsBinary()" class="primary-text" disabled>
+    <button mat-menu-item (click)="saveConfigAsBinary()" class="primary-text">
       <mat-icon color="primary">settings_applications</mat-icon>
       <span>Save FIS-Control settings file</span>
     </button>
@@ -52,11 +52,11 @@
       <mat-icon color="primary">file_upload</mat-icon>
       <span>Load FIS-Control settings file</span>
     </button>
-    <button mat-menu-item (click)="saveBackgroundAsBinary()" class="primary-text" disabled>
+    <button mat-menu-item (click)="saveBackgroundAsBinary()" class="primary-text">
       <mat-icon color="primary">wallpaper</mat-icon>
       <span>Save FIS-Control background file</span>
     </button>
-    <button mat-menu-item (click)="saveNeedlesAsBinary()" class="primary-text" disabled>
+    <button mat-menu-item (click)="saveNeedlesAsBinary()" class="primary-text">
       <mat-icon color="primary">speed</mat-icon>
       <span>Save FIS-Control needles file</span>
     </button>

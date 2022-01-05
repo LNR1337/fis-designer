@@ -5,10 +5,6 @@ import {Subscription} from 'rxjs';
 import {changeProjectName} from '../config/state/config.actions';
 import {selectConfigName} from '../config/state/config.selectors';
 import {ImageManagerComponent} from '../image-manager/image-manager.component';
-import {
-  downloadBackgroundAsBinary,
-  downloadNeedlesAsBinary,
-} from '../image-manager/state/images.actions';
 import {SnackBarService} from '../services/snack-bar.service';
 import {loadCompoundStateFromBinary} from './serialization-utils';
 import {
@@ -19,6 +15,8 @@ import {
   saveStateToStorage,
   downloadStateAsBinary,
   loadStateFromBufferBinary,
+  downloadBackgroundAsBinary,
+  downloadNeedlesAsBinary,
 } from './state/io-toolbar.actions';
 import {selectExistingConfigNames} from './state/io-toolbar.selectors';
 

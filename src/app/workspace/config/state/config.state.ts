@@ -81,7 +81,7 @@ export const ConfigStateGeneralTableFields = [
   'tableFontColor',
   'useTableBackgroundImage',
   'hideStatusBarOnTable',
-  'useVirtualCockpitLayout',
+  'virtualCockpitFriendlyTables',
   'scrollAllTables',
   'firstTable',
 ] as const;
@@ -172,7 +172,7 @@ export const ConfigStateFieldsBooleanSet = new Set([
   'scrollAllTables',
   'hideStatusBarOnGauge',
   'hideStatusBarOnTable',
-  'useVirtualCockpitLayout',
+  'virtualCockpitFriendlyTables',
   'useStarButton',
   'hideOnDriveSelectButton',
   'hideOnMmiButton',
@@ -227,7 +227,7 @@ export interface ConfigState {
   firstTable?: number;
   scrollAllTables?: boolean;
   hideStatusBarOnTable?: boolean;
-  useVirtualCockpitLayout?: boolean;
+  virtualCockpitFriendlyTables?: boolean;
   // General settings.
   language?: number;
   autostart?: number;

@@ -73,7 +73,7 @@ export const selectGeneralFieldsConfig = createSelector(
     tableFontColor: state.tableFontColor!,
     firstTable: state.firstTable!,
     scrollAllTables: state.scrollAllTables!,
-    useVirtualCockpitLayout: state.useVirtualCockpitLayout!,
+    virtualCockpitFriendlyTables: state.virtualCockpitFriendlyTables!,
     // General settings.
     language: state.language!,
     autostart: state.autostart!,

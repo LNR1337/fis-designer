@@ -94,7 +94,7 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
     hint: 'Allow scrolling through all the tables. Otherwise, show just the initial one.',
   },
   hideStatusBarOnTable: {label: 'Hide status bar'},
-  useVirtualCockpitLayout: {
+  virtualCockpitFriendlyTables: {
     label: 'Adapt layout to virtual cockpit window',
     hint: 'Modify the table display to fit in a virtual cockpit window',
   },
