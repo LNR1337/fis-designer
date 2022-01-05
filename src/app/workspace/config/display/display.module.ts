@@ -11,6 +11,7 @@ import {GaugeComponent} from './gauge/gauge.component';
 import {NeedleComponent} from './needle/needle.component';
 import {GeneralComponent} from './general/general.component';
 import {NumericalComponent} from './numerical/numerical.component';
+import {TableComponent} from './table/table.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {NumericalComponent} from './numerical/numerical.component';
     NeedleComponent,
     NumericalComponent,
     GeneralComponent,
+    TableComponent,
   ],
   imports: [
     CommonModule,

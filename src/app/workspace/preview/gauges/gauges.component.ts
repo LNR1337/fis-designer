@@ -1,7 +1,7 @@
 import {AfterViewInit, ElementRef, OnDestroy} from '@angular/core';
 import {Component, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {PartialImageStateFieldsObject} from '../../image-manager/state/images.state';
 import {selectAllImages, selectNeedleAngles} from '../state/preview.selectors';
 import {

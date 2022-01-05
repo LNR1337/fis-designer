@@ -30,7 +30,7 @@ import {
   downloadBackgroundAsBinary,
   downloadNeedlesAsBinary,
 } from './io-toolbar.actions';
-import {Action, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {selectCompoundState} from './io-toolbar.selectors';
 
 @Injectable()
@@ -174,10 +174,10 @@ export class IoToolbarEffects {
       mergeMap(({compoundState}) => {
         return [
           loadConfigStateFromObject({
-            object: compoundState[CONFIG_FEATURE_KEY],
+            maybeState: compoundState[CONFIG_FEATURE_KEY],
           }),
           loadImagesStateFromObject({
-            object: compoundState[IMAGES_FEATURE_KEY],
+            maybeState: compoundState[IMAGES_FEATURE_KEY],
           }),
         ];
       })

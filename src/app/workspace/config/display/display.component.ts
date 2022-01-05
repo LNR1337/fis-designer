@@ -16,14 +16,17 @@ import {
   ConfigStateGeneralNumericalFields,
   ConfigStateGeneralTableFields,
   ConfigStateGeneralMiscFields,
+  ConfigStateTableFieldsObject,
+  ConfigStateTableFields,
 } from '../state/config.state';
 import {
   selectNeedleConfigs,
   selectGaugeConfigs,
   selectNumericalConfigs,
   selectGeneralFieldsConfig,
+  selectTableFields,
 } from '../state/config.selectors';
-import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
+import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
 import {STATE_FIELDS_METADATA} from '../models/configs_metadata';
 import {disableHighlight, enableHighlight} from '../state/config.actions';
 
@@ -38,6 +41,7 @@ export class DisplayComponent {
   loadedImages: Observable<Set<ImageStateFieldsType>>;
   needlesConfigs: Observable<ConfigStateNeedleFieldsObject<NeedleConfig>>;
   gaugesConfigs: Observable<ConfigStateGaugeFieldsObject<GaugeConfig>>;
+  tableConfigs: Observable<ConfigStateTableFieldsObject<TableConfig>>;
   numericalConfigs: Observable<ConfigStateNumericalFieldsObject<NumericalConfig>>;
   generalConfig: Observable<ConfigStateGeneralFieldsConfig>;
 
@@ -46,6 +50,7 @@ export class DisplayComponent {
   ConfigStateGaugeFields = ConfigStateGaugeFields;
   ConfigStateNeedleFields = ConfigStateNeedleFields;
   ConfigStateNumericalFields = ConfigStateNumericalFields;
+  ConfigStateTableFields = ConfigStateTableFields;
   ConfigStateGeneralGaugesFields = ConfigStateGeneralGaugesFields;
   ConfigStateGeneralNumericalFields = ConfigStateGeneralNumericalFields;
   ConfigStateGeneralTableFields = ConfigStateGeneralTableFields;
@@ -59,6 +64,7 @@ export class DisplayComponent {
     this.gaugesConfigs = store.select(selectGaugeConfigs);
     this.numericalConfigs = store.select(selectNumericalConfigs);
     this.generalConfig = store.select(selectGeneralFieldsConfig);
+    this.tableConfigs = store.select(selectTableFields);
   }
 
   highlight(stateField: ConfigStateFieldsType) {

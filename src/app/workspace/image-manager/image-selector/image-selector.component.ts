@@ -4,7 +4,6 @@ import {saveAs} from 'file-saver';
 
 import {IMAGE_LABEL, IMAGE_MAX_SIZE, MIME_TYPE} from '../models/images_metadata';
 import {SnackBarService} from '../../services/snack-bar.service';
-import {SnackType} from '../../services/snack-bar.service';
 import {validateAndSaveImageBuffer} from '../state/images.actions';
 import {Store} from '@ngrx/store';
 import {ImageStateFieldsType} from '../state/images.state';

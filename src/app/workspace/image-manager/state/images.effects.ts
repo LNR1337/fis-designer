@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Store} from '@ngrx/store';
-import {of, tap} from 'rxjs';
 import {concatMap, map} from 'rxjs/operators';
 import {saveImage} from '../../preview/state/preview.actions';
-import {SnackBarService, SnackType} from '../../services/snack-bar.service';
+import {SnackBarService} from '../../services/snack-bar.service';
 import {base64ToArrayBuffer, loadImageFromArrayBuffer} from '../../preview/utils';
 import {
   loadImagesStateFromObject,
@@ -39,8 +38,8 @@ export class ImagesEffects {
   loadImagesStateFromObject = createEffect(() =>
     this.actions$.pipe(
       ofType(loadImagesStateFromObject),
-      concatMap(({object}) => {
-        return ImageStateFields.map(imageField => [imageField, (object as any)[imageField]])
+      concatMap(({maybeState}) => {
+        return ImageStateFields.map(imageField => [imageField, maybeState[imageField]])
           .filter(([imageField, data]) => !!data)
           .map(([imageField, data]) =>
             validateAndSaveImageBuffer({

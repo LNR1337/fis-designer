@@ -2,7 +2,7 @@
   <input hidden (change)="onConfigSelected($event)" #jsonConfigInput type="file"
          accept="application/json"/>
 
-  <input hidden (change)="onBinaryConfigSelected($event)" #binaryConfigInput type="file" />
+  <input hidden (change)="onBinaryConfigSelected($event)" #binaryConfigInput type="file"/>
 
   <button mat-stroked-button color="primary" (click)="openFileSelectorDialog()">
     <mat-icon>collections</mat-icon>
@@ -20,37 +20,37 @@
   </button>
   <mat-menu #saveMenu="matMenu" xPosition="before">
     <!-- Local storage -->
-    <button mat-menu-item (click)="saveConfigLocal()">
-      <mat-icon>save_alt</mat-icon>
-      <span>Save to browser storage</span>
-    </button>
     <button mat-menu-item [mat-menu-trigger-for]="localConfigs">
       <mat-icon>file_upload</mat-icon>
       <span>Load from browser storage</span>
     </button>
+    <button mat-menu-item (click)="saveConfigLocal()">
+      <mat-icon>save_alt</mat-icon>
+      <span>Save config to browser storage</span>
+    </button>
     <mat-divider></mat-divider>
     <!-- JSON -->
-    <button mat-menu-item (click)="saveConfigToJSON()">
-      <mat-icon>save</mat-icon>
-      <span>Download as JSON</span>
-    </button>
     <button mat-menu-item (click)="jsonConfigInput.click()">
-      <mat-icon>upload_file</mat-icon>
+      <mat-icon>file_upload</mat-icon>
       <span>Load full config from JSON</span>
     </button>
     <button mat-menu-item (click)="jsonConfigInput.click()" disabled>
-      <mat-icon>upload_file</mat-icon>
+      <mat-icon>file_upload</mat-icon>
       <span>Load visual config from JSON</span>
+    </button>
+    <button mat-menu-item (click)="saveConfigToJSON()">
+      <mat-icon>save</mat-icon>
+      <span>Download config as JSON</span>
     </button>
     <mat-divider></mat-divider>
     <!-- Binary -->
-    <button mat-menu-item (click)="saveConfigAsBinary()" class="primary-text">
-      <mat-icon color="primary">settings_applications</mat-icon>
-      <span>Save FIS-Control settings file</span>
-    </button>
     <button mat-menu-item class="primary-text" (click)="binaryConfigInput.click()">
       <mat-icon color="primary">file_upload</mat-icon>
       <span>Load FIS-Control settings file</span>
+    </button>
+    <button mat-menu-item (click)="saveConfigAsBinary()" class="primary-text">
+      <mat-icon color="primary">settings_applications</mat-icon>
+      <span>Save FIS-Control settings file</span>
     </button>
     <button mat-menu-item (click)="saveBackgroundAsBinary()" class="primary-text">
       <mat-icon color="primary">wallpaper</mat-icon>
@@ -63,7 +63,8 @@
   </mat-menu>
 
   <mat-menu #localConfigs="matMenu" xPosition="after">
-    <button *ngFor="let name of existingConfigNames" mat-menu-item (click)="loadConfigLocal(name)">{{name}}</button>
+    <button *ngFor="let name of existingConfigNames" mat-menu-item
+            (click)="loadConfigLocal(name)">{{name}}</button>
     <button *ngIf="!existingConfigNames.length" mat-menu-item disabled>No stored configs</button>
   </mat-menu>
 </mat-toolbar>

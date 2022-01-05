@@ -50,7 +50,7 @@ export const changedGeneralFieldsConfig = createAction(
   }>()
 );
 
-export const changeProjectName = createAction(
+export const changeConfigName = createAction(
   '[Config] Change project name',
   props<{name: string}>()
 );
@@ -64,5 +64,5 @@ export const disableHighlight = createAction('[Config] Disable highlighting');
 
 export const loadConfigStateFromObject = createAction(
   '[Config] Load config state from object',
-  props<{object: Object}>()
+  props<{maybeState: any}>()
 );

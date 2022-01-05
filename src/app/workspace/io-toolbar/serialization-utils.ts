@@ -152,7 +152,7 @@ function tableConfigToFis(tableConfig: TableConfig): fisModels.TableConfig {
 
 export function loadCompoundStateFromBinary(binaryData: ArrayBuffer, name: string): CompoundState {
   const fisConfig = convertBinaryToConfig(binaryData);
-  const configState: ConfigStateFieldsObject<any> = {
+  const configState: ConfigState = {
     gauge1: fisToGaugeConfig(fisConfig.gaugeConfigs[0]),
     gauge2: fisToGaugeConfig(fisConfig.gaugeConfigs[1]),
     gauge3: fisToGaugeConfig(fisConfig.gaugeConfigs[2]),

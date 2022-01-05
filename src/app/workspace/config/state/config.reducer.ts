@@ -1,5 +1,4 @@
 import {createReducer, on} from '@ngrx/store';
-import {changeProjectName} from './config.actions';
 
 import * as actions from './config.actions';
 import {initialConfigState} from './config.initial-state';
@@ -37,15 +36,15 @@ export const configReducer = createReducer(
     ...state,
     activeHighlight: undefined,
   })),
-  on(actions.changeProjectName, (state, {name}) => ({
+  on(actions.changeConfigName, (state, {name}) => ({
     ...state,
     configName: name,
   })),
-  on(actions.loadConfigStateFromObject, (state, {object}) => {
-    const newState: {[k: string]: any} = {};
+  on(actions.loadConfigStateFromObject, (state, {maybeState}) => {
+    const newState: Partial<ConfigState> = {};
     for (const fieldName of ConfigStateFields) {
-      if (object.hasOwnProperty(fieldName)) {
-        const value = (object as any)[fieldName];
+      if (Object.prototype.hasOwnProperty.call(maybeState, fieldName)) {
+        const value = maybeState[fieldName];
         // Sanitize simple types.
         if (
           ConfigStateFieldsNumericalSelectSet.has(fieldName) ||

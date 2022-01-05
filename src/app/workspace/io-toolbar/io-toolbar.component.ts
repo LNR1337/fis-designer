@@ -2,11 +2,10 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {MatDialog} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
-import {changeProjectName} from '../config/state/config.actions';
+import {changeConfigName} from '../config/state/config.actions';
 import {selectConfigName} from '../config/state/config.selectors';
 import {ImageManagerComponent} from '../image-manager/image-manager.component';
 import {SnackBarService} from '../services/snack-bar.service';
-import {loadCompoundStateFromBinary} from './serialization-utils';
 import {
   loadExistingConfigNames,
   loadStateFromBufferJSON,
@@ -61,7 +60,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   }
 
   onConfigNameChange(event: Event) {
-    this.store.dispatch(changeProjectName({name: (event.target as HTMLInputElement).value}));
+    this.store.dispatch(changeConfigName({name: (event.target as HTMLInputElement).value}));
   }
 
   get hasConfigName(): boolean {

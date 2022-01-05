@@ -13,5 +13,5 @@ export const saveImageBuffer = createAction(
 
 export const loadImagesStateFromObject = createAction(
   '[Images] Load images state from object',
-  props<{object: Object}>()
+  props<{maybeState: any}>()
 );

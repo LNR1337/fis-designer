@@ -1,7 +1,5 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {CONFIG_FEATURE_KEY} from '../../config/state/config.reducer';
 import {selectConfigState} from '../../config/state/config.selectors';
-import {IMAGES_FEATURE_KEY} from '../../image-manager/state/images.reducer';
 import {selectImagesState} from '../../image-manager/state/images.selectors';
 import {getCompoundState} from '../serialization-utils';
 import {IO_TOOLBAR_FEATURE_KEY} from './io-toolbar.reducer';

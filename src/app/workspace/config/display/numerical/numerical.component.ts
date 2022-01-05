@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {NumericalConfig} from '../../models/configs';
 import {NUMERICAL_FIELD_METADATA} from '../../models/configs_metadata';
-import {changedNeedleConfig, changedNumericalConfig} from '../../state/config.actions';
+import {changedNumericalConfig} from '../../state/config.actions';
 import {ConfigStateNumericalFieldsType} from '../../state/config.state';
 
 @Component({

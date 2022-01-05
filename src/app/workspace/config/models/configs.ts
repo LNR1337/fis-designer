@@ -16,11 +16,8 @@ export type GaugeConfigFieldsObject<T> = {
   [property in GaugeConfigFieldsType]: T;
 };
 
-/** Object type for holding data for some fields in gauge config. */
-export type PartialGaugeConfigFieldsObject<T> = Partial<GaugeConfigFieldsObject<T>>;
-
 /** Configuration of gauge display. */
-export type GaugeConfig = PartialGaugeConfigFieldsObject<number>;
+export type GaugeConfig = GaugeConfigFieldsObject<number>;
 
 /** Helper function for getting absolute radian angles of min and max needle values. */
 export function getAbsoluteNeedleAngleBounds(config: GaugeConfig): [number, number] {
@@ -59,11 +56,8 @@ export type NeedleConfigFieldsObject<T> = {
   [property in NeedleConfigFieldsType]: T;
 };
 
-/** Object type for an object holding data for some fields in needle config. */
-export type PartialNeedleConfigFieldsObject<T> = Partial<NeedleConfigFieldsObject<T>>;
-
 /** Configuration of needle display. */
-export type NeedleConfig = PartialNeedleConfigFieldsObject<number>;
+export type NeedleConfig = NeedleConfigFieldsObject<number>;
 
 // -------------------------- Numerical gauges --------------------------
 
@@ -78,14 +72,11 @@ export type NumericalConfigFieldsObject<T> = {
   [property in NumericalConfigFieldsType]: T;
 };
 
-/** Object type for holding data for some fields in numerical config. */
-export type PartialNumericalConfigFieldsObject<T> = Partial<NumericalConfigFieldsObject<T>>;
-
 /** Configuration of numerical gauge display. */
-export interface NumericalConfig extends PartialNumericalConfigFieldsObject<number | boolean> {
-  positionX?: number;
-  positionY?: number;
-  centered?: boolean;
+export interface NumericalConfig extends NumericalConfigFieldsObject<number | boolean> {
+  positionX: number;
+  positionY: number;
+  centered: boolean;
 }
 
 // -------------------------- Tables --------------------------
@@ -110,19 +101,16 @@ export type TableRowConfigFieldsObject<T> = {
   [property in TableRowConfigFieldsType]: T;
 };
 
-/** Object type for holding data for some fields in table row config. */
-export type PartialTableRowConfigFieldsObject<T> = Partial<TableRowConfigFieldsObject<T>>;
-
 /** Configuration of a table row. */
-export interface TableRowConfig extends PartialTableRowConfigFieldsObject<number | string> {
-  measurementId?: number;
-  label?: string;
-  unit?: string;
-  decimalPlaces?: number;
-  factor?: number;
-  calculationId?: number;
-  lowerWarning?: number;
-  upperWarning?: number;
+export interface TableRowConfig extends TableRowConfigFieldsObject<number | string> {
+  measurementId: number;
+  label: string;
+  unit: string;
+  decimalPlaces: number;
+  factor: number;
+  calculationId: number;
+  lowerWarning: number;
+  upperWarning: number;
 }
 
 /** All valid field names of table config. */
@@ -136,11 +124,8 @@ export type TableConfigFieldsObject<T> = {
   [property in TableConfigFieldsType]: T;
 };
 
-/** Object type for holding data for some fields in table config. */
-export type PartialTableConfigFieldsObject<T> = Partial<TableConfigFieldsObject<T>>;
-
 /** Configuration of a table. */
-export interface TableConfig extends PartialTableConfigFieldsObject<number | TableRowConfig[]> {
-  controlUnitId?: number;
-  rows?: TableRowConfig[];
+export interface TableConfig extends TableConfigFieldsObject<number | TableRowConfig[]> {
+  controlUnitId: number;
+  rows: TableRowConfig[];
 }
