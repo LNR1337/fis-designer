@@ -6,15 +6,30 @@ import {
 } from '../../config/models/configs';
 import {ConfigStateGeneralFieldsConfig} from '../../config/state/config.state';
 
+// Guides constants.
 const GUIDES_FONT = '10px sans-serif';
-const STATUS_BAR_FONT = '22px sans-serif';
 const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
 const NUMERICAL_DIGITS = 3;
+// Digital gauges constants.
 const GTI_FONT_WIDTH = 28;
 const GTI_FONT_HEIGHT = 24;
+// Status bar constants.
 const STATUS_BAR_HEIGHT = 40;
-
+const STATUS_BAR_FONT = '21px sans-serif';
+// Table view constants.
+const RS3_TABLE_LEFT = [139, 85, 49, 26, 17, 23, 31, 43, 57, 74];
+const RS3_TABLE_RIGHT = [530, 505, 488, 477, 471, 471, 471, 475, 484, 499];
+const TTRS_TABLE_LEFT = [115, 45, 15, 20, 25, 35, 45, 60, 75, 95];
+const TTRS_TABLE_RIGHT = [519, 489, 469, 459, 459, 459, 459, 459, 469, 479];
+const RS_UNIT_OFFSET = -80;
+const RS_VALUE_OFFSET = -300;
+const LABEL_X = 16;
+const TABLE_FONT = '22px sans-serif'
+const UNIT_X = 632;
+const VALUE_X = 610; // Justify to the right.
+const LINE1_Y = 36;
+const LINE_HEIGHT = 40;
 /** Class responsible for rendering gauges on the canvas. */
 export class GaugesCompositor {
   constructor(private context: CanvasRenderingContext2D) {}
