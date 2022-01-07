@@ -1,14 +1,16 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
-  selector: 'app-color-input',
-  templateUrl: './color-input.component.html',
-  styleUrls: ['./color-input.component.scss'],
+  selector: 'app-string-input',
+  templateUrl: './string-input.component.html',
+  styleUrls: ['./string-input.component.scss'],
 })
-export class ColorInputComponent {
+export class StringInputComponent {
   @Input() label = '';
-  @Input() hint?: string;
+  @Input() help?: string;
   @Input() value?: string;
+  @Input() maxLength?: number;
+  @Input() type: 'color' | 'text' = 'text';
   @Input() rightLabel = false;
   @Output() valueChanged = new EventEmitter<string>();
 

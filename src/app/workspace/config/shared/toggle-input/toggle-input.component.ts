@@ -8,7 +8,7 @@ import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 })
 export class ToggleInputComponent {
   @Input() label = '';
-  @Input() hint?: string;
+  @Input() help?: string;
   @Input() value?: boolean;
   @Input() rightLabel = false;
 

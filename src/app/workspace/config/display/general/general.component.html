@@ -27,22 +27,23 @@
   </ng-container>
   <!-- Color -->
   <ng-container *ngIf="colorFields.has(fieldName)">
-    <app-color-input
+    <app-string-input
       *ngIf="STATE_FIELDS_METADATA[fieldName]; let metaData"
-      [label]="metaData.label ?? ''"
+      type="color"
+      [label]="metaData.label"
       [rightLabel]="rightLabel"
-      [hint]="metaData.hint ?? ''"
+      [help]="metaData.help"
       (valueChanged)="valueChanged($event, fieldName)"
       [value]="getStringValue(fieldName)"
-    ></app-color-input>
+    ></app-string-input>
   </ng-container>
   <!-- Boolean -->
   <ng-container *ngIf="booleanFields.has(fieldName)">
     <app-toggle-input
       *ngIf="STATE_FIELDS_METADATA[fieldName]; let metaData"
-      [label]="metaData.label ?? ''"
+      [label]="metaData.label"
       [rightLabel]="rightLabel"
-      [hint]="metaData.hint ?? ''"
+      [help]="metaData.help"
       (valueChanged)="valueChanged($event, fieldName)"
       [value]="getBooleanValue(fieldName)"
     ></app-toggle-input>
@@ -51,8 +52,10 @@
   <ng-container *ngIf="selectFields.has(fieldName)">
     <app-select-input
       *ngIf="STATE_FIELDS_METADATA[fieldName]; let metaData"
-      [metaData]="metaData"
+      [label]="metaData.label"
+      [options]="metaData.options"
       [rightLabel]="rightLabel"
+      [help]="metaData.help"
       (valueChanged)="valueChanged($event, fieldName)"
       [value]="getNumericalValue(fieldName)"
     ></app-select-input>

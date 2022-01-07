@@ -7,7 +7,9 @@ import {ConfigFieldMetadata} from '../../models/configs_metadata';
   styleUrls: ['./select-input.component.scss'],
 })
 export class SelectInputComponent {
-  @Input() metaData?: ConfigFieldMetadata;
+  @Input() label = '';
+  @Input() help?: string;
+  @Input() options?: Map<number, string>;
   @Input() value?: number;
   @Input() rightLabel = false;
   @Output() valueChanged = new EventEmitter<number>();

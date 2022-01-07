@@ -1,10 +1,10 @@
 <span [class.right-label]="rightLabel" class="wrapper">
-  <span class="label" [class.right-label]="rightLabel" [tooltip]="metaData?.hint ?? ''">
-    {{ metaData?.label }}
-    <mat-icon *ngIf="metaData?.hint" class="hint-icon">help</mat-icon>
+  <span class="label" [class.right-label]="rightLabel" [tooltip]="help || ''">
+    {{ label }}
+    <mat-icon *ngIf="help" class="hint-icon">help_outline</mat-icon>
   </span>
   <select class="single-input" (change)="onChangeField($event)" value="{{ value }}">
-    <option *ngFor="let option of metaData?.options | keyvalue"
+    <option *ngFor="let option of options | keyvalue"
             [value]="option.key">{{option.value}}</option>
   </select>
 </span>

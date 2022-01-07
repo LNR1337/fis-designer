@@ -53,8 +53,7 @@ a {
 
   .hint-icon {
     font-size: 120%;
-    opacity: 0.7;
-    color: $light-grey-item;
+    color: $grey-item;
     position: relative;
     top: 4px;
     left: 4px;
@@ -65,7 +64,7 @@ a {
   // Left side.
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between;
+  justify-content: right;
   width: $form-left-side-width;
   max-width: $form-left-side-max-width;
 

@@ -8,17 +8,17 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 import {TooltipModule} from '../../tooltip/tooltip.module';
-import {ColorInputComponent} from './color-input/color-input.component';
 import {SelectInputComponent} from './select-input/select-input.component';
 
 import {SlidingInputComponent} from './sliding-input/sliding-input.component';
+import {StringInputComponent} from './string-input/string-input.component';
 import {ToggleInputComponent} from './toggle-input/toggle-input.component';
 
 @NgModule({
   declarations: [
-    ColorInputComponent,
     SelectInputComponent,
     SlidingInputComponent,
+    StringInputComponent,
     ToggleInputComponent,
   ],
   imports: [
@@ -32,6 +32,11 @@ import {ToggleInputComponent} from './toggle-input/toggle-input.component';
     MatSlideToggleModule,
     TooltipModule,
   ],
-  exports: [ColorInputComponent, SelectInputComponent, SlidingInputComponent, ToggleInputComponent],
+  exports: [
+    SelectInputComponent,
+    SlidingInputComponent,
+    StringInputComponent,
+    ToggleInputComponent,
+  ],
 })
 export class ConfigSharedModule {}

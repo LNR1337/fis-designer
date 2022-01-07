@@ -5,3 +5,34 @@
   display: flex;
   flex-direction: column;
 }
+
+.row-wrapper {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: solid 1px $grey-border;
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  app-select-input {
+    width: 320px;
+  }
+
+  app-string-input {
+    flex: 1;
+  }
+
+  app-sliding-input {
+    flex: 0;
+  }
+
+  app-string-input.label-input {
+    flex: 10;
+    min-width: 300px;
+  }
+}
+
+

@@ -10,8 +10,8 @@ import {
 
 /** Metadata for config field display. */
 export interface ConfigFieldMetadata {
-  label?: string;
-  hint?: string;
+  label: string;
+  help?: string;
   min?: number;
   max?: number;
   hideSlider?: boolean;
@@ -62,7 +62,7 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
   fontDotWidth: {label: 'Dot width', min: 0, max: 255, hideSlider: true},
   fontSpacing: {
     label: 'Digit spacing',
-    hint: 'Additional space between digits.',
+    help: 'Additional space between digits.',
     min: 0,
     max: 255,
     hideSlider: true,
@@ -71,7 +71,7 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
   fontWarningColor: {label: 'Warning color'},
   useBuiltInNumericalGauges: {
     label: 'GTI gauges',
-    hint:
+    help:
       'Show built in digital gauges in the middle of each analog gauge. These are' +
       ' visually independent from other digital gauges.',
   },
@@ -91,12 +91,12 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
   },
   scrollAllTables: {
     label: 'Scroll through all tables',
-    hint: 'Allow scrolling through all the tables. Otherwise, show just the initial one.',
+    help: 'Allow scrolling through all the tables. Otherwise, show just the initial one.',
   },
   hideStatusBarOnTable: {label: 'Hide status bar'},
   virtualCockpitFriendlyTables: {
     label: 'Adapt layout to virtual cockpit window',
-    hint: 'Modify the table display to fit in a virtual cockpit window',
+    help: 'Modify the table display to fit in a virtual cockpit window',
   },
   // General settings.
   language: {
@@ -150,26 +150,26 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
   useSteeringWheelRoller: {label: 'Control FIS-Control with steering wheel roller'},
   driveSelectReselect: {
     label: 'Reselect dynamic drive mode after ignition',
-    hint: 'Only for RSQ3. Enables the exhaust flap.',
+    help: 'Only for RSQ3. Enables the exhaust flap.',
   },
   showEgtToCan: {
     label: 'Show EGT from ECUMaster EGT to CAN',
-    hint: 'Show EGT reported by ECUMaster EGT-to-CAN in the lower left corner of the gauges.',
+    help: 'Show EGT reported by ECUMaster EGT-to-CAN in the lower left corner of the gauges.',
   },
   supportLowResolution: {
     label: 'Support low resolution display',
-    hint: 'Change the table and notifications font to fit on a smaller screen.',
+    help: 'Change the table and notifications font to fit on a smaller screen.',
   },
   ignorePdc: {
     label: 'Do not hide while reversing',
-    hint: 'Ignore reverse camera and parking distance control.',
+    help: 'Ignore reverse camera and parking distance control.',
   },
-  useStarButton: {label: 'Operate using star button only', hint: 'For A3 8V and TT 8S.'},
+  useStarButton: {label: 'Operate using star button only', help: 'For A3 8V and TT 8S.'},
   hideOnDriveSelectButton: {
     label: 'Hide when drive select button is pressed',
-    hint: 'For A3 8V face-lift.',
+    help: 'For A3 8V face-lift.',
   },
-  hideOnMmiButton: {label: 'Hide when MMI button is pressed', hint: 'For A3 8V face-lift.'},
+  hideOnMmiButton: {label: 'Hide when MMI button is pressed', help: 'For A3 8V face-lift.'},
   externalCanWarning: {label: 'Send warning status to external CAN board'},
 };
 
@@ -183,42 +183,42 @@ export const GAUGE_FIELD_METADATA: GaugeConfigFieldsObject<ConfigFieldMetadata> 
 };
 
 export const NUMERICAL_FIELD_METADATA: NumericalConfigFieldsObject<ConfigFieldMetadata> = {
-  positionX: {label: 'Position X', min: 0, max: 799, hint: 'Set to 0 to disable gauge.'},
-  positionY: {label: 'Position Y', min: 0, max: 479, hint: 'Set to 0 to disable gauge.'},
+  positionX: {label: 'Position X', min: 0, max: 799, help: 'Set to 0 to disable gauge.'},
+  positionY: {label: 'Position Y', min: 0, max: 479, help: 'Set to 0 to disable gauge.'},
   centered: {
     label: 'Centered',
-    hint:
+    help:
       'Center gauge on the X position. Otherwise, the' +
       " position is the gauge's top right corner.",
   },
 };
 
 export const NEEDLE_FIELD_METADATA: NeedleConfigFieldsObject<ConfigFieldMetadata> = {
-  width: {label: 'Width', hint: 'Has to match image width.', min: 0, max: 255, hideSlider: true},
-  height: {label: 'Height', hint: 'Has to match image height.', min: 0, max: 255, hideSlider: true},
+  width: {label: 'Width', help: 'Has to match image width.', min: 0, max: 255, hideSlider: true},
+  height: {label: 'Height', help: 'Has to match image height.', min: 0, max: 255, hideSlider: true},
   centerX: {
     label: 'Center X',
     min: -200,
     max: 200,
-    hint: 'Relative to position.',
+    help: 'Relative to position.',
   },
   centerY: {
     label: 'Center Y',
     min: -200,
     max: 200,
-    hint: 'Relative to position.',
+    help: 'Relative to position.',
   },
   positionX: {label: 'Position X', min: 0, max: 799},
   positionY: {label: 'Position Y', min: 0, max: 479},
   indicatorPositionX: {
     label: 'Indicator X',
-    hint: 'Set to 0 to disable indicator.',
+    help: 'Set to 0 to disable indicator.',
     min: 0,
     max: 799,
   },
   indicatorPositionY: {
     label: 'Indicator Y',
-    hint: 'Set to 0 to disable indicator.',
+    help: 'Set to 0 to disable indicator.',
     min: 0,
     max: 479,
   },
@@ -230,10 +230,16 @@ export const TABLE_FIELD_METADATA: TableConfigFieldsObject<ConfigFieldMetadata> 
 };
 
 export const TABLE_ROW_FIELD_METADATA: TableRowConfigFieldsObject<ConfigFieldMetadata> = {
-  measurementId: {label: 'Measurement value'},
-  label: {label: 'Label'},
-  unit: {label: 'Unit', hint: 'Enter *lambda* for the λ symbol.'},
-  decimalPlaces: {label: 'Decimals', hint: 'Used only for digital gauge display.', min: 0, max: 3},
+  measurementId: {label: 'Measurement'},
+  label: {label: 'Label', max: 30},
+  unit: {label: 'Unit', help: 'Enter *lambda* for the λ symbol.', max: 20},
+  decimalPlaces: {
+    label: 'Decimals',
+    help: 'Used only for digital gauge display.',
+    min: 0,
+    max: 3,
+    hideSlider: true,
+  },
   factor: {
     label: 'Conversion',
     options: new Map<number, string>([
@@ -265,13 +271,13 @@ export const TABLE_ROW_FIELD_METADATA: TableRowConfigFieldsObject<ConfigFieldMet
   calculationId: {
     label: 'Calculation',
     options: new Map<number, string>([
-      [0, ''],
+      [0, 'Not used'],
       [1, 'Boost pressure'],
       [2, 'Ambient pressure'],
       [3, 'Engine torque'],
       [4, 'RPM'],
     ]),
   },
-  lowerWarning: {label: 'Lower warning'},
-  upperWarning: {label: 'Upper warning'},
+  lowerWarning: {label: 'Lower warning', hideSlider: true},
+  upperWarning: {label: 'Upper warning', hideSlider: true},
 };

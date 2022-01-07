@@ -2,6 +2,12 @@
 
 :host {
   margin-bottom: 4px;
+
+  &.wide {
+    .single-input {
+      flex-grow: 1;
+    }
+  }
 }
 
 .wrapper {

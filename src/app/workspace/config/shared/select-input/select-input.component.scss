@@ -2,6 +2,12 @@
 
 :host {
   margin-bottom: 4px;
+
+  &.wide {
+    .single-input {
+      flex-grow: 1;
+    }
+  }
 }
 
 .wrapper {
@@ -11,12 +17,6 @@
   &.right-label {
     flex-direction: row-reverse;
     justify-content: flex-end;
-  }
-
-  &:not(.right-label) {
-    .single-input {
-      flex-grow: 1;
-    }
   }
 
   .label {

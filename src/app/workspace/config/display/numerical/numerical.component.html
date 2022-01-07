@@ -16,8 +16,8 @@
 
 <app-toggle-input
   *ngIf="NUMERICAL_FIELD_METADATA['centered']; let metaData"
-  [label]="metaData.label ?? ''"
-  [hint]="metaData.hint ?? ''"
+  [label]="metaData.label"
+  [help]="metaData.help"
   (valueChanged)="valueChanged($event, 'centered')"
   [value]="numericalConfig ? numericalConfig['centered'] : undefined"
 ></app-toggle-input>
