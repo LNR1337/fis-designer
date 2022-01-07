@@ -3,9 +3,11 @@
     {{ label }}
     <mat-icon *ngIf="help" class="hint-icon">help_outline</mat-icon>
   </span>
-  <select class="single-input" (change)="onChangeField($event)" value="{{ value }}">
-    <option *ngFor="let option of options | keyvalue"
-            [value]="option.key">{{option.value}}</option>
+  <select class="single-input" (change)="onChangeField($event)" [value]="value">
+    <option *ngFor="let option of options | keyvalue; trackBy: optionTrackBy"
+            [value]="option.key"
+            [selected]="option.key === value"
+    >{{option.value}}</option>
   </select>
 </span>
 

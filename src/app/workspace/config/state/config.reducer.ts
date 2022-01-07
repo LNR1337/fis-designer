@@ -19,6 +19,7 @@ export const configReducer = createReducer(
     actions.changedGaugeConfig,
     actions.changedNeedleConfig,
     actions.changedNumericalConfig,
+    actions.changedTableConfig,
     (state, {config, displayConfigField}) => ({
       ...state,
       [displayConfigField]: config,

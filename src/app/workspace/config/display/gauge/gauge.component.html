@@ -1,6 +1,6 @@
 <h4 class="group-label">{{ label }}</h4>
 
-<ng-container *ngFor="let fieldName of GaugeConfigFields">
+<ng-container *ngFor="let fieldName of GaugeConfigFields; trackBy: trackBy">
   <app-sliding-input
     *ngIf="GAUGE_FIELD_METADATA[fieldName]; let metaData"
     [metaData]="metaData"

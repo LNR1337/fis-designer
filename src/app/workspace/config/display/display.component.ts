@@ -18,6 +18,10 @@ import {
   ConfigStateGeneralMiscFields,
   ConfigStateTableFieldsObject,
   ConfigStateTableFields,
+  ConfigStateGaugeFieldsType,
+  ConfigStateNeedleFieldsType,
+  ConfigStateNumericalFieldsType,
+  ConfigStateTableFieldsType,
 } from '../state/config.state';
 import {
   selectNeedleConfigs,
@@ -73,5 +77,21 @@ export class DisplayComponent {
 
   highlightNone() {
     this.store.dispatch(disableHighlight());
+  }
+
+  trackGauges(index: number, value: ConfigStateGaugeFieldsType) {
+    return value;
+  }
+
+  trackNeedles(index: number, value: ConfigStateNeedleFieldsType) {
+    return value;
+  }
+
+  trackNumeric(index: number, value: ConfigStateNumericalFieldsType) {
+    return value;
+  }
+
+  trackTable(index: number, value: ConfigStateTableFieldsType) {
+    return value;
   }
 }

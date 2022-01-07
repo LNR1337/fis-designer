@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {TooltipModule} from '../../tooltip/tooltip.module';
 import {SelectInputComponent} from './select-input/select-input.component';
 
@@ -30,6 +31,7 @@ import {ToggleInputComponent} from './toggle-input/toggle-input.component';
     MatSelectModule,
     MatSliderModule,
     MatSlideToggleModule,
+    NgxMatSelectSearchModule,
     TooltipModule,
   ],
   exports: [

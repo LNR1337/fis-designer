@@ -24,4 +24,8 @@ export class SelectInputComponent {
   onChangeField(event: Event) {
     this.changeValue(Number((event.target as HTMLInputElement).value));
   }
+
+  optionTrackBy(index: number, value: {key: number; value: string}) {
+    return value.key;
+  }
 }

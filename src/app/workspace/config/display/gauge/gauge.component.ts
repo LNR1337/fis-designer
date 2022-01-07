@@ -3,7 +3,7 @@ import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {ConfigStateGaugeFieldsType} from '../../state/config.state';
 import {Store} from '@ngrx/store';
 import {changedGaugeConfig} from '../../state/config.actions';
-import {GaugeConfig, GaugeConfigFields} from '../../models/configs';
+import {GaugeConfig, GaugeConfigFields, GaugeConfigFieldsType} from '../../models/configs';
 import {GAUGE_FIELD_METADATA} from '../../models/configs_metadata';
 
 @Component({
@@ -34,5 +34,9 @@ export class GaugeComponent {
         })
       );
     }
+  }
+
+  trackBy(index: number, value: GaugeConfigFieldsType) {
+    return value;
   }
 }

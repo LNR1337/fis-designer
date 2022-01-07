@@ -3,7 +3,7 @@ import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {ConfigStateNeedleFieldsType} from '../../state/config.state';
 import {Store} from '@ngrx/store';
 import {changedNeedleConfig, recalculateNeedleSize} from '../../state/config.actions';
-import {NeedleConfig, NeedleConfigFields} from '../../models/configs';
+import {NeedleConfig, NeedleConfigFields, NeedleConfigFieldsType} from '../../models/configs';
 import {
   NEEDLE_DISPLAY_TO_PREVIEW_FIELD,
   NEEDLE_FIELD_METADATA,
@@ -55,5 +55,9 @@ export class NeedleComponent implements OnChanges {
         })
       );
     }
+  }
+
+  trackBy(index: number, value: NeedleConfigFieldsType) {
+    return value;
   }
 }

@@ -17,7 +17,7 @@
       <!-- Analog gauges -->
       <ng-container *ngIf="gaugesConfigs | async; let configs">
         <app-gauge
-          *ngFor="let configName of ConfigStateGaugeFields; let i = index"
+          *ngFor="let configName of ConfigStateGaugeFields; let i = index; trackBy: trackGauges"
           class="settings-element"
           style="order: {{ i }}"
           [gaugeConfig]="configs[configName]"
@@ -30,15 +30,16 @@
       </ng-container>
       <!-- Needles -->
       <ng-container *ngIf="needlesConfigs | async; let configs">
-        <app-needle *ngFor="let configName of ConfigStateNeedleFields; let i = index"
-                    class="settings-element"
-                    style="order: {{ i }}"
-                    [needleConfig]="configs[configName]"
-                    [fieldName]="configName"
-                    [loadedImages]="loadedImagesSet"
-                    label="{{ STATE_FIELDS_METADATA[configName].label }}"
-                    (mouseenter)="highlight(configName)"
-                    (mouseleave)="highlightNone()"
+        <app-needle
+          *ngFor="let configName of ConfigStateNeedleFields; let i = index; trackBy: trackNeedles"
+          class="settings-element"
+          style="order: {{ i }}"
+          [needleConfig]="configs[configName]"
+          [fieldName]="configName"
+          [loadedImages]="loadedImagesSet"
+          label="{{ STATE_FIELDS_METADATA[configName].label }}"
+          (mouseenter)="highlight(configName)"
+          (mouseleave)="highlightNone()"
         ></app-needle>
       </ng-container>
     </ng-container>
@@ -60,14 +61,15 @@
       ></app-general>
       <!-- Numerical gauges -->
       <ng-container *ngIf="numericalConfigs | async; let configs">
-        <app-numerical *ngFor="let configName of ConfigStateNumericalFields; let i = index"
-                       class="settings-element"
-                       style="order: {{ i + 10 }}"
-                       [numericalConfig]="configs[configName]"
-                       [fieldName]="configName"
-                       label="{{ STATE_FIELDS_METADATA[configName].label }}"
-                       (mouseenter)="highlight(configName)"
-                       (mouseleave)="highlightNone()"
+        <app-numerical
+          *ngFor="let configName of ConfigStateNumericalFields; let i = index; trackBy: trackNumeric"
+          class="settings-element"
+          style="order: {{ i + 10 }}"
+          [numericalConfig]="configs[configName]"
+          [fieldName]="configName"
+          label="{{ STATE_FIELDS_METADATA[configName].label }}"
+          (mouseenter)="highlight(configName)"
+          (mouseleave)="highlightNone()"
         ></app-numerical>
       </ng-container>
     </ng-container>
@@ -90,7 +92,7 @@
       <!-- Tables -->
       <ng-container *ngIf="tableConfigs | async; let configs">
         <app-table
-          *ngFor="let configName of ConfigStateTableFields; let i = index"
+          *ngFor="let configName of ConfigStateTableFields; let i = index; trackBy: trackTable"
           class="settings-element"
           [tableConfig]="configs[configName]"
           [fieldName]="configName"

@@ -6,8 +6,9 @@ import {
   ConfigStateNeedleFieldsType,
   ConfigStateNumericalFieldsType,
   ConfigStateGeneralFieldsConfig,
+  ConfigStateTableFieldsType,
 } from './config.state';
-import {GaugeConfig, NeedleConfig, NumericalConfig} from '../models/configs';
+import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
 
 export const recalculateNeedleSize = createAction(
   '[Config] Recalculate needle size',
@@ -40,6 +41,14 @@ export const changedNumericalConfig = createAction(
   props<{
     config: NumericalConfig;
     displayConfigField: ConfigStateNumericalFieldsType;
+  }>()
+);
+
+export const changedTableConfig = createAction(
+  '[Config] Changed table config',
+  props<{
+    config: TableConfig;
+    displayConfigField: ConfigStateTableFieldsType;
   }>()
 );
 

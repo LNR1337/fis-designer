@@ -5,14 +5,18 @@
                   [label]="metaData.label"
                   [help]="metaData.help"
                   [value]="tableConfig!.controlUnitId"
+                  [options]="controlUnitOptions"
+                  (valueChanged)="tableValueChanged($event, 'controlUnitId')"
 >
 </app-select-input>
-<div class="row-wrapper" *ngFor="let row of tableConfig!.rows; let i = index">
+<div class="row-wrapper" *ngFor="let row of tableConfig!.rows; let i = index; trackBy: rowTrackBy">
   <app-select-input *ngIf="TABLE_ROW_FIELD_METADATA['measurementId']; let metaData"
                     class="wide"
                     [label]="metaData.label! + ' ' + (i + 1)"
                     [help]="metaData.help"
                     [value]="row.measurementId"
+                    [options]="controlUnits.get(tableConfig!.controlUnitId)!.values"
+                    (valueChanged)="rowValueChanged(i, $event, 'measurementId')"
   >
   </app-select-input>
   <div class="fields">
@@ -23,6 +27,7 @@
       [help]="metaData.help"
       [maxLength]="metaData.max"
       [value]="row.label"
+      (valueChanged)="rowValueChanged(i, $event, 'label')"
     ></app-string-input>
     <app-string-input
       *ngIf="TABLE_ROW_FIELD_METADATA['unit']; let metaData"
@@ -30,6 +35,7 @@
       [help]="metaData.help"
       [maxLength]="metaData.max"
       [value]="row.unit"
+      (valueChanged)="rowValueChanged(i, $event, 'unit')"
     ></app-string-input>
 
   </div>
@@ -40,6 +46,7 @@
                       [help]="metaData.help"
                       [options]="metaData.options"
                       [value]="row.factor"
+                      (valueChanged)="rowValueChanged(i, $event, 'factor')"
     >
     </app-select-input>
     <app-select-input *ngIf="TABLE_ROW_FIELD_METADATA['calculationId']; let metaData"
@@ -48,22 +55,26 @@
                       [help]="metaData.help"
                       [options]="metaData.options"
                       [value]="row.calculationId"
+                      (valueChanged)="rowValueChanged(i, $event, 'calculationId')"
     >
     </app-select-input>
     <app-sliding-input
       *ngIf="TABLE_ROW_FIELD_METADATA['lowerWarning']; let metaData"
       [metaData]="metaData"
       [value]="row.lowerWarning"
+      (valueChanged)="rowValueChanged(i, $event, 'lowerWarning')"
     ></app-sliding-input>
     <app-sliding-input
       *ngIf="TABLE_ROW_FIELD_METADATA['upperWarning']; let metaData"
       [metaData]="metaData"
       [value]="row.upperWarning"
+      (valueChanged)="rowValueChanged(i, $event, 'upperWarning')"
     ></app-sliding-input>
     <app-sliding-input
       *ngIf="TABLE_ROW_FIELD_METADATA['decimalPlaces']; let metaData"
       [metaData]="metaData"
       [value]="row.decimalPlaces"
+      (valueChanged)="rowValueChanged(i, $event, 'decimalPlaces')"
     ></app-sliding-input>
   </div>
 </div>

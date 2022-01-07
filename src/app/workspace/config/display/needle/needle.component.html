@@ -13,7 +13,7 @@
   </button>
 </h4>
 
-<ng-container *ngFor="let fieldName of NeedleConfigFields">
+<ng-container *ngFor="let fieldName of NeedleConfigFields; trackBy: trackBy">
   <app-sliding-input
     *ngIf="NEEDLE_FIELD_METADATA[fieldName]; let metaData"
     [metaData]="metaData"
