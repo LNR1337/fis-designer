@@ -1,8 +1,14 @@
 @import 'src/variables';
 
 :host {
-  height: calc(100% - $top-bar-height);
-  margin: calc($top-bar-height + 16px) auto 16px auto;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  display: flex;
+}
+
+.pages {
+  margin: 16px auto;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -12,3 +18,10 @@
 .section {
   margin: 16px 8px;
 }
+
+.return {
+  display: flex;
+  justify-content: space-between;
+}
+
+

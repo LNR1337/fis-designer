@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ResizeEvent} from 'angular-resizable-element';
 
 @Component({
   selector: 'app-config',
@@ -7,13 +6,5 @@ import {ResizeEvent} from 'angular-resizable-element';
   styleUrls: ['./config.component.scss'],
 })
 export class ConfigComponent {
-  public style: object = {};
-
   constructor() {}
-
-  onResize(event: ResizeEvent): void {
-    this.style = {
-      width: `${Math.min(event.rectangle.width ?? 480, window.screen.width)}px`,
-    };
-  }
 }

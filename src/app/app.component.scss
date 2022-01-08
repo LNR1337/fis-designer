@@ -1,22 +1,19 @@
 @import 'src/variables';
 
-:host {
-  min-width: $sidebar-desktop-min-width;
-}
-
-.top-bar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  height: 0;
+.top-bar-placeholder {
+  width: 100%;
+  height: 56px;
 }
 
 .top-bar {
-  height: $top-bar-height;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 56px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   a {
     all: unset;
@@ -27,7 +24,7 @@
     font-family: 'Rajdhani', sans-serif;
     font-size: 32px;
     font-weight: 500;
-    line-height: $top-bar-height;
+    line-height: 100%;
   }
 
   .right-side {
@@ -35,5 +32,15 @@
       position: relative;
       top: -1px;
     }
+  }
+}
+
+@media (max-width: $mobile-width-breakpoint) {
+  .top-bar-placeholder, .top-bar {
+    height: 32px;
+  }
+
+  .top-bar .title {
+    font-size: 24px;
   }
 }

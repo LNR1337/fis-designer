@@ -1,3 +1,5 @@
+@import 'src/variables';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,7 @@
 
 .display {
   width: 100%;
-  min-width: 450px;
+  min-width: $mobile-min-width;
   max-width: 800px;
   max-height: 480px;
   background-color: #000;

@@ -1,6 +1,5 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
@@ -22,7 +21,6 @@ import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from './state/io-toolbar.reduc
   declarations: [IoToolbarComponent],
   imports: [
     CommonModule,
-    FormsModule,
     ImageManagerModule,
     MatButtonModule,
     MatDialogModule,
@@ -33,7 +31,6 @@ import {IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer} from './state/io-toolbar.reduc
     MatMenuModule,
     MatToolbarModule,
     TooltipModule,
-    ReactiveFormsModule,
     EffectsModule.forFeature([IoToolbarEffects]),
     StoreModule.forFeature(IO_TOOLBAR_FEATURE_KEY, ioToolbarReducer),
   ],

@@ -1,2 +1,11 @@
-<app-config></app-config>
+<div
+  [ngStyle]="style"
+  class="sidebar"
+  mwlResizable
+  [enableGhostResize]="false"
+  (resizing)="onResize($event)"
+>
+  <app-config></app-config>
+  <div class="resize-handle" mwlResizeHandle [resizeEdges]="{right: true}"></div>
+</div>
 <app-preview></app-preview>

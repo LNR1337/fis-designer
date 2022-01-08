@@ -1,24 +1,16 @@
-<div
-  [ngStyle]="style"
-  class="sidebar"
-  mwlResizable
-  [enableGhostResize]="false"
-  (resizing)="onResize($event)"
->
-  <mat-tab-group animationDuration="200ms"
-                 [disablePagination]="true" [selectedIndex]="0">
-    <mat-tab label="Analog">
-      <app-display page="gauges"></app-display>
-    </mat-tab>
-    <mat-tab label="Digital">
-      <app-display page="numerical"></app-display>
-    </mat-tab>
-    <mat-tab label="Tables">
-      <app-display page="tables"></app-display>
-    </mat-tab>
-    <mat-tab label="Misc">
-      <app-display page="misc"></app-display>
-    </mat-tab>
-  </mat-tab-group>
-  <div class="resize-handle" mwlResizeHandle [resizeEdges]="{right: true}"></div>
-</div>
+<mat-tab-group animationDuration="200ms"
+               [disablePagination]="true" [selectedIndex]="0">
+  <mat-tab label="Analog">
+    <app-display page="gauges"></app-display>
+  </mat-tab>
+  <mat-tab label="Digital">
+    <app-display page="numerical"></app-display>
+  </mat-tab>
+  <mat-tab label="Tables">
+    <app-display page="tables"></app-display>
+  </mat-tab>
+  <mat-tab label="Misc">
+    <app-display page="misc"></app-display>
+  </mat-tab>
+</mat-tab-group>
+

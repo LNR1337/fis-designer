@@ -1,6 +1,5 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {EffectsModule} from '@ngrx/effects';
@@ -20,10 +19,8 @@ import {TesterComponent} from './gauges/tester/tester.component';
     CommonModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    FormsModule,
     IoToolbarModule,
     ImageManagerModule,
-    ReactiveFormsModule,
     EffectsModule.forFeature([PreviewEffects]),
     StoreModule.forFeature(PREVIEW_FEATURE_KEY, previewReducer),
   ],

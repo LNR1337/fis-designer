@@ -1,6 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {Store} from '@ngrx/store';
+import {ResizeEvent} from 'angular-resizable-element';
 import {Subscription} from 'rxjs';
 import {selectConfigName} from './config/state/config.selectors';
 
@@ -11,6 +12,7 @@ import {selectConfigName} from './config/state/config.selectors';
 })
 export class WorkspaceComponent implements OnDestroy {
   subscription = new Subscription();
+  public style: object = {};
 
   constructor(titleService: Title, store: Store) {
     titleService.setTitle('FIS-Designer');
@@ -21,6 +23,13 @@ export class WorkspaceComponent implements OnDestroy {
         }
       })
     );
+  }
+
+  onResize(event: ResizeEvent): void {
+    console.log(event);
+    this.style = {
+      width: `${Math.min(event.rectangle.width ?? 480, window.screen.width)}px`,
+    };
   }
 
   ngOnDestroy() {

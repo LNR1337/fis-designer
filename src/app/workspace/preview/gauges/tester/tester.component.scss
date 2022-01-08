@@ -5,3 +5,9 @@
   flex-direction: row-reverse;
   color: $light-grey-item;
 }
+
+@media (max-width: $mobile-width-breakpoint) {
+  .tester-bar {
+    height: 44px;
+  }
+}

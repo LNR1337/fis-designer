@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
-import {ResizableModule} from 'angular-resizable-element';
 
 import {ConfigComponent} from './config.component';
 import {DisplayModule} from './display/display.module';
@@ -16,7 +15,6 @@ import {configReducer, CONFIG_FEATURE_KEY} from './state/config.reducer';
     CommonModule,
     DisplayModule,
     MatTabsModule,
-    ResizableModule,
     EffectsModule.forFeature([ConfigEffects]),
     StoreModule.forFeature(CONFIG_FEATURE_KEY, configReducer),
   ],

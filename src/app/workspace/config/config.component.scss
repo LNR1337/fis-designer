@@ -1,42 +1,21 @@
 @import 'src/variables';
 
-.sidebar {
-  background-color: $background-dialog;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  z-index: 1;
-  resize: horizontal;
-  box-sizing: border-box;
-  position: relative;
-  height: 100%;
-  width: 480px;
-  min-width: $sidebar-desktop-min-width;
-  max-width: 100%;
-
-  .resize-handle {
-    width: 7px;
-    height: 100%;
-    background: $background;
-    cursor: col-resize;
-    border-left: solid 1px $grey-border;
-
-    &:hover {
-      background: $grey-border;
-    }
-  }
-}
-
-mat-tab-group {
+:host {
   width: 100%;
-  min-height: 100px;
+  height: 100%;
+  border-right: solid 1px $grey-border;
 }
 
 ::ng-deep {
+  mat-tab-group {
+    height: 100%;
+    width: 100%;
+  }
+
   div.mat-tab-labels {
     div.mat-tab-label {
       flex-grow: 1;
-      min-width: 100px;
+      min-width: 20%;
       user-select: none;
     }
   }
@@ -60,23 +39,10 @@ mat-tab-group {
 
     &::-webkit-scrollbar-thumb {
       background: $grey-border;
-      border-radius: 4px;
 
       &:hover {
         background: $grey-item;
       }
-    }
-  }
-}
-
-@media (max-width: $mobile-width-breakpoint) {
-  .sidebar {
-    width: 100%;
-    max-width: 100%;
-    min-width: 200px;
-
-    .resize-handle {
-      display: none;
     }
   }
 }
