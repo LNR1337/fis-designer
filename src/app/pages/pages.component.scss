@@ -17,6 +17,15 @@
 
 .section {
   margin: 16px 8px;
+  line-height: 180%;
+
+  p {
+    margin: 0 0 8px 0;
+  }
+
+  ul {
+    margin: 0 0 8px 0;
+  }
 }
 
 .return {
