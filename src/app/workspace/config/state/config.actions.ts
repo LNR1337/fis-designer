@@ -1,7 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {ImageStateFieldsType} from '../../image-manager/state/images.state';
 import {
-  ConfigStateFieldsType,
   ConfigStateGaugeFieldsType,
   ConfigStateNeedleFieldsType,
   ConfigStateNumericalFieldsType,
@@ -63,13 +62,6 @@ export const changeConfigName = createAction(
   '[Config] Change project name',
   props<{name: string}>()
 );
-
-export const enableHighlight = createAction(
-  '[Config] Enable highlighting',
-  props<{stateField: ConfigStateFieldsType}>()
-);
-
-export const disableHighlight = createAction('[Config] Disable highlighting');
 
 export const loadConfigStateFromObject = createAction(
   '[Config] Load config state from object',

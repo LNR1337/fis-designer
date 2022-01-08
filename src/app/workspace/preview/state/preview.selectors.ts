@@ -27,3 +27,6 @@ export const selectNeedleAngles = createSelector(selectPreviewState, previewStat
   previewState.needleAngle2 ?? 0,
   previewState.needleAngle3 ?? 0,
 ]);
+
+/** Selects currently highlighted config. */
+export const selectHighlight = createSelector(selectPreviewState, state => state.activeHighlight);

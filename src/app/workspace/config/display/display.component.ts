@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {map, Observable} from 'rxjs';
 import {ImageStateFieldsType} from '../../image-manager/state/images.state';
+import {disableHighlight, enableHighlight} from '../../preview/state/preview.actions';
 import {selectLoadedImageNames} from '../../preview/state/preview.selectors';
 import {
   ConfigStateNeedleFieldsObject,
@@ -32,7 +33,6 @@ import {
 } from '../state/config.selectors';
 import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
 import {STATE_FIELDS_METADATA} from '../models/configs_metadata';
-import {disableHighlight, enableHighlight} from '../state/config.actions';
 
 @Component({
   selector: 'app-display',

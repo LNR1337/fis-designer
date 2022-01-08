@@ -3,7 +3,7 @@ import {Component, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
 import {PartialImageStateFieldsObject} from '../../image-manager/state/images.state';
-import {selectAllImages, selectNeedleAngles} from '../state/preview.selectors';
+import {selectAllImages, selectHighlight, selectNeedleAngles} from '../state/preview.selectors';
 import {
   ConfigStateFieldsType,
   ConfigStateGaugeFieldsObject,
@@ -15,7 +15,6 @@ import {GaugeConfig, NeedleConfig, NumericalConfig} from '../../config/models/co
 import {
   selectGaugeConfigs,
   selectGeneralFieldsConfig,
-  selectHighlight,
   selectNeedleConfigs,
   selectNumericalConfigs,
 } from '../../config/state/config.selectors';

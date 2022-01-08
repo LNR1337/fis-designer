@@ -23,5 +23,13 @@ export const previewReducer = createReducer(
     needleAngle1,
     needleAngle2,
     needleAngle3,
+  })),
+  on(actions.enableHighlight, (state, {stateField}) => ({
+    ...state,
+    activeHighlight: stateField,
+  })),
+  on(actions.disableHighlight, state => ({
+    ...state,
+    activeHighlight: undefined,
   }))
 );

@@ -21,6 +21,6 @@ export class ConfigComponent {
   }
 
   newTab(event: MatTabChangeEvent) {
-    setTimeout(() => this.showTables = event.index === 2, 500);
+    setTimeout(() => (this.showTables = event.index === 2), 500);
   }
 }

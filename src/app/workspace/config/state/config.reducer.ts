@@ -29,14 +29,6 @@ export const configReducer = createReducer(
     ...state,
     ...(config as ConfigState), // TODO(pawelszydlo): type hack.
   })),
-  on(actions.enableHighlight, (state, {stateField}) => ({
-    ...state,
-    activeHighlight: stateField,
-  })),
-  on(actions.disableHighlight, state => ({
-    ...state,
-    activeHighlight: undefined,
-  })),
   on(actions.changeConfigName, (state, {name}) => ({
     ...state,
     configName: name,

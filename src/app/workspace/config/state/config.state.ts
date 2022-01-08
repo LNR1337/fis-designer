@@ -244,5 +244,4 @@ export interface ConfigState {
   externalCanWarning: boolean;
   // Internal utility fields.
   configName?: string;
-  activeHighlight?: ConfigStateFieldsType;
 }
