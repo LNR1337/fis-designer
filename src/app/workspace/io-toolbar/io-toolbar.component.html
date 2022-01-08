@@ -1,5 +1,7 @@
 <mat-toolbar class="toolbar">
-  <input hidden (change)="onConfigSelected($event)" #jsonConfigInput type="file"
+  <input hidden (change)="onConfigSelected($event, false)" #jsonConfigInput type="file"
+         accept="application/json"/>
+  <input hidden (change)="onConfigSelected($event, true)" #jsonVisualConfigInput type="file"
          accept="application/json"/>
 
   <input hidden (change)="onBinaryConfigSelected($event)" #binaryConfigInput type="file"/>
@@ -34,7 +36,7 @@
       <mat-icon>file_upload</mat-icon>
       <span>Load full config from JSON</span>
     </button>
-    <button mat-menu-item (click)="jsonConfigInput.click()" disabled>
+    <button mat-menu-item (click)="jsonVisualConfigInput.click()">
       <mat-icon>file_upload</mat-icon>
       <span>Load visual config from JSON</span>
     </button>

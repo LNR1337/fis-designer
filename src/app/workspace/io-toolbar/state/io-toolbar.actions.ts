@@ -33,7 +33,7 @@ export const downloadBackgroundAsBinary = createAction(
 
 export const loadStateFromBufferJSON = createAction(
   '[IoToolbar] Load state from JSON file array buffer',
-  props<{loadedBuffer: ArrayBuffer}>()
+  props<{loadedBuffer: ArrayBuffer; visualOnly: boolean}>()
 );
 
 export const loadStateFromBufferBinary = createAction(
@@ -43,7 +43,7 @@ export const loadStateFromBufferBinary = createAction(
 
 export const loadedCompoundState = createAction(
   '[IoToolbar] A serialized state has been loaded',
-  props<{compoundState: CompoundState}>()
+  props<{compoundState: CompoundState; visualOnly: boolean}>()
 );
 
 export const loadExistingConfigNames = createAction(

@@ -30,6 +30,7 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   configName = '';
 
   @ViewChild('jsonConfigInput') jsonConfigInput?: ElementRef;
+  @ViewChild('jsonVisualConfigInput') jsonVisualConfigInput?: ElementRef;
   @ViewChild('binaryConfigInput') binaryConfigInput?: ElementRef;
   @ViewChild('configNameInput') configNameInput?: ElementRef;
 
@@ -75,6 +76,9 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
   clearFileInputs() {
     if (this.jsonConfigInput) {
       this.jsonConfigInput.nativeElement.value = '';
+    }
+    if (this.jsonVisualConfigInput) {
+      this.jsonVisualConfigInput.nativeElement.value = '';
     }
     if (this.binaryConfigInput) {
       this.binaryConfigInput.nativeElement.value = '';
@@ -156,11 +160,12 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  onConfigSelected(event: Event) {
+  onConfigSelected(event: Event, visual: boolean) {
     this.readFileEvent(event, (result, fileName) => {
       this.store.dispatch(
         loadStateFromBufferJSON({
           loadedBuffer: result,
+          visualOnly: visual,
         })
       );
     });

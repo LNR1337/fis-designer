@@ -9,6 +9,7 @@ import {
   ConfigStateFieldsStringSet,
   ConfigStateFieldsNumericalSelectSet,
   ConfigStateFieldsNumericalSet,
+  ConfigStateVisualFields,
 } from './config.state';
 
 export const CONFIG_FEATURE_KEY = 'config';
@@ -33,9 +34,10 @@ export const configReducer = createReducer(
     ...state,
     configName: name,
   })),
-  on(actions.loadConfigStateFromObject, (state, {maybeState}) => {
+  on(actions.loadConfigStateFromObject, (state, {maybeState, visualOnly}) => {
     const newState: Partial<ConfigState> = {};
-    for (const fieldName of ConfigStateFields) {
+    const fieldList = visualOnly ? ConfigStateVisualFields : ConfigStateFields;
+    for (const fieldName of fieldList) {
       if (Object.prototype.hasOwnProperty.call(maybeState, fieldName)) {
         const value = maybeState[fieldName];
         // Sanitize simple types.

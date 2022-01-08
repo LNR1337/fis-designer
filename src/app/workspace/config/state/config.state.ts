@@ -133,6 +133,15 @@ export const ConfigStateFields = [
   'configName',
 ] as const;
 
+export const ConfigStateVisualFields = [
+  ...ConfigStateGaugeFields,
+  ...ConfigStateNeedleFields,
+  ...ConfigStateNumericalFields,
+  ...ConfigStateGeneralGaugesFields,
+  ...ConfigStateGeneralNumericalFields,
+  ...ConfigStateGeneralTableFields,
+] as const;
+
 /** Set of all config state fields holding numerical values. */
 export const ConfigStateFieldsNumericalSet = new Set([
   'fontWidth',

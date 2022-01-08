@@ -65,5 +65,5 @@ export const changeConfigName = createAction(
 
 export const loadConfigStateFromObject = createAction(
   '[Config] Load config state from object',
-  props<{maybeState: any}>()
+  props<{maybeState: any; visualOnly: boolean}>()
 );

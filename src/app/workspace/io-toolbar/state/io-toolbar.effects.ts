@@ -126,7 +126,7 @@ export class IoToolbarEffects {
       mergeMap(action => {
         try {
           const compoundState = this.localStorageService.loadState(action.name);
-          return [loadedCompoundState({compoundState})];
+          return [loadedCompoundState({compoundState, visualOnly: false})];
         } catch (e) {
           this.snackBar.error(`Error loading config from local storage: ${e}`);
           return EMPTY;
@@ -142,7 +142,7 @@ export class IoToolbarEffects {
       mergeMap(action => {
         try {
           const compoundState = loadCompoundStateFromJSON(action.loadedBuffer);
-          return [loadedCompoundState({compoundState})];
+          return [loadedCompoundState({compoundState, visualOnly: action.visualOnly})];
         } catch (e) {
           this.snackBar.error(`Error loading config from file: ${e}`);
           return EMPTY;
@@ -158,7 +158,7 @@ export class IoToolbarEffects {
       mergeMap(action => {
         try {
           const compoundState = loadCompoundStateFromBinary(action.loadedBuffer, action.fileName);
-          return [loadedCompoundState({compoundState})];
+          return [loadedCompoundState({compoundState, visualOnly: false})];
         } catch (e) {
           this.snackBar.error(`Error loading config from file: ${e}`);
           return EMPTY;
@@ -171,10 +171,11 @@ export class IoToolbarEffects {
   loadedCompoundState = createEffect(() =>
     this.actions$.pipe(
       ofType(loadedCompoundState),
-      mergeMap(({compoundState}) => {
+      mergeMap(({compoundState, visualOnly}) => {
         return [
           loadConfigStateFromObject({
             maybeState: compoundState[CONFIG_FEATURE_KEY],
+            visualOnly,
           }),
           loadImagesStateFromObject({
             maybeState: compoundState[IMAGES_FEATURE_KEY],
