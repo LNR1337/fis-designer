@@ -74,14 +74,14 @@ export class GaugesCompositor {
     } else {
       this.context.globalAlpha = 1;
     }
-    const statusBarY = 479.5 - STATUS_BAR_HEIGHT;
+    const statusBarY = 480 - STATUS_BAR_HEIGHT;
     this.context.font = STATUS_BAR_FONT;
     this.context.fillStyle = '#333333';
-    this.context.fillRect(0.5, statusBarY, 799, STATUS_BAR_HEIGHT);
+    this.context.fillRect(0, statusBarY, 800, STATUS_BAR_HEIGHT);
     this.context.fillStyle = '#666666';
-    this.context.fillRect(0.5, statusBarY, 799, 4);
+    this.context.fillRect(0, statusBarY, 800, 4);
     this.context.fillStyle = '#999999';
-    this.context.fillRect(0.5, statusBarY, 799, 3);
+    this.context.fillRect(0, statusBarY, 800, 3);
     this.context.fillStyle = '#ffffff';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'top';

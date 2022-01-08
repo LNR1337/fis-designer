@@ -11,7 +11,7 @@ export class ConfigComponent {
 
   constructor() {}
 
-  onResizeEnd(event: ResizeEvent): void {
+  onResize(event: ResizeEvent): void {
     this.style = {
       width: `${Math.min(event.rectangle.width ?? 480, window.screen.width)}px`,
     };

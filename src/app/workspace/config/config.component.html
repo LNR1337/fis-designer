@@ -2,8 +2,8 @@
   [ngStyle]="style"
   class="sidebar"
   mwlResizable
-  [enableGhostResize]="true"
-  (resizeEnd)="onResizeEnd($event)"
+  [enableGhostResize]="false"
+  (resizing)="onResize($event)"
 >
   <mat-tab-group animationDuration="200ms"
                  [disablePagination]="true" [selectedIndex]="0">
