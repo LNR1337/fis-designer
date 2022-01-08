@@ -26,6 +26,10 @@ $sidebar-desktop-min-width: 480px;
 $mobile-width-breakpoint: 990px;
 $mobile-min-width: 400px;
 
+// Top bar.
+$top-bar-height: 56px;
+$top-bar-mobile: 32px;
+
 // Backgrounds - darkest to lightest.
 $background-bar: map-get(mat.$dark-theme-background-palette, app-bar);
 $background: map-get(mat.$dark-theme-background-palette, background);

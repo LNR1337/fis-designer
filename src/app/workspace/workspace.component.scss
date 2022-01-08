@@ -2,11 +2,12 @@
 
 :host {
   width: 100%;
-  height: 100%;
+  height: calc(100% - #{$top-bar-height});
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
+  align-items: stretch; // Cross-axis.
   min-width: $mobile-min-width;
 }
 
@@ -19,7 +20,6 @@
   resize: horizontal;
   box-sizing: border-box;
   position: relative;
-  height: 100%;
   width: 480px;
   min-width: $sidebar-desktop-min-width;
   max-width: 100%;
@@ -46,6 +46,7 @@ app-preview {
   :host {
     flex-direction: column-reverse;
     justify-content: flex-end;
+    height: calc(100% - #{$top-bar-mobile});
   }
 
   .sidebar {
