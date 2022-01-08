@@ -20,7 +20,7 @@
   resize: horizontal;
   box-sizing: border-box;
   position: relative;
-  width: 480px;
+  width: $sidebar-desktop-min-width;
   min-width: $sidebar-desktop-min-width;
   max-width: 100%;
 
