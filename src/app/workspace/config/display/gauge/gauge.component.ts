@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {ConfigStateGaugeFieldsType} from '../../state/config.state';
 import {Store} from '@ngrx/store';
@@ -10,6 +10,7 @@ import {GAUGE_FIELD_METADATA} from '../../models/configs_metadata';
   selector: 'app-gauge',
   templateUrl: './gauge.component.html',
   styleUrls: ['./gauge.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GaugeComponent {
   // Configuration for this gauge.

@@ -1,4 +1,4 @@
-import {Component, Input, SimpleChanges, OnChanges} from '@angular/core';
+import {Component, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {containsAllDigitImages} from '../../../image-manager/utils';
@@ -17,6 +17,7 @@ import {
   selector: 'app-general',
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeneralComponent implements OnChanges {
   // List of names of loaded images.

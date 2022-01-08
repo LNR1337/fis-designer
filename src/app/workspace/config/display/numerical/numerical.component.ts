@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {NumericalConfig, NumericalConfigFieldsType} from '../../models/configs';
 import {NUMERICAL_FIELD_METADATA} from '../../models/configs_metadata';
@@ -9,6 +9,7 @@ import {ConfigStateNumericalFieldsType} from '../../state/config.state';
   selector: 'app-numerical',
   templateUrl: './numerical.component.html',
   styleUrls: ['./numerical.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NumericalComponent {
   @Input() numericalConfig?: NumericalConfig;

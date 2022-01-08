@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {controlUnits} from '../../../../../assets/js/fis-control-binary-converter/control-units';
 import {changedTableConfig} from '../../state/config.actions';
 import {ConfigStateTableFieldsType} from '../../state/config.state';
@@ -17,6 +17,7 @@ import {TABLE_FIELD_METADATA, TABLE_ROW_FIELD_METADATA} from '../../models/confi
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
   // Configuration for this table.

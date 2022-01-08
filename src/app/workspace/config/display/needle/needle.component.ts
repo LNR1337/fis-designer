@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ImageStateFieldsType} from '../../../image-manager/state/images.state';
 import {ConfigStateNeedleFieldsType} from '../../state/config.state';
 import {Store} from '@ngrx/store';
@@ -13,6 +13,7 @@ import {
   selector: 'app-needle',
   templateUrl: './needle.component.html',
   styleUrls: ['./needle.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NeedleComponent implements OnChanges {
   @Input() needleConfig?: NeedleConfig;

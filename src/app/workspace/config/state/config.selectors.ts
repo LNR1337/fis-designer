@@ -1,4 +1,5 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
+import {distinctUntilChanged} from 'rxjs';
 
 import {CONFIG_FEATURE_KEY} from './config.reducer';
 import {

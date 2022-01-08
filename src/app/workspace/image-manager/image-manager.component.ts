@@ -1,4 +1,4 @@
-import {QueryList} from '@angular/core';
+import {ChangeDetectionStrategy, QueryList} from '@angular/core';
 import {Component, ViewChildren} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable, tap} from 'rxjs';
@@ -14,6 +14,7 @@ import {assureDigitDimensions} from './utils';
   selector: 'app-image-manager',
   templateUrl: './image-manager.component.html',
   styleUrls: ['./image-manager.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 /**
  * This component is responsible showing all image inputs.

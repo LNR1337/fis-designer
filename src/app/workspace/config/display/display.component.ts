@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {map, Observable} from 'rxjs';
 import {ImageStateFieldsType} from '../../image-manager/state/images.state';
@@ -31,13 +31,19 @@ import {
   selectGeneralFieldsConfig,
   selectTableFields,
 } from '../state/config.selectors';
-import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
+import {
+  GaugeConfig,
+  NeedleConfig,
+  NumericalConfig,
+  TableConfig,
+} from '../models/configs';
 import {STATE_FIELDS_METADATA} from '../models/configs_metadata';
 
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisplayComponent {
   @Input() page: 'gauges' | 'numerical' | 'tables' | 'misc' = 'gauges';
