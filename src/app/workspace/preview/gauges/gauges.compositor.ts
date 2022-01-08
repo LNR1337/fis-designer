@@ -86,7 +86,7 @@ export class GaugesCompositor {
     this.context.textAlign = 'center';
     this.context.textBaseline = 'top';
     const date = new Date();
-    this.context.fillText(`${date.toTimeString().substr(0, 5)}`, 399, statusBarY + 10);
+    this.context.fillText(`${date.toTimeString().substr(0, 5)}`, 399, statusBarY + 11);
     this.context.globalAlpha = 1;
   }
 

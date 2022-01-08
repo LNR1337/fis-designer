@@ -5,8 +5,8 @@
   [enableGhostResize]="true"
   (resizeEnd)="onResizeEnd($event)"
 >
-  <mat-tab-group animationDuration="200ms" selectedIndex="0"
-                 [disablePagination]="true" (selectedTabChange)="newTab($event)">
+  <mat-tab-group animationDuration="200ms"
+                 [disablePagination]="true" [selectedIndex]="0">
     <mat-tab label="Analog">
       <app-display page="gauges"></app-display>
     </mat-tab>

@@ -20,3 +20,15 @@
   }
 }
 
+.table-tabs {
+  ::ng-deep {
+    div.mat-tab-labels {
+      div.mat-tab-label {
+        flex-grow: 1;
+        min-width: 60px;
+        user-select: none;
+      }
+    }
+  }
+}
+

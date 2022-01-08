@@ -89,15 +89,21 @@
       ></app-general>
       <!-- Tables -->
       <ng-container *ngIf="tableConfigs | async; let configs">
-        <app-table
-          *ngFor="let configName of ConfigStateTableFields; let i = index; trackBy: trackTable"
-          class="settings-element"
-          [tableConfig]="configs[configName]"
-          [fieldName]="configName"
-          label="{{ STATE_FIELDS_METADATA[configName].label }}"
-          (mouseenter)="highlight(configName)"
-          (mouseleave)="highlightNone()"
-        ></app-table>
+        <mat-tab-group class="table-tabs" animationDuration="200ms"
+                       [disablePagination]="true" [selectedIndex]="0">
+          <mat-tab
+            *ngFor="let configName of ConfigStateTableFields; let i = index; trackBy: trackTable"
+            label="{{ STATE_FIELDS_METADATA[configName].label }}">
+            <app-table
+              class="settings-element"
+              [tableConfig]="configs[configName]"
+              [fieldName]="configName"
+              label="{{ STATE_FIELDS_METADATA[configName].label }}"
+              (mouseenter)="highlight(configName)"
+              (mouseleave)="highlightNone()"
+            ></app-table>
+          </mat-tab>
+        </mat-tab-group>
       </ng-container>
     </ng-container>
 

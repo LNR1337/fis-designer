@@ -31,12 +31,7 @@ import {
   selectGeneralFieldsConfig,
   selectTableFields,
 } from '../state/config.selectors';
-import {
-  GaugeConfig,
-  NeedleConfig,
-  NumericalConfig,
-  TableConfig,
-} from '../models/configs';
+import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
 import {STATE_FIELDS_METADATA} from '../models/configs_metadata';
 
 @Component({
