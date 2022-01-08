@@ -1,23 +1,25 @@
 <h4 class="group-label">{{ label }}</h4>
 
-<app-sliding-input
-  *ngIf="NUMERICAL_FIELD_METADATA['positionX']; let metaData"
-  [metaData]="metaData"
-  (valueChanged)="valueChanged($event, 'positionX')"
-  [value]="numericalConfig ? numericalConfig['positionX'] : undefined"
-></app-sliding-input>
+<div class="input-group">
+  <app-sliding-input
+    *ngIf="NUMERICAL_FIELD_METADATA['positionX']; let metaData"
+    [metaData]="metaData"
+    (valueChanged)="valueChanged($event, 'positionX')"
+    [value]="numericalConfig ? numericalConfig['positionX'] : undefined"
+  ></app-sliding-input>
 
-<app-sliding-input
-  *ngIf="NUMERICAL_FIELD_METADATA['positionY']; let metaData"
-  [metaData]="metaData"
-  (valueChanged)="valueChanged($event, 'positionY')"
-  [value]="numericalConfig ? numericalConfig['positionY'] : undefined"
-></app-sliding-input>
+  <app-sliding-input
+    *ngIf="NUMERICAL_FIELD_METADATA['positionY']; let metaData"
+    [metaData]="metaData"
+    (valueChanged)="valueChanged($event, 'positionY')"
+    [value]="numericalConfig ? numericalConfig['positionY'] : undefined"
+  ></app-sliding-input>
 
-<app-toggle-input
-  *ngIf="NUMERICAL_FIELD_METADATA['centered']; let metaData"
-  [label]="metaData.label"
-  [help]="metaData.help"
-  (valueChanged)="valueChanged($event, 'centered')"
-  [value]="numericalConfig ? numericalConfig['centered'] : undefined"
-></app-toggle-input>
+  <app-toggle-input
+    *ngIf="NUMERICAL_FIELD_METADATA['centered']; let metaData"
+    [label]="metaData.label"
+    [help]="metaData.help"
+    (valueChanged)="valueChanged($event, 'centered')"
+    [value]="numericalConfig ? numericalConfig['centered'] : undefined"
+  ></app-toggle-input>
+</div>

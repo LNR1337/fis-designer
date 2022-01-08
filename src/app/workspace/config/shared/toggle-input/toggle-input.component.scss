@@ -1,40 +1,8 @@
 @import 'src/variables';
 
-:host {
-  display: flex;
-  align-content: center;
-  margin-bottom: 4px;
+:host{
+  padding: 6px 0;
+  margin-top: 8px;
+  width: 100%;
 }
-
-::ng-deep {
-
-  .slide-toggle {
-    color: $light-grey-item;
-    height: 36px;
-    width: 100%;
-
-    &:not(.right-label) {
-      .mat-slide-toggle-content {
-        margin-right: 8px;
-        width: $form-left-side-width;
-        max-width: $form-left-side-max-width;
-
-        .label {
-          width: 100%;
-        }
-      }
-    }
-
-    &.right-label {
-      .mat-slide-toggle-content {
-        margin-left: 12px;
-      }
-    }
-
-    &.right-label {
-      margin-left: calc(min(#{$form-left-side-width}, #{$form-left-side-max-width}) - 40px);
-    }
-  }
-}
-
 

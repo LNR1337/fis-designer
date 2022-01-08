@@ -24,7 +24,7 @@ export const selectNeedleConfigs = createSelector(
     needle1: state.needle1,
     needle2: state.needle2,
     needle3: state.needle3,
-  })
+  }),
 );
 
 /** Selects the gauges' configs. */

@@ -13,11 +13,14 @@
   </button>
 </h4>
 
-<ng-container *ngFor="let fieldName of NeedleConfigFields; trackBy: trackBy">
-  <app-sliding-input
-    *ngIf="NEEDLE_FIELD_METADATA[fieldName]; let metaData"
-    [metaData]="metaData"
-    (valueChanged)="valueChanged($event, fieldName)"
-    [value]="needleConfig ? needleConfig[fieldName] : undefined"
-  ></app-sliding-input>
-</ng-container>
+<div class="input-group">
+  <ng-container *ngFor="let fieldName of NeedleConfigFields; trackBy: trackBy">
+    <app-sliding-input
+      *ngIf="NEEDLE_FIELD_METADATA[fieldName]; let metaData"
+      [metaData]="metaData"
+      (valueChanged)="valueChanged($event, fieldName)"
+      [value]="needleConfig ? needleConfig[fieldName] : undefined"
+    ></app-sliding-input>
+    <div *ngIf="fieldName==='height'" class="break"></div>
+  </ng-container>
+</div>

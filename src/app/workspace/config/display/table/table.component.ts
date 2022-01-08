@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {controlUnits} from '../../../../../assets/js/fis-control-binary-converter/control-units';
 import {changedTableConfig} from '../../state/config.actions';
 import {ConfigStateTableFieldsType} from '../../state/config.state';
@@ -18,7 +18,7 @@ import {TABLE_FIELD_METADATA, TABLE_ROW_FIELD_METADATA} from '../../models/confi
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnChanges {
+export class TableComponent {
   // Configuration for this table.
   @Input() tableConfig?: TableConfig;
   // Name of the state field this config corresponds to.
@@ -61,9 +61,5 @@ export class TableComponent implements OnChanges {
 
   rowTrackBy(index: number, row: TableRowConfig) {
     return index;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(this.tableConfig);
   }
 }

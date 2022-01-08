@@ -1,0 +1,19 @@
+<div class="input-wrapper">
+  <div class="label" [tooltip]="metaData?.help ?? ''">
+    {{ metaData?.label }}
+    <mat-icon *ngIf="metaData?.help" class="hint-icon">help_outline</mat-icon>
+  </div>
+  <!-- Color and string -->
+  <input *ngIf="type === 'color' || type === 'text'" class="input" [type]="type" [value]="value"
+         [attr.maxlength]="metaData?.max || null" (change)="onChangeField($event)"/>
+  <!-- Select -->
+  <select *ngIf="type === 'select'" class="input" (change)="onChangeField($event)" [value]="value">
+    <option *ngFor="let option of (options || metaData?.options) | keyvalue; trackBy: optionTrackBy"
+            [value]="option.key"
+            [selected]="option.key === value"
+    >{{option.value}}</option>
+  </select>
+</div>
+
+
+

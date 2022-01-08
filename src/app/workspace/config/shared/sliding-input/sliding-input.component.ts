@@ -6,6 +6,7 @@ import {ConfigFieldMetadata} from '../../models/configs_metadata';
   selector: 'app-sliding-input',
   templateUrl: './sliding-input.component.html',
   styleUrls: ['./sliding-input.component.scss'],
+  host: {'[class.wide]': 'metaData?.wide'},
 })
 export class SlidingInputComponent {
   @Input() metaData?: ConfigFieldMetadata;
@@ -18,7 +19,7 @@ export class SlidingInputComponent {
   get showSlider(): boolean {
     return (
       !!this.metaData &&
-      !this.metaData.hideSlider &&
+      !!this.metaData.wide &&
       !this.rightLabel &&
       this.metaData.min !== undefined &&
       this.metaData.max !== undefined

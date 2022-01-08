@@ -1,63 +1,51 @@
 <h4 class="group-label">{{ label }}</h4>
 
-<app-select-input *ngIf="TABLE_FIELD_METADATA['controlUnitId']; let metaData"
-                  class="wide"
-                  [label]="metaData.label"
-                  [help]="metaData.help"
+<app-simple-input *ngIf="TABLE_FIELD_METADATA['controlUnitId']; let metaData"
+                  type="select"
+                  [metaData]="metaData"
                   [value]="tableConfig!.controlUnitId"
                   [options]="controlUnitOptions"
-                  (valueChanged)="tableValueChanged($event, 'controlUnitId')"
+                  (numberChanged)="tableValueChanged($event, 'controlUnitId')"
 >
-</app-select-input>
+</app-simple-input>
 <div class="row-wrapper" *ngFor="let row of tableConfig!.rows; let i = index; trackBy: rowTrackBy">
-  <app-select-input *ngIf="TABLE_ROW_FIELD_METADATA['measurementId']; let metaData"
-                    class="wide"
-                    [label]="metaData.label! + ' ' + (i + 1)"
-                    [help]="metaData.help"
+  <h4 class="group-label">Row {{ i + 1 }}</h4>
+  <app-simple-input *ngIf="TABLE_ROW_FIELD_METADATA['measurementId']; let metaData"
+                    type="select"
+                    [metaData]="metaData"
                     [value]="row.measurementId"
                     [options]="controlUnits.get(tableConfig!.controlUnitId)!.values"
-                    (valueChanged)="rowValueChanged(i, $event, 'measurementId')"
+                    (numberChanged)="rowValueChanged(i, $event, 'measurementId')"
   >
-  </app-select-input>
-  <div class="fields">
-    <app-string-input
+  </app-simple-input>
+  <div class="input-group">
+    <app-simple-input
       class="wide label-input"
       *ngIf="TABLE_ROW_FIELD_METADATA['label']; let metaData"
-      [label]="metaData.label"
-      [help]="metaData.help"
-      [maxLength]="metaData.max"
+      [metaData]="metaData"
       [value]="row.label"
-      (valueChanged)="rowValueChanged(i, $event, 'label')"
-    ></app-string-input>
-    <app-string-input
+      (stringChanged)="rowValueChanged(i, $event, 'label')"
+    ></app-simple-input>
+    <app-simple-input
       *ngIf="TABLE_ROW_FIELD_METADATA['unit']; let metaData"
-      [label]="metaData.label"
-      [help]="metaData.help"
-      [maxLength]="metaData.max"
+      [metaData]="metaData"
       [value]="row.unit"
-      (valueChanged)="rowValueChanged(i, $event, 'unit')"
-    ></app-string-input>
-
-  </div>
-  <div class="fields">
-    <app-select-input *ngIf="TABLE_ROW_FIELD_METADATA['factor']; let metaData"
-                      class="wide"
-                      [label]="metaData.label"
-                      [help]="metaData.help"
-                      [options]="metaData.options"
+      (stringChanged)="rowValueChanged(i, $event, 'unit')"
+    ></app-simple-input>
+    <app-simple-input *ngIf="TABLE_ROW_FIELD_METADATA['factor']; let metaData"
+                      type="select"
+                      [metaData]="metaData"
                       [value]="row.factor"
-                      (valueChanged)="rowValueChanged(i, $event, 'factor')"
+                      (numberChanged)="rowValueChanged(i, $event, 'factor')"
     >
-    </app-select-input>
-    <app-select-input *ngIf="TABLE_ROW_FIELD_METADATA['calculationId']; let metaData"
-                      class="wide"
-                      [label]="metaData.label"
-                      [help]="metaData.help"
-                      [options]="metaData.options"
+    </app-simple-input>
+    <app-simple-input *ngIf="TABLE_ROW_FIELD_METADATA['calculationId']; let metaData"
+                      type="select"
+                      [metaData]="metaData"
                       [value]="row.calculationId"
-                      (valueChanged)="rowValueChanged(i, $event, 'calculationId')"
+                      (numberChanged)="rowValueChanged(i, $event, 'calculationId')"
     >
-    </app-select-input>
+    </app-simple-input>
     <app-sliding-input
       *ngIf="TABLE_ROW_FIELD_METADATA['lowerWarning']; let metaData"
       [metaData]="metaData"

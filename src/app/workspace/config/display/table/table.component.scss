@@ -12,27 +12,6 @@
   border-top: solid 1px $grey-border;
 }
 
-.fields {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-
-  app-select-input {
-    width: 320px;
-  }
-
-  app-string-input {
-    flex: 1;
-  }
-
-  app-sliding-input {
-    flex: 0;
-  }
-
-  app-string-input.label-input {
-    flex: 10;
-    min-width: 300px;
-  }
+app-sliding-input:not(.wide) {
+    width: 90px;
 }
-
-

@@ -14,7 +14,7 @@ export interface ConfigFieldMetadata {
   help?: string;
   min?: number;
   max?: number;
-  hideSlider?: boolean;
+  wide?: boolean;
   options?: Map<number, string>;
 }
 
@@ -57,15 +57,14 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
   numerical9: {label: 'Digital gauge 9'},
   numerical10: {label: 'Digital gauge 10'},
   // Digital gauges setup.
-  fontWidth: {label: 'Digit width', min: 0, max: 255, hideSlider: true},
-  fontHeight: {label: 'Digit height', min: 0, max: 255, hideSlider: true},
-  fontDotWidth: {label: 'Dot width', min: 0, max: 255, hideSlider: true},
+  fontWidth: {label: 'Digit width', min: 0, max: 255},
+  fontHeight: {label: 'Digit height', min: 0, max: 255},
+  fontDotWidth: {label: 'Dot width', min: 0, max: 255},
   fontSpacing: {
     label: 'Digit spacing',
     help: 'Additional space between digits.',
     min: 0,
     max: 255,
-    hideSlider: true,
   },
   fontColor: {label: 'Normal color'},
   fontWarningColor: {label: 'Warning color'},
@@ -128,6 +127,7 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
   },
   car: {
     label: 'Car model',
+    wide: true,
     options: new Map<number, string>([
       [0, 'unknown'],
       [1, 'Audi A1 8X (05/2010 - )'],
@@ -176,15 +176,27 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
 // -------------------------- Config fields --------------------------
 
 export const GAUGE_FIELD_METADATA: GaugeConfigFieldsObject<ConfigFieldMetadata> = {
-  startAngle: {label: 'Lower limit angle', min: 0, max: 360},
-  angularRange: {label: 'Low to high angle', min: -360, max: 360},
-  lowerLimit: {label: 'Value lower limit', min: -2147483, max: 2147483, hideSlider: true},
-  upperLimit: {label: 'Value upper limit', min: -2147483, max: 2147483, hideSlider: true},
+  startAngle: {label: 'Lower limit angle', min: 0, max: 360, wide: true},
+  angularRange: {label: 'Low to high angle', min: -360, max: 360, wide: true},
+  lowerLimit: {label: 'Value lower limit', min: -2147483, max: 2147483},
+  upperLimit: {label: 'Value upper limit', min: -2147483, max: 2147483},
 };
 
 export const NUMERICAL_FIELD_METADATA: NumericalConfigFieldsObject<ConfigFieldMetadata> = {
-  positionX: {label: 'Position X', min: 0, max: 799, help: 'Set to 0 to disable gauge.'},
-  positionY: {label: 'Position Y', min: 0, max: 479, help: 'Set to 0 to disable gauge.'},
+  positionX: {
+    label: 'Position X',
+    min: 0,
+    max: 799,
+    help: 'Set to 0 to disable gauge.',
+    wide: true,
+  },
+  positionY: {
+    label: 'Position Y',
+    min: 0,
+    max: 479,
+    help: 'Set to 0 to disable gauge.',
+    wide: true,
+  },
   centered: {
     label: 'Centered',
     help:
@@ -194,33 +206,37 @@ export const NUMERICAL_FIELD_METADATA: NumericalConfigFieldsObject<ConfigFieldMe
 };
 
 export const NEEDLE_FIELD_METADATA: NeedleConfigFieldsObject<ConfigFieldMetadata> = {
-  width: {label: 'Width', help: 'Has to match image width.', min: 0, max: 255, hideSlider: true},
-  height: {label: 'Height', help: 'Has to match image height.', min: 0, max: 255, hideSlider: true},
+  width: {label: 'Width', help: 'Has to match image width.', min: 0, max: 255},
+  height: {label: 'Height', help: 'Has to match image height.', min: 0, max: 255},
   centerX: {
     label: 'Center X',
     min: -200,
     max: 200,
     help: 'Relative to position.',
+    wide: true,
   },
   centerY: {
     label: 'Center Y',
     min: -200,
     max: 200,
     help: 'Relative to position.',
+    wide: true,
   },
-  positionX: {label: 'Position X', min: 0, max: 799},
-  positionY: {label: 'Position Y', min: 0, max: 479},
+  positionX: {label: 'Position X', min: 0, max: 799, wide: true},
+  positionY: {label: 'Position Y', min: 0, max: 479, wide: true},
   indicatorPositionX: {
     label: 'Indicator X',
     help: 'Set to 0 to disable indicator.',
     min: 0,
     max: 799,
+    wide: true,
   },
   indicatorPositionY: {
     label: 'Indicator Y',
     help: 'Set to 0 to disable indicator.',
     min: 0,
     max: 479,
+    wide: true,
   },
 };
 
@@ -238,7 +254,6 @@ export const TABLE_ROW_FIELD_METADATA: TableRowConfigFieldsObject<ConfigFieldMet
     help: 'Used only for digital gauge display.',
     min: 0,
     max: 3,
-    hideSlider: true,
   },
   factor: {
     label: 'Conversion',
@@ -278,6 +293,6 @@ export const TABLE_ROW_FIELD_METADATA: TableRowConfigFieldsObject<ConfigFieldMet
       [4, 'RPM'],
     ]),
   },
-  lowerWarning: {label: 'Lower warning', hideSlider: true},
-  upperWarning: {label: 'Upper warning', hideSlider: true},
+  lowerWarning: {label: 'Lower warning'},
+  upperWarning: {label: 'Upper warning'},
 };

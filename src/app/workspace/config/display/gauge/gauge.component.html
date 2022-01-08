@@ -1,10 +1,13 @@
 <h4 class="group-label">{{ label }}</h4>
 
-<ng-container *ngFor="let fieldName of GaugeConfigFields; trackBy: trackBy">
-  <app-sliding-input
-    *ngIf="GAUGE_FIELD_METADATA[fieldName]; let metaData"
-    [metaData]="metaData"
-    (valueChanged)="valueChanged($event, fieldName)"
-    [value]="gaugeConfig ? gaugeConfig[fieldName] : undefined"
-  ></app-sliding-input>
-</ng-container>
+<div class="input-group">
+  <ng-container *ngFor="let fieldName of GaugeConfigFields; trackBy: trackBy">
+    <app-sliding-input
+      *ngIf="GAUGE_FIELD_METADATA[fieldName]; let metaData"
+      [metaData]="metaData"
+      (valueChanged)="valueChanged($event, fieldName)"
+      [value]="gaugeConfig ? gaugeConfig[fieldName] : undefined"
+    ></app-sliding-input>
+    <div *ngIf="fieldName==='upperLimit'" class="break"></div>
+  </ng-container>
+</div>

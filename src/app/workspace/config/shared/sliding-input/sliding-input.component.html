@@ -1,9 +1,10 @@
-<span class="wrapper" [class.right-label]="rightLabel">
-  <span class="label" [class.right-label]="rightLabel" [tooltip]="metaData?.help ?? ''">
+<div class="input-wrapper" [class.wide]="showSlider">
+  <div class="label" [tooltip]="metaData?.help ?? ''">
     {{ metaData?.label }}
     <mat-icon *ngIf="metaData?.help" class="hint-icon">help_outline</mat-icon>
-  </span>
+  </div>
   <mat-slider
+    class="slider"
     *ngIf="showSlider"
     [min]="metaData?.min"
     [max]="metaData?.max"
@@ -13,8 +14,7 @@
     (change)="onChangeSlider($event)"
   ></mat-slider>
   <input
-    mat-input
-    class="single-input"
+    class="input"
     [class.short]="showSlider"
     maxlength="3"
     type="number"
@@ -23,4 +23,4 @@
     [max]="metaData?.max"
     [min]="metaData?.min"
   />
-</span>
+</div>

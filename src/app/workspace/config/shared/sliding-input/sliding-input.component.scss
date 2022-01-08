@@ -1,46 +1,18 @@
 @import 'src/variables';
 
-:host {
-  margin-bottom: 4px;
-
-  &.wide {
-    .single-input {
-      flex-grow: 1;
-    }
-  }
-}
-
-.wrapper {
-  display: flex;
-  align-items: center;
-
-  &.right-label {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-  }
-}
-
-.label {
-  &:not(.right-label) {
-    margin-right: 16px;
-  }
-
-  &.right-label {
-    margin-left: 16px;
-  }
-}
-
-mat-slider {
-  flex-grow: 4;
+.slider {
+  flex-grow: 10;
   padding: 0;
-  height: 32px;
-  margin-right: 16px;
+  margin-left: 8px;
+  height: 28px;
+  position: relative;
+  top: -3px;
 
   ::ng-deep .mat-slider-wrapper {
     top: 17px;
   }
 }
 
-.single-input.short {
-  width: 60px;
+.input.short {
+  width: 50px;
 }

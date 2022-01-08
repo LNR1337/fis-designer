@@ -1,13 +1,12 @@
 <mat-slide-toggle
   class="slide-toggle"
   color="primary"
-  [class.right-label]="rightLabel"
   [checked]="value"
   (change)="onChangeToggle($event)"
   [tooltip]="help ?? ''"
-  [labelPosition]="rightLabel ? 'after' : 'before'"
+  [labelPosition]="'after'"
 >
-    <span class="label" [class.right-label]="rightLabel">
+    <span class="label">
     {{ label }}
     <mat-icon class="hint-icon" *ngIf="help">help_outline</mat-icon>
     </span>

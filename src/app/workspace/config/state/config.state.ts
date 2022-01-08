@@ -79,11 +79,11 @@ export const ConfigStateGeneralNumericalFields = [
 export const ConfigStateGeneralTableFields = [
   'tableBackgroundColor',
   'tableFontColor',
+  'firstTable',
   'useTableBackgroundImage',
   'hideStatusBarOnTable',
   'virtualCockpitFriendlyTables',
   'scrollAllTables',
-  'firstTable',
 ] as const;
 export const ConfigStateGeneralMiscFields = [
   'language',

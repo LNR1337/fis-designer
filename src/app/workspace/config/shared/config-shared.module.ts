@@ -9,19 +9,13 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {TooltipModule} from '../../tooltip/tooltip.module';
-import {SelectInputComponent} from './select-input/select-input.component';
 
 import {SlidingInputComponent} from './sliding-input/sliding-input.component';
-import {StringInputComponent} from './string-input/string-input.component';
+import {SimpleInputComponent} from './simple-input/simple-input.component';
 import {ToggleInputComponent} from './toggle-input/toggle-input.component';
 
 @NgModule({
-  declarations: [
-    SelectInputComponent,
-    SlidingInputComponent,
-    StringInputComponent,
-    ToggleInputComponent,
-  ],
+  declarations: [SlidingInputComponent, SimpleInputComponent, ToggleInputComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -34,11 +28,6 @@ import {ToggleInputComponent} from './toggle-input/toggle-input.component';
     NgxMatSelectSearchModule,
     TooltipModule,
   ],
-  exports: [
-    SelectInputComponent,
-    SlidingInputComponent,
-    StringInputComponent,
-    ToggleInputComponent,
-  ],
+  exports: [SlidingInputComponent, SimpleInputComponent, ToggleInputComponent],
 })
 export class ConfigSharedModule {}
