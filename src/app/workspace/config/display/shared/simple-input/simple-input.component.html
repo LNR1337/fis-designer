@@ -10,7 +10,7 @@
     <!-- Select -->
     <mat-select *ngIf="type === 'select'" class="input" ngModel
                 (ngModelChange)="changeValue($event)"
-                [value]="value" [disableOptionCentering]="true">
+                [ngModel]="value" [disableOptionCentering]="true">
       <mat-option *ngIf="realOptions.length > 8">
         <ngx-mat-select-search placeholderLabel="Search"
                                noEntriesFoundLabel="'No matches'" ngModel
