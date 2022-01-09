@@ -46,6 +46,7 @@ export class IoToolbarEffects {
         } catch (e) {
           this.snackBar.error(`Error saving config: ${e}`);
         }
+        this.snackBar.info('Config saved.');
         return of(loadExistingConfigNames());
       })
     )
@@ -172,6 +173,7 @@ export class IoToolbarEffects {
     this.actions$.pipe(
       ofType(loadedCompoundState),
       mergeMap(({compoundState, visualOnly}) => {
+        this.snackBar.info('Config loaded.');
         return [
           loadConfigStateFromObject({
             maybeState: compoundState[CONFIG_FEATURE_KEY],
