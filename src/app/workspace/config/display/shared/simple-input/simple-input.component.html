@@ -9,9 +9,16 @@
            [attr.maxlength]="metaData?.max || null" (change)="onChangeField($event)"/>
     <!-- Select -->
     <mat-select *ngIf="type === 'select'" class="input" (change)="onChangeField($event)"
-            [value]="value">
+                [value]="value" [disableOptionCentering]="true">
+      <mat-option *ngIf="realOptions.length > 8">
+        <ngx-mat-select-search placeholderLabel="Search"
+                               noEntriesFoundLabel="'No matches'" ngModel
+                               (ngModelChange)="filterOptions($event)"
+                               [enableClearOnEscapePressed]="true"
+        ></ngx-mat-select-search>
+      </mat-option>
       <mat-option
-        *ngFor="let option of (options?.entries() || metaData?.options?.entries()); trackBy: optionTrackBy"
+        *ngFor="let option of filteredOptions; trackBy: optionTrackBy"
         [value]="option[0]"
       >{{option[1]}}</mat-option>
     </mat-select>
