@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {MatSliderChange} from '@angular/material/slider';
-import {ConfigFieldMetadata} from '../../models/configs_metadata';
+import {ConfigFieldMetadata} from '../../../models/configs_metadata';
 
 @Component({
   selector: 'app-sliding-input',

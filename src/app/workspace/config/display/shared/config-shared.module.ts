@@ -8,7 +8,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
-import {TooltipModule} from '../../tooltip/tooltip.module';
+import {TooltipModule} from '../../../tooltip/tooltip.module';
 
 import {SlidingInputComponent} from './sliding-input/sliding-input.component';
 import {SimpleInputComponent} from './simple-input/simple-input.component';

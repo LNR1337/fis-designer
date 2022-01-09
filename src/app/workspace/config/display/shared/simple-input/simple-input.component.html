@@ -8,14 +8,13 @@
     <input *ngIf="type === 'color' || type === 'text'" class="input" [type]="type" [value]="value"
            [attr.maxlength]="metaData?.max || null" (change)="onChangeField($event)"/>
     <!-- Select -->
-    <select *ngIf="type === 'select'" class="input" (change)="onChangeField($event)"
+    <mat-select *ngIf="type === 'select'" class="input" (change)="onChangeField($event)"
             [value]="value">
-      <option
-        *ngFor="let option of (options || metaData?.options) | keyvalue; trackBy: optionTrackBy"
-        [value]="option.key"
-        [selected]="option.key === value"
-      >{{option.value}}</option>
-    </select>
+      <mat-option
+        *ngFor="let option of (options?.entries() || metaData?.options?.entries()); trackBy: optionTrackBy"
+        [value]="option[0]"
+      >{{option[1]}}</mat-option>
+    </mat-select>
   </div>
 </div>
 

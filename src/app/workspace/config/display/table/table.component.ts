@@ -5,10 +5,8 @@ import {ConfigStateTableFieldsType} from '../../state/config.state';
 import {Store} from '@ngrx/store';
 import {
   TableConfig,
-  TableConfigFields,
   TableConfigFieldsType,
   TableRowConfig,
-  TableRowConfigFields,
   TableRowConfigFieldsType,
 } from '../../models/configs';
 import {TABLE_FIELD_METADATA, TABLE_ROW_FIELD_METADATA} from '../../models/configs_metadata';
@@ -29,14 +27,12 @@ export class TableComponent {
 
   TABLE_FIELD_METADATA = TABLE_FIELD_METADATA;
   TABLE_ROW_FIELD_METADATA = TABLE_ROW_FIELD_METADATA;
-  TableConfigFields = TableConfigFields;
-  TableRowConfigFields = TableRowConfigFields;
   controlUnits = controlUnits;
-  a = Array.from(controlUnits.entries())
-    .map(([id, config]): [number, string] => [id, config.name])
-    .sort((a, b) => (a[1] > b[1] ? 1 : -1));
-
-  controlUnitOptions = new Map<number, string>(this.a);
+  controlUnitOptions = new Map<number, string>(
+    Array.from(controlUnits.entries())
+      .map(([id, config]): [number, string] => [id, config.name])
+      .sort((a, b) => (a[1] >= b[1] ? 1 : -1))
+  );
 
   constructor(private readonly store: Store) {}
 

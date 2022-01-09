@@ -38,6 +38,29 @@ a {
   color: $primary-text;
 }
 
+// Scroll bar styling.
+.mat-select-panel, .mat-tab-body-content {
+  // Firefox scrollbar.
+  scrollbar-color: $grey-border;
+  scrollbar-width: thin;
+
+  // Webkit scrollbar.
+  &::-webkit-scrollbar {
+    width: 8px;
+    overflow-y: scroll;
+    background: $background-dialog;
+    border-left: solid 1px $grey-border;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $grey-border;
+
+    &:hover {
+      background: $grey-item;
+    }
+  }
+}
+
 // Forms.
 .group-label {
   color: map-get($primary, default);
@@ -133,7 +156,7 @@ a {
         top: 0;
         right: 0;
         bottom: 0;
-        width: 8px;
+        width: 9px;
       }
     }
   }

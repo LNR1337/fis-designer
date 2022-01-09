@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {ConfigFieldMetadata} from '../../models/configs_metadata';
+import {ConfigFieldMetadata} from '../../../models/configs_metadata';
 
 @Component({
   selector: 'app-simple-input',
@@ -31,7 +31,7 @@ export class SimpleInputComponent {
     this.changeValue((event.target as HTMLInputElement).value);
   }
 
-  optionTrackBy(index: number, value: {key: number; value: string}) {
-    return value.key;
+  optionTrackBy(index: number, item: [number, string]) {
+    return item[0];
   }
 }

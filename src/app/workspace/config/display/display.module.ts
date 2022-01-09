@@ -5,7 +5,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {TooltipModule} from '../../tooltip/tooltip.module';
-import {ConfigSharedModule} from '../shared/config-shared.module';
+import {ConfigSharedModule} from './shared/config-shared.module';
 
 import {DisplayComponent} from './display.component';
 import {GaugeComponent} from './gauge/gauge.component';
