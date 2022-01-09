@@ -21,8 +21,8 @@ export const selectLoadedImageNames = createSelector(
     )
 );
 
-/** Selects current needle angles. */
-export const selectNeedleAngles = createSelector(selectPreviewState, previewState => [
+/** Selects current preview simulation variables. */
+export const selectPreviewVars = createSelector(selectPreviewState, previewState => [
   previewState.needleAngle1 ?? 0,
   previewState.needleAngle2 ?? 0,
   previewState.needleAngle3 ?? 0,
@@ -30,3 +30,6 @@ export const selectNeedleAngles = createSelector(selectPreviewState, previewStat
 
 /** Selects currently highlighted config. */
 export const selectHighlight = createSelector(selectPreviewState, state => state.activeHighlight);
+
+/** Selects current preview page. */
+export const selectPreviewPage = createSelector(selectPreviewState, state => state.previewPage);

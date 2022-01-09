@@ -1,5 +1,5 @@
 <mat-tab-group animationDuration="200ms"
-               [disablePagination]="true" [selectedIndex]="0">
+               [disablePagination]="true" [selectedIndex]="0" (selectedTabChange)="changeTab($event)">
   <mat-tab label="Analog">
     <app-display page="gauges"></app-display>
   </mat-tab>

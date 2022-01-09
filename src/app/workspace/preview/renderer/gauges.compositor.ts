@@ -6,6 +6,8 @@ import {
 } from '../../config/models/configs';
 import {ConfigStateGeneralFieldsConfig} from '../../config/state/config.state';
 
+import {Compositor} from './common.compositor';
+
 // Guides constants.
 const GUIDES_FONT = '10px sans-serif';
 const CROSS_SIZE = 10;
@@ -14,32 +16,152 @@ const NUMERICAL_DIGITS = 3;
 // Digital gauges constants.
 const GTI_FONT_WIDTH = 28;
 const GTI_FONT_HEIGHT = 24;
-// Status bar constants.
-const STATUS_BAR_HEIGHT = 40;
-const STATUS_BAR_FONT = '21px sans-serif';
-// Table view constants.
-const RS3_TABLE_LEFT = [139, 85, 49, 26, 17, 23, 31, 43, 57, 74];
-const RS3_TABLE_RIGHT = [530, 505, 488, 477, 471, 471, 471, 475, 484, 499];
-const TTRS_TABLE_LEFT = [115, 45, 15, 20, 25, 35, 45, 60, 75, 95];
-const TTRS_TABLE_RIGHT = [519, 489, 469, 459, 459, 459, 459, 459, 469, 479];
-const RS_UNIT_OFFSET = -80;
-const RS_VALUE_OFFSET = -300;
-const LABEL_X = 16;
-const TABLE_FONT = '22px sans-serif';
-const UNIT_X = 632;
-const VALUE_X = 610; // Justify to the right.
-const LINE1_Y = 36;
-const LINE_HEIGHT = 40;
-/** Class responsible for rendering gauges on the canvas. */
-export class GaugesCompositor {
-  constructor(private context: CanvasRenderingContext2D) {}
 
-  clearImage() {
-    this.context.clearRect(0, 0, 800, 480);
+/** Class responsible for rendering gauges on the canvas. */
+export class GaugesCompositor extends Compositor {
+  drawNeedles() {
+    if (!this.images || !this.needleConfigs || !this.simulationVars) return;
+
+    if (this.images.needleImage1) {
+      const config = this.needleConfigs.needle1;
+      this.drawImageRotatedAround(
+        this.images.needleImage1,
+        config.positionX!,
+        config.positionY!,
+        config.positionX! + config.centerX!,
+        config.positionY! + config.centerY!,
+        this.simulationVars[0]
+      );
+    }
+    if (this.images.needleImage2) {
+      const config = this.needleConfigs.needle2;
+      this.drawImageRotatedAround(
+        this.images.needleImage2,
+        config.positionX!,
+        config.positionY!,
+        config.positionX! + config.centerX!,
+        config.positionY! + config.centerY!,
+        this.simulationVars[1]
+      );
+    }
+    if (this.images.needleImage3) {
+      const config = this.needleConfigs.needle3;
+      this.drawImageRotatedAround(
+        this.images.needleImage3,
+        config.positionX!,
+        config.positionY!,
+        config.positionX! + config.centerX!,
+        config.positionY! + config.centerY!,
+        this.simulationVars[2]
+      );
+    }
   }
 
-  drawImage(image: HTMLImageElement, x: number, y: number) {
-    this.context.drawImage(image, x, y);
+  override drawBackground() {
+    this.context.clearRect(0, 0, 800, 480);
+    if (this.images?.backgroundImage) {
+      if (this.highlight) {
+        this.context.globalAlpha = 0.5;
+      } else {
+        this.context.globalAlpha = 1;
+      }
+      this.drawImage(this.images.backgroundImage, 0, 0);
+      this.context.globalAlpha = 1;
+    }
+  }
+
+  override drawForeground() {
+    // Draw the needles.
+    this.drawNeedles();
+
+    // Draw the status bar.
+    if (!this.generalConfig?.hideStatusBarOnGauge) {
+      this.drawStatusBar(!!this.highlight);
+    }
+  }
+
+  override drawHighlights() {
+    if (
+      !this.needleConfigs ||
+      !this.gaugeConfigs ||
+      !this.numericalConfigs ||
+      !this.generalConfig
+    ) {
+      return;
+    }
+
+    // TODO(pawelszydlo): streamline this.
+    switch (this.highlight) {
+      case 'hideStatusBarOnGauge':
+        this.drawStatusBarHighlight();
+        break;
+      case 'needle1':
+        this.drawNeedleHighlight(this.needleConfigs.needle1);
+        break;
+      case 'needle2':
+        this.drawNeedleHighlight(this.needleConfigs.needle2);
+        break;
+      case 'needle3':
+        this.drawNeedleHighlight(this.needleConfigs.needle3);
+        break;
+      case 'gauge1':
+        this.drawGaugeHighlight(this.gaugeConfigs.gauge1, this.needleConfigs.needle1);
+        break;
+      case 'gauge2':
+        this.drawGaugeHighlight(this.gaugeConfigs.gauge2, this.needleConfigs.needle2);
+        break;
+      case 'gauge3':
+        this.drawGaugeHighlight(this.gaugeConfigs.gauge3, this.needleConfigs.needle3);
+        break;
+      case 'numerical1':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical1, this.generalConfig);
+        break;
+      case 'numerical2':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical2, this.generalConfig);
+        break;
+      case 'numerical3':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical3, this.generalConfig);
+        break;
+      case 'numerical4':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical4, this.generalConfig);
+        break;
+      case 'numerical5':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical5, this.generalConfig);
+        break;
+      case 'numerical6':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical6, this.generalConfig);
+        break;
+      case 'numerical7':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical7, this.generalConfig);
+        break;
+      case 'numerical8':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical8, this.generalConfig);
+        break;
+      case 'numerical9':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical9, this.generalConfig);
+        break;
+      case 'numerical10':
+        this.drawNumericalHighlight(this.numericalConfigs.numerical10, this.generalConfig);
+        break;
+      case 'fontWidth': // Placeholder for all digital gauges setup.
+        this.drawGTIHighlight(
+          this.generalConfig,
+          this.needleConfigs.needle1,
+          this.needleConfigs.needle2,
+          this.needleConfigs.needle3
+        );
+        this.drawNumericalHighlight(this.numericalConfigs.numerical1, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical2, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical3, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical4, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical5, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical6, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical7, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical8, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical9, this.generalConfig, false);
+        this.drawNumericalHighlight(this.numericalConfigs.numerical10, this.generalConfig, false);
+        break;
+    }
   }
 
   drawImageRotatedAround(
@@ -56,38 +178,6 @@ export class GaugesCompositor {
     this.context.drawImage(image, positionX, positionY);
     // Reset transformations.
     this.context.setTransform(1, 0, 0, 1, 0, 0);
-  }
-
-  drawBackground(image: HTMLImageElement, highlight: boolean) {
-    if (highlight) {
-      this.context.globalAlpha = 0.5;
-    } else {
-      this.context.globalAlpha = 1;
-    }
-    this.drawImage(image, 0, 0);
-    this.context.globalAlpha = 1;
-  }
-
-  drawStatusBar(highlight: boolean) {
-    if (highlight) {
-      this.context.globalAlpha = 0.5;
-    } else {
-      this.context.globalAlpha = 1;
-    }
-    const statusBarY = 480 - STATUS_BAR_HEIGHT;
-    this.context.font = STATUS_BAR_FONT;
-    this.context.fillStyle = '#333333';
-    this.context.fillRect(0, statusBarY, 800, STATUS_BAR_HEIGHT);
-    this.context.fillStyle = '#666666';
-    this.context.fillRect(0, statusBarY, 800, 4);
-    this.context.fillStyle = '#999999';
-    this.context.fillRect(0, statusBarY, 800, 3);
-    this.context.fillStyle = '#ffffff';
-    this.context.textAlign = 'center';
-    this.context.textBaseline = 'top';
-    const date = new Date();
-    this.context.fillText(`${date.toTimeString().substr(0, 5)}`, 399, statusBarY + 11);
-    this.context.globalAlpha = 1;
   }
 
   drawNeedleCenter(x: number, y: number, showCoords = true) {
@@ -256,14 +346,6 @@ export class GaugesCompositor {
     this.context.textBaseline = 'top';
     this.context.textAlign = 'end';
     this.context.fillText(`x:${x}`, x - 5, 5);
-    this.context.globalAlpha = 1;
-  }
-
-  drawStatusBarHighlight() {
-    this.context.lineWidth = 1;
-    this.context.globalAlpha = 0.7;
-    this.context.strokeStyle = 'yellow';
-    this.context.strokeRect(0.5, 479.5 - STATUS_BAR_HEIGHT, 799, STATUS_BAR_HEIGHT);
     this.context.globalAlpha = 1;
   }
 

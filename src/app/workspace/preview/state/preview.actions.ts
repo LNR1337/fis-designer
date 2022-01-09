@@ -1,6 +1,7 @@
 import {createAction, props} from '@ngrx/store';
 import {ConfigStateFieldsType} from '../../config/state/config.state';
 import {ImageStateFieldsType} from '../../image-manager/state/images.state';
+import {PreviewPage} from './preview.state';
 
 export const saveImage = createAction(
   '[Preview] Save an image object to state',
@@ -18,3 +19,8 @@ export const enableHighlight = createAction(
 );
 
 export const disableHighlight = createAction('[Preview] Disable highlighting');
+
+export const changePreviewPage = createAction(
+  '[Preview] Change preview page',
+  props<{previewPage: PreviewPage}>()
+);

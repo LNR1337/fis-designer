@@ -56,7 +56,7 @@ export const selectNumericalConfigs = createSelector(
 );
 
 /** Selects the tables' configs. */
-export const selectTableFields = createSelector(
+export const selectTableConfigs = createSelector(
   selectConfigState,
   (state): ConfigStateTableFieldsObject<TableConfig> => ({
     table1: state.table1,

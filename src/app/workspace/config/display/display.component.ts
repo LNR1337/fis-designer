@@ -29,7 +29,7 @@ import {
   selectGaugeConfigs,
   selectNumericalConfigs,
   selectGeneralFieldsConfig,
-  selectTableFields,
+  selectTableConfigs,
 } from '../state/config.selectors';
 import {GaugeConfig, NeedleConfig, NumericalConfig, TableConfig} from '../models/configs';
 import {STATE_FIELDS_METADATA} from '../models/configs_metadata';
@@ -69,7 +69,7 @@ export class DisplayComponent {
     this.gaugesConfigs = store.select(selectGaugeConfigs);
     this.numericalConfigs = store.select(selectNumericalConfigs);
     this.generalConfig = store.select(selectGeneralFieldsConfig);
-    this.tableConfigs = store.select(selectTableFields);
+    this.tableConfigs = store.select(selectTableConfigs);
   }
 
   highlight(stateField: ConfigStateFieldsType) {

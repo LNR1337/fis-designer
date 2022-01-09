@@ -8,6 +8,7 @@ export const initialPreviewState: PreviewState = {
   needleAngle1: 0,
   needleAngle2: 0,
   needleAngle3: 0,
+  previewPage: 'gauges',
 };
 
 export const previewReducer = createReducer(
@@ -31,5 +32,9 @@ export const previewReducer = createReducer(
   on(actions.disableHighlight, state => ({
     ...state,
     activeHighlight: undefined,
+  })),
+  on(actions.changePreviewPage, (state, {previewPage}) => ({
+    ...state,
+    previewPage,
   }))
 );

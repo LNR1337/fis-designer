@@ -6,15 +6,15 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreModule} from '@ngrx/store';
 import {IoToolbarModule} from '../io-toolbar/io-toolbar.module';
 
-import {GaugesComponent} from './gauges/gauges.component';
+import {RendererComponent} from './renderer/renderer.component';
 import {ImageManagerModule} from '../image-manager/image-manager.module';
 import {PreviewComponent} from './preview.component';
 import {PreviewEffects} from './state/preview.effects';
 import {PREVIEW_FEATURE_KEY, previewReducer} from './state/preview.reducer';
-import {TesterComponent} from './gauges/tester/tester.component';
+import {TesterComponent} from './renderer/tester/tester.component';
 
 @NgModule({
-  declarations: [GaugesComponent, PreviewComponent, TesterComponent],
+  declarations: [RendererComponent, PreviewComponent, TesterComponent],
   imports: [
     CommonModule,
     MatSlideToggleModule,
