@@ -8,7 +8,8 @@
     <input *ngIf="type === 'color' || type === 'text'" class="input" [type]="type" [value]="value"
            [attr.maxlength]="metaData?.max || null" (change)="onChangeField($event)"/>
     <!-- Select -->
-    <mat-select *ngIf="type === 'select'" class="input" (change)="onChangeField($event)"
+    <mat-select *ngIf="type === 'select'" class="input" ngModel
+                (ngModelChange)="changeValue($event)"
                 [value]="value" [disableOptionCentering]="true">
       <mat-option *ngIf="realOptions.length > 8">
         <ngx-mat-select-search placeholderLabel="Search"
