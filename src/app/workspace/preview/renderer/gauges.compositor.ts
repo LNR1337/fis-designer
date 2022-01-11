@@ -5,6 +5,7 @@ import {
   NumericalConfig,
 } from '../../config/models/configs';
 import {ConfigStateGeneralFieldsConfig} from '../../config/state/config.state';
+import {SIMULATION_DISABLED} from '../state/preview.state';
 
 import {Compositor} from './common.compositor';
 
@@ -17,10 +18,65 @@ const NUMERICAL_DIGITS = 3;
 const GTI_FONT_WIDTH = 28;
 const GTI_FONT_HEIGHT = 24;
 
+function getTranslatedAngles(angleBounds: [number, number]) {
+  let minAngle = angleBounds[0];
+  let maxAngle = angleBounds[1];
+  // Needle images are vertical, pointing up, so their initial angle is PI/2.
+  minAngle = minAngle + Math.PI / 2;
+  maxAngle = maxAngle + Math.PI / 2;
+  // Make sure the bounds are in correct order.
+  if (minAngle > maxAngle) {
+    [minAngle, maxAngle] = [maxAngle, minAngle];
+  }
+  return [minAngle, maxAngle];
+}
+
 /** Class responsible for rendering gauges on the canvas. */
 export class GaugesCompositor extends Compositor {
+  recalcNeedleRanges() {
+    if (!this.gaugeConfigs) return;
+
+    this.needleRanges[0] = getTranslatedAngles(
+      getAbsoluteNeedleAngleBounds(this.gaugeConfigs.gauge1)
+    );
+    this.needleRanges[1] = getTranslatedAngles(
+      getAbsoluteNeedleAngleBounds(this.gaugeConfigs.gauge2)
+    );
+    this.needleRanges[2] = getTranslatedAngles(
+      getAbsoluteNeedleAngleBounds(this.gaugeConfigs.gauge3)
+    );
+  }
+
+  override gaugeConfigsChanged() {
+    this.recalcNeedleRanges();
+  }
+
+  override tableConfigsChanged() {
+    this.recalcNeedleRanges();
+  }
+
+  getNeedleAngle(needleId: 0 | 1 | 2): number {
+    if (this.simulationProgress === undefined || this.simulationProgress === SIMULATION_DISABLED) {
+      return 0;
+    }
+
+    return (
+      (this.simulationProgress *
+        (this.needleRanges[needleId][1] - this.needleRanges[needleId][0])) /
+        100 +
+      this.needleRanges[needleId][0]
+    );
+  }
+
   drawNeedles() {
-    if (!this.images || !this.needleConfigs || !this.simulationVars) return;
+    if (
+      !this.images ||
+      !this.gaugeConfigs ||
+      !this.needleConfigs ||
+      !this.simulationProgress ||
+      !this.tableConfigs
+    )
+      return;
 
     if (this.images.needleImage1) {
       const config = this.needleConfigs.needle1;
@@ -30,7 +86,7 @@ export class GaugesCompositor extends Compositor {
         config.positionY!,
         config.positionX! + config.centerX!,
         config.positionY! + config.centerY!,
-        this.simulationVars[0]
+        this.getNeedleAngle(0)
       );
     }
     if (this.images.needleImage2) {
@@ -41,7 +97,7 @@ export class GaugesCompositor extends Compositor {
         config.positionY!,
         config.positionX! + config.centerX!,
         config.positionY! + config.centerY!,
-        this.simulationVars[1]
+        this.getNeedleAngle(1)
       );
     }
     if (this.images.needleImage3) {
@@ -52,7 +108,7 @@ export class GaugesCompositor extends Compositor {
         config.positionY!,
         config.positionX! + config.centerX!,
         config.positionY! + config.centerY!,
-        this.simulationVars[2]
+        this.getNeedleAngle(2)
       );
     }
   }

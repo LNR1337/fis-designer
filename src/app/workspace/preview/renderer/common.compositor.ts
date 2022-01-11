@@ -15,9 +15,14 @@ import {
   ConfigStateNeedleFieldsObject,
   ConfigStateNumericalFieldsObject,
   ConfigStateTableFieldsObject,
+  ConfigStateTableFieldsType,
 } from '../../config/state/config.state';
 import {PartialImageStateFieldsObject} from '../../image-manager/state/images.state';
-import {selectAllImages, selectHighlight, selectPreviewVars} from '../state/preview.selectors';
+import {
+  selectAllImages,
+  selectHighlight,
+  selectSimulationProgress,
+} from '../state/preview.selectors';
 
 // Status bar constants.
 const STATUS_BAR_HEIGHT = 41;
@@ -32,12 +37,22 @@ export class Compositor {
   numericalConfigs?: ConfigStateNumericalFieldsObject<NumericalConfig>;
   generalConfig?: ConfigStateGeneralFieldsConfig;
   highlight?: ConfigStateFieldsType;
-  simulationVars?: number[];
+  simulationProgress?: number;
+
+  // Child prams really, but they need to be here due to JS being shit.
+  currentTable: ConfigStateTableFieldsType = 'table1';
+  needleRanges = {
+    0: [0, 0],
+    1: [0, 0],
+    2: [0, 0],
+  };
 
   /** To be implemented in the child. */
   drawBackground() {}
   drawForeground() {}
   drawHighlights() {}
+  gaugeConfigsChanged() {}
+  tableConfigsChanged() {}
 
   constructor(public context: CanvasRenderingContext2D, private readonly store: Store) {
     this.subscription.add(
@@ -55,6 +70,7 @@ export class Compositor {
     this.subscription.add(
       this.store.select(selectGaugeConfigs).subscribe(configs => {
         this.gaugeConfigs = configs;
+        this.gaugeConfigsChanged();
         this.redrawAll();
       })
     );
@@ -67,6 +83,7 @@ export class Compositor {
     this.subscription.add(
       this.store.select(selectTableConfigs).subscribe(configs => {
         this.tableConfigs = configs;
+        this.tableConfigsChanged();
         this.redrawAll();
       })
     );
@@ -83,8 +100,8 @@ export class Compositor {
       })
     );
     this.subscription.add(
-      this.store.select(selectPreviewVars).subscribe(angles => {
-        this.simulationVars = angles;
+      this.store.select(selectSimulationProgress).subscribe(progress => {
+        this.simulationProgress = progress;
         this.redrawAll();
       })
     );

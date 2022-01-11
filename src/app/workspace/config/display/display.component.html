@@ -88,9 +88,9 @@
         (mouseleave)="highlightNone()"
       ></app-general>
       <!-- Tables -->
-      <ng-container *ngIf="tableConfigs | async; let configs">
+      <div *ngIf="tableConfigs | async; let configs" (mouseleave)="highlightNone()">
         <mat-tab-group class="table-tabs" animationDuration="200ms"
-                       [disablePagination]="true" [selectedIndex]="0">
+                       [disablePagination]="true" [selectedIndex]="0" (selectedTabChange)="highlightTable($event)">
           <mat-tab
             *ngFor="let configName of ConfigStateTableFields; let i = index; trackBy: trackTable"
             label="{{ STATE_FIELDS_METADATA[configName].label }}">
@@ -100,11 +100,10 @@
               [fieldName]="configName"
               label="{{ STATE_FIELDS_METADATA[configName].label }}"
               (mouseenter)="highlight(configName)"
-              (mouseleave)="highlightNone()"
             ></app-table>
           </mat-tab>
         </mat-tab-group>
-      </ng-container>
+      </div>
     </ng-container>
 
     <!-- Page: misc -->

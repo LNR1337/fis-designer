@@ -8,10 +8,12 @@ export const saveImage = createAction(
   props<{image: HTMLImageElement; imageField: ImageStateFieldsType}>()
 );
 
-export const moveNeedles = createAction(
-  '[Preview] Move needles',
-  props<{needleAngle1: number; needleAngle2: number; needleAngle3: number}>()
+export const setSimulationProgress = createAction(
+  '[Preview] Set simulation progress',
+  props<{progress: number}>()
 );
+
+export const stopSimulation = createAction('[Preview] Stop simulation');
 
 export const enableHighlight = createAction(
   '[Preview] Enable highlighting',

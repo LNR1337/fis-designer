@@ -22,11 +22,10 @@ export const selectLoadedImageNames = createSelector(
 );
 
 /** Selects current preview simulation variables. */
-export const selectPreviewVars = createSelector(selectPreviewState, previewState => [
-  previewState.needleAngle1 ?? 0,
-  previewState.needleAngle2 ?? 0,
-  previewState.needleAngle3 ?? 0,
-]);
+export const selectSimulationProgress = createSelector(
+  selectPreviewState,
+  previewState => previewState.simulationProgress
+);
 
 /** Selects currently highlighted config. */
 export const selectHighlight = createSelector(selectPreviewState, state => state.activeHighlight);

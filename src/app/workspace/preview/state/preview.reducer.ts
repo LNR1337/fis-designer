@@ -1,13 +1,11 @@
 import * as actions from './preview.actions';
-import {PreviewState} from './preview.state';
+import {PreviewState, SIMULATION_DISABLED} from './preview.state';
 import {createReducer, on} from '@ngrx/store';
 
 export const PREVIEW_FEATURE_KEY = 'preview';
 
 export const initialPreviewState: PreviewState = {
-  needleAngle1: 0,
-  needleAngle2: 0,
-  needleAngle3: 0,
+  simulationProgress: SIMULATION_DISABLED,
   previewPage: 'gauges',
 };
 
@@ -18,12 +16,15 @@ export const previewReducer = createReducer(
     ...state,
     [imageField]: image,
   })),
-  // Change needle angle.
-  on(actions.moveNeedles, (state, {needleAngle1, needleAngle2, needleAngle3}) => ({
+  // Change simulation progress.
+  on(actions.setSimulationProgress, (state, {progress}) => ({
     ...state,
-    needleAngle1,
-    needleAngle2,
-    needleAngle3,
+    simulationProgress: progress,
+  })),
+  // Stop simulation.
+  on(actions.stopSimulation, state => ({
+    ...state,
+    simulationProgress: SIMULATION_DISABLED,
   })),
   on(actions.enableHighlight, (state, {stateField}) => ({
     ...state,

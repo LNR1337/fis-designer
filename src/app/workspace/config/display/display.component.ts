@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {MatTabChangeEvent} from '@angular/material/tabs';
 import {Store} from '@ngrx/store';
 import {map, Observable} from 'rxjs';
 import {ImageStateFieldsType} from '../../image-manager/state/images.state';
@@ -70,6 +71,26 @@ export class DisplayComponent {
     this.numericalConfigs = store.select(selectNumericalConfigs);
     this.generalConfig = store.select(selectGeneralFieldsConfig);
     this.tableConfigs = store.select(selectTableConfigs);
+  }
+
+  highlightTable(event: MatTabChangeEvent) {
+    switch (event.index) {
+      case 0:
+        this.highlight('table1');
+        break;
+      case 1:
+        this.highlight('table2');
+        break;
+      case 2:
+        this.highlight('table3');
+        break;
+      case 3:
+        this.highlight('table4');
+        break;
+      case 4:
+        this.highlight('table5');
+        break;
+    }
   }
 
   highlight(stateField: ConfigStateFieldsType) {

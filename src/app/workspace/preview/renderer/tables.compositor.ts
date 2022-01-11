@@ -1,4 +1,5 @@
 import {ConfigStateTableFieldsType} from '../../config/state/config.state';
+import {SIMULATION_DISABLED} from '../state/preview.state';
 import {Compositor} from './common.compositor';
 
 // Table view constants.
@@ -17,8 +18,6 @@ const LINE1_Y = 20;
 const LINE_HEIGHT = 40;
 
 export class TablesCompositor extends Compositor {
-  currentTable: ConfigStateTableFieldsType = 'table1';
-
   override drawHighlights() {
     if (
       !this.needleConfigs ||
@@ -34,20 +33,16 @@ export class TablesCompositor extends Compositor {
       case 'hideStatusBarOnTable':
         this.drawStatusBarHighlight();
         break;
-      case 'table1':
-      case 'table2':
-      case 'table3':
-      case 'table4':
-      case 'table5':
-        this.currentTable = this.highlight;
-        break;
     }
   }
 
   generateValue(min: number, max: number): number {
+    if (this.simulationProgress === undefined || this.simulationProgress === SIMULATION_DISABLED) {
+      return 123.456;
+    }
     const lowerBound = min !== 0 ? min - 0.2 * min : -100;
     const upperBound = max !== 0 ? max + 0.2 * max : 100;
-    return Math.random() * (upperBound - lowerBound + 1) + lowerBound;
+    return (this.simulationProgress * (upperBound - lowerBound)) / 100 + lowerBound;
   }
 
   drawLabels() {
@@ -119,6 +114,17 @@ export class TablesCompositor extends Compositor {
   }
 
   override drawForeground() {
+    // Set active table based on highlight.
+    switch (this.highlight) {
+      case 'table1':
+      case 'table2':
+      case 'table3':
+      case 'table4':
+      case 'table5':
+        this.currentTable = this.highlight;
+        break;
+    }
+
     // Draw labels.
     this.drawLabels();
 
