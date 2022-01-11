@@ -1,14 +1,9 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Store} from '@ngrx/store';
 import {Subscription, timer} from 'rxjs';
 import {setSimulationProgress, stopSimulation} from '../../state/preview.actions';
-import {SIMULATION_DISABLED} from '../../state/preview.state';
-
-// 16.6 ms = 60 fps.
-const TICK_DURATION = 16.6;
-// 4 seconds for full sweep.
-const PROGRESS_STEP = 100 / (4 * (1000 / TICK_DURATION));
+import {PreviewPage, SIMULATION_DISABLED} from '../../state/preview.state';
 
 @Component({
   selector: 'app-tester',
@@ -18,6 +13,7 @@ const PROGRESS_STEP = 100 / (4 * (1000 / TICK_DURATION));
 export class TesterComponent implements OnDestroy {
   progress: number = SIMULATION_DISABLED;
   goingDown = false;
+  @Input() previewPage: PreviewPage = 'gauges';
   sweepSubscription?: Subscription;
 
   constructor(private readonly store: Store) {}
@@ -31,21 +27,27 @@ export class TesterComponent implements OnDestroy {
   startSweeps() {
     this.maybeUnsubscribe();
     this.sweepSubscription = new Subscription();
-
     this.progress = 0;
+
+    let tickDuration = 1000 / 60;
+    let progressStep = 100 / (4 * (1000 / tickDuration));
+    if (this.previewPage === 'tables') {
+      tickDuration = 1000 / 5;
+      progressStep = 100 / (8 * (1000 / tickDuration));
+    }
 
     // Start emitting simulation progress changes. Approx 60 fps.
     this.sweepSubscription.add(
-      timer(0, TICK_DURATION).subscribe(() => {
+      timer(0, tickDuration).subscribe(() => {
         if (this.goingDown) {
-          this.progress -= PROGRESS_STEP;
+          this.progress -= progressStep;
           if (this.progress <= 0) {
             this.progress = 0;
             this.goingDown = false;
           }
         } else {
           // Going up.
-          this.progress += PROGRESS_STEP;
+          this.progress += progressStep;
           if (this.progress >= 100) {
             this.progress = 100;
             this.goingDown = true;

@@ -2,6 +2,7 @@ import {AfterViewInit, ElementRef, OnDestroy} from '@angular/core';
 import {Component, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {selectPreviewPage} from '../state/preview.selectors';
+import {PreviewPage} from '../state/preview.state';
 import {Compositor} from './common.compositor';
 import {GaugesCompositor} from './gauges.compositor';
 import {TablesCompositor} from './tables.compositor';
@@ -16,6 +17,7 @@ export class RendererComponent implements AfterViewInit, OnDestroy {
   @ViewChild('displayCanvas', {static: false}) displayCanvas?: ElementRef<HTMLCanvasElement>;
   // Currently active compositor.
   currentCompositor?: Compositor;
+  previewPage: PreviewPage = 'gauges';
 
   constructor(private readonly store: Store) {}
 
@@ -24,10 +26,11 @@ export class RendererComponent implements AfterViewInit, OnDestroy {
       if (!this.displayCanvas) {
         throw new Error('Failed to initialise canvas!');
       }
-
+      this.previewPage = page;
       if (page === 'gauges') {
         if (!(this.currentCompositor instanceof GaugesCompositor)) {
           this.currentCompositor?.destroy();
+
           this.currentCompositor = new GaugesCompositor(
             this.displayCanvas.nativeElement.getContext('2d')!,
             this.store

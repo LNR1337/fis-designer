@@ -1,4 +1,4 @@
-import {ConfigStateTableFieldsType} from '../../config/state/config.state';
+import {ConfigStateTableFields, ConfigStateTableFieldsType} from '../../config/state/config.state';
 import {SIMULATION_DISABLED} from '../state/preview.state';
 import {Compositor} from './common.compositor';
 
@@ -38,6 +38,9 @@ export class TablesCompositor extends Compositor {
 
   generateValue(min: number, max: number): number {
     if (this.simulationProgress === undefined || this.simulationProgress === SIMULATION_DISABLED) {
+      if (min !== 0 || max !== 0) {
+        return min;
+      }
       return 123.456;
     }
     const lowerBound = min !== 0 ? min - 0.2 * min : -100;
@@ -115,14 +118,12 @@ export class TablesCompositor extends Compositor {
 
   override drawForeground() {
     // Set active table based on highlight.
-    switch (this.highlight) {
-      case 'table1':
-      case 'table2':
-      case 'table3':
-      case 'table4':
-      case 'table5':
-        this.currentTable = this.highlight;
-        break;
+
+    if (
+      this.highlight &&
+      ConfigStateTableFields.includes(this.highlight as ConfigStateTableFieldsType)
+    ) {
+      this.currentTable = this.highlight as ConfigStateTableFieldsType;
     }
 
     // Draw labels.
