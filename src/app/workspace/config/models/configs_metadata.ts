@@ -95,7 +95,7 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
   hideStatusBarOnTable: {label: 'Hide status bar'},
   virtualCockpitFriendlyTables: {
     label: 'Adapt layout to virtual cockpit window',
-    help: 'Modify the table display to fit in a virtual cockpit window',
+    help: 'Modify the table display to fit in a virtual cockpit window (only works for TT RS and RS3)',
   },
   // General settings.
   language: {
@@ -293,6 +293,12 @@ export const TABLE_ROW_FIELD_METADATA: TableRowConfigFieldsObject<ConfigFieldMet
       [4, 'RPM'],
     ]),
   },
-  lowerWarning: {label: 'Lower warning'},
-  upperWarning: {label: 'Upper warning'},
+  lowerWarning: {
+    label: 'Lower warn.',
+    help: 'Set both warning thresholds to 0 to disable warning.',
+  },
+  upperWarning: {
+    label: 'Upper warn.',
+    help: 'Set both warning thresholds to 0 to disable warning.',
+  },
 };

@@ -33,6 +33,7 @@
         [type]="colorFields.has(fieldName) ? 'color' : 'select'"
         [metaData]="metaData"
         (stringChanged)="valueChanged($event, fieldName)"
+        (numberChanged)="valueChanged($event, fieldName)"
         [value]="getStringValue(fieldName)"
       ></app-simple-input>
     </ng-container>
