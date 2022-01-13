@@ -10,10 +10,10 @@ const TTRS_TABLE_RIGHT = [519, 489, 469, 459, 459, 459, 459, 459, 469, 479];
 const TABLE_LEFT = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
 const TABLE_RIGHT = [799, 799, 799, 799, 799, 799, 799, 799, 799, 799];
 const RS_UNIT_OFFSET = 80;
-const RS_VALUE_OFFSET = 300;
-const UNIT_OFFSET = 172;
-const VALUE_OFFSET = 200; // Justify to the right.
-const TABLE_FONT = '30px Arial';
+const RS_VALUE_OFFSET = 95;
+const UNIT_OFFSET = 170;
+const VALUE_OFFSET = 190; // Justify to the right.
+const TABLE_FONT = '30px Verdana';
 const LINE1_Y = 20;
 const LINE_HEIGHT = 40;
 
