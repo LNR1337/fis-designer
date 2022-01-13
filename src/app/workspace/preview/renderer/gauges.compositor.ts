@@ -4,7 +4,12 @@ import {
   NeedleConfig,
   NumericalConfig,
 } from '../../config/models/configs';
-import {ConfigStateGeneralFieldsConfig} from '../../config/state/config.state';
+import {
+  ConfigStateGeneralFieldsConfig,
+  ConfigStateNumericalFields,
+  ConfigStateNumericalFieldsObject,
+  ConfigStateNumericalFieldsType,
+} from '../../config/state/config.state';
 import {SIMULATION_DISABLED} from '../state/preview.state';
 
 import {Compositor} from './common.compositor';
@@ -170,34 +175,34 @@ export class GaugesCompositor extends Compositor {
         this.drawGaugeHighlight(this.gaugeConfigs.gauge3, this.needleConfigs.needle3);
         break;
       case 'numerical1':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical1, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical1');
         break;
       case 'numerical2':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical2, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical2');
         break;
       case 'numerical3':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical3, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical3');
         break;
       case 'numerical4':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical4, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical4');
         break;
       case 'numerical5':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical5, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical5');
         break;
       case 'numerical6':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical6, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical6');
         break;
       case 'numerical7':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical7, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical7');
         break;
       case 'numerical8':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical8, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical8');
         break;
       case 'numerical9':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical9, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical9');
         break;
       case 'numerical10':
-        this.drawNumericalHighlight(this.numericalConfigs.numerical10, this.generalConfig);
+        this.drawAllNumericalHighlights('numerical10');
         break;
       case 'fontWidth': // Placeholder for all digital gauges setup.
         this.drawGTIHighlight(
@@ -206,16 +211,7 @@ export class GaugesCompositor extends Compositor {
           this.needleConfigs.needle2,
           this.needleConfigs.needle3
         );
-        this.drawNumericalHighlight(this.numericalConfigs.numerical1, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical2, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical3, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical4, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical5, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical6, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical7, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical8, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical9, this.generalConfig, false);
-        this.drawNumericalHighlight(this.numericalConfigs.numerical10, this.generalConfig, false);
+        this.drawAllNumericalHighlights();
         break;
     }
   }
@@ -288,21 +284,37 @@ export class GaugesCompositor extends Compositor {
     }
   }
 
-  drawNumericalHighlight(
-    numericalConfig: NumericalConfig,
-    generalSetup: ConfigStateGeneralFieldsConfig,
-    drawPosition = true
-  ) {
-    if (!numericalConfig.positionX || !numericalConfig.positionY) return;
+  drawAllNumericalHighlights(showPositionFor?: ConfigStateNumericalFieldsType) {
+    if (!this.numericalConfigs) return;
+
+    for (const configField of ConfigStateNumericalFields) {
+      this.drawNumericalHighlight(
+        this.numericalConfigs[configField],
+        configField === showPositionFor
+      );
+    }
+  }
+
+  drawNumericalHighlight(numericalConfig: NumericalConfig, drawPosition = true) {
+    if (!numericalConfig.positionX || !numericalConfig.positionY || !this.generalConfig) return;
+
+    const fontWidth = this.generalConfig.fontWidth as number;
+    const fontHeight = this.generalConfig.fontHeight as number;
+    const fontSpacing = this.generalConfig.fontSpacing as number;
 
     if (drawPosition) {
       this.drawPosition(numericalConfig.positionX!, numericalConfig.positionY!);
+      this.context.globalAlpha = 0.7;
+      this.context.strokeStyle = 'cyan';
+      this.context.setLineDash([2, 2]);
+      this.context.beginPath();
+      this.context.moveTo(0.5, numericalConfig.positionY! + fontHeight - 0.5);
+      this.context.lineTo(800, numericalConfig.positionY! + fontHeight - 0.5);
+      this.context.stroke();
+      this.context.setLineDash([]);
     }
     // Bracket.
     this.context.globalAlpha = 0.7;
-    const fontWidth = generalSetup.fontWidth as number;
-    const fontHeight = generalSetup.fontHeight as number;
-    const fontSpacing = generalSetup.fontSpacing as number;
     this.context.strokeStyle = 'yellow';
     const totalWidth = NUMERICAL_DIGITS * fontWidth + (NUMERICAL_DIGITS - 1) * fontSpacing;
     const x =
@@ -389,11 +401,14 @@ export class GaugesCompositor extends Compositor {
     this.context.font = GUIDES_FONT;
     // Lines
     this.context.strokeStyle = 'cyan';
+    this.context.setLineDash([2, 2]);
     this.context.beginPath();
     this.context.moveTo(x + 0.5, 0.5);
-    this.context.lineTo(x + 0.5, y + 0.5);
-    this.context.lineTo(0.5, y + 0.5);
+    this.context.lineTo(x + 0.5, 480);
+    this.context.moveTo(0.5, y + 0.5);
+    this.context.lineTo(800, y + 0.5);
     this.context.stroke();
+    this.context.setLineDash([]);
     // Coordinates.
     this.context.fillStyle = 'cyan';
     this.context.textAlign = 'start';
@@ -406,12 +421,11 @@ export class GaugesCompositor extends Compositor {
   }
 
   drawNeedleHighlight(config: NeedleConfig) {
-    this.context.lineWidth = 1;
-    this.context.globalAlpha = 0.7;
-    this.context.font = GUIDES_FONT;
     // Needle position.
     this.drawPosition(config.positionX!, config.positionY!);
     // Needle size.
+    this.context.globalAlpha = 0.7;
+    this.context.font = GUIDES_FONT;
     this.context.strokeStyle = 'yellow';
     this.context.fillStyle = 'yellow';
     this.context.strokeRect(
@@ -423,14 +437,14 @@ export class GaugesCompositor extends Compositor {
     // Needle middle strikethrough.
     const needleMiddleX = config.positionX! + Math.floor(config.width! / 2) + 0.5;
     this.context.beginPath();
+    this.context.setLineDash([2, 2]);
     this.context.moveTo(needleMiddleX, 0);
-    this.context.lineTo(needleMiddleX, config.positionY! + CROSS_SIZE + 0.5);
-    this.context.moveTo(needleMiddleX, config.positionY! + config.height! - CROSS_SIZE + 0.5);
     this.context.lineTo(needleMiddleX, 479);
     this.context.stroke();
-    this.context.textAlign = 'end';
-    this.context.textBaseline = 'bottom';
-    this.context.fillText(`x:${needleMiddleX - 0.5}`, needleMiddleX - 5, 474);
+    this.context.setLineDash([]);
+    this.context.textAlign = 'start';
+    this.context.textBaseline = 'top';
+    this.context.fillText(`x:${needleMiddleX - 0.5}`, needleMiddleX + 5, 5);
     // Needle center.
     const centerX = config.positionX! + config.centerX! + 0.5;
     const centerY = config.positionY! + config.centerY! + 0.5;
