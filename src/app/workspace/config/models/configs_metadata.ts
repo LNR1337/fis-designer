@@ -145,6 +145,7 @@ export const STATE_FIELDS_METADATA: ConfigStateFieldsObject<ConfigFieldMetadata>
       [13, 'VW Golf Mk7'],
       [14, 'Audi TT 8S'],
       [15, 'VW Polo 6C'],
+      [16, 'Audi Q7 4L (05/2009 - 03/2015)'],
     ]),
   },
   useSteeringWheelRoller: {label: 'Control FIS-Control with steering wheel roller'},
