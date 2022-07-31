@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {controlUnits} from '../../../../../assets/js/fis-control-binary-converter/control-units';
+import {controlUnits} from '../../../../../assets/js/FIS-Control-binary-converter/control-units';
 import {changedTableConfig} from '../../state/config.actions';
 import {ConfigStateTableFieldsType} from '../../state/config.state';
 import {Store} from '@ngrx/store';

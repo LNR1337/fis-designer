@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Syncing control units..."
-cd src/assets/js/fis-control-binary-converter/
+cd src/assets/js/FIS-Control-binary-converter/
 git pull
 cd ../../../..
 

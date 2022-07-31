@@ -2,12 +2,12 @@ import {saveAs} from 'file-saver';
 import {
   convertBinaryToConfig,
   convertConfigToBinary,
-} from '../../../assets/js/fis-control-binary-converter/config-converter';
-import * as fisModels from '../../../assets/js/fis-control-binary-converter/config-model';
+} from '../../../assets/js/FIS-Control-binary-converter/config-converter';
+import * as fisModels from '../../../assets/js/FIS-Control-binary-converter/config-model';
 import {
   convertBackgrounds,
   convertNeedlesAndDigits,
-} from '../../../assets/js/fis-control-binary-converter/image-converter';
+} from '../../../assets/js/FIS-Control-binary-converter/image-converter';
 import {
   GaugeConfig,
   NeedleConfig,
