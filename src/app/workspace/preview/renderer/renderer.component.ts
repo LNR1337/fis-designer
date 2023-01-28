@@ -1,4 +1,4 @@
-import {AfterViewInit, ElementRef, OnDestroy} from '@angular/core';
+import {AfterViewInit, ElementRef, OnDestroy , Renderer2 } from '@angular/core';
 import {Component, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {selectPreviewPage} from '../state/preview.selectors';
@@ -15,11 +15,13 @@ import {TablesCompositor} from './tables.compositor';
 export class RendererComponent implements AfterViewInit, OnDestroy {
   // The main canvas to draw on.
   @ViewChild('displayCanvas', {static: false}) displayCanvas?: ElementRef<HTMLCanvasElement>;
+  @ViewChild('container', { static: true }) container?: ElementRef = undefined;
+
   // Currently active compositor.
   currentCompositor?: Compositor;
   previewPage: PreviewPage = 'gauges';
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store,private renderer: Renderer2) {}
 
   ngAfterViewInit() {
     this.store.select(selectPreviewPage).subscribe(page => {
@@ -47,6 +49,23 @@ export class RendererComponent implements AfterViewInit, OnDestroy {
       }
       this.currentCompositor?.redrawAll();
     });
+    
+  }
+
+  zoomLevel = 1;
+  zoomIn() {
+    if (this.zoomLevel < 1.5) {
+      this.zoomLevel += 0.1;
+      console.log(this.zoomLevel);
+      this.renderer.setStyle(this.container?.nativeElement, 'transform', `scale(${this.zoomLevel})`);
+    }
+  }
+
+  zoomOut() {
+    if (this.zoomLevel > 0.5) {
+      this.zoomLevel -= 0.1;
+      this.renderer.setStyle(this.container?.nativeElement, 'transform', `scale(${this.zoomLevel})`);
+    }
   }
 
   ngOnDestroy() {

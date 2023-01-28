@@ -8,8 +8,8 @@
 .display {
   width: 100%;
   min-width: $mobile-min-width;
-  //max-width: 800px;
-  //max-height: 480px;
+  max-width: 800px;
+  max-height: 480px;
   background-color: #000;
 }
 
@@ -21,4 +21,8 @@
   .save-buttons button {
     margin-left: 4px;
   }
+}
+
+#container {
+  transition: transform 0.2s ease-in-out;
 }

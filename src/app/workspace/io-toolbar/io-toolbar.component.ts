@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild , EventEmitter, Output } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
@@ -6,6 +6,7 @@ import {changeConfigName} from '../config/state/config.actions';
 import {selectConfigName} from '../config/state/config.selectors';
 import {ImageManagerComponent} from '../image-manager/image-manager.component';
 import {SnackBarService} from '../services/snack-bar.service';
+import { RendererComponent } from '../preview/renderer/renderer.component';
 import {
   loadExistingConfigNames,
   loadStateFromBufferJSON,
@@ -50,6 +51,9 @@ export class IoToolbarComponent implements OnInit, OnDestroy {
       })
     );
   }
+
+  @Output() zoomIn = new EventEmitter();
+  @Output() zoomOut = new EventEmitter();
 
   openFileSelectorDialog() {
     this.dialog.open(ImageManagerComponent, {

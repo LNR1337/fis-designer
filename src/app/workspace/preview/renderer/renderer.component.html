@@ -1,3 +1,5 @@
-<app-io-toolbar></app-io-toolbar>
-<canvas class="display" width="800" height="480" #displayCanvas></canvas>
-<app-tester [previewPage]="previewPage"></app-tester>
+<div #container>
+    <app-io-toolbar (zoomIn)="zoomIn()" (zoomOut)="zoomOut()"></app-io-toolbar>
+    <canvas class="display" width="800" height="480" #displayCanvas></canvas>
+    <app-tester [previewPage]="previewPage"></app-tester>
+</div>

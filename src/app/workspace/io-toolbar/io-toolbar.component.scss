@@ -12,6 +12,16 @@
   }
 }
 
+.mat-button-toggle-override{
+  color: #673ab7;
+  cursor: pointer;
+  background: transparent;
+}
+
+.mat-button-toggle-group {
+	border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
 @media (max-width: $mobile-width-breakpoint) {
   .toolbar {
     height: 44px;

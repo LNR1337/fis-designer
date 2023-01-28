@@ -4,6 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EffectsModule} from '@ngrx/effects';
 import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import {StoreModule} from '@ngrx/store';
 
@@ -21,6 +22,7 @@ import {WorkspaceModule} from './workspace/workspace.module';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    MatButtonToggleModule,
     PagesModule,
     WorkspaceModule,
     StoreModule.forRoot({}),

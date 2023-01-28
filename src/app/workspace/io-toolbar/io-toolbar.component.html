@@ -11,6 +11,11 @@
     <span class="mobile-hide"> Image manager</span>
   </button>
 
+  <mat-button-toggle-group appearance="legacy">
+    <mat-button-toggle (click)="zoomIn.emit()" class="mat-button-toggle-override" value="ZoomIn"><mat-icon>add</mat-icon></mat-button-toggle>
+    <mat-button-toggle (click)="zoomOut.emit()" class="mat-button-toggle-override" value="ZommOut"><mat-icon>remove</mat-icon></mat-button-toggle>
+  </mat-button-toggle-group>
+
   <mat-form-field class="config-name" appearance="standard">
     <input type="text" matInput placeholder="Config name" #configNameInput [value]="configName"
            (change)="onConfigNameChange($event)" autocomplete="off"/>
