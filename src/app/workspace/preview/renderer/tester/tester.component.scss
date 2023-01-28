@@ -6,6 +6,10 @@
   color: $light-grey-item;
 }
 
+.mat-toolbar {
+  background: #161b22 !important;
+}
+
 @media (max-width: $mobile-width-breakpoint) {
   .tester-bar {
     height: 44px;

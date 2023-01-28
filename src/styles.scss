@@ -22,7 +22,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background-color: $background;
+  background-color: #0d1117;
   color: $light-grey-item;
   -webkit-font-smoothing: antialiased;
   font-weight: 300;
@@ -129,8 +129,8 @@ a {
     box-sizing: border-box;
     height: 36px;
     line-height: 34px;
-    background-color: $background;
-    border: solid 1px $grey-item;
+    background-color: #0d1117;
+    border: solid 1px #21262d;
     border-radius: 4px;
     overflow: hidden;
     display: flex;
@@ -140,7 +140,7 @@ a {
 
     &:hover,
     &:focus {
-      border-color: $light-grey-item;
+      border-color: #2b3038;
       outline: none;
     }
 
@@ -169,6 +169,25 @@ a {
       }
     }
   }
+}
+
+.mat-tab-header {
+  border-bottom: 1px solid $grey-border !important;
+}
+
+.mat-card {
+  background: #161b22;
+  color: #bbcad1;
+}
+
+.mat-dialog-container {
+  background: #161b22 !important;
+  color: #bbcad1 !important;
+}
+
+.mat-menu-panel {
+  background: #161b22 !important;
+  color: #bbcad1 !important;
 }
 
 @media (max-width: $mobile-width-breakpoint) {

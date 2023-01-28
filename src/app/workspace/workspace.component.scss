@@ -12,7 +12,7 @@
 }
 
 .sidebar {
-  background-color: $background-dialog;
+  background-color: #161b22;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -29,7 +29,7 @@
     right: -8px;
     width: 8px;
     height: 100%;
-    background: $background;
+    background: #0d1117;
     cursor: col-resize;
 
     &:hover {

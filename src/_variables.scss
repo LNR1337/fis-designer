@@ -16,7 +16,7 @@ $theme: mat.define-dark-theme(
 );
 
 // Other colors.
-$grey-border: rgb(82, 82, 82);
+$grey-border: #21262d;
 $grey-item: rgb(117, 117, 117);
 $light-grey-item: rgb(187, 202, 209);
 $primary-text: map-get($primary, 500);
