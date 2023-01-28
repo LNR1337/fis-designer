@@ -64,7 +64,11 @@ a {
 
 // Forms.
 .group-label {
-  color: map-get($primary, default);
+  color: map-get($primary, 300);
+}
+
+.mat-tab-label-content {
+  color: map-get($primary, 300) !important;
 }
 
 .input-group {

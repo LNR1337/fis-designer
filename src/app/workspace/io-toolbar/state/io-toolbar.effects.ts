@@ -193,6 +193,7 @@ export class IoToolbarEffects {
       ofType(loadExistingConfigNames),
       exhaustMap(() => {
         const configNames = this.localStorageService.getSavedNames();
+        this.snackBar.info('Found Config: ' + configNames);
         return [loadExistingConfigNamesSuccess({configNames})];
       })
     )
