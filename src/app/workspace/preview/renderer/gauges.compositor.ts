@@ -20,8 +20,9 @@ const CROSS_SIZE = 10;
 const INDICATOR_SIZE = 7;
 const NUMERICAL_DIGITS = 3;
 // Digital gauges constants.
-const GTI_FONT_WIDTH = 28;
-const GTI_FONT_HEIGHT = 24;
+const GTI_FONT_WIDTH 	= 28;
+const GTI_FONT_HEIGHT 	= 24;
+const GTI_FONT		 	= '20px sans-serif';
 
 function getTranslatedAngles(angleBounds: [number, number]) {
 	let minAngle = angleBounds[0];
@@ -123,13 +124,58 @@ export class GaugesCompositor extends Compositor {
 		}
 	}
 
+
+	drawGTINumerical() {
+		if (
+			!this.images ||
+			!this.gaugeConfigs ||
+			!this.needleConfigs ||
+			!this.simulationProgress ||
+			!this.tableConfigs || 
+			!this.generalConfig 
+		)
+			return;
+
+			if (!this.generalConfig.useBuiltInNumericalGauges) return;
+
+			const fontWidth = this.generalConfig.fontWidth as number;
+			const fontHeight = this.generalConfig.fontHeight as number;
+			const fontSpacing = this.generalConfig.fontSpacing as number;
+
+			const totalWidth = NUMERICAL_DIGITS * GTI_FONT_WIDTH;
+
+
+		for (const config of [this.needleConfigs.needle1, this.needleConfigs.needle2, this.needleConfigs.needle3]) {
+			const needleCenterX = config.positionX! + config.centerX! + 0.5;
+			const needleCenterY = config.positionY! + config.centerY! + 0.5;
+
+			const x = needleCenterX - Math.floor(totalWidth / 2);
+			const y = needleCenterY - Math.floor(GTI_FONT_HEIGHT / 2);
+
+			this.context.globalAlpha = 0.7;
+			this.context.strokeStyle = 'white';
+			this.context.font 		 = GTI_FONT;
+			this.context.fillStyle 	 = 'white';
+			this.context.textAlign 	 = 'center';
+			this.context.textBaseline = 'middle';
+
+			for (let i = 0; i < NUMERICAL_DIGITS; i++) {
+				const rectX = x + i * GTI_FONT_WIDTH;
+				const number = this.generateRandomNumber();
+				this.context.fillText("" + number, rectX + GTI_FONT_WIDTH / 2 , needleCenterY)
+			}
+
+			this.context.globalAlpha = 1;
+		}
+
+	}
+
 	
 	drawAllNumerical() {
 		if (
 			!this.images ||
 			!this.gaugeConfigs ||
 			!this.numericalConfigs ||
-			!this.simulationProgress ||
 			!this.generalConfig
 		)return;
 
@@ -147,7 +193,6 @@ export class GaugesCompositor extends Compositor {
 			!this.images ||
 			!this.gaugeConfigs ||
 			!this.needleConfigs ||
-			!this.simulationProgress ||
 			!this.generalConfig
 		)return;
 
@@ -226,6 +271,7 @@ export class GaugesCompositor extends Compositor {
 		// Draw the needles.
 		this.drawNeedles();
 		this.drawAllNumerical();
+		this.drawGTINumerical();
 
 		// Draw the status bar.
 		if (!this.generalConfig?.hideStatusBarOnGauge) {

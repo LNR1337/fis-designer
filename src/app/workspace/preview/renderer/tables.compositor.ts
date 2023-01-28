@@ -13,7 +13,7 @@ const RS_UNIT_OFFSET = 80;
 const RS_VALUE_OFFSET = 95;
 const UNIT_OFFSET = 170;
 const VALUE_OFFSET = 190; // Justify to the right.
-const TABLE_FONT = '30px Verdana';
+const TABLE_FONT = '28px Verdana';
 const LINE1_Y = 20;
 const LINE_HEIGHT = 40;
 
