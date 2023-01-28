@@ -3,7 +3,7 @@ FIS-Designer is a hobby project aiming to help design dashboards for the fantast
 
 #### The tool is available at http://fis-designer.xyz.
 
-![Gauge config window](https://i.imgur.com/gmIAJWC.png)
+![Gauge config window](https://prnt.sc/li7ta4lTM1f7)
 
 ### Main features:
 
@@ -19,8 +19,6 @@ FIS-Designer is a hobby project aiming to help design dashboards for the fantast
 
 ### TODO
 
-- Load digits as grayscale.
-- Digit visualization.
 - More accurate tables font.
 
 ### Known bugs

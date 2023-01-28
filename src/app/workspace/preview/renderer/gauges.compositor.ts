@@ -132,11 +132,10 @@ export class GaugesCompositor extends Compositor {
 			!this.needleConfigs ||
 			!this.simulationProgress ||
 			!this.tableConfigs || 
-			!this.generalConfig 
+			!this.generalConfig ||
+			!this.generalConfig.useBuiltInNumericalGauges
 		)
 			return;
-
-			if (!this.generalConfig.useBuiltInNumericalGauges) return;
 
 			const fontWidth = this.generalConfig.fontWidth as number;
 			const fontHeight = this.generalConfig.fontHeight as number;
